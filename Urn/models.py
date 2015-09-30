@@ -14,20 +14,25 @@ from django.db import models
 
 
 class Role(enum.Enum):
-    owner = 0
-    admin = 1
-    member = 2
+    owner = 1
+    admin = 2
+    member = 3
 
 
 class Rating(enum.Enum):
-    pass
+    RATING_ZERO = 0
+    RATING_ONE = 1
+    RATING_TWO = 2
+    RATING_THREE = 3
+    RATING_FOUR = 4
+    RATING_FIVE = 5
 
 
 class Status(enum.Enum):
-    active = 0
-    online = 1
-    offline = 2
-    deleted = 3
+    active = 1
+    online = 2
+    offline = 3
+    deleted = 4
 
 
 class Addresses(models.Model):
@@ -237,7 +242,7 @@ class Products(models.Model):
 class Reviews(models.Model):
     review_id = models.AutoField(primary_key=True)
     review_guid = models.UUIDField(unique=True)
-    rating = models.TextField()  # ToDo This field type is a guess. doubt on enum, yet to decide
+    rating = enum.EnumField(Rating, default=Rating.RATING_ZERO)
     review_detail = models.TextField(blank=True, null=True)
     user = models.ForeignKey('Users')
     business = models.ForeignKey(Businesses, blank=True, null=True)
