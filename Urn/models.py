@@ -64,20 +64,20 @@ class BusinessAddresses(models.Model):
     class Meta:
         managed = False
         db_table = 'business_addresses'
-        unique_together = (('business_id', 'address_id'),)
+        unique_together = (('business', 'address'),)
 
 
 class BusinessUsers(models.Model):
     business = models.ForeignKey('Businesses')
     user = models.ForeignKey('Users')
-    role = enum.EnumField(Role)
+    role = enum.EnumField(Role, default=Role.admin)
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'business_users'
-        unique_together = (('business_id', 'user_id'),)
+        unique_together = (('business', 'user'),)
 
 
 class Businesses(models.Model):
@@ -86,8 +86,8 @@ class Businesses(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     category = models.CharField(max_length=20, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True)
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True)
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='businesses_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='businesses_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -135,8 +135,8 @@ class Discounts(models.Model):
     is_percentage = models.NullBooleanField()
     product_quantity = models.IntegerField(blank=True, null=True)
     active = models.NullBooleanField()
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True)
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True)
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='discounts_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='discounts_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -163,8 +163,8 @@ class Keywords(models.Model):
     keyword_guid = models.UUIDField(unique=True)
     name = models.CharField(max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    created_by = models.ForeignKey('Users', db_column='created_by')
-    updated_by = models.ForeignKey('Users', db_column='updated_by')
+    created_by = models.ForeignKey('Users', db_column='created_by', related_name='keywords_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', related_name='keywords_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -196,8 +196,8 @@ class Orders(models.Model):
     user = models.ForeignKey('Users')
     address_id = models.IntegerField()
     coupon = models.ForeignKey(Coupons, blank=True, null=True)
-    created_by = models.IntegerField(blank=True, null=True)
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True)
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='orders_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='orders_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -229,8 +229,8 @@ class Products(models.Model):
     product_data = JSONField(blank=True, null=True)
     business = models.ForeignKey(Businesses)
     sku = models.ForeignKey('Sku')
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True)
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True)
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='products_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='products_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -262,8 +262,8 @@ class Sku(models.Model):
     description = models.TextField(blank=True, null=True)
     status = models.NullBooleanField()
     business = models.ForeignKey(Businesses)
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True)
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True)
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='sku_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='sku_updated_by')
     created_on = models.DateTimeField()
     updated_on = models.DateTimeField()
 
@@ -295,7 +295,7 @@ class UserAddresses(models.Model):
     class Meta:
         managed = False
         db_table = 'user_addresses'
-        unique_together = (('user_id', 'address_id'),)
+        unique_together = (('user', 'address'),)
 
 
 class Users(models.Model):
