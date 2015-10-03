@@ -31,12 +31,12 @@ CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
 SET search_path = public, pg_catalog;
 
 CREATE TYPE rating_enum AS ENUM (
-    'RATING_ZERO',
-    'RATING_ONE',
-    'RATING_TWO',
-    'RATING_THREE',
-    'RATING_FOUR',
-    'RATING_FIVE'
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
 );
 
 CREATE TYPE role_enum AS ENUM (
@@ -221,8 +221,8 @@ CREATE TABLE keywords (
     keyword_guid uuid NOT NULL,
     name character varying(30),
     description text,
-    created_by integer NOT NULL,
-    updated_by integer NOT NULL,
+    created_by integer,
+    updated_by integer,
     created_on timestamp without time zone,
     updated_on timestamp without time zone
 );
@@ -327,13 +327,13 @@ ALTER SEQUENCE products_product_id_seq OWNED BY products.product_id;
 CREATE TABLE reviews (
     review_id integer NOT NULL,
     review_guid uuid NOT NULL,
-    rating rating_enum DEFAULT 'RATING_ZERO'::rating_enum NOT NULL,
+    rating rating_enum DEFAULT '0'::rating_enum NOT NULL,
     review_detail text,
     user_id integer NOT NULL,
     business_id integer,
     product_id integer,
     created_on timestamp without time zone,
-    updated_on timestamp without time zone NOT NULL
+    updated_on timestamp without time zone
 );
 
 CREATE SEQUENCE reviews_review_id_seq
@@ -354,8 +354,8 @@ CREATE TABLE sku (
     business_id integer NOT NULL,
     created_by integer,
     updated_by integer,
-    created_on timestamp without time zone NOT NULL,
-    updated_on timestamp without time zone NOT NULL
+    created_on timestamp without time zone,
+    updated_on timestamp without time zone
 );
 
 CREATE SEQUENCE sku_sku_id_seq
@@ -398,7 +398,7 @@ CREATE TABLE users (
     user_guid uuid NOT NULL,
     email character varying(120) NOT NULL,
     username character varying(20) NOT NULL,
-    password character varying(30) NOT NULL,
+    password character varying(255) NOT NULL,
     first_name character varying(20),
     last_name character varying(20),
     phone character varying(12) NOT NULL,

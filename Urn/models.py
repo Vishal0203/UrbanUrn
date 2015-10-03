@@ -13,6 +13,7 @@ from django.db import models
 import uuid
 from Urn.common.utils import ChoiceEnum
 
+
 class Role(ChoiceEnum):
     owner = 'owner'
     admin = 'admin'
@@ -167,8 +168,10 @@ class Keywords(models.Model):
     keyword_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    created_by = models.ForeignKey('Users', db_column='created_by', related_name='keywords_created_by')
-    updated_by = models.ForeignKey('Users', db_column='updated_by', related_name='keywords_updated_by')
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
+                                   related_name='keywords_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
+                                   related_name='keywords_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -258,7 +261,7 @@ class Reviews(models.Model):
     business = models.ForeignKey(Businesses, blank=True, null=True)
     product_id = models.IntegerField(blank=True, null=True)
     created_on = models.DateTimeField(blank=True, null=True)
-    updated_on = models.DateTimeField()
+    updated_on = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -276,8 +279,8 @@ class Sku(models.Model):
                                    related_name='sku_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
                                    related_name='sku_updated_by')
-    created_on = models.DateTimeField()
-    updated_on = models.DateTimeField()
+    created_on = models.DateTimeField(blank=True, null=True)
+    updated_on = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -315,7 +318,7 @@ class Users(models.Model):
     user_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     email = models.CharField(unique=True, max_length=120)
     username = models.CharField(unique=True, max_length=20)
-    password = models.CharField(max_length=30)
+    password = models.CharField(max_length=255)
     first_name = models.CharField(max_length=20, blank=True, null=True)
     last_name = models.CharField(max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=12)
