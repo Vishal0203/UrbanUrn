@@ -81,7 +81,7 @@ CREATE TABLE addresses (
     street_2 character varying(50),
     city character varying(30) NOT NULL,
     state character varying(30),
-    pincode smallint NOT NULL,
+    pincode character varying(15) NOT NULL,
     country character varying(30) NOT NULL,
     latitude double precision,
     longitude double precision,
@@ -240,6 +240,7 @@ CREATE TABLE order_details (
     order_detail_id integer NOT NULL,
     order_id integer NOT NULL,
     delivery_party_name character varying(30) NOT NULL,
+    delivery_tracking_number character varying(30) NOT NULL,
     product_id integer NOT NULL,
     discount_id integer,
     final_cost double precision,
@@ -284,6 +285,7 @@ CREATE TABLE product_images (
     product_id integer NOT NULL,
     url character varying(255),
     size smallint,
+    is_default boolean DEFAULT false,
     created_on timestamp without time zone,
     updated_on timestamp without time zone
 );
