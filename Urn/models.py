@@ -86,8 +86,10 @@ class Businesses(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     category = models.CharField(max_length=20, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='businesses_created_by')
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='businesses_updated_by')
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
+                                   related_name='businesses_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
+                                   related_name='businesses_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -135,8 +137,10 @@ class Discounts(models.Model):
     is_percentage = models.NullBooleanField()
     product_quantity = models.IntegerField(blank=True, null=True)
     active = models.NullBooleanField()
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='discounts_created_by')
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='discounts_updated_by')
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
+                                   related_name='discounts_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
+                                   related_name='discounts_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -196,8 +200,10 @@ class Orders(models.Model):
     user = models.ForeignKey('Users')
     address_id = models.IntegerField()
     coupon = models.ForeignKey(Coupons, blank=True, null=True)
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='orders_created_by')
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='orders_updated_by')
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
+                                   related_name='orders_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
+                                   related_name='orders_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -229,8 +235,10 @@ class Products(models.Model):
     product_data = JSONField(blank=True, null=True)
     business = models.ForeignKey(Businesses)
     sku = models.ForeignKey('Sku')
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='products_created_by')
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='products_updated_by')
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
+                                   related_name='products_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
+                                   related_name='products_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -262,8 +270,10 @@ class Sku(models.Model):
     description = models.TextField(blank=True, null=True)
     status = models.NullBooleanField()
     business = models.ForeignKey(Businesses)
-    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True, related_name='sku_created_by')
-    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True, related_name='sku_updated_by')
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
+                                   related_name='sku_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
+                                   related_name='sku_updated_by')
     created_on = models.DateTimeField()
     updated_on = models.DateTimeField()
 
