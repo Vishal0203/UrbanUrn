@@ -396,16 +396,10 @@ CREATE TABLE user_addresses (
 CREATE TABLE users (
     user_id integer NOT NULL,
     user_guid uuid NOT NULL,
-    email character varying(120) NOT NULL,
-    username character varying(20) NOT NULL,
-    password character varying(255) NOT NULL,
-    first_name character varying(20),
-    last_name character varying(20),
+    username character varying(30) NOT NULL,
     phone character varying(12) NOT NULL,
     is_business_user boolean DEFAULT false,
-    is_superuser boolean DEFAULT false,
     status status_enum DEFAULT 'active'::status_enum NOT NULL,
-    last_logged_on timestamp without time zone,
     push_notification boolean DEFAULT false,
     email_notification boolean DEFAULT true,
     sms_notification boolean DEFAULT false,
@@ -540,9 +534,6 @@ ALTER TABLE ONLY discounts
 
 ALTER TABLE ONLY discounts
     ADD CONSTRAINT "discounts_PRIMARY" PRIMARY KEY (discount_id);
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT "email_UNIQUE" UNIQUE (email);
 
 ALTER TABLE ONLY entity_keywords
     ADD CONSTRAINT "entity_keywords_PRIMARY" PRIMARY KEY (entity_keyword_id);
@@ -844,6 +835,9 @@ ALTER TABLE ONLY sku
 
 ALTER TABLE ONLY tokens
     ADD CONSTRAINT "tokens_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY users
+  ADD CONSTRAINT "users_auth_user_username_FK" FOREIGN KEY (username) REFERENCES auth_user (username) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ONLY user_addresses
     ADD CONSTRAINT "user_addresses_addresses_address_id_FK" FOREIGN KEY (address_id) REFERENCES addresses(address_id) ON UPDATE CASCADE ON DELETE CASCADE;

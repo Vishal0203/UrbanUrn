@@ -36,6 +36,23 @@ class Status(ChoiceEnum):
     deleted = 'deleted'
 
 
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.BooleanField()
+    username = models.CharField(unique=True, max_length=30)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=254)
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
 class Addresses(models.Model):
     address_id = models.AutoField(primary_key=True)
     address_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
@@ -316,16 +333,10 @@ class UserAddresses(models.Model):
 class Users(models.Model):
     user_id = models.AutoField(primary_key=True)
     user_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    email = models.CharField(unique=True, max_length=120)
-    username = models.CharField(unique=True, max_length=20)
-    password = models.CharField(max_length=255)
-    first_name = models.CharField(max_length=20, blank=True, null=True)
-    last_name = models.CharField(max_length=20, blank=True, null=True)
+    username = models.ForeignKey(AuthUser, unique=True)
     phone = models.CharField(max_length=12)
     is_business_user = models.NullBooleanField()
-    is_superuser = models.NullBooleanField()
     status = models.CharField(max_length=10, choices=Status.choices(), default=Status.active.value)
-    last_logged_on = models.DateTimeField(blank=True, null=True)
     push_notification = models.NullBooleanField()
     email_notification = models.NullBooleanField()
     sms_notification = models.NullBooleanField()
