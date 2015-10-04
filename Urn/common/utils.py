@@ -1,8 +1,8 @@
 import inspect
 from enum import Enum
 
-class ChoiceEnum(Enum):
 
+class ChoiceEnum(Enum):
     @classmethod
     def choices(cls):
         members = inspect.getmembers(cls, lambda m: not(inspect.isroutine(m)))
