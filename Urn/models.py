@@ -8,36 +8,37 @@
 # Also note: You'll have to insert the output of 'django-admin sqlcustom [app_label]'
 # into your database.
 from __future__ import unicode_literals
-from django_enumfield import enum
 from jsonfield import JSONField
 from django.db import models
+import uuid
+from Urn.common.utils import ChoiceEnum
 
 
-class Role(enum.Enum):
-    owner = 1
-    admin = 2
-    member = 3
+class Role(ChoiceEnum):
+    owner = 'owner'
+    admin = 'admin'
+    member = 'member'
 
 
-class Rating(enum.Enum):
-    RATING_ZERO = 0
-    RATING_ONE = 1
-    RATING_TWO = 2
-    RATING_THREE = 3
-    RATING_FOUR = 4
-    RATING_FIVE = 5
+class Rating(ChoiceEnum):
+    RATING_ZERO = '0'
+    RATING_ONE = '1'
+    RATING_TWO = '2'
+    RATING_THREE = '3'
+    RATING_FOUR = '4'
+    RATING_FIVE = '5'
 
 
-class Status(enum.Enum):
-    active = 1
-    online = 2
-    offline = 3
-    deleted = 4
+class Status(ChoiceEnum):
+    active = 'active'
+    online = 'online'
+    offline = 'offline'
+    deleted = 'deleted'
 
 
 class Addresses(models.Model):
     address_id = models.AutoField(primary_key=True)
-    address_guid = models.UUIDField(unique=True)
+    address_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     is_default = models.NullBooleanField()
     street_1 = models.CharField(max_length=50, blank=True, null=True)
     street_2 = models.CharField(max_length=50, blank=True, null=True)
@@ -70,7 +71,7 @@ class BusinessAddresses(models.Model):
 class BusinessUsers(models.Model):
     business = models.ForeignKey('Businesses')
     user = models.ForeignKey('Users')
-    role = enum.EnumField(Role, default=Role.admin)
+    role = models.CharField(max_length=10, choices=Role.choices(), default=Role.admin.value)
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -82,7 +83,7 @@ class BusinessUsers(models.Model):
 
 class Businesses(models.Model):
     business_id = models.AutoField(primary_key=True)
-    business_guid = models.UUIDField(unique=True)
+    business_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50, blank=True, null=True)
     category = models.CharField(max_length=20, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
@@ -100,7 +101,7 @@ class Businesses(models.Model):
 
 class CartItems(models.Model):
     cart_item_id = models.AutoField(primary_key=True)
-    cart_item_guid = models.UUIDField(unique=True)
+    cart_item_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey('Products')
     user = models.ForeignKey('Users')
     product_data = JSONField(blank=True, null=True)
@@ -114,7 +115,7 @@ class CartItems(models.Model):
 
 class Coupons(models.Model):
     coupon_id = models.AutoField(primary_key=True)
-    coupon_guid = models.UUIDField(unique=True)
+    coupon_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     code = models.CharField(max_length=30)
     discount_value = models.IntegerField()
     is_percentage = models.NullBooleanField()
@@ -128,7 +129,7 @@ class Coupons(models.Model):
 
 class Discounts(models.Model):
     discount_id = models.AutoField(primary_key=True)
-    discount_guid = models.UUIDField(unique=True)
+    discount_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey('Products', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     start_time = models.DateTimeField(blank=True, null=True)
@@ -164,11 +165,13 @@ class EntityKeywords(models.Model):
 
 class Keywords(models.Model):
     keyword_id = models.AutoField(primary_key=True)
-    keyword_guid = models.UUIDField(unique=True)
+    keyword_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    created_by = models.ForeignKey('Users', db_column='created_by', related_name='keywords_created_by')
-    updated_by = models.ForeignKey('Users', db_column='updated_by', related_name='keywords_updated_by')
+    created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
+                                   related_name='keywords_created_by')
+    updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
+                                   related_name='keywords_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
@@ -197,7 +200,7 @@ class OrderDetails(models.Model):
 
 class Orders(models.Model):
     order_id = models.AutoField(primary_key=True)
-    order_guid = models.UUIDField(unique=True)
+    order_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey('Users')
     address_id = models.IntegerField()
     coupon = models.ForeignKey(Coupons, blank=True, null=True)
@@ -229,7 +232,7 @@ class ProductImages(models.Model):
 
 class Products(models.Model):
     product_id = models.AutoField(primary_key=True)
-    product_guid = models.UUIDField(unique=True)
+    product_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     status = models.NullBooleanField()
@@ -251,14 +254,14 @@ class Products(models.Model):
 
 class Reviews(models.Model):
     review_id = models.AutoField(primary_key=True)
-    review_guid = models.UUIDField(unique=True)
-    rating = enum.EnumField(Rating, default=Rating.RATING_ZERO)
+    review_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
+    rating = models.CharField(max_length=10, choices=Rating.choices(), default=Rating.RATING_ZERO.value)
     review_detail = models.TextField(blank=True, null=True)
     user = models.ForeignKey('Users')
     business = models.ForeignKey(Businesses, blank=True, null=True)
     product_id = models.IntegerField(blank=True, null=True)
     created_on = models.DateTimeField(blank=True, null=True)
-    updated_on = models.DateTimeField()
+    updated_on = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -267,7 +270,7 @@ class Reviews(models.Model):
 
 class Sku(models.Model):
     sku_id = models.AutoField(primary_key=True)
-    sku_guid = models.UUIDField(unique=True)
+    sku_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     status = models.NullBooleanField()
@@ -276,8 +279,8 @@ class Sku(models.Model):
                                    related_name='sku_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
                                    related_name='sku_updated_by')
-    created_on = models.DateTimeField()
-    updated_on = models.DateTimeField()
+    created_on = models.DateTimeField(blank=True, null=True)
+    updated_on = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -312,16 +315,16 @@ class UserAddresses(models.Model):
 
 class Users(models.Model):
     user_id = models.AutoField(primary_key=True)
-    user_guid = models.UUIDField(unique=True)
+    user_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     email = models.CharField(unique=True, max_length=120)
     username = models.CharField(unique=True, max_length=20)
-    password = models.CharField(max_length=30)
+    password = models.CharField(max_length=255)
     first_name = models.CharField(max_length=20, blank=True, null=True)
     last_name = models.CharField(max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=12)
     is_business_user = models.NullBooleanField()
     is_superuser = models.NullBooleanField()
-    status = enum.EnumField(Status, default=Status.active)
+    status = models.CharField(max_length=10, choices=Status.choices(), default=Status.active.value)
     last_logged_on = models.DateTimeField(blank=True, null=True)
     push_notification = models.NullBooleanField()
     email_notification = models.NullBooleanField()
@@ -336,7 +339,7 @@ class Users(models.Model):
 
 class Wishlist(models.Model):
     wishlist_id = models.AutoField(primary_key=True)
-    wishlist_guid = models.UUIDField(unique=True)
+    wishlist_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(Users, blank=True, null=True)
     product = models.ForeignKey(Products)
     product_data = JSONField(blank=True, null=True)

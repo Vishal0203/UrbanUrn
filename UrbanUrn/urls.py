@@ -19,5 +19,6 @@ from Urn import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/v1_0/login', views.validate_input_and_authenticate)
+    url(r'^api/v1_0/login', views.validate_input_and_authenticate),
+    url(r'^api-token-auth/', 'rest_framework_jwt.views.obtain_jwt_token'),
 ]
