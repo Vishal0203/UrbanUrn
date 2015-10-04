@@ -394,9 +394,9 @@ CREATE TABLE user_addresses (
 );
 
 CREATE TABLE users (
+    id integer NOT NULL,
     user_id integer NOT NULL,
     user_guid uuid NOT NULL,
-    username character varying(30) NOT NULL,
     phone character varying(12) NOT NULL,
     is_business_user boolean DEFAULT false,
     status status_enum DEFAULT 'active'::status_enum NOT NULL,
@@ -407,14 +407,14 @@ CREATE TABLE users (
     updated_on timestamp without time zone
 );
 
-CREATE SEQUENCE users_user_id_seq
+CREATE SEQUENCE users_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
 
-ALTER SEQUENCE users_user_id_seq OWNED BY users.user_id;
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 CREATE TABLE wishlist (
     wishlist_id integer NOT NULL,
@@ -463,7 +463,7 @@ ALTER TABLE ONLY sku ALTER COLUMN sku_id SET DEFAULT nextval('sku_sku_id_seq'::r
 
 ALTER TABLE ONLY tokens ALTER COLUMN token_id SET DEFAULT nextval('tokens_token_id_seq'::regclass);
 
-ALTER TABLE ONLY users ALTER COLUMN user_id SET DEFAULT nextval('users_user_id_seq'::regclass);
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 ALTER TABLE ONLY wishlist ALTER COLUMN wishlist_id SET DEFAULT nextval('wishlist_wishlist_id_seq'::regclass);
 
@@ -495,7 +495,7 @@ SELECT pg_catalog.setval('sku_sku_id_seq', 1, false);
 
 SELECT pg_catalog.setval('tokens_token_id_seq', 1, false);
 
-SELECT pg_catalog.setval('users_user_id_seq', 1, false);
+SELECT pg_catalog.setval('users_id_seq', 1, false);
 
 SELECT pg_catalog.setval('wishlist_wishlist_id_seq', 1, false);
 
@@ -585,9 +585,6 @@ ALTER TABLE ONLY user_addresses
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT "user_guid_UNIQUE" UNIQUE (user_guid);
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT "username_UNIQUE" UNIQUE (username);
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT "users_PRIMARY" PRIMARY KEY (user_id);
@@ -837,7 +834,7 @@ ALTER TABLE ONLY tokens
     ADD CONSTRAINT "tokens_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ONLY users
-  ADD CONSTRAINT "users_auth_user_username_FK" FOREIGN KEY (username) REFERENCES auth_user (username) ON UPDATE CASCADE ON DELETE CASCADE;
+  ADD CONSTRAINT "users_auth_user_user_id_FK" FOREIGN KEY (user_id) REFERENCES auth_user(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ONLY user_addresses
     ADD CONSTRAINT "user_addresses_addresses_address_id_FK" FOREIGN KEY (address_id) REFERENCES addresses(address_id) ON UPDATE CASCADE ON DELETE CASCADE;

@@ -10,8 +10,9 @@
 from __future__ import unicode_literals
 from jsonfield import JSONField
 from django.db import models
-import uuid
 from Urn.common.utils import ChoiceEnum
+from django.contrib.auth.models import User
+import uuid
 
 
 class Role(ChoiceEnum):
@@ -331,9 +332,10 @@ class UserAddresses(models.Model):
 
 
 class Users(models.Model):
-    user_id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, related_name='user_profile')
+
+    id = models.AutoField(primary_key=True)
     user_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    username = models.ForeignKey(AuthUser, unique=True)
     phone = models.CharField(max_length=12)
     is_business_user = models.NullBooleanField()
     status = models.CharField(max_length=10, choices=Status.choices(), default=Status.active.value)
