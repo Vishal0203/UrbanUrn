@@ -1,0 +1,432 @@
+[
+  {
+    "model": "Urn.authuser",
+    "pk": 1,
+    "fields": {
+	  "username": "urbanurn",
+	  "password": "94f88a431e39811e07fa33a927893aea269a143786a5d5fcab70af1221358a11",
+	  "email": "superuser@urbanurn.com",
+	  "first_name": "superuser",
+	  "last_name": "",
+	  "is_superuser": "True",
+	  "is_staff": "True",
+	  "is_active": "True",
+	  "date_joined": "2015-10-03 15:56:02Z"
+    }
+  },
+  {
+    "model": "Urn.authuser",
+    "pk": 2,
+    "fields": {
+	  "username": "sample.one",
+	  "password": "94f88a431e39811e07fa33a927893aea269a143786a5d5fcab70af1221358a11",
+	  "email": "sample.one@urbanurn.com",
+	  "first_name": "Sample",
+	  "last_name": "One",
+	  "is_superuser": "False",
+	  "is_staff": "True",
+	  "is_active": "True",
+	  "date_joined": "2015-10-03 15:56:02Z"
+    }
+  },
+  {
+    "model": "Urn.authuser",
+    "pk": 3,
+    "fields": {
+	  "username": "sample.two",
+	  "password": "94f88a431e39811e07fa33a927893aea269a143786a5d5fcab70af1221358a11",
+	  "email": "sample.two@urbanurn.com",
+	  "first_name": "Sample",
+	  "last_name": "Two",
+	  "is_superuser": "False",
+	  "is_staff": "False",
+	  "is_active": "True",
+	  "date_joined": "2015-10-03 15:56:02Z"
+    }
+  },
+  {
+    "model": "Urn.authuser",
+    "pk": 4,
+    "fields": {
+	  "username": "sample.three",
+	  "password": "94f88a431e39811e07fa33a927893aea269a143786a5d5fcab70af1221358a11",
+	  "email": "sample.three@urbanurn.com",
+	  "first_name": "Sample",
+	  "last_name": "Three",
+	  "is_superuser": "False",
+	  "is_staff": "False",
+	  "is_active": "True",
+	  "date_joined": "2015-10-03 15:56:02Z"
+    }
+  },
+  {
+    "model": "Urn.users",
+    "pk": 1,
+    "fields": {
+	  "user_id": "1",
+	  "user_guid": "284ae2fe-69bf-11e5-9d70-feff819cdc9f",
+	  "phone": "9999999999",
+	  "is_business_user": "False",
+	  "status": "active",
+	  "push_notification": "True",
+	  "email_notification": "True",
+	  "sms_notification": "True"
+    }
+  },
+  {
+    "model": "Urn.users",
+    "pk": 2,
+    "fields": {
+	  "user_id": "2",
+	  "user_guid": "a3bfbd7e-69c4-11e5-9d70-feff819cdc9f",
+	  "phone": "9999999999",
+	  "is_business_user": "False",
+	  "status": "active",
+	  "push_notification": "False",
+	  "email_notification": "True",
+	  "sms_notification": "True"
+	}
+  },
+  {
+    "model": "Urn.users",
+    "pk": 3,
+    "fields": {
+	  "user_id": "3",
+	  "user_guid": "0e1973c2-69c5-11e5-9d70-feff819cdc9f",
+	  "phone": "9999999999",
+	  "is_business_user": "True",
+	  "status": "active",
+	  "push_notification": "False",
+	  "email_notification": "True",
+	  "sms_notification": "True"
+	}
+  },
+  {
+    "model": "Urn.users",
+    "pk": 4,
+    "fields": {
+	  "user_id": "4",
+	  "user_guid": "3419ac18-69c5-11e5-9d70-feff819cdc9f",
+	  "phone": "9999999999",
+	  "is_business_user": "False",
+	  "status": "active",
+	  "push_notification": "False",
+	  "email_notification": "True",
+	  "sms_notification": "False"
+	}
+  },
+  {
+    "model": "Urn.addresses",
+    "pk": 1,
+    "fields": {
+      "address_guid": "bbebd9e2-6937-11e5-9d70-feff819cdc9f",
+      "is_default": "True",
+	  "street_1": "Test Address Street 1a",
+	  "street_2": "Test Address Street 1b",
+	  "city": "Hyderabad",
+	  "state": "Telengana",
+	  "pincode": "300001",
+	  "country": "India",
+	  "latitude": "21.12",
+	  "longitude": "53.68"
+    }
+  },
+  {
+    "model": "Urn.addresses",
+    "pk": 2,
+    "fields": {
+      "address_guid": "813fd0f4-69ba-11e5-9d70-feff819cdc9f",
+      "is_default": "False",
+	  "street_1": "Test Address Street 2a",
+	  "street_2": "Test Address Street 2b",
+	  "city": "Hyderabad",
+	  "state": "Telengana",
+	  "pincode": "300002",
+	  "country": "India",
+	  "latitude": "47.52",
+	  "longitude": "109.23"
+    }
+  },
+  {
+    "model": "Urn.addresses",
+    "pk": 3,
+    "fields": {
+      "address_guid": "ab762850-69ba-11e5-9d70-feff819cdc9f",
+      "is_default": "True",
+	  "street_1": "Test Address Street 3",
+	  "city": "Hyderabad",
+	  "pincode": "300003",
+	  "country": "India",
+	  "latitude": "63.31",
+	  "longitude": "164.23"
+    }
+  },
+  {
+    "model": "Urn.businesses",
+    "pk": 1,
+    "fields": {
+      "business_guid": "e85d5bc4-69bc-11e5-9d70-feff819cdc9f",
+      "name": "Test Business 1",
+	  "category": "Handlooms",
+	  "description": "Test Business for handlooms",
+	  "created_by": "1",
+	  "updated_by": "1"
+    }
+  },
+  {
+    "model": "Urn.businesses",
+    "pk": 2,
+    "fields": {
+      "business_guid": "76b2ca52-69be-11e5-9d70-feff819cdc9f",
+      "name": "Test Business 2",
+	  "category": "Crafts",
+	  "description": "Test Business for crafts",
+	  "created_by": "1",
+	  "updated_by": "1"
+    }
+  },
+  {
+    "model": "Urn.businesses",
+    "pk": 3,
+    "fields": {
+      "business_guid": "a689c898-69be-11e5-9d70-feff819cdc9f",
+      "name": "Test Business 3",
+	  "category": "Footwear",
+	  "description": "Test Business for footwear",
+	  "created_by": "1",
+	  "updated_by": "1"
+    }
+  },
+  {
+    "model": "Urn.sku",
+    "pk": 1,
+    "fields": {
+      "sku_guid": "fae3292a-69cd-11e5-9d70-feff819cdc9f",
+	  "name": "Sarees & Shawls",
+	  "description": "Sarees & Shawls",
+	  "status": "True",
+	  "business_id": "1",
+	  "created_by": "1",
+	  "updated_by": "1"
+    }
+  },
+  {
+    "model": "Urn.sku",
+    "pk": 2,
+    "fields": {
+      "sku_guid": "27d71b1c-69ce-11e5-9d70-feff819cdc9f",
+	  "name": "Sherwanis",
+	  "description": "Sherwanis",
+	  "status": "True",
+	  "business_id": "1",
+	  "created_by": "1"
+    }
+  },
+  {
+    "model": "Urn.sku",
+    "pk": 3,
+    "fields": {
+      "sku_guid": "58e65614-69ce-11e5-9d70-feff819cdc9f",
+	  "name": "Shoes",
+	  "description": "Shoes",
+	  "status": "True",
+	  "business_id": "3",
+	  "created_by": "1",
+	  "updated_by": "1"
+    }
+  },
+  {
+    "model": "Urn.sku",
+    "pk": 4,
+    "fields": {
+      "sku_guid": "2288b300-69d3-11e5-9d70-feff819cdc9f",
+	  "name": "Chapals",
+	  "description": "Chapals",
+	  "status": "True",
+	  "business_id": "3",
+	  "created_by": "1"
+    }
+  },
+  {
+    "model": "Urn.coupons",
+    "pk": 1,
+    "fields": {
+      "coupon_guid": "c476022e-69c6-11e5-9d70-feff819cdc9f",
+	  "code": "AAABBB",
+	  "discount_value": "10",
+	  "is_percentage": "True"
+	}
+  },
+  {
+    "model": "Urn.coupons",
+    "pk": 2,
+    "fields": {
+      "coupon_guid": "61ff08c0-69f8-11e5-9d70-feff819cdc9f",
+	  "code": "XXXXYYYY",
+	  "discount_value": "300",
+	  "is_percentage": "False"
+	}
+  },
+  {
+    "model": "Urn.products",
+    "pk": 10001,
+    "fields": {
+      "product_guid": "85a4e676-69c8-11e5-9d70-feff819cdc9f",
+	  "name": "Banarasi Saree - Magenta",
+	  "description": "Sarees from Banaras",
+	  "status": "True",
+	  "price": "5000",
+	  "product_data": {
+		"quantity": "1"
+	  },
+	  "business_id": "1",
+	  "sku_id": "1",
+	  "created_by": "1",
+	  "updated_by": "1"
+	}
+  },
+  {
+    "model": "Urn.products",
+    "pk": 10002,
+    "fields": {
+      "product_guid": "fa7f21aa-69c8-11e5-9d70-feff819cdc9f",
+	  "name": "Kashmiri Shawls - Blue",
+	  "description": "Shawls from Kashmir",
+	  "status": "True",
+	  "price": "3000",
+	  "product_data": {
+		"quantity": "3"
+	  },
+	  "business_id": "1",
+	  "sku_id": "1",
+	  "created_by": "1",
+	  "updated_by": "1"
+	}
+  },
+  {
+    "model": "Urn.products",
+    "pk": 10003,
+    "fields": {
+      "product_guid": "037a633c-69c9-11e5-9d70-feff819cdc9f",
+	  "name": "Manyavar Sherwani - Red",
+	  "description": "Sherwanis from Manyavar",
+	  "status": "True",
+	  "price": "4500",
+	  "product_data": [
+		{
+          "size": "M",
+          "quantity": "5"
+        },
+        {
+          "size": "L",
+          "quantity": "10"
+        },
+        {
+          "size": "XL",
+          "quantity": "2"
+        }
+	  ],
+	  "business_id": "1",
+	  "sku_id": "2",
+	  "created_by": "1"
+	}
+  },
+  {
+    "model": "Urn.products",
+    "pk": 10004,
+    "fields": {
+      "product_guid": "b3ff0be0-69c9-11e5-9d70-feff819cdc9f",
+	  "name": "Rajasthani Mojari - Light Brown",
+	  "description": "Mojaris from Rajasthan",
+	  "status": "True",
+	  "price": "800",
+	  "product_data": [
+		{
+          "size": "7",
+          "quantity": "5"
+        },
+        {
+          "size": "8",
+          "quantity": "10"
+        },
+        {
+          "size": "9",
+          "quantity": "2"
+        },
+        {
+          "size": "10",
+          "quantity": "0"
+		}
+	  ],
+	  "business_id": "3",
+	  "sku_id": "3",
+	  "created_by": "1",
+	  "updated_by": "1"
+	}
+  },
+  {
+    "model": "Urn.products",
+    "pk": 10005,
+    "fields": {
+      "product_guid": "ddbf0d8e-69cb-11e5-9d70-feff819cdc9f",
+	  "name": "Rajasthani Mojari - Black",
+	  "description": "Mojaris from Rajasthan",
+	  "status": "True",
+	  "price": "800",
+	  "product_data": [
+		{
+          "size": "7",
+          "quantity": "1"
+		},
+		{
+          "size": "8",
+          "quantity": "0"
+		},
+		{
+          "size": "9",
+          "quantity": "3"
+		},
+		{
+          "size": "10",
+          "quantity": "4"
+		}
+	  ],
+	  "business_id": "3",
+	  "sku_id": "3",
+	  "created_by": "1"
+	}
+  },
+  {
+    "model": "Urn.products",
+    "pk": 10006,
+    "fields": {
+      "product_guid": "ced58b38-69c9-11e5-9d70-feff819cdc9f",
+	  "name": "Kolapuri Chapals - Black",
+	  "description": "Chapals from Kolapur",
+	  "status": "True",
+	  "price": "600",
+	  "product_data": [
+		{
+          "size": "7",
+          "quantity": "1"
+		},
+		{
+          "size": "8",
+          "quantity": "0"
+		},
+		{
+          "size": "9",
+          "quantity": "3"
+		},
+		{
+          "size": "10",
+          "quantity": "4"
+		}
+	  ],
+	  "business_id": "3",
+	  "sku_id": "4",
+	  "created_by": "1",
+	  "updated_by": "1"
+	}
+  }
+]
