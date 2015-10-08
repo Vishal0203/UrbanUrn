@@ -584,10 +584,13 @@ ALTER TABLE ONLY user_addresses
     ADD CONSTRAINT "user_addresses_PRIMARY" PRIMARY KEY (user_id, address_id);
 
 ALTER TABLE ONLY users
+    ADD CONSTRAINT "user_id_UNIQUE" UNIQUE (user_id);
+
+ALTER TABLE ONLY users
     ADD CONSTRAINT "user_guid_UNIQUE" UNIQUE (user_guid);
 
 ALTER TABLE ONLY users
-    ADD CONSTRAINT "users_PRIMARY" PRIMARY KEY (user_id);
+    ADD CONSTRAINT "users_PRIMARY" PRIMARY KEY (id);
 
 ALTER TABLE ONLY wishlist
     ADD CONSTRAINT "wishlist_PRIMARY" PRIMARY KEY (wishlist_id);
