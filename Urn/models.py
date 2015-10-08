@@ -305,18 +305,17 @@ class Sku(models.Model):
         db_table = 'sku'
 
 
-class Tokens(models.Model):
-    token_id = models.AutoField(primary_key=True)
+class Sessions(models.Model):
+    session_id = models.AutoField(primary_key=True)
     user = models.ForeignKey('Users')
-    token = models.CharField(max_length=255)
-    token_key = models.CharField(unique=True, max_length=255)
+    session_key = models.CharField(unique=True, max_length=255)
     expiry = models.DateTimeField(blank=True, null=True)
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'tokens'
+        db_table = 'sessions'
 
 
 class UserAddresses(models.Model):
