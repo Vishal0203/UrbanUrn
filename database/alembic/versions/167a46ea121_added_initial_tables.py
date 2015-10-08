@@ -367,24 +367,23 @@ CREATE SEQUENCE sku_sku_id_seq
 
 ALTER SEQUENCE sku_sku_id_seq OWNED BY sku.sku_id;
 
-CREATE TABLE tokens (
-    token_id integer NOT NULL,
+CREATE TABLE sessions (
+    session_id integer NOT NULL,
     user_id integer NOT NULL,
-    token character varying(255) NOT NULL,
-    token_key character varying(255) NOT NULL,
+    session_key character varying(255) NOT NULL,
     expiry timestamp without time zone,
     created_on timestamp without time zone,
     updated_on timestamp without time zone
 );
 
-CREATE SEQUENCE tokens_token_id_seq
+CREATE SEQUENCE sessions_session_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
 
-ALTER SEQUENCE tokens_token_id_seq OWNED BY tokens.token_id;
+ALTER SEQUENCE sessions_session_id_seq OWNED BY sessions.session_id;
 
 CREATE TABLE user_addresses (
     user_id integer NOT NULL,
@@ -461,7 +460,7 @@ ALTER TABLE ONLY reviews ALTER COLUMN review_id SET DEFAULT nextval('reviews_rev
 
 ALTER TABLE ONLY sku ALTER COLUMN sku_id SET DEFAULT nextval('sku_sku_id_seq'::regclass);
 
-ALTER TABLE ONLY tokens ALTER COLUMN token_id SET DEFAULT nextval('tokens_token_id_seq'::regclass);
+ALTER TABLE ONLY sessions ALTER COLUMN session_id SET DEFAULT nextval('sessions_session_id_seq'::regclass);
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
@@ -493,7 +492,7 @@ SELECT pg_catalog.setval('reviews_review_id_seq', 1, false);
 
 SELECT pg_catalog.setval('sku_sku_id_seq', 1, false);
 
-SELECT pg_catalog.setval('tokens_token_id_seq', 1, false);
+SELECT pg_catalog.setval('sessions_session_id_seq', 1, false);
 
 SELECT pg_catalog.setval('users_id_seq', 1, false);
 
@@ -574,11 +573,11 @@ ALTER TABLE ONLY sku
 ALTER TABLE ONLY sku
     ADD CONSTRAINT "sku_guid_UNIQUE" UNIQUE (sku_guid);
 
-ALTER TABLE ONLY tokens
-    ADD CONSTRAINT "token_key_UNIQUE" UNIQUE (token_key);
+ALTER TABLE ONLY sessions
+    ADD CONSTRAINT "session_key_UNIQUE" UNIQUE (session_key);
 
-ALTER TABLE ONLY tokens
-    ADD CONSTRAINT "tokens_PRIMARY" PRIMARY KEY (token_id);
+ALTER TABLE ONLY sessions
+    ADD CONSTRAINT "sessions_PRIMARY" PRIMARY KEY (session_id);
 
 ALTER TABLE ONLY user_addresses
     ADD CONSTRAINT "user_addresses_PRIMARY" PRIMARY KEY (user_id, address_id);
@@ -656,7 +655,7 @@ CREATE INDEX "fki_sku_users_created_by_FK" ON sku USING btree (created_by);
 
 CREATE INDEX "fki_sku_users_updated_by_FK" ON sku USING btree (updated_by);
 
-CREATE INDEX "fki_tokens_users_user_id_FK" ON tokens USING btree (user_id);
+CREATE INDEX "fki_sessions_users_user_id_FK" ON sessions USING btree (user_id);
 
 CREATE INDEX "fki_user_addresses_addresses_address_id_FK" ON user_addresses USING btree (address_id);
 
@@ -724,9 +723,9 @@ CREATE TRIGGER "sku_BINS" BEFORE INSERT ON sku FOR EACH ROW EXECUTE PROCEDURE be
 
 CREATE TRIGGER "sku_BUPD" BEFORE UPDATE ON sku FOR EACH ROW EXECUTE PROCEDURE before_update_function();
 
-CREATE TRIGGER "tokens_BINS" BEFORE INSERT ON tokens FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
+CREATE TRIGGER "sessions_BINS" BEFORE INSERT ON sessions FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
 
-CREATE TRIGGER "tokens_BUPD" BEFORE UPDATE ON tokens FOR EACH ROW EXECUTE PROCEDURE before_update_function();
+CREATE TRIGGER "sessions_BUPD" BEFORE UPDATE ON sessions FOR EACH ROW EXECUTE PROCEDURE before_update_function();
 
 CREATE TRIGGER "user_addresses_BINS" BEFORE INSERT ON user_addresses FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
 
@@ -833,8 +832,8 @@ ALTER TABLE ONLY sku
 ALTER TABLE ONLY sku
     ADD CONSTRAINT "sku_users_updated_by_FK" FOREIGN KEY (updated_by) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE ONLY tokens
-    ADD CONSTRAINT "tokens_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY sessions
+    ADD CONSTRAINT "sessions_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ONLY users
   ADD CONSTRAINT "users_auth_user_user_id_FK" FOREIGN KEY (user_id) REFERENCES auth_user(id) ON UPDATE CASCADE ON DELETE CASCADE;
@@ -889,7 +888,7 @@ DROP TABLE reviews CASCADE;
 
 DROP TABLE sku CASCADE;
 
-DROP TABLE tokens CASCADE;
+DROP TABLE sessions CASCADE;
 
 DROP TABLE user_addresses CASCADE;
 
