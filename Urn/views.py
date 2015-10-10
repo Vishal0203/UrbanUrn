@@ -24,12 +24,15 @@ def validate_input_and_authenticate(request):
                     'iss': settings.JWT_ISSUER,
                     'iat': datetime.datetime.now(),
                     'exp': datetime.datetime.now() + datetime.timedelta(hours=2),
+                    'username': auth_user.username,
                     'session_key': request.session.session_key,
                     'user_guid': basestring(auth_user.user_profile.user_guid)
                 }
                 encoded_token = jwt.encode(jwt_payload, settings.JWT_SECRET_KEY, algorithm='HS256')
-                user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=request.session.session_key)
-                user_session.save()
+                if Sessions.objects.get(session_key=request.session.session_key) is None:
+                    user_session = Sessions(user_id=auth_user.user_profile.user_id,
+                                            session_key=request.session.session_key)
+                    user_session.save()
 
                 return HttpResponse(encoded_token)
             else:
