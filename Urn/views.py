@@ -16,18 +16,19 @@ def validate_input_and_authenticate(request):
     else:
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
+        auth_user = authenticate(username=username, password=password)
+        if auth_user is not None:
+            if auth_user.is_active:
+                login(request, auth_user)
                 jwt_payload = {
                     'iss': settings.JWT_ISSUER,
+                    'iat': datetime.datetime.now(),
                     'exp': datetime.datetime.now() + datetime.timedelta(hours=2),
                     'session_key': request.session.session_key,
-                    'user_guid': basestring(user.user_profile.user_guid)
+                    'user_guid': basestring(auth_user.user_profile.user_guid)
                 }
                 encoded_token = jwt.encode(jwt_payload, settings.JWT_SECRET_KEY, algorithm='HS256')
-                user_session = Sessions(user_id=user.user_profile.user_id, session_key=request.session.session_key)
+                user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=request.session.session_key)
                 user_session.save()
 
                 return HttpResponse(encoded_token)
