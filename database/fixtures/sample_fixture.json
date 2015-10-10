@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
 	  "username": "urbanurn",
-	  "password": "94f88a431e39811e07fa33a927893aea269a143786a5d5fcab70af1221358a11",
+	  "password": "pbkdf2_sha256$20000$tTAjTJoQdZX1$q7kY404c433kbTMBXblboDYyMdqSJzo2NB8w2CAxf3g=",
 	  "email": "superuser@urbanurn.com",
 	  "first_name": "superuser",
 	  "last_name": "",
@@ -19,7 +19,7 @@
     "pk": 2,
     "fields": {
 	  "username": "sample.one",
-	  "password": "94f88a431e39811e07fa33a927893aea269a143786a5d5fcab70af1221358a11",
+	  "password": "pbkdf2_sha256$20000$tTAjTJoQdZX1$q7kY404c433kbTMBXblboDYyMdqSJzo2NB8w2CAxf3g=",
 	  "email": "sample.one@urbanurn.com",
 	  "first_name": "Sample",
 	  "last_name": "One",
@@ -34,7 +34,7 @@
     "pk": 3,
     "fields": {
 	  "username": "sample.two",
-	  "password": "94f88a431e39811e07fa33a927893aea269a143786a5d5fcab70af1221358a11",
+	  "password": "pbkdf2_sha256$20000$tTAjTJoQdZX1$q7kY404c433kbTMBXblboDYyMdqSJzo2NB8w2CAxf3g=",
 	  "email": "sample.two@urbanurn.com",
 	  "first_name": "Sample",
 	  "last_name": "Two",
@@ -49,7 +49,7 @@
     "pk": 4,
     "fields": {
 	  "username": "sample.three",
-	  "password": "94f88a431e39811e07fa33a927893aea269a143786a5d5fcab70af1221358a11",
+	  "password": "pbkdf2_sha256$20000$tTAjTJoQdZX1$q7kY404c433kbTMBXblboDYyMdqSJzo2NB8w2CAxf3g=",
 	  "email": "sample.three@urbanurn.com",
 	  "first_name": "Sample",
 	  "last_name": "Three",
