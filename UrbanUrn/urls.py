@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from Urn import views
+from Urn.views import authentication
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/v1_0/login', views.validate_input_and_authenticate),
-    url(r'^api/v1_0/logout', views.logout_and_clear_session)
+    url(r'^api/v1_0/login', authentication.validate_input_and_authenticate),
+    url(r'^api/v1_0/logout', authentication.logout_and_clear_session)
 ]
