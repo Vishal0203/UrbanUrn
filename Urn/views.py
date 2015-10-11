@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseNotAllow
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from setuptools.compat import basestring
+from Urn.decorators.validators import jwt_validate
 from Urn.models import Sessions
 
 
@@ -22,10 +23,11 @@ def validate_input_and_authenticate(request):
             if auth_user.is_active:
                 login(request, auth_user)
                 active_session = request.session.session_key
+                issued_at = datetime.datetime.utcnow()
                 jwt_payload = {
                     'iss': settings.JWT_ISSUER,
-                    'iat': datetime.datetime.now(),
-                    'exp': datetime.datetime.now() + datetime.timedelta(hours=2),
+                    'iat': issued_at,
+                    'exp': issued_at + datetime.timedelta(hours=2),
                     'username': auth_user.username,
                     'session_key': active_session,
                     'user_guid': basestring(auth_user.user_profile.user_guid)
@@ -44,7 +46,7 @@ def validate_input_and_authenticate(request):
             return HttpResponseForbidden('Invalid username or password')
 
 
-@login_required
+@jwt_validate
 def logout_and_clear_session(request):
     if request.method == 'GET':
         Sessions.objects.filter(session_key=request.session.session_key).delete()
