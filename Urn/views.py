@@ -42,3 +42,11 @@ def validate_input_and_authenticate(request):
                 return HttpResponseNotAllowed('This user has a disabled account')
         else:
             return HttpResponseForbidden('Invalid username or password')
+
+
+@login_required
+def logout_and_clear_session(request):
+    if request.method == 'GET':
+        Sessions.objects.filter(session_key=request.session.session_key).delete()
+        logout(request)
+        return HttpResponse("Logged Out")
