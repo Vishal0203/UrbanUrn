@@ -1,7 +1,8 @@
 import datetime
+from django.contrib.auth.decorators import login_required
 import jwt
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseNotAllowed, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -20,18 +21,20 @@ def validate_input_and_authenticate(request):
         if auth_user is not None:
             if auth_user.is_active:
                 login(request, auth_user)
+                active_session = request.session.session_key
                 jwt_payload = {
                     'iss': settings.JWT_ISSUER,
                     'iat': datetime.datetime.now(),
                     'exp': datetime.datetime.now() + datetime.timedelta(hours=2),
                     'username': auth_user.username,
-                    'session_key': request.session.session_key,
+                    'session_key': active_session,
                     'user_guid': basestring(auth_user.user_profile.user_guid)
                 }
                 encoded_token = jwt.encode(jwt_payload, settings.JWT_SECRET_KEY, algorithm='HS256')
-                if Sessions.objects.get(session_key=request.session.session_key) is None:
-                    user_session = Sessions(user_id=auth_user.user_profile.user_id,
-                                            session_key=request.session.session_key)
+                try:
+                    Sessions.objects.get(session_key=active_session)
+                except Sessions.DoesNotExist:
+                    user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=active_session)
                     user_session.save()
 
                 return HttpResponse(encoded_token)
