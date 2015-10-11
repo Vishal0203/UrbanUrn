@@ -51,7 +51,7 @@ def run_migrations_online():
 
     """
     configuration = config.get_section(config.config_ini_section)
-    configuration['sqlalchemy.url'] = 'postgresql+psycopg2://postgres:Password@123@127.0.0.1:5432/urbanurn'
+    configuration['sqlalchemy.url'] = 'postgresql+psycopg2://postgres:vishal@127.0.0.1:5433/urbanurn'
     connectable = engine_from_config(
         configuration,
         prefix='sqlalchemy.',
