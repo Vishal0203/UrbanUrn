@@ -1,5 +1,6 @@
 import inspect
 from enum import Enum
+import json
 
 
 class ChoiceEnum(Enum):
@@ -9,3 +10,7 @@ class ChoiceEnum(Enum):
         props = [m for m in members if not(m[0][:2] == '__')]
         choices = tuple([(str(p[1].value), p[0]) for p in props])
         return choices
+
+
+def build_json(keys, values):
+    return json.dumps(dict(zip(keys, values)))
