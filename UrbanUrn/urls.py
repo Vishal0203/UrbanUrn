@@ -20,5 +20,6 @@ from Urn.views import authentication
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/v1_0/login', authentication.validate_input_and_authenticate),
-    url(r'^api/v1_0/logout', authentication.logout_and_clear_session)
+    url(r'^api/v1_0/logout', authentication.logout_and_clear_session),
+    url(r'^api/v1_0/refresh_token', authentication.refresh_jwt_token)
 ]

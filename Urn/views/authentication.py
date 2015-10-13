@@ -52,3 +52,26 @@ def logout_and_clear_session(request):
         Sessions.objects.filter(session_key=request.session.session_key).delete()
         logout(request)
         return HttpResponse("Logged Out")
+
+
+@jwt_validate
+def refresh_jwt_token(request):
+    if request.method == 'GET' and request.user.is_authenticated():
+        issued_at = datetime.datetime.utcnow()
+        auth_user = request.user
+        jwt_payload = {
+            'iss': settings.JWT_ISSUER,
+            'iat': issued_at,
+            'exp': issued_at + datetime.timedelta(hours=2),
+            'username': auth_user.username,
+            'session_key': request.session.session_key,
+            'user_guid': basestring(auth_user.user_profile.user_guid)
+        }
+        encoded_token = jwt.encode(jwt_payload, settings.JWT_SECRET_KEY, algorithm='HS256')
+        try:
+            Sessions.objects.get(session_key=request.session.session_key)
+        except Sessions.DoesNotExist:
+            user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=request.session.session_key)
+            user_session.save()
+
+        return HttpResponse(encoded_token)
