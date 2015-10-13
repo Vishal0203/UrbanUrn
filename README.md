@@ -25,3 +25,8 @@ pip install pyjwt
 ```
 pip install cryptography
 ```
+
+6. Install jsonschema
+...
+pip install jsonschema
+...
