@@ -9,6 +9,7 @@ from django.conf import settings
 from setuptools.compat import basestring
 from Urn.decorators.validators import jwt_validate
 from Urn.models import Sessions
+import json
 
 
 @csrf_exempt
@@ -16,8 +17,9 @@ def validate_input_and_authenticate(request):
     if request.method == 'GET':
         return HttpResponseNotFound("Page not found")
     else:
-        username = request.POST['username']
-        password = request.POST['password']
+        request_data = json.loads(request.body.decode())
+        username = request_data['username']
+        password = request_data['password']
         auth_user = authenticate(username=username, password=password)
         if auth_user is not None:
             if auth_user.is_active:
