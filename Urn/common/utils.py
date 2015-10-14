@@ -12,7 +12,7 @@ class ChoiceEnum(Enum):
         return choices
 
 
-def build_json(arg, keys=None, values=None):
+def build_json(arg=None, keys=None, values=None):
     if keys is not None and values is not None:
         return json.dumps(dict(zip(keys, values)))
     elif isinstance(arg[0], tuple) and isinstance(arg, list):
