@@ -1,7 +1,7 @@
 import datetime
-from django.contrib.auth.decorators import login_required
 import jwt
 from django.shortcuts import render
+from Urn.common.utils import build_json
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseNotAllowed, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
@@ -41,7 +41,7 @@ def validate_input_and_authenticate(request):
                     user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=active_session)
                     user_session.save()
 
-                return HttpResponse(encoded_token)
+                return HttpResponse(build_json(keys=['token'], values=[encoded_token.decode('utf-8')]))
             else:
                 return HttpResponseNotAllowed('This user has a disabled account')
         else:
@@ -76,4 +76,4 @@ def refresh_jwt_token(request):
             user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=request.session.session_key)
             user_session.save()
 
-        return HttpResponse(encoded_token)
+        return HttpResponse(build_json(keys=['token'], values=[encoded_token.decode('utf-8')]))
