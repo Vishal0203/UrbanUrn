@@ -29,6 +29,5 @@ schema = {
             "type": "boolean"
         }
     },
-    "required": ["email", "username", "password", "first_name"
-                 ]
+    "required": ["email", "username", "password", "first_name", "last_name", "phone"]
 }
