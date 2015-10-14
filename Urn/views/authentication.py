@@ -35,9 +35,7 @@ def validate_input_and_authenticate(request):
                     'user_guid': basestring(auth_user.user_profile.user_guid)
                 }
                 encoded_token = jwt.encode(jwt_payload, settings.JWT_SECRET_KEY, algorithm='HS256')
-                try:
-                    Sessions.objects.get(session_key=active_session)
-                except Sessions.DoesNotExist:
+                if not Sessions.objects.filter(session_key=active_session).exists():
                     user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=active_session)
                     user_session.save()
 
@@ -70,9 +68,7 @@ def refresh_jwt_token(request):
             'user_guid': basestring(auth_user.user_profile.user_guid)
         }
         encoded_token = jwt.encode(jwt_payload, settings.JWT_SECRET_KEY, algorithm='HS256')
-        try:
-            Sessions.objects.get(session_key=request.session.session_key)
-        except Sessions.DoesNotExist:
+        if not Sessions.objects.filter(session_key=request.session.session_key).exists():
             user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=request.session.session_key)
             user_session.save()
 
