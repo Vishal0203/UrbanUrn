@@ -1,8 +1,10 @@
-from django.http import HttpResponseRedirect
+import json
+from django.http import HttpResponseRedirect, HttpResponseServerError
 from jwt import decode, InvalidTokenError, InvalidIssuerError, InvalidIssuedAtError
 from django.conf import settings
 from setuptools.compat import basestring
 from Urn.models import Sessions
+import jsonschema
 
 
 def jwt_validate(original_function):
@@ -30,4 +32,17 @@ def validate_jwt_values(encoded_token, loggedin_user):
         else:
             return 'INVALID'
     except (InvalidIssuerError, InvalidIssuedAtError, InvalidTokenError, Sessions.DoesNotExist) as e:
-            return 'INVALID'
+        return 'INVALID'
+
+
+def validate_schema(schema):
+    def wrap_schema_validator(func):
+        def actual_schema_validator(request):
+            try:
+                jsonschema.validate(json.loads(request.body.decode()), schema)
+                return func(request)
+            except Exception as e:
+                request.session["Error"] = e
+                return HttpResponseServerError(e)
+        return actual_schema_validator
+    return wrap_schema_validator
