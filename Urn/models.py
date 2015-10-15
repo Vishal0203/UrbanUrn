@@ -105,6 +105,7 @@ class Businesses(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     category = models.CharField(max_length=20, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
+    business_image = models.CharField(max_length=255, blank=True, null=True)
     created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
                                    related_name='businesses_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,

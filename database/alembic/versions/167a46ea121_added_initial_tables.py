@@ -119,6 +119,7 @@ CREATE TABLE businesses (
     name character varying(50),
     category character varying(20),
     description character varying(1024),
+    business_image character varying(255),
     created_by integer,
     updated_by integer,
     created_on timestamp without time zone,
