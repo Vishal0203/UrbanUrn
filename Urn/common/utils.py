@@ -1,6 +1,6 @@
 import inspect
-from enum import Enum
 import json
+from enum import Enum
 
 
 class ChoiceEnum(Enum):
@@ -19,5 +19,17 @@ def build_json(arg=None, keys=None, values=None):
         return json.dumps(dict(arg))
     elif isinstance(arg, dict):
         return json.dumps(arg)
+    elif isinstance(arg, list):
+        return json.dumps(arg)
     else:
         return "Invalid type"
+
+
+# Helper method to convert UUID object to string for JSON serialization
+def convert_uuid_string(uuid):
+    return str(uuid)
+
+
+# Helper method to convert timestamp object to string for JSON serialization
+def format_timestamp(timestamp):
+    return str(timestamp)
