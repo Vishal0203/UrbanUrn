@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^api/v1_0/logout', authentication.logout_and_clear_session),
     url(r'^api/v1_0/refresh_token', authentication.refresh_jwt_token),
     url(r'^api/v1_0/registration', users.registration),
-    url(r'^api/v1_0/businesses', businesses.api_businesses)
+    url(r'^api/v1_0/businesses', businesses.api_businesses),
+    url(r'^api/v1_0/users', users.get_all_users)
 ]
