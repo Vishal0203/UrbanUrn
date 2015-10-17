@@ -80,3 +80,19 @@ def format_products(products):
         product_data['business_id'] = product.business_id
         products_data.append(product_data)
     return utils.build_json(products_data)
+
+
+@csrf_exempt
+def process_products_request(request):
+    if request.method in ['POST', 'PUT']:
+        return process_products_post(request)
+    else:
+        return process_products_get(request)
+
+
+def process_products_post(request):
+    pass
+
+
+def process_products_get(request):
+    pass
