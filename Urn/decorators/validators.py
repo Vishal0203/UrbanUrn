@@ -37,10 +37,10 @@ def validate_jwt_values(encoded_token, loggedin_user):
 
 def validate_schema(schema):
     def wrap_schema_validator(func):
-        def actual_schema_validator(request):
+        def actual_schema_validator(request, *args):
             try:
                 jsonschema.validate(json.loads(request.body.decode()), schema)
-                return func(request)
+                return func(request, *args)
             except Exception as e:
                 request.session["Error"] = e
                 return HttpResponseServerError(e)
