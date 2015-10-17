@@ -1,5 +1,5 @@
 import json
-from django.http import HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseForbidden
 from jwt import decode, InvalidTokenError, InvalidIssuerError, InvalidIssuedAtError
 from django.conf import settings
 from setuptools.compat import basestring
@@ -20,6 +20,15 @@ def jwt_validate(original_function):
             return HttpResponseRedirect('login_page')
 
     return validator
+
+
+def check_authenticity(original_function):
+    def authenticity_checker(request_arg):
+        if request_arg.user.is_superuser or request_arg.user.is_staff:
+            return original_function(request_arg)
+        else:
+            return HttpResponseForbidden("You are not authorized to use this API")
+    return authenticity_checker
 
 
 def validate_jwt_values(encoded_token, loggedin_user):
