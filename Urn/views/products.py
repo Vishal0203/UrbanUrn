@@ -1,11 +1,12 @@
-from collections import OrderedDict
-
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
-
-from Urn.decorators.validators import jwt_validate, check_authenticity, validate_schema
-from Urn.models import Sku, Products
+import json
 from Urn.common import utils
+from collections import OrderedDict
+from Urn.models import Sku, Products
+from django.views.decorators.csrf import csrf_exempt
+from Urn.schema_validators.sku_validation import schema
+from django.http import HttpResponse, HttpResponseBadRequest
+from Urn.common.utils import build_json, convert_uuid_string
+from Urn.decorators.validators import jwt_validate, check_authenticity, validate_schema
 
 
 @csrf_exempt
@@ -18,9 +19,29 @@ def process_sku_request(request):
 
 @jwt_validate
 @check_authenticity
-@validate_schema
+@validate_schema(schema)
 def process_sku_post(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    if request.method == 'POST':
+        if not Sku.objects.filter(name=request_data["name"]).exists():
+            Sku.objects.create(name=request_data["name"], description=request_data["description"],
+                               business_id=request_data["business_id"] if 'business_id' in request_data else None,
+                               created_by=request.user.user_profile)
+            return HttpResponse(status=201, content='sku created')
+        else:
+            sku_guid = {
+                "sku_guid": convert_uuid_string(Sku.objects.get(name=request_data["name"]).sku_guid)
+            }
+            return HttpResponse(build_json(arg=sku_guid))
+
+    else:
+        sku = Sku.objects.filter(sku_guid=request_data["sku_guid"])
+        if sku.exists():
+            request_data["updated_by"] = request.user.user_profile
+            sku.update(**request_data)
+            return HttpResponse(status=201, content='sku updated')
+        else:
+            return HttpResponseBadRequest('No such sku to update')
 
 
 def process_sku_get(request):
