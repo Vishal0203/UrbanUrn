@@ -91,21 +91,14 @@ CREATE TABLE addresses (
     updated_on timestamp without time zone
 );
 
-CREATE TABLE business_addresses (
-    business_id integer NOT NULL,
-    address_id integer NOT NULL,
-    created_on timestamp without time zone,
-    updated_on timestamp without time zone
-);
-
-CREATE SEQUENCE business_addresses_address_id_seq
+CREATE SEQUENCE addresses_address_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
 
-ALTER SEQUENCE business_addresses_address_id_seq OWNED BY addresses.address_id;
+ALTER SEQUENCE addresses_address_id_seq OWNED BY addresses.address_id;
 
 CREATE TABLE business_users (
     business_id integer NOT NULL,
@@ -388,13 +381,6 @@ CREATE SEQUENCE sessions_session_id_seq
 
 ALTER SEQUENCE sessions_session_id_seq OWNED BY sessions.session_id;
 
-CREATE TABLE user_addresses (
-    user_id integer NOT NULL,
-    address_id integer NOT NULL,
-    created_on timestamp without time zone,
-    updated_on timestamp without time zone
-);
-
 CREATE TABLE users (
     id integer NOT NULL,
     user_id integer NOT NULL,
@@ -437,7 +423,7 @@ CREATE SEQUENCE wishlist_wishlist_id_seq
 
 ALTER SEQUENCE wishlist_wishlist_id_seq OWNED BY wishlist.wishlist_id;
 
-ALTER TABLE ONLY addresses ALTER COLUMN address_id SET DEFAULT nextval('business_addresses_address_id_seq'::regclass);
+ALTER TABLE ONLY addresses ALTER COLUMN address_id SET DEFAULT nextval('addresses_address_id_seq'::regclass);
 
 ALTER TABLE ONLY businesses ALTER COLUMN business_id SET DEFAULT nextval('businesses_business_id_seq'::regclass);
 
@@ -469,7 +455,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 ALTER TABLE ONLY wishlist ALTER COLUMN wishlist_id SET DEFAULT nextval('wishlist_wishlist_id_seq'::regclass);
 
-SELECT pg_catalog.setval('business_addresses_address_id_seq', 1, false);
+SELECT pg_catalog.setval('addresses_address_id_seq', 1, false);
 
 SELECT pg_catalog.setval('businesses_business_id_seq', 1, false);
 
@@ -506,9 +492,6 @@ ALTER TABLE ONLY addresses
 
 ALTER TABLE ONLY addresses
     ADD CONSTRAINT "addresses_PRIMARY" PRIMARY KEY (address_id);
-
-ALTER TABLE ONLY business_addresses
-    ADD CONSTRAINT "business_addresses_PRIMARY" PRIMARY KEY (business_id, address_id);
 
 ALTER TABLE ONLY businesses
     ADD CONSTRAINT "business_guid_UNIQUE" UNIQUE (business_guid);
@@ -582,9 +565,6 @@ ALTER TABLE ONLY sessions
 ALTER TABLE ONLY sessions
     ADD CONSTRAINT "sessions_PRIMARY" PRIMARY KEY (session_id);
 
-ALTER TABLE ONLY user_addresses
-    ADD CONSTRAINT "user_addresses_PRIMARY" PRIMARY KEY (user_id, address_id);
-
 ALTER TABLE ONLY users
     ADD CONSTRAINT "user_id_UNIQUE" UNIQUE (user_id);
 
@@ -603,8 +583,6 @@ ALTER TABLE ONLY wishlist
 CREATE INDEX "addresses_businesses_business_id_FK" ON addresses USING btree (business_id);
 
 CREATE INDEX "addresses_users_user_id_FK" ON addresses USING btree (user_id);
-
-CREATE INDEX "fki_business_addresses_addresses_address_id_FK" ON business_addresses USING btree (address_id);
 
 CREATE INDEX fki_business_users_users_user_id ON business_users USING btree (user_id);
 
@@ -664,8 +642,6 @@ CREATE INDEX "fki_sku_users_updated_by_FK" ON sku USING btree (updated_by);
 
 CREATE INDEX "fki_sessions_users_user_id_FK" ON sessions USING btree (user_id);
 
-CREATE INDEX "fki_user_addresses_addresses_address_id_FK" ON user_addresses USING btree (address_id);
-
 CREATE INDEX "fki_wishlist_products_product_id_FK" ON wishlist USING btree (product_id);
 
 CREATE INDEX "fki_wishlist_users_user_id_FK" ON wishlist USING btree (user_id);
@@ -673,10 +649,6 @@ CREATE INDEX "fki_wishlist_users_user_id_FK" ON wishlist USING btree (user_id);
 CREATE TRIGGER "addresses_BINS" BEFORE INSERT ON addresses FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
 
 CREATE TRIGGER "addresses_BUPD" BEFORE UPDATE ON addresses FOR EACH ROW EXECUTE PROCEDURE before_update_function();
-
-CREATE TRIGGER "business_addresses_BINS" BEFORE INSERT ON business_addresses FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
-
-CREATE TRIGGER "business_addresses_BUPD" BEFORE UPDATE ON business_addresses FOR EACH ROW EXECUTE PROCEDURE before_update_function();
 
 CREATE TRIGGER "business_users_BINS" BEFORE INSERT ON business_users FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
 
@@ -734,10 +706,6 @@ CREATE TRIGGER "sessions_BINS" BEFORE INSERT ON sessions FOR EACH ROW EXECUTE PR
 
 CREATE TRIGGER "sessions_BUPD" BEFORE UPDATE ON sessions FOR EACH ROW EXECUTE PROCEDURE before_update_function();
 
-CREATE TRIGGER "user_addresses_BINS" BEFORE INSERT ON user_addresses FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
-
-CREATE TRIGGER "user_addresses_BUPD" BEFORE UPDATE ON user_addresses FOR EACH ROW EXECUTE PROCEDURE before_update_function();
-
 CREATE TRIGGER "users_BINS" BEFORE INSERT ON users FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
 
 CREATE TRIGGER "users_BUPD" BEFORE UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE before_update_function();
@@ -751,12 +719,6 @@ ALTER TABLE ONLY addresses
 
 ALTER TABLE ONLY addresses
     ADD CONSTRAINT "addresses_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE ONLY business_addresses
-    ADD CONSTRAINT "business_addresses_addresses_address_id_FK" FOREIGN KEY (address_id) REFERENCES addresses(address_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE ONLY business_addresses
-    ADD CONSTRAINT "business_addresses_businesses_business_id_FK" FOREIGN KEY (business_id) REFERENCES businesses(business_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ONLY business_users
     ADD CONSTRAINT "business_users_businesses_business_id_FK" FOREIGN KEY (business_id) REFERENCES businesses(business_id) ON UPDATE CASCADE ON DELETE CASCADE;
@@ -851,12 +813,6 @@ ALTER TABLE ONLY sessions
 ALTER TABLE ONLY users
   ADD CONSTRAINT "users_auth_user_user_id_FK" FOREIGN KEY (user_id) REFERENCES auth_user(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE ONLY user_addresses
-    ADD CONSTRAINT "user_addresses_addresses_address_id_FK" FOREIGN KEY (address_id) REFERENCES addresses(address_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE ONLY user_addresses
-    ADD CONSTRAINT "user_addresses_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
 ALTER TABLE ONLY wishlist
     ADD CONSTRAINT "wishlist_products_product_id_FK" FOREIGN KEY (product_id) REFERENCES products(product_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
@@ -872,8 +828,6 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 _initial_down="""
 DROP TABLE addresses CASCADE;
-
-DROP TABLE business_addresses CASCADE;
 
 DROP TABLE business_users CASCADE;
 
@@ -904,8 +858,6 @@ DROP TABLE sku CASCADE;
 DROP TABLE IF EXISTS sessions CASCADE;
 
 DROP TABLE IF EXISTS tokens CASCADE;
-
-DROP TABLE user_addresses CASCADE;
 
 DROP TABLE users CASCADE;
 
