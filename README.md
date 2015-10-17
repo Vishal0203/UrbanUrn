@@ -20,6 +20,7 @@ pip install jsonschema
 
 - Modify the database connection URL in alembic.ini and env.py
 - Run the following commands to migrate the tables to your database.
+
 a) Run from project root folder 
 ```
 python manage.py migrate
