@@ -1,5 +1,5 @@
 import json
-from django.http import HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponseServerError, HttpResponseForbidden, HttpResponseBadRequest
 from jwt import decode, InvalidTokenError, InvalidIssuerError, InvalidIssuedAtError
 from django.conf import settings
 from setuptools.compat import basestring
@@ -15,17 +15,17 @@ def jwt_validate(original_function):
             if status is 'OK':
                 return original_function(request_argument)
             else:
-                return HttpResponseRedirect('login_page')
+                return HttpResponseForbidden('Invalid token')
         else:
-            return HttpResponseRedirect('login_page')
+            return HttpResponseBadRequest("Header 'X-Urbanurn-Auth' expected")
 
     return validator
 
 
-def validate_jwt_values(encoded_token, loggedin_user):
+def validate_jwt_values(encoded_token, logged_in_user):
     try:
         decoded_payload = decode(encoded_token, settings.JWT_SECRET_KEY, algorithms=['HS256'])
-        guid_check = basestring(loggedin_user.user_profile.user_guid) == decoded_payload.get('user_guid')
+        guid_check = basestring(logged_in_user.user_profile.user_guid) == decoded_payload.get('user_guid')
         session_check = Sessions.objects.get(session_key=decoded_payload.get('session_key'))
         if guid_check and session_check is not None:
             return 'OK'
