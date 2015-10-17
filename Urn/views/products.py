@@ -95,4 +95,11 @@ def process_products_post(request):
 
 
 def process_products_get(request):
-    pass
+    url_params = request.GET
+    if len(url_params) == 0:
+        products = Products.objects.all()
+        return HttpResponse(format_products(products))
+    elif len(url_params) == 1 and 'product_guid' in url_params:
+        product_guid = url_params['product_guid']
+        product = Products.objects.get(product_guid=product_guid)
+        return HttpResponse(format_products([product]))
