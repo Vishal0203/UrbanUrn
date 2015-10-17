@@ -116,52 +116,6 @@
 	}
   },
   {
-    "model": "Urn.addresses",
-    "pk": 1,
-    "fields": {
-      "address_guid": "bbebd9e2-6937-11e5-9d70-feff819cdc9f",
-      "is_default": "True",
-	  "street_1": "Test Address Street 1a",
-	  "street_2": "Test Address Street 1b",
-	  "city": "Hyderabad",
-	  "state": "Telengana",
-	  "pincode": "300001",
-	  "country": "India",
-	  "latitude": "21.12",
-	  "longitude": "53.68"
-    }
-  },
-  {
-    "model": "Urn.addresses",
-    "pk": 2,
-    "fields": {
-      "address_guid": "813fd0f4-69ba-11e5-9d70-feff819cdc9f",
-      "is_default": "False",
-	  "street_1": "Test Address Street 2a",
-	  "street_2": "Test Address Street 2b",
-	  "city": "Hyderabad",
-	  "state": "Telengana",
-	  "pincode": "300002",
-	  "country": "India",
-	  "latitude": "47.52",
-	  "longitude": "109.23"
-    }
-  },
-  {
-    "model": "Urn.addresses",
-    "pk": 3,
-    "fields": {
-      "address_guid": "ab762850-69ba-11e5-9d70-feff819cdc9f",
-      "is_default": "True",
-	  "street_1": "Test Address Street 3",
-	  "city": "Hyderabad",
-	  "pincode": "300003",
-	  "country": "India",
-	  "latitude": "63.31",
-	  "longitude": "164.23"
-    }
-  },
-  {
     "model": "Urn.businesses",
     "pk": 1,
     "fields": {
@@ -195,6 +149,55 @@
 	  "description": "Test Business for footwear",
 	  "created_by": "1",
 	  "updated_by": "1"
+    }
+  },
+  {
+    "model": "Urn.addresses",
+    "pk": 1,
+    "fields": {
+      "address_guid": "bbebd9e2-6937-11e5-9d70-feff819cdc9f",
+      "is_default": "True",
+	  "street_1": "Test Address Street 1a",
+	  "street_2": "Test Address Street 1b",
+	  "city": "Hyderabad",
+	  "state": "Telengana",
+	  "pincode": "300001",
+	  "country": "India",
+	  "latitude": "21.12",
+	  "longitude": "53.68",
+	  "business_id": "1"
+    }
+  },
+  {
+    "model": "Urn.addresses",
+    "pk": 2,
+    "fields": {
+      "address_guid": "813fd0f4-69ba-11e5-9d70-feff819cdc9f",
+      "is_default": "False",
+	  "street_1": "Test Address Street 2a",
+	  "street_2": "Test Address Street 2b",
+	  "city": "Hyderabad",
+	  "state": "Telengana",
+	  "pincode": "300002",
+	  "country": "India",
+	  "latitude": "47.52",
+	  "longitude": "109.23",
+	  "business_id": "1"
+    }
+  },
+  {
+    "model": "Urn.addresses",
+    "pk": 3,
+    "fields": {
+      "address_guid": "ab762850-69ba-11e5-9d70-feff819cdc9f",
+      "is_default": "True",
+	  "street_1": "Test Address Street 3",
+	  "city": "Hyderabad",
+	  "pincode": "300003",
+	  "country": "India",
+	  "latitude": "63.31",
+	  "longitude": "164.23",
+	  "user_id": "1"
     }
   },
   {

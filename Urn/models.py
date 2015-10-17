@@ -66,6 +66,8 @@ class Addresses(models.Model):
     country = models.CharField(max_length=30)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
+    business = models.ForeignKey('Businesses')
+    user = models.ForeignKey('Users')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
 

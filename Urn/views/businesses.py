@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common import utils
 from Urn.decorators.validators import jwt_validate
-from Urn.models import Businesses
+from Urn.models import Businesses, Addresses
+from Urn.views import addresses
 
 
 @csrf_exempt
@@ -29,6 +30,11 @@ def format_get_businesses(businesses):
         business_data['category'] = business.category
         business_data['description'] = business.description
         business_data['business_image'] = business.business_image
+
+        business_addresses = Addresses.objects.filter(business_id=business.business_id)
+        addresses_data = addresses.format_addresses(business_addresses)
+        business_data['addresses'] = addresses_data
+
         business_data['created_by'] = business.created_by.user.username
         business_data['updated_by'] = business.updated_by.user.username if business.updated_by is not None else None
         business_data['created_on'] = utils.format_timestamp(business.created_on)

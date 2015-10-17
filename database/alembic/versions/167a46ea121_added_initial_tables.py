@@ -85,6 +85,8 @@ CREATE TABLE addresses (
     country character varying(30) NOT NULL,
     latitude double precision,
     longitude double precision,
+    business_id integer,
+    user_id integer,
     created_on timestamp without time zone,
     updated_on timestamp without time zone
 );
@@ -598,6 +600,10 @@ ALTER TABLE ONLY wishlist
 ALTER TABLE ONLY wishlist
     ADD CONSTRAINT "wishlist_guid_UNIQUE" UNIQUE (wishlist_guid);
 
+CREATE INDEX "addresses_businesses_business_id_FK" ON addresses USING btree (business_id);
+
+CREATE INDEX "addresses_users_user_id_FK" ON addresses USING btree (user_id);
+
 CREATE INDEX "fki_business_addresses_addresses_address_id_FK" ON business_addresses USING btree (address_id);
 
 CREATE INDEX fki_business_users_users_user_id ON business_users USING btree (user_id);
@@ -739,6 +745,12 @@ CREATE TRIGGER "users_BUPD" BEFORE UPDATE ON users FOR EACH ROW EXECUTE PROCEDUR
 CREATE TRIGGER "wishlist_BINS" BEFORE INSERT ON wishlist FOR EACH ROW EXECUTE PROCEDURE before_insert_function();
 
 CREATE TRIGGER "wishlist_BUPD" BEFORE UPDATE ON wishlist FOR EACH ROW EXECUTE PROCEDURE before_update_function();
+
+ALTER TABLE ONLY addresses
+    ADD CONSTRAINT "addresses_businesses_business_id_FK" FOREIGN KEY (business_id) REFERENCES businesses(business_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY addresses
+    ADD CONSTRAINT "addresses_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ONLY business_addresses
     ADD CONSTRAINT "business_addresses_addresses_address_id_FK" FOREIGN KEY (address_id) REFERENCES addresses(address_id) ON UPDATE CASCADE ON DELETE CASCADE;
