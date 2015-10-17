@@ -1,10 +1,11 @@
 import json
 from Urn.common import utils
 from collections import OrderedDict
-from Urn.models import Sku, Products
+from Urn.models import Sku, Products, BusinessUsers, Users, Businesses
 from django.views.decorators.csrf import csrf_exempt
 from Urn.schema_validators.sku_validation import schema
-from django.http import HttpResponse, HttpResponseBadRequest
+from Urn.schema_validators.products_validation import schema as product_schema
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from Urn.common.utils import build_json, convert_uuid_string
 from Urn.decorators.validators import jwt_validate, check_authenticity, validate_schema
 
@@ -90,8 +91,35 @@ def process_products_request(request):
         return process_products_get(request)
 
 
+@jwt_validate
+@validate_schema(product_schema)
 def process_products_post(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    if request.method == 'POST' and request.user.user_profile.is_business_user is True:
+        business_info = Businesses.objects.get(business_guid=request_data["business_guid"])
+        sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
+        Products.objects.create(name=request_data["name"], description=request_data["description"],
+                                price=request_data["price"], product_data=request_data["product_data"],
+                                business_id=business_info.business_id, sku_id=sku_info.sku_id,
+                                created_by=request.user.user_profile)
+        return HttpResponse(status=201, content='Product added')
+
+    elif request.method == 'PUT' and request.user.user_profile.is_business_user is True:
+        product = Products.objects.filter(product_guid=request_data["product_guid"])
+        if product.exists():
+            sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
+            request_data["updated_by"] = request.user.user_profile
+            request_data["sku_id"] = sku_info.sku_id
+            request_data["product_data"] = json.loads(request_data["product_data"])
+            del request_data["sku_guid"]
+            del request_data["business_guid"]
+            product.update(**request_data)
+            return HttpResponse(status=201, content='Product updated')
+        else:
+            return HttpResponseBadRequest('No such product to update')
+
+    else:
+        return HttpResponseForbidden('Not allowed to use API')
 
 
 def process_products_get(request):
