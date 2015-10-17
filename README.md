@@ -8,25 +8,16 @@ Setting up this application will require the following.
 
 # Python environment setup
 
-1. Install alembic package
+- Install the following python packages:
 ```
 pip install alembic
+pip install pyjwt
+pip install cryptography
+pip install jsonschema
 ```
-2. Modify the database connection URL in alembic.ini and env.py
-3. Run the following command to migrate the tables to your database
+
+- Modify the database connection URL in alembic.ini and env.py
+- Run the following command to migrate the tables to your database
 ```
 alembic upgrade HEAD
 ```
-4. Install PyJWT package
-```
-pip install pyjwt
-```
-5. Install cryptography
-```
-pip install cryptography
-```
-
-6. Install jsonschema
-...
-pip install jsonschema
-...
