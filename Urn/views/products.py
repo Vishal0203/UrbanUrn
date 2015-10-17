@@ -1,8 +1,9 @@
 import json
 from Urn.common import utils
 from collections import OrderedDict
-from Urn.models import Sku, Products, BusinessUsers, Users, Businesses
+from Urn.models import Sku, Products, Businesses
 from django.views.decorators.csrf import csrf_exempt
+
 from Urn.schema_validators.sku_validation import schema
 from Urn.schema_validators.products_validation import schema as product_schema
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
@@ -49,27 +50,35 @@ def process_sku_get(request):
     url_params = request.GET
     if len(url_params) == 0:
         skus = Sku.objects.all()
-        return HttpResponse(format_skus(skus))
-    elif len(url_params) == 1 and 'sku_guid' in url_params:
-        sku_guid = url_params['sku_guid']
-        sku = Sku.objects.get(sku_guid=sku_guid)
-        if sku.status:
+        result = []
+        for sku in skus:
             products = Products.objects.filter(sku_id=sku.sku_id)
-            return HttpResponse(format_products(products))
+            result.append(format_skus(sku, products))
+        return HttpResponse(build_json(result))
+    elif 'sku_guid' in url_params:
+        sku_guid = url_params['sku_guid']
+        try:
+            sku = Sku.objects.get(sku_guid=sku_guid)
+            if sku.status:
+                products = Products.objects.filter(sku_id=sku.sku_id)
+                return HttpResponse(build_json(format_skus(sku, products)))
+        except Sku.DoesNotExist as e:
+            return HttpResponseBadRequest("No such SKU exists")
+    else:
+        return HttpResponseBadRequest("No such SKU exists")
 
 
-def format_skus(skus):
-    skus_data = []
-    for sku in skus:
-        sku_data = OrderedDict()
-        sku_data['sku_guid'] = utils.convert_uuid_string(sku.sku_guid)
-        sku_data['name'] = sku.name
-        sku_data['description'] = sku.description
-        skus_data.append(sku_data)
-    return utils.build_json(skus_data)
+def format_skus(sku, products):
+    sku_data = OrderedDict()
+    sku_data['sku_guid'] = utils.convert_uuid_string(sku.sku_guid)
+    sku_data['name'] = sku.name
+    sku_data['description'] = sku.description
+    sku_data['id'] = sku.sku_id
+    sku_data['products'] = format_products(products, False) if products is not None else []
+    return sku_data
 
 
-def format_products(products):
+def format_products(products, json=True):
     products_data = []
     for product in products:
         product_data = OrderedDict()
@@ -79,7 +88,10 @@ def format_products(products):
         product_data['price'] = product.price
         product_data['product_data'] = product.product_data
         product_data['business_id'] = product.business_id
+        product_data['sku_id'] = product.sku_id
         products_data.append(product_data)
+    if not json:
+        return products_data
     return utils.build_json(products_data)
 
 
@@ -123,4 +135,16 @@ def process_products_post(request):
 
 
 def process_products_get(request):
-    pass
+    url_params = request.GET
+    if len(url_params) == 0:
+        products = Products.objects.all()
+        return HttpResponse(format_products(products))
+    elif 'product_guid' in url_params:
+        product_guid = url_params['product_guid']
+        try:
+            product = Products.objects.get(product_guid=product_guid)
+            return HttpResponse(format_products([product]))
+        except Products.DoesNotExist as e:
+            return HttpResponseBadRequest("No such product exists")
+    else:
+        return HttpResponseBadRequest("No such product exists")
