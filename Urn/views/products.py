@@ -6,17 +6,19 @@ from django.views.decorators.csrf import csrf_exempt
 
 from Urn.schema_validators.sku_validation import schema
 from Urn.schema_validators.products_validation import schema as product_schema
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from Urn.common.utils import build_json, convert_uuid_string
-from Urn.decorators.validators import jwt_validate, check_authenticity, validate_schema
+from Urn.decorators.validators import jwt_validate, check_authenticity, validate_schema, check_business_or_super
 
 
 @csrf_exempt
 def process_sku_request(request):
     if request.method in ['POST', 'PUT']:
         return process_sku_post(request)
-    else:
+    elif request.method == 'GET':
         return process_sku_get(request)
+    else:
+        return HttpResponseNotFound("API Not found")
 
 
 @jwt_validate
@@ -41,7 +43,7 @@ def process_sku_post(request):
         if sku.exists():
             request_data["updated_by"] = request.user.user_profile
             sku.update(**request_data)
-            return HttpResponse(status=201, content='sku updated')
+            return HttpResponse(status=202, content='sku updated')
         else:
             return HttpResponseBadRequest('No such sku to update')
 
@@ -99,15 +101,18 @@ def format_products(products, json=True):
 def process_products_request(request):
     if request.method in ['POST', 'PUT']:
         return process_products_post(request)
-    else:
+    elif request.method == 'GET':
         return process_products_get(request)
+    else:
+        return HttpResponseNotFound("API not found")
 
 
 @jwt_validate
+@check_business_or_super
 @validate_schema(product_schema)
 def process_products_post(request):
     request_data = json.loads(request.body.decode())
-    if request.method == 'POST' and request.user.user_profile.is_business_user is True:
+    if request.method == 'POST':
         business_info = Businesses.objects.get(business_guid=request_data["business_guid"])
         sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
         Products.objects.create(name=request_data["name"], description=request_data["description"],
@@ -116,7 +121,7 @@ def process_products_post(request):
                                 created_by=request.user.user_profile)
         return HttpResponse(status=201, content='Product added')
 
-    elif request.method == 'PUT' and request.user.user_profile.is_business_user is True:
+    else:
         product = Products.objects.filter(product_guid=request_data["product_guid"])
         if product.exists():
             sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
@@ -126,12 +131,9 @@ def process_products_post(request):
             del request_data["sku_guid"]
             del request_data["business_guid"]
             product.update(**request_data)
-            return HttpResponse(status=201, content='Product updated')
+            return HttpResponse(status=202, content='Product updated')
         else:
             return HttpResponseBadRequest('No such product to update')
-
-    else:
-        return HttpResponseForbidden('Not allowed to use API')
 
 
 def process_products_get(request):
