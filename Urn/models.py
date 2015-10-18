@@ -76,18 +76,6 @@ class Addresses(models.Model):
         db_table = 'addresses'
 
 
-class BusinessAddresses(models.Model):
-    business = models.ForeignKey('Businesses')
-    address = models.ForeignKey(Addresses)
-    created_on = models.DateTimeField(blank=True, null=True)
-    updated_on = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'business_addresses'
-        unique_together = (('business', 'address'),)
-
-
 class BusinessUsers(models.Model):
     business = models.ForeignKey('Businesses')
     user = models.ForeignKey('Users')
@@ -319,18 +307,6 @@ class Sessions(models.Model):
     class Meta:
         managed = False
         db_table = 'sessions'
-
-
-class UserAddresses(models.Model):
-    user = models.ForeignKey('Users')
-    address = models.ForeignKey(Addresses)
-    created_on = models.DateTimeField(blank=True, null=True)
-    updated_on = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'user_addresses'
-        unique_together = (('user', 'address'),)
 
 
 class Users(models.Model):
