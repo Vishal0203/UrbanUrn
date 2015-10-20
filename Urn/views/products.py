@@ -75,8 +75,11 @@ def format_skus(sku, products):
     sku_data['sku_guid'] = utils.convert_uuid_string(sku.sku_guid)
     sku_data['name'] = sku.name
     sku_data['description'] = sku.description
-    sku_data['id'] = sku.sku_id
     sku_data['products'] = format_products(products, False) if products is not None else []
+    sku_data['created_by'] = sku.created_by.user.username
+    sku_data['updated_by'] = sku.updated_by.user.username if sku.updated_by is not None else None
+    sku_data['created_on'] = utils.format_timestamp(sku.created_on)
+    sku_data['updated_on'] = utils.format_timestamp(sku.updated_on) if sku.updated_on is not None else None
     return sku_data
 
 
@@ -89,8 +92,10 @@ def format_products(products, json=True):
         product_data['description'] = product.description
         product_data['price'] = product.price
         product_data['product_data'] = product.product_data
-        product_data['business_id'] = product.business_id
-        product_data['sku_id'] = product.sku_id
+        product_data['business_guid'] = utils.convert_uuid_string(product.business.business_guid)
+        product_data['sku_guid'] = utils.convert_uuid_string(product.sku.sku_guid)
+        product_data['created_on'] = utils.format_timestamp(product.created_on)
+        product_data['updated_on'] = utils.format_timestamp(product.updated_on) if product.updated_on is not None else None
         products_data.append(product_data)
     if not json:
         return products_data
