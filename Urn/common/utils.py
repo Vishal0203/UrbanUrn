@@ -15,12 +15,12 @@ class ChoiceEnum(Enum):
 def build_json(arg=None, keys=None, values=None):
     if keys is not None and values is not None:
         return json.dumps(dict(zip(keys, values)))
-    elif isinstance(arg[0], tuple) and isinstance(arg, list):
-        return json.dumps(dict(arg))
     elif isinstance(arg, dict):
         return json.dumps(arg)
     elif isinstance(arg, list):
         return json.dumps(arg)
+    elif isinstance(arg[0], tuple) and isinstance(arg, list):
+        return json.dumps(dict(arg))
     else:
         return "Invalid type"
 

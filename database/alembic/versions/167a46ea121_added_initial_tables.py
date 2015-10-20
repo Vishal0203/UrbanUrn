@@ -15,8 +15,7 @@ depends_on = None
 from alembic import op
 import sqlalchemy as sa
 
-
-_initial_tables="""
+_initial_tables = """
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -300,7 +299,7 @@ CREATE TABLE products (
     product_guid uuid NOT NULL,
     name character varying(50),
     description text,
-    status boolean,
+    status boolean DEFAULT true,
     price double precision NOT NULL,
     product_data json,
     business_id integer NOT NULL,
@@ -346,8 +345,8 @@ CREATE TABLE sku (
     sku_guid uuid NOT NULL,
     name character varying(30),
     description text,
-    status boolean,
-    business_id integer NOT NULL,
+    status boolean DEFAULT true,
+    business_id integer NULL,
     created_by integer,
     updated_by integer,
     created_on timestamp without time zone,
@@ -826,7 +825,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 """
 
-_initial_down="""
+_initial_down = """
 DROP TABLE addresses CASCADE;
 
 DROP TABLE business_users CASCADE;
@@ -874,9 +873,10 @@ DROP TYPE role_enum;
 DROP TYPE status_enum;
 """
 
+
 def upgrade():
-    op.execute(_initial_tables);
+    op.execute(_initial_tables)
 
 
 def downgrade():
-    op.execute(_initial_down);
+    op.execute(_initial_down)

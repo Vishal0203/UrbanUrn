@@ -244,7 +244,7 @@ class Products(models.Model):
     product_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    status = models.NullBooleanField()
+    status = models.NullBooleanField(default=True)
     price = models.FloatField()
     product_data = JSONField(blank=True, null=True)
     business = models.ForeignKey(Businesses)
@@ -282,7 +282,7 @@ class Sku(models.Model):
     sku_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    status = models.NullBooleanField()
+    status = models.NullBooleanField(default=True)
     business = models.ForeignKey(Businesses)
     created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
                                    related_name='sku_created_by')

@@ -1,5 +1,5 @@
 import json
-from django.http import HttpResponseServerError, HttpResponseForbidden, HttpResponseBadRequest
+from django.http import HttpResponseServerError, HttpResponseForbidden, HttpResponseBadRequest, HttpResponse
 from jwt import decode, InvalidTokenError, InvalidIssuerError, InvalidIssuedAtError
 from django.conf import settings
 from setuptools.compat import basestring
@@ -20,6 +20,26 @@ def jwt_validate(original_function):
             return HttpResponseBadRequest("Header 'X-Urbanurn-Auth' expected")
 
     return validator
+
+
+def check_authenticity(original_function):
+    def authenticity_checker(request_arg):
+        if request_arg.user.is_superuser or request_arg.user.is_staff:
+            return original_function(request_arg)
+        else:
+            return HttpResponse(status=401, content="You are not authorized to use this API")
+
+    return authenticity_checker
+
+
+def check_business_or_super(original_function):
+    def authenticity_checker(request_arg):
+        if request_arg.user.user_profile.is_business_user or request_arg.user.is_superuser or request_arg.user.is_staff:
+            return original_function(request_arg)
+        else:
+            return HttpResponse(status=401, content="You are not authorized to use this API")
+
+    return authenticity_checker
 
 
 def validate_jwt_values(encoded_token, logged_in_user):
@@ -44,5 +64,7 @@ def validate_schema(schema):
             except Exception as e:
                 request.session["Error"] = e
                 return HttpResponseServerError(e)
+
         return actual_schema_validator
+
     return wrap_schema_validator
