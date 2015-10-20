@@ -11,41 +11,50 @@ from Urn.views import addresses
 
 
 @csrf_exempt
+def api_businesses(request):
+    if request.method == 'GET':
+        return api_businesses_get(request)
+    elif request.method == 'POST':
+        return api_businesses_post(request)
+    else:
+        return HttpResponseNotFound("API Not found")
+
+
+@jwt_validate
+def api_businesses_get(request):
+    if request.user.is_superuser or request.user.is_staff:
+        businesses = Businesses.objects.all()
+        return HttpResponse(format_get_businesses(businesses))
+    else:
+        return HttpResponse(status=401, content='You are not authorized to use this API.')
+
+
 @jwt_validate
 @validate_schema(schema)
-def api_businesses(request):
-    if request.method in ['GET']:
-        if request.user.is_superuser or request.user.is_staff:
-            businesses = Businesses.objects.all()
-            return HttpResponse(format_get_businesses(businesses))
-        else:
-            return HttpResponse(status=401, content='You are not authorized to use this API.')
-    elif request.method in ['POST']:
-        if request.user.is_superuser or request.user.is_staff:
-            request_data = json.loads(request.body.decode())
-            category = request_data['category'] if 'category' in request_data else None
-            description = request_data['description'] if 'description' in request_data else None
-            business = Businesses.objects.create(name=request_data['name'], category=category, description=description,
-                                                 created_by=request.user.user_profile)
-            for address in request_data['addresses']:
-                street1 = address['street1'] if 'street1' in address else None
-                street2 = address['street2'] if 'street2' in address else None
-                state = address['state'] if 'state' in address else None
-                if 'is_default' in address:
-                    if address['is_default'].lower() == 'true':
-                        is_default = True
-                    else:
-                        is_default = False
+def api_businesses_post(request):
+    if request.user.is_superuser or request.user.is_staff:
+        request_data = json.loads(request.body.decode())
+        category = request_data['category'] if 'category' in request_data else None
+        description = request_data['description'] if 'description' in request_data else None
+        business = Businesses.objects.create(name=request_data['name'], category=category, description=description,
+                                             created_by=request.user.user_profile)
+        for address in request_data['addresses']:
+            street1 = address['street1'] if 'street1' in address else None
+            street2 = address['street2'] if 'street2' in address else None
+            state = address['state'] if 'state' in address else None
+            if 'is_default' in address:
+                if address['is_default'].lower() == 'true':
+                    is_default = True
                 else:
                     is_default = False
-                Addresses.objects.create(city=address['city'], pincode=address['pincode'], country=address['country'],
-                                         street_1=street1, street_2=street2, state=state, is_default=is_default,
-                                         business=business)
-            return HttpResponse(status=201, content='Business created')
-        else:
-            return HttpResponse(status=401, content='You are not authorized to use this API.')
+            else:
+                is_default = False
+            Addresses.objects.create(city=address['city'], pincode=address['pincode'], country=address['country'],
+                                     street_1=street1, street_2=street2, state=state, is_default=is_default,
+                                     business=business)
+        return HttpResponse(status=201, content='Business created')
     else:
-        return HttpResponseNotFound("Page Not Found")
+        return HttpResponse(status=401, content='You are not authorized to use this API.')
 
 
 # This method formats the businesses result to JSON form
