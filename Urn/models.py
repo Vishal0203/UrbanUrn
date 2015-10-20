@@ -96,6 +96,7 @@ class Businesses(models.Model):
     category = models.CharField(max_length=20, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
     business_image = models.CharField(max_length=255, blank=True, null=True)
+    users = models.ManyToManyField('Users', through=BusinessUsers)
     created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
                                    related_name='businesses_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
