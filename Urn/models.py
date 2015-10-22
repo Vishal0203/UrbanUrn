@@ -225,10 +225,15 @@ class Orders(models.Model):
         db_table = 'orders'
 
 
+def content_file_name(instance, filename, image_type):
+    if image_type == "PRODUCTS":
+        return '/'.join(['content', filename])
+
+
 class ProductImages(models.Model):
     product_image_id = models.AutoField(primary_key=True)
     product = models.ForeignKey('Products')
-    url = models.CharField(max_length=255, blank=True, null=True)
+    url = models.FileField(upload_to=content_file_name, max_length=255, blank=True, null=True)
     size = models.SmallIntegerField(blank=True, null=True)
     is_default = models.NullBooleanField()
     created_on = models.DateTimeField(blank=True, null=True)

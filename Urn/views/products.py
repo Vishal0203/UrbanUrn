@@ -1,7 +1,7 @@
 import json
 from Urn.common import utils
 from collections import OrderedDict
-from Urn.models import Sku, Products, Businesses
+from Urn.models import Sku, Products, Businesses, ProductImages
 from django.views.decorators.csrf import csrf_exempt
 
 from Urn.schema_validators.sku_validation import schema
@@ -95,7 +95,8 @@ def format_products(products, json=True):
         product_data['business_guid'] = utils.convert_uuid_string(product.business.business_guid)
         product_data['sku_guid'] = utils.convert_uuid_string(product.sku.sku_guid)
         product_data['created_on'] = utils.format_timestamp(product.created_on)
-        product_data['updated_on'] = utils.format_timestamp(product.updated_on) if product.updated_on is not None else None
+        product_data['updated_on'] = utils.format_timestamp(
+            product.updated_on) if product.updated_on is not None else None
         products_data.append(product_data)
     if not json:
         return products_data
@@ -114,16 +115,18 @@ def process_products_request(request):
 
 @jwt_validate
 @check_business_or_super
-@validate_schema(product_schema)
 def process_products_post(request):
-    request_data = json.loads(request.body.decode())
+    request_data = request.POST
+    files = request.FILES
     if request.method == 'POST':
+        request_data = json.loads(request.POST['data'])
         business_info = Businesses.objects.get(business_guid=request_data["business_guid"])
         sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
-        Products.objects.create(name=request_data["name"], description=request_data["description"],
-                                price=request_data["price"], product_data=request_data["product_data"],
-                                business_id=business_info.business_id, sku_id=sku_info.sku_id,
-                                created_by=request.user.user_profile)
+        product = Products.objects.create(name=request_data["name"], description=request_data["description"],
+                                          price=request_data["price"], product_data=request_data["product_data"],
+                                          business_id=business_info.business_id, sku_id=sku_info.sku_id,
+                                          created_by=request.user.user_profile)
+        ProductImages.objects.create(product_id=product.product_id, url=request.FILES['product_images'])
         return HttpResponse(status=201, content='Product added')
 
     else:
