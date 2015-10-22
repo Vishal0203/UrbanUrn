@@ -110,5 +110,7 @@ STATIC_URL = '/media/'
 STATIC_ROOT = "<project_root_directory>"
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "Urn/media"),
+    os.path.join(BASE_DIR, "media"),
 )
+
+BASE_URL = "<http://<host>:<port>"

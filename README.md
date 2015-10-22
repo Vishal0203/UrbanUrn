@@ -34,10 +34,6 @@ alembic upgrade HEAD
 ```
 python manage.py loaddata database\fixtures\sample_fixture.json
 ```
-- Run the following command after setting up the `settings.py` file as per `settings.py.dist` 
-```
-python manage.py collectstatics
-```
 
 ### Setting up git-flow
 
