@@ -80,9 +80,27 @@ def format_get_users(users):
         user_data['is_business_user'] = user.user_profile.is_business_user
         user_data['is_superuser'] = user.is_superuser
         user_data['is_staff'] = user.is_staff
-        user_data['last_login'] = utils.format_timestamp(user.last_login)
+        user_data['last_login'] = utils.format_timestamp(user.last_login) if user.last_login is not None else None
         user_data['created_on'] = utils.format_timestamp(user.user_profile.created_on)
         user_data['updated_on'] = utils.format_timestamp(
             user.user_profile.updated_on) if user.user_profile.updated_on is not None else None
         users_data.append(user_data)
     return utils.build_json(users_data)
+
+
+def format_get_business_users(business_users):
+    business_users_data = []
+    for business_user in business_users:
+        business_user_data = OrderedDict()
+        business_user_data['user_guid'] = utils.convert_uuid_string(business_user.user_guid)
+        business_user_data['username'] = business_user.user.username
+        business_user_data['first_name'] = business_user.user.first_name
+        business_user_data['last_name'] = business_user.user.last_name
+        business_user_data['email'] = business_user.user.email
+        business_user_data['phone'] = business_user.phone
+        business_user_data['status'] = business_user.status
+        business_user_data['created_on'] = utils.format_timestamp(business_user.created_on)
+        business_user_data['updated_on'] = utils.format_timestamp(
+            business_user.updated_on) if business_user.updated_on is not None else None
+        business_users_data.append(business_user_data)
+    return business_users_data

@@ -7,7 +7,7 @@ from Urn.common import utils
 from Urn.decorators.validators import jwt_validate, validate_schema
 from Urn.models import Businesses, Addresses
 from Urn.schema_validators.businesses_validator import schema
-from Urn.views import addresses
+from Urn.views import addresses, users
 
 
 @csrf_exempt
@@ -67,6 +67,10 @@ def format_get_businesses(businesses):
         business_data['category'] = business.category
         business_data['description'] = business.description
         business_data['business_image'] = business.business_image
+
+        business_users = business.users.all()
+        users_data = users.format_get_business_users(business_users)
+        business_data['users'] = users_data
 
         business_addresses = Addresses.objects.filter(business_id=business.business_id)
         addresses_data = addresses.format_addresses(business_addresses)
