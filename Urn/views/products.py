@@ -1,4 +1,5 @@
 import json
+from UrbanUrn import settings
 from Urn.common import utils
 from collections import OrderedDict
 from Urn.models import Sku, Products, Businesses, ProductImages
@@ -86,12 +87,15 @@ def format_skus(sku, products):
 def format_products(products, json=True):
     products_data = []
     for product in products:
+        product_images = ProductImages.objects.filter(product_id=product.product_id)
         product_data = OrderedDict()
         product_data['product_guid'] = utils.convert_uuid_string(product.product_guid)
         product_data['name'] = product.name
         product_data['description'] = product.description
         product_data['price'] = product.price
         product_data['product_data'] = product.product_data
+        product_data['product_images'] = format_product_images(product_images,
+                                                               False) if product_images is not None else []
         product_data['business_guid'] = utils.convert_uuid_string(product.business.business_guid)
         product_data['sku_guid'] = utils.convert_uuid_string(product.sku.sku_guid)
         product_data['created_on'] = utils.format_timestamp(product.created_on)
@@ -101,6 +105,22 @@ def format_products(products, json=True):
     if not json:
         return products_data
     return utils.build_json(products_data)
+
+
+def format_product_images(products, json=True):
+    product_images = []
+    for product in products:
+        product_data = OrderedDict()
+        product_data['url'] = settings.BASE_URL + product.url.url
+        product_data['size'] = product.size
+        product_data['is_default'] = product.is_default
+        product_data['created_on'] = utils.format_timestamp(product.created_on)
+        product_data['updated_on'] = utils.format_timestamp(
+            product.updated_on) if product.updated_on is not None else None
+        product_images.append(product_data)
+    if not json:
+        return product_images
+    return utils.build_json(product_images)
 
 
 @csrf_exempt
