@@ -13,6 +13,7 @@ from django.db import models
 from Urn.common.utils import ChoiceEnum
 from django.contrib.auth.models import User
 import uuid
+from Urn.common.utils import build_json, convert_uuid_string
 
 
 class Role(ChoiceEnum):
@@ -225,15 +226,15 @@ class Orders(models.Model):
         db_table = 'orders'
 
 
-def content_file_name(instance, filename, image_type):
-    if image_type == "PRODUCTS":
-        return '/'.join(['content', filename])
+def custom_file_path(instance, filename):
+    return '/'.join(['media', convert_uuid_string(instance.product.sku.sku_guid),
+                     convert_uuid_string(instance.product.product_guid), filename])
 
 
 class ProductImages(models.Model):
     product_image_id = models.AutoField(primary_key=True)
     product = models.ForeignKey('Products')
-    url = models.FileField(upload_to=content_file_name, max_length=255, blank=True, null=True)
+    url = models.FileField(upload_to=custom_file_path, max_length=255, blank=True, null=True)
     size = models.SmallIntegerField(blank=True, null=True)
     is_default = models.NullBooleanField()
     created_on = models.DateTimeField(blank=True, null=True)
