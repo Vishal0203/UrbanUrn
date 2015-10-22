@@ -10,6 +10,7 @@
 from __future__ import unicode_literals
 from jsonfield import JSONField
 from django.db import models
+from UrbanUrn import settings
 from Urn.common.utils import ChoiceEnum
 from django.contrib.auth.models import User
 import uuid
@@ -234,7 +235,7 @@ def custom_file_path(instance, filename):
 class ProductImages(models.Model):
     product_image_id = models.AutoField(primary_key=True)
     product = models.ForeignKey('Products')
-    url = models.FileField(upload_to=custom_file_path, max_length=255, blank=True, null=True)
+    url = models.ImageField(upload_to=custom_file_path, max_length=255, blank=True, null=True)
     size = models.SmallIntegerField(blank=True, null=True)
     is_default = models.NullBooleanField()
     created_on = models.DateTimeField(blank=True, null=True)

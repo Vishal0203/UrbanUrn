@@ -117,7 +117,7 @@ def process_products_request(request):
 @check_business_or_super
 def process_products_post(request):
     request_data = request.POST
-    files = request.FILES['product_images']
+    files = request.FILES.getlist("product_images")
     if request.method == 'POST':
         request_data = json.loads(request.POST['product_json'])
         business_info = Businesses.objects.get(business_guid=request_data["business_guid"])
@@ -126,7 +126,9 @@ def process_products_post(request):
                                           price=request_data["price"], product_data=request_data["product_data"],
                                           business_id=business_info.business_id, sku_id=sku_info.sku_id,
                                           created_by=request.user.user_profile)
-        ProductImages.objects.create(product_id=product.product_id, url=files)
+        for file in files:
+            ProductImages.objects.create(product_id=product.product_id, url=file)
+
         return HttpResponse(status=201, content='Product added')
 
     else:
