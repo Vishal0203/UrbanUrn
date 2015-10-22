@@ -5,9 +5,9 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadReque
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common import utils
 from Urn.decorators.validators import validate_schema, jwt_validate
-from Urn.models import Users, Status
+from Urn.models import Users, Status, Addresses
 from Urn.schema_validators.registration_validator import schema
-
+from Urn.views import addresses
 
 @csrf_exempt
 @validate_schema(schema)
@@ -69,6 +69,11 @@ def format_get_users(users):
         user_data['email'] = user.email
         user_data['phone'] = user.user_profile.phone
         user_data['status'] = user.user_profile.status
+
+        user_addresses = Addresses.objects.filter(user_id=user.user_profile.user_id)
+        addresses_data = addresses.format_addresses(user_addresses)
+        user_data['addresses'] = addresses_data
+
         user_data['push_notification'] = user.user_profile.push_notification
         user_data['email_notification'] = user.user_profile.email_notification
         user_data['sms_notification'] = user.user_profile.sms_notification
@@ -77,6 +82,7 @@ def format_get_users(users):
         user_data['is_staff'] = user.is_staff
         user_data['last_login'] = utils.format_timestamp(user.last_login)
         user_data['created_on'] = utils.format_timestamp(user.user_profile.created_on)
-        user_data['updated_on'] = utils.format_timestamp(user.user_profile.updated_on)
+        user_data['updated_on'] = utils.format_timestamp(
+            user.user_profile.updated_on) if user.user_profile.updated_on is not None else None
         users_data.append(user_data)
     return utils.build_json(users_data)

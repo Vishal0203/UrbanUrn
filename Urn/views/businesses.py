@@ -75,7 +75,7 @@ def format_get_businesses(businesses):
         business_data['created_by'] = business.created_by.user.username
         business_data['updated_by'] = business.updated_by.user.username if business.updated_by is not None else None
         business_data['created_on'] = utils.format_timestamp(business.created_on)
-        business_data['updated_on'] = \
-            utils.format_timestamp(business.updated_on) if business.updated_on is not None else None
+        business_data['updated_on'] = utils.format_timestamp(
+            business.updated_on) if business.updated_on is not None else None
         businesses_data.append(business_data)
     return utils.build_json(businesses_data)
