@@ -1,6 +1,6 @@
 import json
 
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common import utils, formatters
 from Urn.decorators.validators import jwt_validate, validate_schema
@@ -20,8 +20,15 @@ def api_businesses(request):
 
 @jwt_validate
 def api_businesses_get(request):
-    if request.user.is_superuser or request.user.is_staff:
-        businesses = Businesses.objects.all()
+    if request.user.is_superuser or request.user.is_staff or request.user.user_profile.is_business_user:
+        url_params = request.GET
+        if request.user.user_profile.is_business_user and len(url_params) == 0:
+            return HttpResponse(status=401, content='You are not authorized to use this API.')
+        business_guid = url_params['business_guid'] if 'business_guid' in url_params else None
+        if business_guid:
+            businesses = Businesses.objects.filter(business_guid=business_guid)
+        else:
+            businesses = Businesses.objects.all()
         return HttpResponse(utils.build_json(formatters.format_get_businesses(businesses, True, True)))
     else:
         return HttpResponse(status=401, content='You are not authorized to use this API.')
