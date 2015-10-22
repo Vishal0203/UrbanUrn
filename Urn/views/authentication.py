@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseNotAllow
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from setuptools.compat import basestring
+from Urn.common import utils
 from Urn.decorators.validators import jwt_validate
 from Urn.models import Sessions
 import json
@@ -39,7 +40,9 @@ def validate_input_and_authenticate(request):
                     user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=active_session)
                     user_session.save()
 
-                return HttpResponse(build_json(keys=['token'], values=[encoded_token.decode('utf-8')]))
+                return HttpResponse(build_json(keys=['user_guid', 'token'],
+                                               values=[utils.convert_uuid_string(auth_user.user_profile.user_guid),
+                                                       encoded_token.decode('utf-8')]))
             else:
                 return HttpResponseNotAllowed('This user has a disabled account')
         else:
