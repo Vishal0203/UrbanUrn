@@ -1,5 +1,3 @@
-import json
-
 from collections import OrderedDict
 from Urn.views import addresses
 from Urn.common import utils

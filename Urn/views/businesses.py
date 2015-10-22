@@ -1,13 +1,11 @@
 import json
 
-from collections import OrderedDict
 from django.http import HttpResponse, HttpResponseNotFound
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common import utils, formatters
 from Urn.decorators.validators import jwt_validate, validate_schema
 from Urn.models import Businesses, Addresses
 from Urn.schema_validators.businesses_validator import schema
-from Urn.views import addresses, users
 
 
 @csrf_exempt
