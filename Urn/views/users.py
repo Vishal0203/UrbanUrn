@@ -3,11 +3,12 @@ from collections import OrderedDict
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-from Urn.common import utils
+from Urn.common import utils, formatters
 from Urn.decorators.validators import validate_schema, jwt_validate
 from Urn.models import Users, Status, Addresses
 from Urn.schema_validators.registration_validator import schema
 from Urn.views import addresses
+
 
 @csrf_exempt
 @validate_schema(schema)
@@ -71,8 +72,11 @@ def format_get_users(users):
         user_data['status'] = user.user_profile.status
 
         user_addresses = Addresses.objects.filter(user_id=user.user_profile.user_id)
-        addresses_data = addresses.format_addresses(user_addresses)
-        user_data['addresses'] = addresses_data
+        user_data['addresses'] = addresses.format_addresses(user_addresses)
+
+        if user.user_profile.is_business_user:
+            user_businesses = user.user_profile.businesses_set.all()
+            user_data['businesses'] = formatters.format_get_businesses(user_businesses)
 
         user_data['push_notification'] = user.user_profile.push_notification
         user_data['email_notification'] = user.user_profile.email_notification
