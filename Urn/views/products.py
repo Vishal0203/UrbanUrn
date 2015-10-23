@@ -95,32 +95,33 @@ def format_products(products, json=True):
         product_data['price'] = product.price
         product_data['product_data'] = product.product_data
         product_data['product_images'] = format_product_images(product_images,
-                                                               False) if product_images is not None else []
+                                                               False) if len(product_images) > 0 else []
         product_data['business_guid'] = utils.convert_uuid_string(product.business.business_guid)
         product_data['sku_guid'] = utils.convert_uuid_string(product.sku.sku_guid)
         product_data['created_on'] = utils.format_timestamp(product.created_on)
         product_data['updated_on'] = utils.format_timestamp(
             product.updated_on) if product.updated_on is not None else None
         products_data.append(product_data)
-    if not json:
-        return products_data
-    return utils.build_json(products_data)
+    if json:
+        return utils.build_json(products_data)
+    return products_data
 
 
-def format_product_images(products, json=True):
-    product_images = []
-    for product in products:
-        product_data = OrderedDict()
-        product_data['url'] = settings.BASE_URL + product.url.url
-        product_data['size'] = product.size
-        product_data['is_default'] = product.is_default
-        product_data['created_on'] = utils.format_timestamp(product.created_on)
-        product_data['updated_on'] = utils.format_timestamp(
-            product.updated_on) if product.updated_on is not None else None
-        product_images.append(product_data)
+def format_product_images(product_images, json=True):
+    product_images_data = []
+    for product_image in product_images:
+        product_image_data = OrderedDict()
+        product_image_data['product_image_guid'] = utils.convert_uuid_string(product_image.product_image_guid)
+        product_image_data['image'] = settings.BASE_URL + product_image.image.url
+        product_image_data['size'] = product_image.size
+        product_image_data['is_default'] = product_image.is_default
+        product_image_data['created_on'] = utils.format_timestamp(product_image.created_on)
+        product_image_data['updated_on'] = utils.format_timestamp(
+            product_image.updated_on) if product_image.updated_on is not None else None
+        product_images_data.append(product_image_data)
     if not json:
-        return product_images
-    return utils.build_json(product_images)
+        return product_images_data
+    return utils.build_json(product_images_data)
 
 
 @csrf_exempt
@@ -147,7 +148,7 @@ def process_products_post(request):
                                           business_id=business_info.business_id, sku_id=sku_info.sku_id,
                                           created_by=request.user.user_profile)
         for file in files:
-            ProductImages.objects.create(product_id=product.product_id, url=file)
+            ProductImages.objects.create(product_id=product.product_id, image=file)
 
         return HttpResponse(status=201, content='Product added')
 

@@ -234,8 +234,9 @@ def custom_file_path(instance, filename):
 
 class ProductImages(models.Model):
     product_image_id = models.AutoField(primary_key=True)
+    product_image_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey('Products')
-    url = models.ImageField(upload_to=custom_file_path, max_length=255, blank=True, null=True)
+    image = models.ImageField(upload_to=custom_file_path, max_length=255, blank=True, null=True)
     size = models.SmallIntegerField(blank=True, null=True)
     is_default = models.NullBooleanField()
     created_on = models.DateTimeField(blank=True, null=True)
