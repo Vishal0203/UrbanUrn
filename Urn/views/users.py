@@ -76,7 +76,7 @@ def format_get_users(users):
 
         if user.user_profile.is_business_user:
             user_businesses = user.user_profile.businesses_set.all()
-            user_data['businesses'] = formatters.format_get_businesses(user_businesses)
+            user_data['businesses'] = formatters.format_get_businesses(user_businesses, False, False, user.user_profile)
 
         user_data['push_notification'] = user.user_profile.push_notification
         user_data['email_notification'] = user.user_profile.email_notification
@@ -90,21 +90,3 @@ def format_get_users(users):
             user.user_profile.updated_on) if user.user_profile.updated_on is not None else None
         users_data.append(user_data)
     return utils.build_json(users_data)
-
-
-def format_get_business_users(business_users):
-    business_users_data = []
-    for business_user in business_users:
-        business_user_data = OrderedDict()
-        business_user_data['user_guid'] = utils.convert_uuid_string(business_user.user_guid)
-        business_user_data['username'] = business_user.user.username
-        business_user_data['first_name'] = business_user.user.first_name
-        business_user_data['last_name'] = business_user.user.last_name
-        business_user_data['email'] = business_user.user.email
-        business_user_data['phone'] = business_user.phone
-        business_user_data['status'] = business_user.status
-        business_user_data['created_on'] = utils.format_timestamp(business_user.created_on)
-        business_user_data['updated_on'] = utils.format_timestamp(
-            business_user.updated_on) if business_user.updated_on is not None else None
-        business_users_data.append(business_user_data)
-    return business_users_data

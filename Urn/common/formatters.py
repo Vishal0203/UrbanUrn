@@ -1,10 +1,10 @@
 from collections import OrderedDict
 from Urn.views import addresses
 from Urn.common import utils
-from Urn.models import Addresses
+from Urn.models import Addresses, BusinessUsers
 
 
-def format_get_businesses(businesses, include_users=False, include_addresses=False):
+def format_get_businesses(businesses, include_users=False, include_addresses=False, user=None):
     businesses_data = []
     for business in businesses:
         business_data = OrderedDict()
@@ -16,11 +16,14 @@ def format_get_businesses(businesses, include_users=False, include_addresses=Fal
 
         if include_users:
             business_users = business.users.all()
-            business_data['users'] = format_get_business_users(business_users)
+            business_data['users'] = format_get_business_users(business_users, business)
 
         if include_addresses:
             business_addresses = Addresses.objects.filter(business_id=business.business_id)
             business_data['addresses'] = addresses.format_addresses(business_addresses)
+
+        if user:
+            business_data['role'] = get_business_user_entry(business, user).role
 
         business_data['created_by'] = business.created_by.user.username
         business_data['updated_by'] = business.updated_by.user.username if business.updated_by is not None else None
@@ -31,12 +34,13 @@ def format_get_businesses(businesses, include_users=False, include_addresses=Fal
     return businesses_data
 
 
-def format_get_business_users(business_users):
+def format_get_business_users(business_users, business):
     business_users_data = []
     for business_user in business_users:
         business_user_data = OrderedDict()
         business_user_data['user_guid'] = utils.convert_uuid_string(business_user.user_guid)
         business_user_data['username'] = business_user.user.username
+        business_user_data['role'] = get_business_user_entry(business, business_user).role
         business_user_data['first_name'] = business_user.user.first_name
         business_user_data['last_name'] = business_user.user.last_name
         business_user_data['email'] = business_user.user.email
@@ -49,3 +53,5 @@ def format_get_business_users(business_users):
     return business_users_data
 
 
+def get_business_user_entry(business, user):
+    return BusinessUsers.objects.get(business=business, user=user)
