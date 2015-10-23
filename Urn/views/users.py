@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common import utils, formatters
-from Urn.decorators.validators import validate_schema, jwt_validate
+from Urn.decorators.validators import validate_schema, jwt_validate, check_authenticity
 from Urn.models import Users, Status, Addresses
 from Urn.schema_validators.registration_validator import schema
 from Urn.views import addresses
@@ -43,18 +43,13 @@ def registration(request, users_api=False):
 
 @csrf_exempt
 @jwt_validate
+@check_authenticity
 def get_all_users(request):
     if request.method in ['GET']:
-        if request.user.is_superuser or request.user.is_staff:
-            users = User.objects.all()
-            return HttpResponse(format_get_users(users))
-        else:
-            return HttpResponse(status=401, content='You are not authorized to use this API.')
+        users = User.objects.all()
+        return HttpResponse(format_get_users(users))
     elif request.method in ['POST']:
-        if request.user.is_superuser or request.user.is_staff:
-            return registration(request, True)
-        else:
-            return HttpResponse(status=401, content='You are not authorized to use this API.')
+        return registration(request, True)
     else:
         return HttpResponseNotFound("Page Not Found")
 
