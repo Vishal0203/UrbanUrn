@@ -277,8 +277,9 @@ ALTER SEQUENCE orders_order_id_seq OWNED BY orders.order_id;
 
 CREATE TABLE product_images (
     product_image_id integer NOT NULL,
+    product_image_guid uuid NOT NULL,
     product_id integer NOT NULL,
-    url character varying(255),
+    image character varying(255),
     size smallint,
     is_default boolean DEFAULT false,
     created_on timestamp without time zone,
@@ -536,6 +537,9 @@ ALTER TABLE ONLY orders
 
 ALTER TABLE ONLY orders
     ADD CONSTRAINT "orders_PRIMARY" PRIMARY KEY (order_id);
+
+ALTER TABLE ONLY product_images
+    ADD CONSTRAINT "product_image_guid_UNIQUE" UNIQUE (product_image_guid);
 
 ALTER TABLE ONLY products
     ADD CONSTRAINT "product_guid_UNIQUE" UNIQUE (product_guid);
