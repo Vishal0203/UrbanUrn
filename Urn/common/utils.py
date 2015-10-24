@@ -33,3 +33,11 @@ def convert_uuid_string(uuid):
 # Helper method to convert timestamp object to string for JSON serialization
 def format_timestamp(timestamp):
     return str(timestamp)
+
+
+# Helper method to convert boolean field in request object
+def request_boolean_field_value(input_value):
+    if input_value.lower() == 'true':
+        return True
+    else:
+        return False
