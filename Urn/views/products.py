@@ -1,4 +1,6 @@
 import json
+import os
+import shutil
 from UrbanUrn import settings
 from Urn.common import utils
 from collections import OrderedDict
@@ -125,7 +127,7 @@ def format_product_images(product_images, json=True):
 
 @csrf_exempt
 def process_products_request(request):
-    if request.method in ['POST', 'PUT']:
+    if request.method == 'POST':
         return process_products_post(request)
     elif request.method == 'GET':
         return process_products_get(request)
@@ -136,10 +138,9 @@ def process_products_request(request):
 @jwt_validate
 @check_business_or_super
 def process_products_post(request):
-    request_data = request.POST
-    files = request.FILES.getlist("product_images")
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.get('_method', None) is None:
         request_data = json.loads(request.POST['product_json'])
+        files = request.FILES.getlist("product_images")
         business_info = Businesses.objects.get(business_guid=request_data["business_guid"])
         sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
         product = Products.objects.create(name=request_data["name"], description=request_data["description"],
@@ -151,19 +152,37 @@ def process_products_post(request):
 
         return HttpResponse(status=201, content='Product added')
 
+    elif request.POST.get('_method', None) == "PUT":
+        return product_update_helper(request)
+
+
+def product_update_helper(request):
+    request_data = json.loads(request.POST["product_json"])
+    new_images = request.FILES.getlist("new_images")
+    deleted_images = json.loads(request.POST["deleted_images"])
+    product = Products.objects.filter(product_guid=request_data["product_guid"])
+    if product.exists():
+        product_info = product.get()
+        sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
+        request_data["updated_by"] = request.user.user_profile
+        request_data["sku_id"] = sku_info.sku_id
+        request_data["product_data"] = json.loads(request_data["product_data"])
+        del request_data["sku_guid"]
+        del request_data["business_guid"]
+        product.update(**request_data)
+
+        for image in new_images:
+            ProductImages.objects.create(product_id=product_info.product_id, image=image)
+
+        for image_guid in deleted_images:
+            image_info = ProductImages.objects.get(product_image_guid=image_guid)
+            if os.path.exists(image_info.image.url):
+                os.remove(image_info.image.url)
+            image_info.delete()
+
+        return HttpResponse(status=202, content='Product updated')
     else:
-        product = Products.objects.filter(product_guid=request_data["product_guid"])
-        if product.exists():
-            sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
-            request_data["updated_by"] = request.user.user_profile
-            request_data["sku_id"] = sku_info.sku_id
-            request_data["product_data"] = json.loads(request_data["product_data"])
-            del request_data["sku_guid"]
-            del request_data["business_guid"]
-            product.update(**request_data)
-            return HttpResponse(status=202, content='Product updated')
-        else:
-            return HttpResponseBadRequest('No such product to update')
+        return HttpResponseBadRequest('No such product to update')
 
 
 def process_products_get(request):
