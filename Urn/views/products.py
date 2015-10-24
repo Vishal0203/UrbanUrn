@@ -131,6 +131,8 @@ def process_products_request(request):
         return process_products_post(request)
     elif request.method == 'GET':
         return process_products_get(request)
+    elif request.method == 'DELETE':
+        return product_delete_helper(request)
     else:
         return HttpResponseNotFound("API not found")
 
@@ -183,6 +185,18 @@ def product_update_helper(request):
         return HttpResponse(status=202, content='Product updated')
     else:
         return HttpResponseBadRequest('No such product to update')
+
+
+@jwt_validate
+@check_business_or_super
+def product_delete_helper(request):
+    products_to_delete = json.loads(request.body.decode())["product_guid"]
+    for each_product in products_to_delete:
+        product_to_delete = Products.objects.filter(product_guid=each_product)
+        if product_to_delete.exists():
+            product_to_delete.delete()
+
+    return HttpResponse(status=202, content='Product deleted')
 
 
 def process_products_get(request):
