@@ -6,7 +6,6 @@ from Urn.models import Sku, Products, Businesses, ProductImages
 from django.views.decorators.csrf import csrf_exempt
 
 from Urn.schema_validators.sku_validation import schema
-from Urn.schema_validators.products_validation import schema as product_schema
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from Urn.common.utils import build_json, convert_uuid_string
 from Urn.decorators.validators import jwt_validate, check_authenticity, validate_schema, check_business_or_super
