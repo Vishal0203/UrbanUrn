@@ -79,6 +79,7 @@ class Addresses(models.Model):
 
 
 class BusinessUsers(models.Model):
+    business_user_id = models.AutoField(primary_key=True)
     business = models.ForeignKey('Businesses')
     user = models.ForeignKey('Users')
     role = models.CharField(max_length=10, choices=Role.choices(), default=Role.admin.value)
@@ -88,7 +89,6 @@ class BusinessUsers(models.Model):
     class Meta:
         managed = False
         db_table = 'business_users'
-        unique_together = (('business', 'user'),)
 
 
 class Businesses(models.Model):
@@ -98,6 +98,7 @@ class Businesses(models.Model):
     category = models.CharField(max_length=20, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
     business_image = models.CharField(max_length=255, blank=True, null=True)
+    users = models.ManyToManyField('Users', through=BusinessUsers)
     created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
                                    related_name='businesses_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,

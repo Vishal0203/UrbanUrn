@@ -17,7 +17,7 @@ def format_addresses(addresses):
         address_data['latitude'] = address.latitude
         address_data['longitude'] = address.longitude
         address_data['created_on'] = utils.format_timestamp(address.created_on)
-        address_data['updated_on'] = \
-            utils.format_timestamp(address.updated_on) if address.updated_on is not None else None
+        address_data['updated_on'] = utils.format_timestamp(
+            address.updated_on) if address.updated_on is not None else None
         addresses_data.append(address_data)
     return addresses_data

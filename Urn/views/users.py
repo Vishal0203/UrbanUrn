@@ -3,10 +3,11 @@ from collections import OrderedDict
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-from Urn.common import utils
-from Urn.decorators.validators import validate_schema, jwt_validate
-from Urn.models import Users, Status
+from Urn.common import utils, formatters
+from Urn.decorators.validators import validate_schema, jwt_validate, check_authenticity
+from Urn.models import Users, Status, Addresses
 from Urn.schema_validators.registration_validator import schema
+from Urn.views import addresses
 
 
 @csrf_exempt
@@ -42,18 +43,13 @@ def registration(request, users_api=False):
 
 @csrf_exempt
 @jwt_validate
+@check_authenticity
 def get_all_users(request):
     if request.method in ['GET']:
-        if request.user.is_superuser or request.user.is_staff:
-            users = User.objects.all()
-            return HttpResponse(format_get_users(users))
-        else:
-            return HttpResponse(status=401, content='You are not authorized to use this API.')
+        users = User.objects.all()
+        return HttpResponse(format_get_users(users))
     elif request.method in ['POST']:
-        if request.user.is_superuser or request.user.is_staff:
-            return registration(request, True)
-        else:
-            return HttpResponse(status=401, content='You are not authorized to use this API.')
+        return registration(request, True)
     else:
         return HttpResponseNotFound("Page Not Found")
 
@@ -69,14 +65,23 @@ def format_get_users(users):
         user_data['email'] = user.email
         user_data['phone'] = user.user_profile.phone
         user_data['status'] = user.user_profile.status
+
+        user_addresses = Addresses.objects.filter(user_id=user.user_profile.user_id)
+        user_data['addresses'] = addresses.format_addresses(user_addresses)
+
+        if user.user_profile.is_business_user:
+            user_businesses = user.user_profile.businesses_set.all()
+            user_data['businesses'] = formatters.format_get_businesses(user_businesses, False, False, user.user_profile)
+
         user_data['push_notification'] = user.user_profile.push_notification
         user_data['email_notification'] = user.user_profile.email_notification
         user_data['sms_notification'] = user.user_profile.sms_notification
         user_data['is_business_user'] = user.user_profile.is_business_user
         user_data['is_superuser'] = user.is_superuser
         user_data['is_staff'] = user.is_staff
-        user_data['last_login'] = utils.format_timestamp(user.last_login)
+        user_data['last_login'] = utils.format_timestamp(user.last_login) if user.last_login is not None else None
         user_data['created_on'] = utils.format_timestamp(user.user_profile.created_on)
-        user_data['updated_on'] = utils.format_timestamp(user.user_profile.updated_on)
+        user_data['updated_on'] = utils.format_timestamp(
+            user.user_profile.updated_on) if user.user_profile.updated_on is not None else None
         users_data.append(user_data)
     return utils.build_json(users_data)
