@@ -100,12 +100,22 @@ CREATE SEQUENCE addresses_address_id_seq
 ALTER SEQUENCE addresses_address_id_seq OWNED BY addresses.address_id;
 
 CREATE TABLE business_users (
+    business_user_id integer NOT NULL,
     business_id integer NOT NULL,
     user_id integer NOT NULL,
     role role_enum,
     created_on timestamp without time zone,
     updated_on timestamp without time zone
 );
+
+CREATE SEQUENCE business_users_business_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE business_users_business_user_id_seq OWNED BY business_users.business_user_id;
 
 CREATE TABLE businesses (
     business_id integer NOT NULL,
@@ -424,6 +434,8 @@ ALTER SEQUENCE wishlist_wishlist_id_seq OWNED BY wishlist.wishlist_id;
 
 ALTER TABLE ONLY addresses ALTER COLUMN address_id SET DEFAULT nextval('addresses_address_id_seq'::regclass);
 
+ALTER TABLE ONLY business_users ALTER COLUMN business_user_id SET DEFAULT nextval('business_users_business_user_id_seq'::regclass);
+
 ALTER TABLE ONLY businesses ALTER COLUMN business_id SET DEFAULT nextval('businesses_business_id_seq'::regclass);
 
 ALTER TABLE ONLY cart_items ALTER COLUMN cart_item_id SET DEFAULT nextval('cart_items_cart_item_id_seq'::regclass);
@@ -455,6 +467,8 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 ALTER TABLE ONLY wishlist ALTER COLUMN wishlist_id SET DEFAULT nextval('wishlist_wishlist_id_seq'::regclass);
 
 SELECT pg_catalog.setval('addresses_address_id_seq', 1, false);
+
+SELECT pg_catalog.setval('business_users_business_user_id_seq', 1, false);
 
 SELECT pg_catalog.setval('businesses_business_id_seq', 1, false);
 
@@ -496,7 +510,7 @@ ALTER TABLE ONLY businesses
     ADD CONSTRAINT "business_guid_UNIQUE" UNIQUE (business_guid);
 
 ALTER TABLE ONLY business_users
-    ADD CONSTRAINT "business_users_PRIMARY" PRIMARY KEY (business_id, user_id);
+    ADD CONSTRAINT "business_users_PRIMARY" PRIMARY KEY (business_user_id);
 
 ALTER TABLE ONLY businesses
     ADD CONSTRAINT "businesses_PRIMARY" PRIMARY KEY (business_id);
