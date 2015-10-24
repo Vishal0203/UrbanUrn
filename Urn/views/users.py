@@ -1,13 +1,11 @@
 import json
-from collections import OrderedDict
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common import utils, formatters
 from Urn.decorators.validators import validate_schema, jwt_validate, check_authenticity
-from Urn.models import Users, Status, Addresses
+from Urn.models import Users, Status
 from Urn.schema_validators.registration_validator import schema
-from Urn.views import addresses
 
 
 @csrf_exempt
@@ -57,31 +55,15 @@ def get_all_users(request):
 def format_get_users(users):
     users_data = []
     for user in users:
-        user_data = OrderedDict()
-        user_data['user_guid'] = utils.convert_uuid_string(user.user_profile.user_guid)
-        user_data['username'] = user.username
-        user_data['first_name'] = user.first_name
-        user_data['last_name'] = user.last_name
-        user_data['email'] = user.email
-        user_data['phone'] = user.user_profile.phone
-        user_data['status'] = user.user_profile.status
-
-        user_addresses = Addresses.objects.filter(user_id=user.user_profile.user_id)
-        user_data['addresses'] = addresses.format_addresses(user_addresses)
-
-        if user.user_profile.is_business_user:
-            user_businesses = user.user_profile.businesses_set.all()
-            user_data['businesses'] = formatters.format_get_businesses(user_businesses, False, False, user.user_profile)
-
-        user_data['push_notification'] = user.user_profile.push_notification
-        user_data['email_notification'] = user.user_profile.email_notification
-        user_data['sms_notification'] = user.user_profile.sms_notification
-        user_data['is_business_user'] = user.user_profile.is_business_user
-        user_data['is_superuser'] = user.is_superuser
-        user_data['is_staff'] = user.is_staff
-        user_data['last_login'] = utils.format_timestamp(user.last_login) if user.last_login is not None else None
-        user_data['created_on'] = utils.format_timestamp(user.user_profile.created_on)
-        user_data['updated_on'] = utils.format_timestamp(
-            user.user_profile.updated_on) if user.user_profile.updated_on is not None else None
-        users_data.append(user_data)
+        users_data.append(formatters.format_user(user))
     return utils.build_json(users_data)
+
+
+@csrf_exempt
+@jwt_validate
+def who_am_i(request):
+    if request.method in ['GET']:
+        user = request.user
+        return HttpResponse(utils.build_json(formatters.format_user(user)))
+    else:
+        return HttpResponseNotFound('API Not Found')
