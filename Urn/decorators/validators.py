@@ -1,10 +1,11 @@
 import json
+import jsonschema
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.http import HttpResponseServerError, HttpResponseForbidden, HttpResponseBadRequest, HttpResponse
 from jwt import decode, InvalidTokenError, InvalidIssuerError, InvalidIssuedAtError
-from django.conf import settings
 from setuptools.compat import basestring
 from Urn.models import Sessions
-import jsonschema
 
 
 def jwt_validate(original_function):
@@ -68,3 +69,19 @@ def validate_schema(schema):
         return actual_schema_validator
 
     return wrap_schema_validator
+
+
+def check_email_exists(request, email):
+    if User.objects.filter(email=email).exists():
+        request.session["Error"] = "EmailId already exists"
+        return True
+    else:
+        return False
+
+
+def check_username_exists(request, username):
+    if User.objects.filter(username=username).exists():
+        request.session["Error"] = "Username already exists"
+        return True
+    else:
+        return False

@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^api/v1_0/refresh_token', authentication.refresh_jwt_token),
     url(r'^api/v1_0/registration', users.registration),
     url(r'^api/v1_0/businesses', businesses.api_businesses),
-    url(r'^api/v1_0/users', users.get_all_users),
+    url(r'^api/v1_0/users', users.api_users),
     url(r'^api/v1_0/skus', products.process_sku_request),
     url(r'^api/v1_0/products', products.process_products_request),
     url(r'^api/v1_0/whoami', users.who_am_i)

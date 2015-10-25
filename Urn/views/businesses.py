@@ -46,10 +46,7 @@ def api_businesses_post(request):
         street2 = address['street2'] if 'street2' in address else None
         state = address['state'] if 'state' in address else None
         if 'is_default' in address:
-            if address['is_default'].lower() == 'true':
-                is_default = True
-            else:
-                is_default = False
+            is_default = utils.request_boolean_field_value(address['is_default'])
         else:
             is_default = False
         Addresses.objects.create(city=address['city'], pincode=address['pincode'], country=address['country'],
