@@ -200,7 +200,7 @@ def product_delete_helper(request):
                 else:
                     raise BusinessUsers.DoesNotExist
             except BusinessUsers.DoesNotExist:
-                return HttpResponseBadRequest('Not allowed')
+                return HttpResponse(status=401, content='Not authorized to perform this operation')
 
     return HttpResponse(status=202, content='Product deleted')
 
