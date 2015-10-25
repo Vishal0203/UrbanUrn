@@ -22,3 +22,17 @@ schema = {
     },
     "required": ["name", "description", "sku_guid", "price", "product_data", "business_guid"]
 }
+
+
+put_schema = {
+    "type": "object",
+    "properties": {
+        "product_guid": {
+            "type": "string"
+        },
+        "sku_guid": {
+            "type": "string"
+        }
+    },
+    "required": ["product_guid", "sku_guid"]
+}

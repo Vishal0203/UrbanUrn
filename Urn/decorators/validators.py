@@ -71,6 +71,21 @@ def validate_schema(schema):
     return wrap_schema_validator
 
 
+def validate_post_request_schema(schema):
+    def wrap_schema_validator(func):
+        def actual_schema_validator(request, *args):
+            try:
+                jsonschema.validate(json.loads(request.POST["product_json"]), schema)
+                return func(request, *args)
+            except Exception as e:
+                request.session["Error"] = e
+                return HttpResponseServerError(e)
+
+        return actual_schema_validator
+
+    return wrap_schema_validator
+
+
 def check_email_exists(request, email):
     if User.objects.filter(email=email).exists():
         request.session["Error"] = "EmailId already exists"
