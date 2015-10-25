@@ -131,7 +131,7 @@ def process_products_request(request):
     elif request.method == 'GET':
         return process_products_get(request)
     elif request.method == 'DELETE':
-        return product_delete_helper(request)
+        return process_products_delete(request)
     else:
         return HttpResponseNotFound("API not found")
 
@@ -188,21 +188,24 @@ def product_update_helper(request):
 
 @jwt_validate
 @check_business_or_super
-def product_delete_helper(request):
+def process_products_delete(request):
     products_to_delete = json.loads(request.body.decode())["product_guid"]
+    response = OrderedDict()
+    response["success"] = list()
+    response["error"] = list()
     for each_product in products_to_delete:
         product_to_delete = Products.objects.filter(product_guid=each_product)
         if product_to_delete.exists():
-            try:
-                if BusinessUsers.objects.filter(business_id=product_to_delete.get().business_id,
-                                                user_id=request.user.user_profile.user_id).exists():
-                    product_to_delete.delete()
-                else:
-                    raise BusinessUsers.DoesNotExist
-            except BusinessUsers.DoesNotExist:
-                return HttpResponse(status=401, content='Not authorized to perform this operation')
+            if BusinessUsers.objects.filter(business_id=product_to_delete.get().business_id,
+                                            user_id=request.user.user_profile.user_id).exists():
+                success_msg = "Product deleted : "
+                response["success"].append(success_msg + product_to_delete.get().name)
+                product_to_delete.delete()
+            else:
+                err = "You are not authorized to delete : "
+                response["error"].append(err + product_to_delete.get().name)
 
-    return HttpResponse(status=202, content='Product deleted')
+    return HttpResponse(build_json(response))
 
 
 def process_products_get(request):
