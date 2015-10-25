@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common import utils, formatters
-from Urn.decorators.validators import validate_schema, jwt_validate, check_authenticity
+from Urn.decorators.validators import validate_schema, jwt_validate, check_authenticity, \
+    check_email_exists, check_username_exists
 from Urn.models import Users, Status
 from Urn.schema_validators.registration_validator import schema, update_schema
 
@@ -13,37 +14,35 @@ from Urn.schema_validators.registration_validator import schema, update_schema
 def registration(request, users_api=False):
     if request.method in ['POST']:
         request_data = json.loads(request.body.decode())
-        if User.objects.filter(email=request_data['email']).exists():
-            request.session["Error"] = "EmailId already exists"
+        if check_email_exists(request, request_data['email']):
             return HttpResponseBadRequest("EmailId already exists")
-        elif User.objects.filter(username=request_data['username']).exists():
-            request.session["Error"] = "Username already exists"
+        if check_username_exists(request, request_data['username']):
             return HttpResponseBadRequest("Username already exists")
-        else:
-            user = User.objects.create_user(request_data['username'], request_data['email'],
-                                            request_data['password'],
-                                            first_name=request_data['first_name'],
-                                            last_name=request_data['last_name'])
-            is_business_user = False
-            if users_api and 'is_business_user' in request_data:
-                is_business_user = utils.request_boolean_field_value(request_data['is_business_user'])
 
-            push_notification = utils.request_boolean_field_value(
-                request_data['push_notification']) if 'push_notification' in request_data else False
-            email_notification = utils.request_boolean_field_value(
-                request_data['email_notification']) if 'email_notification' in request_data else False
-            sms_notification = utils.request_boolean_field_value(
-                request_data['sms_notification']) if 'sms_notification' in request_data else False
-            Users.objects.create(
-                user_id=user.id,
-                phone=request_data['phone'],
-                status=Status.active.value,
-                push_notification=push_notification,
-                email_notification=email_notification,
-                sms_notification=sms_notification,
-                is_business_user=is_business_user
-            )
-            return HttpResponse(status=201, content="User is Created")
+        user = User.objects.create_user(request_data['username'], request_data['email'],
+                                        request_data['password'],
+                                        first_name=request_data['first_name'],
+                                        last_name=request_data['last_name'])
+        is_business_user = False
+        if users_api and 'is_business_user' in request_data:
+            is_business_user = utils.request_boolean_field_value(request_data['is_business_user'])
+
+        push_notification = utils.request_boolean_field_value(
+            request_data['push_notification']) if 'push_notification' in request_data else False
+        email_notification = utils.request_boolean_field_value(
+            request_data['email_notification']) if 'email_notification' in request_data else False
+        sms_notification = utils.request_boolean_field_value(
+            request_data['sms_notification']) if 'sms_notification' in request_data else False
+        Users.objects.create(
+            user_id=user.id,
+            phone=request_data['phone'],
+            status=Status.active.value,
+            push_notification=push_notification,
+            email_notification=email_notification,
+            sms_notification=sms_notification,
+            is_business_user=is_business_user
+        )
+        return HttpResponse(status=201, content="User is Created")
     else:
         return HttpResponseNotFound("Page Not Found")
 
@@ -83,34 +82,35 @@ def api_users_put(request):
 
 def update_user(request, user_guid):
     if user_guid:
-        user_entry = Users.objects.get(user_guid=user_guid)
-        user_id = user_entry.user_id
+        try:
+            user_entry = Users.objects.get(user_guid=user_guid)
+            user_id = user_entry.user_id
+        except Users.DoesNotExist as e:
+            return HttpResponseBadRequest("No such user exists")
     else:
         user_id = request.user.user_profile.user_id
     user_entry = Users.objects.get(user_id=user_id)
     request_data = json.loads(request.body.decode())
-    if 'email' in request_data and request_data['email'] != user_entry.user.email and User.objects.filter(
-            email=request_data['email']).exists():
-        request.session["Error"] = "EmailId already exists"
-        return HttpResponseBadRequest("EmailId already exists")
-    elif 'username' in request_data and request_data['username'] != user_entry.user.username and User.objects.filter(
-            username=request_data['username']).exists():
-        request.session["Error"] = "Username already exists"
-        return HttpResponseBadRequest("Username already exists")
-    else:
-        auth_user_keys = ['username', 'first_name', 'last_name', 'email']
-        user_keys = ['phone', 'status']
-        user_boolean_keys = ['push_notification', 'email_notification', 'sms_notification']
-        for key in request_data:
-            if key in auth_user_keys:
-                setattr(user_entry.user, key, request_data[key])
-            elif key in user_keys:
-                setattr(user_entry, key, request_data[key])
-            elif key in user_boolean_keys:
-                setattr(user_entry, key, utils.request_boolean_field_value(request_data[key]))
-        user_entry.user.save()
-        user_entry.save()
-        return HttpResponse(status=202, content='User successfully updated')
+    if 'email' in request_data and request_data['email'] != user_entry.user.email:
+        if check_email_exists(request, request_data['email']):
+            return HttpResponseBadRequest("EmailId already exists")
+    if 'username' in request_data and request_data['username'] != user_entry.user.username:
+        if check_username_exists(request, request_data['username']):
+            return HttpResponseBadRequest("Username already exists")
+
+    auth_user_keys = ['username', 'first_name', 'last_name', 'email']
+    user_keys = ['phone', 'status']
+    user_boolean_keys = ['push_notification', 'email_notification', 'sms_notification']
+    for key in request_data:
+        if key in auth_user_keys:
+            setattr(user_entry.user, key, request_data[key])
+        elif key in user_keys:
+            setattr(user_entry, key, request_data[key])
+        elif key in user_boolean_keys:
+            setattr(user_entry, key, utils.request_boolean_field_value(request_data[key]))
+    user_entry.user.save()
+    user_entry.save()
+    return HttpResponse(status=202, content='User successfully updated')
 
 
 def format_get_users(users):
