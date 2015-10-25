@@ -1,10 +1,9 @@
 import json
 import os
-import shutil
 from UrbanUrn import settings
 from Urn.common import utils
 from collections import OrderedDict
-from Urn.models import Sku, Products, Businesses, ProductImages
+from Urn.models import Sku, Products, Businesses, ProductImages, BusinessUsers
 from django.views.decorators.csrf import csrf_exempt
 
 from Urn.schema_validators.sku_validation import schema
@@ -194,7 +193,14 @@ def product_delete_helper(request):
     for each_product in products_to_delete:
         product_to_delete = Products.objects.filter(product_guid=each_product)
         if product_to_delete.exists():
-            product_to_delete.delete()
+            try:
+                if BusinessUsers.objects.filter(business_id=product_to_delete.get().business_id,
+                                                user_id=request.user.user_profile.user_id).exists():
+                    product_to_delete.delete()
+                else:
+                    raise BusinessUsers.DoesNotExist
+            except BusinessUsers.DoesNotExist:
+                return HttpResponseBadRequest('Not allowed')
 
     return HttpResponse(status=202, content='Product deleted')
 
