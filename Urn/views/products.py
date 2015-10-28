@@ -32,7 +32,6 @@ def process_sku_post(request):
     if request.method == 'POST':
         if not Sku.objects.filter(name=request_data["name"]).exists():
             Sku.objects.create(name=request_data["name"], description=request_data["description"],
-                               business_id=request_data["business_id"] if 'business_id' in request_data else None,
                                created_by=request.user.user_profile)
             return HttpResponse(status=201, content='sku created')
         else:

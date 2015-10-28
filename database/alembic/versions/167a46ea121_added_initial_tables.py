@@ -357,7 +357,6 @@ CREATE TABLE sku (
     name character varying(30),
     description text,
     status boolean DEFAULT true,
-    business_id integer NULL,
     created_by integer,
     updated_by integer,
     created_on timestamp without time zone,
@@ -651,8 +650,6 @@ CREATE INDEX "fki_reviews_businesses_business_id_FK" ON reviews USING btree (bus
 
 CREATE INDEX "fki_reviews_users_user_id_FK" ON reviews USING btree (user_id);
 
-CREATE INDEX "fki_sku_businesses_business_id_FK" ON sku USING btree (business_id);
-
 CREATE INDEX "fki_sku_users_created_by_FK" ON sku USING btree (created_by);
 
 CREATE INDEX "fki_sku_users_updated_by_FK" ON sku USING btree (updated_by);
@@ -814,9 +811,6 @@ ALTER TABLE ONLY reviews
 
 ALTER TABLE ONLY reviews
     ADD CONSTRAINT "reviews_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE ONLY sku
-    ADD CONSTRAINT "sku_businesses_business_id_FK" FOREIGN KEY (business_id) REFERENCES businesses(business_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ONLY sku
     ADD CONSTRAINT "sku_users_created_by_FK" FOREIGN KEY (created_by) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
