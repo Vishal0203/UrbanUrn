@@ -143,7 +143,8 @@ CREATE TABLE cart_items (
     cart_item_id integer NOT NULL,
     cart_item_guid uuid NOT NULL,
     product_id integer NOT NULL,
-    user_id integer NOT NULL,
+    user_id integer NULL,
+    session_id integer NOT NULL,
     product_data json,
     created_on time without time zone,
     updated_on time without time zone
@@ -374,7 +375,7 @@ ALTER SEQUENCE sku_sku_id_seq OWNED BY sku.sku_id;
 
 CREATE TABLE sessions (
     session_id integer NOT NULL,
-    user_id integer NOT NULL,
+    user_id integer,
     session_key character varying(255) NOT NULL,
     expiry timestamp without time zone,
     created_on timestamp without time zone,
@@ -610,6 +611,8 @@ CREATE INDEX "fki_cart_items_products_product_id_FK" ON cart_items USING btree (
 
 CREATE INDEX "fki_cart_items_users_user_id_FK" ON cart_items USING btree (user_id);
 
+CREATE INDEX "fki_cart_items_sessions_session_id_FK" ON cart_items USING btree (session_id);
+
 CREATE INDEX "fki_discounts_products_product_id_FK" ON discounts USING btree (product_id);
 
 CREATE INDEX "fki_discounts_users_created_by_FK" ON discounts USING btree (created_by);
@@ -751,6 +754,9 @@ ALTER TABLE ONLY cart_items
 
 ALTER TABLE ONLY cart_items
     ADD CONSTRAINT "cart_items_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE ONLY cart_items
+    ADD CONSTRAINT "cart_items_sessions_session_id_FK" FOREIGN KEY (session_id) REFERENCES sessions(session_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ONLY discounts
     ADD CONSTRAINT "discounts_products_product_id_FK" FOREIGN KEY (product_id) REFERENCES products(product_id) ON UPDATE CASCADE ON DELETE CASCADE;
