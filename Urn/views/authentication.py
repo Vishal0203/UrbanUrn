@@ -24,6 +24,7 @@ def validate_input_and_authenticate(request):
         auth_user = authenticate(username=username, password=password)
         if auth_user is not None:
             if auth_user.is_active:
+                request.session.set_expiry(1800)
                 login(request, auth_user)
                 active_session = request.session.session_key
                 issued_at = datetime.datetime.utcnow()
