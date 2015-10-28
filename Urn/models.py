@@ -116,6 +116,7 @@ class CartItems(models.Model):
     cart_item_guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey('Products')
     user = models.ForeignKey('Users')
+    session = models.ForeignKey('Sessions')
     product_data = JSONField(blank=True, null=True)
     created_on = models.TimeField(blank=True, null=True)
     updated_on = models.TimeField(blank=True, null=True)
@@ -292,7 +293,6 @@ class Sku(models.Model):
     name = models.CharField(max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     status = models.NullBooleanField(default=True)
-    business = models.ForeignKey(Businesses)
     created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
                                    related_name='sku_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
