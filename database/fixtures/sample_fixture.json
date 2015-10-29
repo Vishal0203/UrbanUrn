@@ -208,7 +208,6 @@
 	  "name": "Sarees & Shawls",
 	  "description": "Sarees & Shawls",
 	  "status": "True",
-	  "business_id": "1",
 	  "created_by": "1",
 	  "updated_by": "1"
     }
@@ -221,7 +220,6 @@
 	  "name": "Sherwanis",
 	  "description": "Sherwanis",
 	  "status": "True",
-	  "business_id": "1",
 	  "created_by": "1"
     }
   },
@@ -233,7 +231,6 @@
 	  "name": "Shoes",
 	  "description": "Shoes",
 	  "status": "True",
-	  "business_id": "3",
 	  "created_by": "1",
 	  "updated_by": "1"
     }
@@ -246,7 +243,6 @@
 	  "name": "Chapals",
 	  "description": "Chapals",
 	  "status": "True",
-	  "business_id": "3",
 	  "created_by": "1"
     }
   },
