@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from Urn.decorators.validators import jwt_validate
+from Urn.decorators.validators import jwt_validate, validate_schema
+from Urn.schema_validators.cart_validation import *
 
 
 @csrf_exempt
@@ -23,10 +24,12 @@ def process_carts_post(request):
 
 
 @jwt_validate
+@validate_schema(post_auth_schema)
 def process_post_if_authenticated(request):
     pass
 
 
+@validate_schema(post_non_auth_schema)
 def process_post_if_not_authenticated(request):
     pass
 
@@ -39,10 +42,12 @@ def process_carts_put(request):
 
 
 @jwt_validate
+@validate_schema(put_auth_schema)
 def process_put_if_authenticated(request):
     pass
 
 
+@validate_schema(put_non_auth_schema)
 def process_put_if_not_authenticated(request):
     pass
 
@@ -59,9 +64,11 @@ def process_carts_delete(request):
 
 
 @jwt_validate
+@validate_schema(delete_auth_schema)
 def process_delete_if_authenticated(request):
     pass
 
 
+@validate_schema(delete_non_auth_schema)
 def process_delete_if_not_authenticated(request):
     pass
