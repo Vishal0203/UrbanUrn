@@ -1,5 +1,6 @@
 from collections import OrderedDict
 import json
+from Urn.common import utils
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common.utils import build_json, convert_uuid_string
@@ -7,6 +8,7 @@ from Urn.decorators.cookie_manager import manage_cookie
 from Urn.decorators.validators import jwt_validate, validate_schema
 from Urn.models import Sessions, Products, CartItems
 from Urn.schema_validators.cart_validation import *
+from Urn.views.products import format_products
 
 
 @csrf_exempt
@@ -77,8 +79,31 @@ def process_put_if_not_authenticated(request):
     pass
 
 
+@manage_cookie
 def process_carts_get(request):
-    pass
+    if request.user.is_authenticated():
+        user = request.user.user_profile.id
+        cart_items = CartItems.objects.filter(user_id=user)
+    else:
+        # TODO
+        session = request.COOKIES
+        cart_items = CartItems.objects.filter(session_id=session)
+
+    return HttpResponse(build_json(format_carts(cart_items)))
+
+
+def format_carts(cart_items):
+    cart_items_data = []
+    for item in cart_items:
+        cart_item_data = OrderedDict()
+        cart_item_data["cart_item_guid"] = utils.convert_uuid_string(item.cart_item_guid)
+        cart_item_data["product_info"] = format_products([Products.objects.get(product_id=item.product_id)], False)
+        cart_item_data["product_data"] = item.product_data
+        cart_item_data["created_on"] = utils.format_timestamp(item.created_on)
+        cart_item_data["updated_on"] = utils.format_timestamp(
+            item.updated_on) if item.updated_on is not None else None
+        cart_items_data.append(cart_item_data)
+    return cart_items_data
 
 
 @validate_schema(delete_schema)
