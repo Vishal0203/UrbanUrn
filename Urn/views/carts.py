@@ -122,15 +122,29 @@ def format_carts(cart_items):
 @validate_schema(delete_schema)
 def process_carts_delete(request):
     if request.user.is_authenticated() or request.user.is_superuser or request.user.is_staff:
-        process_delete_if_authenticated(request)
+        return process_delete_if_authenticated(request)
     else:
-        process_delete_if_not_authenticated(request)
+        return process_delete_if_not_authenticated(request)
 
 
 @jwt_validate
 def process_delete_if_authenticated(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    cart_item = CartItems.objects.filter(cart_item_guid=request_data["cart_item_guid"])
+    if cart_item.exists() or cart_item.get().user_id == request.user.user_profile.user_id:
+        cart_item.delete()
+        return HttpResponse(status=202, content='cart product deleted')
+    else:
+        return HttpResponse(status=401, content='You are not authorized to delete this cart item')
 
 
 def process_delete_if_not_authenticated(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    cart_item = CartItems.objects.filter(cart_item_guid=request_data["cart_item_guid"])
+    if cart_item.exists() or cart_item.get().session.session_key == request.COOKIES.get(
+            settings.ANONYMOUS_SESSION_NAME):
+        cart_item.delete()
+        return HttpResponse(status=202, content='cart product deleted')
+    else:
+        return HttpResponse(status=401, content='You are not authorized to delete this cart item')
+
