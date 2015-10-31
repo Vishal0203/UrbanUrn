@@ -143,8 +143,8 @@ CREATE TABLE cart_items (
     cart_item_id integer NOT NULL,
     cart_item_guid uuid NOT NULL,
     product_id integer NOT NULL,
-    user_id integer NULL,
-    session_id integer NOT NULL,
+    user_id integer,
+    session_id integer,
     product_data json,
     created_on time without time zone,
     updated_on time without time zone
