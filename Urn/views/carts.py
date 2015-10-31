@@ -98,9 +98,9 @@ def process_carts_get(request):
         user = request.user.user_profile.id
         cart_items = CartItems.objects.filter(user_id=user)
     else:
-        # TODO
-        session = request.COOKIES
-        cart_items = CartItems.objects.filter(session_id=session)
+        session_key = request.COOKIES.get(settings.ANONYMOUS_SESSION_NAME)
+        session = Sessions.objects.get(session_key=session_key)
+        cart_items = CartItems.objects.filter(session_id=session.session_id)
 
     return HttpResponse(build_json(format_carts(cart_items)))
 
