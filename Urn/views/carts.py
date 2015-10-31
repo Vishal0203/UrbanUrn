@@ -97,7 +97,7 @@ def format_carts(cart_items):
     for item in cart_items:
         cart_item_data = OrderedDict()
         cart_item_data["cart_item_guid"] = utils.convert_uuid_string(item.cart_item_guid)
-        cart_item_data["product_info"] = format_products([Products.objects.get(product_id=item.product_id)], False)
+        cart_item_data["product_info"] = format_products([item.product], False)
         cart_item_data["product_data"] = item.product_data
         cart_item_data["created_on"] = utils.format_timestamp(item.created_on)
         cart_item_data["updated_on"] = utils.format_timestamp(
