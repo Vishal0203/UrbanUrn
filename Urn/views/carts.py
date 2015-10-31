@@ -147,4 +147,3 @@ def process_delete_if_not_authenticated(request):
         return HttpResponse(status=202, content='cart product deleted')
     else:
         return HttpResponse(status=401, content='You are not authorized to delete this cart item')
-
