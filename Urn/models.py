@@ -200,7 +200,7 @@ class OrderDetails(models.Model):
     delivery_tracking_number = models.CharField(max_length=30)
     product = models.ForeignKey('Products')
     discount = models.ForeignKey(Discounts, blank=True, null=True)
-    final_cost = models.FloatField(blank=True, null=True)
+    total_cost = models.FloatField()
     status = models.NullBooleanField()
     product_data = JSONField(blank=True, null=True)
     created_on = models.DateTimeField(blank=True, null=True)
@@ -217,6 +217,7 @@ class Orders(models.Model):
     user = models.ForeignKey('Users')
     address_id = models.IntegerField()
     coupon = models.ForeignKey(Coupons, blank=True, null=True)
+    final_cost = models.FloatField()
     created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
                                    related_name='orders_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
