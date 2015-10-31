@@ -3,6 +3,7 @@ import os
 from UrbanUrn import settings
 from Urn.common import utils
 from collections import OrderedDict
+from Urn.decorators.cookie_manager import manage_cookie
 from Urn.models import Sku, Products, Businesses, ProductImages, BusinessUsers
 from django.views.decorators.csrf import csrf_exempt
 from Urn.schema_validators.products_validation import put_schema

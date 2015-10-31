@@ -114,3 +114,5 @@ STATICFILES_DIRS = (
 )
 
 BASE_URL = "<http://<host>:<port>/"
+
+ANONYMOUS_SESSION_NAME = "urbanurn_anonymous_cookie"
