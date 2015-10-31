@@ -17,14 +17,11 @@ put_schema = {
         "cart_item_guid": {
             "type": "string"
         },
-        "product_guid": {
-            "type": "string"
-        },
         "product_data": {
             "type": "string"
         }
     },
-    "required": ["cart_item_guid", "product_guid", "product_data"]
+    "required": ["cart_item_guid", "product_data"]
 }
 
 delete_schema = {

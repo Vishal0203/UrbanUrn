@@ -1,5 +1,6 @@
 from collections import OrderedDict
 import json
+from UrbanUrn import settings
 from Urn.common import utils
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -34,7 +35,6 @@ def process_carts_post(request):
 @jwt_validate
 def process_post_if_authenticated(request):
     request_data = json.loads(request.body.decode())
-
     product = Products.objects.get(product_guid=request_data["product_guid"])
     cart_item = CartItems.objects.create(product_id=product.product_id, user_id=request.user.user_profile.user_id,
                                          product_data=request_data["product_data"])
@@ -49,9 +49,9 @@ def process_post_if_not_authenticated(request):
     request_data = json.loads(request.body.decode())
 
     try:
-        active_session = Sessions.objects.get(session_key=request.COOKIES.get('urbanurn_anonymous_cookie'))
+        active_session = Sessions.objects.get(session_key=request.COOKIES.get(settings.ANONYMOUS_SESSION_NAME))
     except Sessions.DoesNotExist:
-        active_session = Sessions.objects.create(session_key=request.COOKIES.get('urbanurn_anonymous_cookie'))
+        active_session = Sessions.objects.create(session_key=request.COOKIES.get(settings.ANONYMOUS_SESSION_NAME))
 
     product = Products.objects.get(product_guid=request_data["product_guid"])
     cart_item = CartItems.objects.create(product_id=product.product_id, session_id=active_session.session_id,
@@ -65,18 +65,31 @@ def process_post_if_not_authenticated(request):
 @validate_schema(put_schema)
 def process_carts_put(request):
     if request.user.is_authenticated() or request.user.is_superuser or request.user.is_staff:
-        process_put_if_authenticated(request)
+        return process_put_if_authenticated(request)
     else:
-        process_put_if_not_authenticated(request)
+        return process_put_if_not_authenticated(request)
 
 
 @jwt_validate
 def process_put_if_authenticated(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    cart_item = CartItems.objects.filter(cart_item_guid=request_data["cart_item_guid"])
+    if cart_item.exists() or cart_item.get().user_id == request.user.user_profile.user_id:
+        cart_item.update(**request_data)
+        return HttpResponse(status=202, content='cart product updated')
+    else:
+        return HttpResponse(status=401, content='You are not authorized to edit this cart item')
 
 
 def process_put_if_not_authenticated(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    cart_item = CartItems.objects.filter(cart_item_guid=request_data["cart_item_guid"])
+    if cart_item.exists() or cart_item.get().session.session_key == request.COOKIES.get(
+            settings.ANONYMOUS_SESSION_NAME):
+        cart_item.update(**request_data)
+        return HttpResponse(status=202, content='cart product updated')
+    else:
+        return HttpResponse(status=401, content='You are not authorized to edit this cart item')
 
 
 @manage_cookie
