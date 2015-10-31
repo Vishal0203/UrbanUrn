@@ -8,12 +8,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from setuptools.compat import basestring
 from Urn.common import utils
+from Urn.decorators.cookie_manager import manage_cookie
 from Urn.decorators.validators import jwt_validate
 from Urn.models import Sessions
 import json
 
 
 @csrf_exempt
+@manage_cookie
 def validate_input_and_authenticate(request):
     if request.method == 'GET':
         return HttpResponseNotFound("Page not found")
