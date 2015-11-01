@@ -29,7 +29,7 @@ script_location = alembic
 # are written from script.py.mako
 # output_encoding = utf-8
 
-sqlalchemy.url = 'postgresql+psycopg2://postgres:123456@127.0.0.1:5433/urbanurn'
+sqlalchemy.url = 'postgresql+psycopg2://<postgres_username>:<postgres_password>@<host>:<port>/urbanurn'
 
 
 # Logging configuration
