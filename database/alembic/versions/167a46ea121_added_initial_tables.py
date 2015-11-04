@@ -44,6 +44,14 @@ CREATE TYPE role_enum AS ENUM (
     'member'
 );
 
+
+CREATE TYPE order_status_enum AS ENUM (
+    'confirmed',
+    'delivered',
+    'cancelled'
+);
+
+
 CREATE TYPE status_enum AS ENUM (
     'active',
     'online',
@@ -250,7 +258,7 @@ CREATE TABLE order_details (
     product_id integer NOT NULL,
     discount_id integer,
     total_cost double precision NOT NULL,
-    status boolean,
+    status order_status_enum DEFAULT 'confirmed'::order_status_enum NOT NULL,
     product_data json,
     created_on timestamp without time zone,
     updated_on timestamp without time zone
@@ -890,6 +898,8 @@ DROP TYPE rating_enum;
 DROP TYPE role_enum;
 
 DROP TYPE status_enum;
+
+DROP TYPE IF EXISTS order_status_enum;
 """
 
 

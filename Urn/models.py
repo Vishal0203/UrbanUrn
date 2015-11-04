@@ -23,6 +23,12 @@ class Role(ChoiceEnum):
     member = 'member'
 
 
+class OrderStatus(ChoiceEnum):
+    confirmed = 'confirmed'
+    delivered = 'delivered'
+    cancelled = 'cancelled'
+
+
 class Rating(ChoiceEnum):
     RATING_ZERO = '0'
     RATING_ONE = '1'
@@ -201,7 +207,7 @@ class OrderDetails(models.Model):
     product = models.ForeignKey('Products')
     discount = models.ForeignKey(Discounts, blank=True, null=True)
     total_cost = models.FloatField()
-    status = models.NullBooleanField()
+    status = models.CharField(max_length=10, choices=OrderStatus.choices(), default=OrderStatus.confirmed.value)
     product_data = JSONField(blank=True, null=True)
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
