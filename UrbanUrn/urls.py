@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from Urn.views import authentication, users, businesses, products, fulltextsearch, addresses, carts
+from Urn.views import authentication, users, businesses, products, fulltextsearch, addresses, carts, orders
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),

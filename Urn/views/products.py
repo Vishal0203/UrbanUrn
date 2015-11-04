@@ -1,15 +1,14 @@
 import json
 import os
-from UrbanUrn import settings
-from Urn.common import utils
 from collections import OrderedDict
-from Urn.decorators.cookie_manager import manage_cookie
-from Urn.models import Sku, Products, Businesses, ProductImages, BusinessUsers
-from django.views.decorators.csrf import csrf_exempt
-from Urn.schema_validators.products_validation import put_schema
 
-from Urn.schema_validators.sku_validation import schema
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
+
+from Urn.common.formatters import format_skus, format_products
+from Urn.models import Sku, Products, Businesses, ProductImages, BusinessUsers
+from Urn.schema_validators.products_validation import put_schema
+from Urn.schema_validators.sku_validation import schema
 from Urn.common.utils import build_json, convert_uuid_string
 from Urn.decorators.validators import jwt_validate, check_authenticity, validate_schema, check_business_or_super, \
     validate_post_request_schema
@@ -71,59 +70,6 @@ def process_sku_get(request):
             return HttpResponseBadRequest("No such SKU exists")
     else:
         return HttpResponseBadRequest("No such SKU exists")
-
-
-def format_skus(sku, products):
-    sku_data = OrderedDict()
-    sku_data['sku_guid'] = utils.convert_uuid_string(sku.sku_guid)
-    sku_data['name'] = sku.name
-    sku_data['description'] = sku.description
-    sku_data['products'] = format_products(products, False) if products is not None else []
-    sku_data['created_by'] = sku.created_by.user.username
-    sku_data['updated_by'] = sku.updated_by.user.username if sku.updated_by is not None else None
-    sku_data['created_on'] = utils.format_timestamp(sku.created_on)
-    sku_data['updated_on'] = utils.format_timestamp(sku.updated_on) if sku.updated_on is not None else None
-    return sku_data
-
-
-def format_products(products, json=True):
-    products_data = []
-    for product in products:
-        product_images = ProductImages.objects.filter(product_id=product.product_id)
-        product_data = OrderedDict()
-        product_data['product_guid'] = utils.convert_uuid_string(product.product_guid)
-        product_data['name'] = product.name
-        product_data['description'] = product.description
-        product_data['price'] = product.price
-        product_data['product_data'] = product.product_data
-        product_data['product_images'] = format_product_images(product_images,
-                                                               False) if len(product_images) > 0 else []
-        product_data['business_guid'] = utils.convert_uuid_string(product.business.business_guid)
-        product_data['sku_guid'] = utils.convert_uuid_string(product.sku.sku_guid)
-        product_data['created_on'] = utils.format_timestamp(product.created_on)
-        product_data['updated_on'] = utils.format_timestamp(
-            product.updated_on) if product.updated_on is not None else None
-        products_data.append(product_data)
-    if json:
-        return utils.build_json(products_data)
-    return products_data
-
-
-def format_product_images(product_images, json=True):
-    product_images_data = []
-    for product_image in product_images:
-        product_image_data = OrderedDict()
-        product_image_data['product_image_guid'] = utils.convert_uuid_string(product_image.product_image_guid)
-        product_image_data['image'] = settings.BASE_URL + product_image.image.url
-        product_image_data['size'] = product_image.size
-        product_image_data['is_default'] = product_image.is_default
-        product_image_data['created_on'] = utils.format_timestamp(product_image.created_on)
-        product_image_data['updated_on'] = utils.format_timestamp(
-            product_image.updated_on) if product_image.updated_on is not None else None
-        product_images_data.append(product_image_data)
-    if not json:
-        return product_images_data
-    return utils.build_json(product_images_data)
 
 
 @csrf_exempt
