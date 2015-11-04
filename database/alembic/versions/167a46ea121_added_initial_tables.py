@@ -253,8 +253,8 @@ ALTER SEQUENCE keywords_keyword_id_seq OWNED BY keywords.keyword_id;
 CREATE TABLE order_details (
     order_detail_id integer NOT NULL,
     order_id integer NOT NULL,
-    delivery_party_name character varying(30) NOT NULL,
-    delivery_tracking_number character varying(30) NOT NULL,
+    delivery_party_name character varying(30) NULL,
+    delivery_tracking_number character varying(30) NULL,
     product_id integer NOT NULL,
     discount_id integer,
     total_cost double precision NOT NULL,

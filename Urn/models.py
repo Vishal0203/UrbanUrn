@@ -26,6 +26,7 @@ class Role(ChoiceEnum):
 class OrderStatus(ChoiceEnum):
     confirmed = 'confirmed'
     delivered = 'delivered'
+    shipped = 'shipped'
     cancelled = 'cancelled'
 
 
