@@ -113,6 +113,12 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "media"),
 )
 
+AUTH_PROFILE_MODULE = 'Urn.Users'
+
+JWT_SECRET_KEY = "7e3c4d3f466d4858273637647871566b2f7a6e432e525f4069407b2c22"
+
+JWT_ISSUER = "urbanurn:superuser_admin"
+
 BASE_URL = "<http://<host>:<port>/"
 
 ANONYMOUS_SESSION_NAME = "urbanurn_anonymous_cookie"
