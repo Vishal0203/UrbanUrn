@@ -14,6 +14,9 @@ pip install alembic
 pip install pyjwt
 pip install cryptography
 pip install jsonschema
+pip install libjpeg-dev
+pip install pillow
+pip install jsonfield
 ```
 
 ### Database setup and load data
