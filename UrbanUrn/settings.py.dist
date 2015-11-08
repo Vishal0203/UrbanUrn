@@ -121,4 +121,4 @@ JWT_ISSUER = "urbanurn:superuser_admin"
 
 BASE_URL = "<http://<host>:<port>/"
 
-ANONYMOUS_SESSION_NAME = "urbanurn_anonymous_cookie"
+BROWSER_COOKIE_NAME = "urbanurn_cookie"

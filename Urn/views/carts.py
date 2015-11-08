@@ -49,9 +49,9 @@ def process_post_if_not_authenticated(request):
     request_data = json.loads(request.body.decode())
 
     try:
-        active_session = Sessions.objects.get(session_key=request.COOKIES.get(settings.ANONYMOUS_SESSION_NAME))
+        active_session = Sessions.objects.get(session_key=request.COOKIES.get(settings.BROWSER_COOKIE_NAME))
     except Sessions.DoesNotExist:
-        active_session = Sessions.objects.create(session_key=request.COOKIES.get(settings.ANONYMOUS_SESSION_NAME))
+        active_session = Sessions.objects.create(session_key=request.COOKIES.get(settings.BROWSER_COOKIE_NAME))
 
     product = Products.objects.get(product_guid=request_data["product_guid"])
     cart_item = CartItems.objects.create(product_id=product.product_id, session_id=active_session.session_id,
@@ -85,7 +85,7 @@ def process_put_if_not_authenticated(request):
     request_data = json.loads(request.body.decode())
     cart_item = CartItems.objects.filter(cart_item_guid=request_data["cart_item_guid"])
     if cart_item.exists() or cart_item.get().session.session_key == request.COOKIES.get(
-            settings.ANONYMOUS_SESSION_NAME):
+            settings.BROWSER_COOKIE_NAME):
         cart_item.update(**request_data)
         return HttpResponse(status=202, content='cart product updated')
     else:
@@ -98,7 +98,7 @@ def process_carts_get(request):
         user = request.user.user_profile.id
         cart_items = CartItems.objects.filter(user_id=user)
     else:
-        session_key = request.COOKIES.get(settings.ANONYMOUS_SESSION_NAME)
+        session_key = request.COOKIES.get(settings.BROWSER_COOKIE_NAME)
         session = Sessions.objects.get(session_key=session_key)
         cart_items = CartItems.objects.filter(session_id=session.session_id)
 
@@ -142,7 +142,7 @@ def process_delete_if_not_authenticated(request):
     request_data = json.loads(request.body.decode())
     cart_item = CartItems.objects.filter(cart_item_guid=request_data["cart_item_guid"])
     if cart_item.exists() or cart_item.get().session.session_key == request.COOKIES.get(
-            settings.ANONYMOUS_SESSION_NAME):
+            settings.BROWSER_COOKIE_NAME):
         cart_item.delete()
         return HttpResponse(status=202, content='cart product deleted')
     else:
