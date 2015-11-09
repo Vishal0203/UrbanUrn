@@ -13,3 +13,19 @@ review_schema = {
     },
     "required": ["product_guid", "rating", "review_comment"]
 }
+
+review_schema_put = {
+    "type": "object",
+    "properties": {
+        "review_guid": {
+            "type": "string"
+        },
+        "rating": {
+            "type": "number"
+        },
+        "review_detail": {
+            "type": "string"
+        }
+    },
+    "required": ["review_guid"]
+}

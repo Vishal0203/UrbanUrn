@@ -5,14 +5,12 @@ from django.views.decorators.csrf import csrf_exempt
 from Urn.common.utils import build_json, convert_uuid_string
 from Urn.decorators.validators import jwt_validate, validate_schema
 from Urn.models import Products, Reviews
-from Urn.schema_validators.reviews_validator import review_schema
+from Urn.schema_validators.reviews_validator import review_schema, review_schema_put
 
 
 @csrf_exempt
 def process_reviews_request(request):
-    if request.method == 'GET':
-        return process_get_request(request)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         return process_post_request(request)
     elif request.method == 'PUT':
         return process_put_request(request)
@@ -47,8 +45,16 @@ def process_post_request(request):
 
 
 @jwt_validate
+@validate_schema(review_schema_put)
 def process_put_request(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    review = Reviews.objects.filter(review_guid=request_data["review_guid"])
+    if review.exists() and review.get().user_id == request.user.user_profile.user_id:
+        del request_data["review_guid"]
+        review.update(**request_data)
+        return HttpResponse(status=202, content='review updated')
+    else:
+        return HttpResponse(status=202, content='review not found')
 
 
 @jwt_validate
