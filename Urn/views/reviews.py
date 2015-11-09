@@ -54,9 +54,17 @@ def process_put_request(request):
         review.update(**request_data)
         return HttpResponse(status=202, content='review updated')
     else:
-        return HttpResponse(status=202, content='review not found')
+        return HttpResponseBadRequest('review not found')
 
 
 @jwt_validate
 def process_delete_request(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    review = Reviews.objects.filter(review_guid=request_data["review_guid"])
+    if review.exists():
+        if review.get().user_id == request.user.user_profile.user_id or \
+                request.user.is_superuser or request.user.is_staff:
+            review.delete()
+        return HttpResponse(status=202, content='review deleted')
+    else:
+        return HttpResponseBadRequest('review not found')

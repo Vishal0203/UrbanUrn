@@ -29,3 +29,13 @@ review_schema_put = {
     },
     "required": ["review_guid"]
 }
+
+review_schema_delete = {
+    "type": "object",
+    "properties": {
+        "review_guid": {
+            "type": "string"
+        }
+    },
+    "required": ["review_guid"]
+}
