@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from Urn.common.utils import build_json, convert_uuid_string
 from Urn.decorators.validators import jwt_validate, validate_schema
 from Urn.models import Products, Reviews
-from Urn.schema_validators.reviews_validator import review_schema, review_schema_put
+from Urn.schema_validators.reviews_validator import review_schema, review_schema_put, review_schema_delete
 
 
 @csrf_exempt
@@ -18,10 +18,6 @@ def process_reviews_request(request):
         return process_delete_request(request)
     else:
         return HttpResponseBadRequest("API not found")
-
-
-def process_get_request(request):
-    pass
 
 
 @jwt_validate
@@ -58,6 +54,7 @@ def process_put_request(request):
 
 
 @jwt_validate
+@validate_schema(review_schema_delete)
 def process_delete_request(request):
     request_data = json.loads(request.body.decode())
     review = Reviews.objects.filter(review_guid=request_data["review_guid"])
