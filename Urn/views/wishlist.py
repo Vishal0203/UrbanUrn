@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from Urn.decorators.validators import jwt_validate, validate_schema
 from Urn.models import Products, Wishlist, Users
-from Urn.schema_validators.wishlist_validator import wishlist_post
+from Urn.schema_validators.wishlist_validator import wishlist_delete, wishlist_post
 
 
 @csrf_exempt
@@ -13,8 +13,8 @@ def process_wishlist_api(request):
         return process_wishlist_get(request)
     elif request.method == 'POST':
         return process_wishlist_post(request)
-    elif request.method == 'PUT':
-        return process_wishlist_put(request)
+    elif request.method == 'DELETE':
+        return process_wishlist_delete(request)
     else:
         return HttpResponseBadRequest("API not found")
 
@@ -48,5 +48,13 @@ def process_wishlist_post(request):
         return HttpResponseBadRequest("No such product")
 
 
-def process_wishlist_put(request):
-    pass
+@validate_schema(wishlist_delete)
+def process_wishlist_delete(request):
+    request_data = json.loads(request.body.decode())
+    wish = Wishlist.objects.filter(wishlist_guid=request_data["wishlist_guid"],
+                                   user_id=request.user.user_profile.user_id)
+    if wish.exists():
+        wish.delete()
+        return HttpResponse("Product removed from wish list")
+    else:
+        return HttpResponseBadRequest("Product not present in wish list")

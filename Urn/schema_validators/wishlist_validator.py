@@ -10,3 +10,13 @@ wishlist_post = {
     },
     "required": ["product_guid"]
 }
+
+wishlist_delete = {
+    "type": "object",
+    "properties": {
+        "wishlist_guid": {
+            "type": "string"
+        }
+    },
+    "required": ["wishlist_guid"]
+}
