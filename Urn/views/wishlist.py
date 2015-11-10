@@ -8,7 +8,7 @@ from Urn.schema_validators.wishlist_validator import wishlist_delete, wishlist_p
 
 @csrf_exempt
 @jwt_validate
-def process_wishlist_api(request):
+def process_wishlist_request(request):
     if request.method == 'GET':
         return process_wishlist_get(request)
     elif request.method == 'POST':
@@ -19,7 +19,6 @@ def process_wishlist_api(request):
         return HttpResponseBadRequest("API not found")
 
 
-# ToDo formatting the get call
 def process_wishlist_get(request):
     if request.user.is_staff or request.user.is_superuser:
         user_guid = request.GET.get("user_guid", None)
