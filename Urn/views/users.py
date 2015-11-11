@@ -73,11 +73,11 @@ def api_users_post(request):
 
 @validate_schema(update_schema)
 def api_users_put(request):
-        url_params = request.GET
-        if (request.user.is_superuser or request.user.is_staff) and len(url_params) == 0:
-            return HttpResponseBadRequest(content='Please provide the user_guid of the user to update')
-        user_guid = url_params['user_guid'] if 'user_guid' in url_params else None
-        return update_user(request, user_guid)
+    url_params = request.GET
+    if (request.user.is_superuser or request.user.is_staff) and len(url_params) == 0:
+        return HttpResponseBadRequest(content='Please provide the user_guid of the user to update')
+    user_guid = url_params['user_guid'] if 'user_guid' in url_params else None
+    return update_user(request, user_guid)
 
 
 def update_user(request, user_guid):

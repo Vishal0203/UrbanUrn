@@ -1,7 +1,8 @@
 from collections import OrderedDict
+from UrbanUrn import settings
 from Urn.views import addresses
 from Urn.common import utils
-from Urn.models import Addresses, BusinessUsers
+from Urn.models import Addresses, BusinessUsers, OrderDetails, Discounts, ProductImages
 
 
 def format_get_businesses(businesses, include_users=False, include_addresses=False, user=None):
@@ -20,7 +21,7 @@ def format_get_businesses(businesses, include_users=False, include_addresses=Fal
 
         if include_addresses:
             business_addresses = Addresses.objects.filter(business_id=business.business_id)
-            business_data['addresses'] = addresses.format_addresses(business_addresses)
+            business_data['addresses'] = format_addresses(business_addresses)
 
         if user:
             business_data['role'] = get_business_user_entry(business, user).role
@@ -68,7 +69,7 @@ def format_user(user):
     user_data['status'] = user.user_profile.status
 
     user_addresses = Addresses.objects.filter(user_id=user.user_profile.user_id)
-    user_data['addresses'] = addresses.format_addresses(user_addresses)
+    user_data['addresses'] = format_addresses(user_addresses)
 
     if user.user_profile.is_business_user:
         user_businesses = user.user_profile.businesses_set.all()
@@ -85,3 +86,139 @@ def format_user(user):
     user_data['updated_on'] = utils.format_timestamp(
         user.user_profile.updated_on) if user.user_profile.updated_on is not None else None
     return user_data
+
+
+def format_addresses(addresses):
+    addresses_data = []
+    for address in addresses:
+        address_data = OrderedDict()
+        address_data['address_guid'] = utils.convert_uuid_string(address.address_guid)
+        address_data['is_default'] = address.is_default
+        address_data['street_1'] = address.street_1
+        address_data['street_2'] = address.street_2
+        address_data['city'] = address.city
+        address_data['state'] = address.state
+        address_data['country'] = address.country
+        address_data['pincode'] = address.pincode
+        address_data['latitude'] = address.latitude
+        address_data['longitude'] = address.longitude
+        address_data['created_on'] = utils.format_timestamp(address.created_on)
+        address_data['updated_on'] = utils.format_timestamp(
+            address.updated_on) if address.updated_on is not None else None
+        addresses_data.append(address_data)
+    return addresses_data
+
+
+def format_carts(cart_items):
+    cart_items_data = []
+    for item in cart_items:
+        cart_item_data = OrderedDict()
+        cart_item_data["cart_item_guid"] = utils.convert_uuid_string(item.cart_item_guid)
+        cart_item_data["product_info"] = format_products([item.product], False)
+        cart_item_data["product_data"] = item.product_data
+        cart_item_data["created_on"] = utils.format_timestamp(item.created_on)
+        cart_item_data["updated_on"] = utils.format_timestamp(
+            item.updated_on) if item.updated_on is not None else None
+        cart_items_data.append(cart_item_data)
+    return cart_items_data
+
+
+def format_skus(sku, products):
+    sku_data = OrderedDict()
+    sku_data['sku_guid'] = utils.convert_uuid_string(sku.sku_guid)
+    sku_data['name'] = sku.name
+    sku_data['description'] = sku.description
+    sku_data['products'] = format_products(products, False) if products is not None else []
+    sku_data['created_by'] = sku.created_by.user.username
+    sku_data['updated_by'] = sku.updated_by.user.username if sku.updated_by is not None else None
+    sku_data['created_on'] = utils.format_timestamp(sku.created_on)
+    sku_data['updated_on'] = utils.format_timestamp(sku.updated_on) if sku.updated_on is not None else None
+    return sku_data
+
+
+def format_products(products, json=True):
+    products_data = []
+    for product in products:
+        product_images = ProductImages.objects.filter(product_id=product.product_id)
+        product_data = OrderedDict()
+        product_data['product_guid'] = utils.convert_uuid_string(product.product_guid)
+        product_data['name'] = product.name
+        product_data['discount_info'] = format_discounts(product.discounts_set.filter())
+        product_data['description'] = product.description
+        product_data['price'] = product.price
+        product_data['product_data'] = product.product_data
+        product_data['product_images'] = format_product_images(product_images,
+                                                               False) if len(product_images) > 0 else []
+        product_data['business_guid'] = utils.convert_uuid_string(product.business.business_guid)
+        product_data['sku_guid'] = utils.convert_uuid_string(product.sku.sku_guid)
+        product_data['created_on'] = utils.format_timestamp(product.created_on)
+        product_data['updated_on'] = utils.format_timestamp(
+            product.updated_on) if product.updated_on is not None else None
+        products_data.append(product_data)
+    if json:
+        return utils.build_json(products_data)
+    return products_data
+
+
+def format_product_images(product_images, json=True):
+    product_images_data = []
+    for product_image in product_images:
+        product_image_data = OrderedDict()
+        product_image_data['product_image_guid'] = utils.convert_uuid_string(product_image.product_image_guid)
+        product_image_data['image'] = settings.BASE_URL + product_image.image.url
+        product_image_data['size'] = product_image.size
+        product_image_data['is_default'] = product_image.is_default
+        product_image_data['created_on'] = utils.format_timestamp(product_image.created_on)
+        product_image_data['updated_on'] = utils.format_timestamp(
+            product_image.updated_on) if product_image.updated_on is not None else None
+        product_images_data.append(product_image_data)
+    if not json:
+        return product_images_data
+    return utils.build_json(product_images_data)
+
+
+def format_orders(order_items):
+    orders_data = []
+    for item in order_items:
+        order_data = OrderedDict()
+        order_data["order_guid"] = utils.convert_uuid_string(item.order_guid)
+        order_data["order_info"] = format_order_details(OrderDetails.objects.filter(order_id=item.order_id))
+        order_data["final_cost"] = item.final_cost
+        order_data["address_info"] = format_addresses(Addresses.objects.filter(address_id=item.address_id))
+        order_data["created_on"] = utils.format_timestamp(item.created_on)
+        order_data["updated_on"] = utils.format_timestamp(
+            item.updated_on) if item.updated_on is not None else None
+        orders_data.append(order_data)
+    return orders_data
+
+
+def format_order_details(order_details):
+    order_items_data = []
+    for item in order_details:
+        order_item_data = OrderedDict()
+        order_item_data["delivery_party_name"] = item.delivery_party_name
+        order_item_data["delivery_tracking_number"] = item.delivery_tracking_number
+        order_item_data["total_cost"] = item.total_cost
+        order_item_data["product_info"] = format_products([item.product], False)
+        order_item_data["status"] = item.status
+        order_item_data["product_data"] = item.product_data
+        order_item_data["created_on"] = utils.format_timestamp(item.created_on)
+        order_item_data["updated_on"] = utils.format_timestamp(
+            item.updated_on) if item.updated_on is not None else None
+        order_items_data.append(order_item_data)
+    return order_items_data
+
+
+def format_discounts(discount_data):
+    discounts_data = []
+    for item in discount_data:
+        discount_data = OrderedDict()
+        discount_data["discount_guid"] = utils.convert_uuid_string(item.discount_guid)
+        discount_data["description"] = item.description
+        discount_data["discount_value"] = item.discount_value
+        discount_data["is_percentage"] = item.is_percentage
+        discount_data["created_on"] = utils.format_timestamp(item.created_on)
+        discount_data["updated_on"] = utils.format_timestamp(
+            item.updated_on) if item.updated_on is not None else None
+        discounts_data.append(discount_data)
+    return discounts_data
