@@ -28,7 +28,8 @@ def process_coupons_post(request):
 def process_superuser_coupon_request(request):
     request_data = json.loads(request.body.decode())
     response = OrderedDict()
-    response["success"] = response["error"] = list()
+    response["success"] = list()
+    response["error"] = list()
     for coupon in request_data["coupons"]:
         each_coupon = Coupons.objects.filter(code=coupon["code"], discount_value=coupon["discount_value"],
                                              is_percentage=coupon["is_percentage"])
@@ -37,7 +38,7 @@ def process_superuser_coupon_request(request):
                                                   is_percentage=coupon["is_percentage"])
             response["success"].append(added_coupon.code)
         else:
-            response["error"].append(coupon["code"])
+            response["error"].append(coupon["code"] + " already exists")
 
     return HttpResponse(build_json(response))
 
