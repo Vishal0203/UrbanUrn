@@ -2,7 +2,8 @@ from collections import OrderedDict
 import json
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-from Urn.common.utils import convert_uuid_string, build_json
+from Urn.common.formatters import format_wishlist_get
+from Urn.common.utils import build_json
 from Urn.decorators.validators import jwt_validate, validate_schema
 from Urn.models import Products, Wishlist, Users
 from Urn.schema_validators.wishlist_validator import wishlist_delete, wishlist_post
@@ -37,19 +38,6 @@ def process_wishlist_get(request):
         response = format_wishlist_get(users_wishlist)
 
     return HttpResponse(build_json(response))
-
-
-def format_wishlist_get(users_wishlist):
-    response = list()
-    for item in users_wishlist:
-        item_dict = OrderedDict()
-        item_dict["wishlist_guid"] = convert_uuid_string(item.wishlist_guid)
-        item_dict["product_guid"] = convert_uuid_string(item.product.product_guid)
-        item_dict["product_name"] = item.product.name
-        item_dict["product_data"] = item.product_data
-        response.append(item_dict)
-
-    return response
 
 
 @validate_schema(wishlist_post)
