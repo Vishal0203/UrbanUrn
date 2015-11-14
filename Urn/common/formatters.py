@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from UrbanUrn import settings
+from Urn.common.utils import convert_uuid_string
 from Urn.views import addresses
 from Urn.common import utils
 from Urn.models import Addresses, BusinessUsers, OrderDetails, Discounts, ProductImages
@@ -74,6 +75,9 @@ def format_user(user):
     if user.user_profile.is_business_user:
         user_businesses = user.user_profile.businesses_set.all()
         user_data['businesses'] = format_get_businesses(user_businesses, False, False, user.user_profile)
+    else:
+        users_wishlist = user.user_profile.wishlist_set.all()
+        user_data['wishlist'] = format_wishlist_get(users_wishlist)
 
     user_data['push_notification'] = user.user_profile.push_notification
     user_data['email_notification'] = user.user_profile.email_notification
@@ -86,6 +90,19 @@ def format_user(user):
     user_data['updated_on'] = utils.format_timestamp(
         user.user_profile.updated_on) if user.user_profile.updated_on is not None else None
     return user_data
+
+
+def format_wishlist_get(users_wishlist):
+    response = list()
+    for item in users_wishlist:
+        item_dict = OrderedDict()
+        item_dict["wishlist_guid"] = convert_uuid_string(item.wishlist_guid)
+        item_dict["product_guid"] = convert_uuid_string(item.product.product_guid)
+        item_dict["product_name"] = item.product.name
+        item_dict["product_data"] = item.product_data
+        response.append(item_dict)
+
+    return response
 
 
 def format_addresses(addresses):
