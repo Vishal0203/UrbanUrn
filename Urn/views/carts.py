@@ -96,8 +96,7 @@ def process_put_if_not_authenticated(request):
 @manage_cookie
 def process_carts_get(request):
     if request.user.is_authenticated():
-        user = request.user.user_profile.id
-        cart_items = CartItems.objects.filter(user_id=user)
+        cart_items = request.user.user_profile.cartitems_set.all()
     else:
         session_key = request.COOKIES.get(settings.BROWSER_COOKIE_NAME)
         session = Sessions.objects.get(session_key=session_key)
