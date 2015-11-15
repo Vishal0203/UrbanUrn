@@ -2,6 +2,8 @@ import json
 from datetime import datetime
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
+from Urn.common.formatters import format_discounts
+from Urn.common.utils import build_json
 from Urn.decorators.validators import jwt_validate, check_business_or_super
 from Urn.models import Products, Discounts
 
@@ -35,7 +37,13 @@ def process_discount_post(request):
 
 
 def process_discount_get(request):
-    pass
+    params = request.GET
+    if len(params) == 0:
+        return HttpResponseBadRequest(content="Expected parameter 'product_guid'")
+    elif 'product_guid' in params:
+        product = Products.objects.filter(product_guid=params['product_guid'])
+        discount = product.get().discounts_set.all()
+        return HttpResponse(build_json(format_discounts(discount)))
 
 
 def process_discount_put(request):
