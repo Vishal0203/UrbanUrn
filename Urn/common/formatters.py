@@ -3,7 +3,7 @@ from UrbanUrn import settings
 from Urn.common.utils import convert_uuid_string
 from Urn.views import addresses
 from Urn.common import utils
-from Urn.models import Addresses, BusinessUsers, OrderDetails, Discounts, ProductImages
+from Urn.models import Addresses, BusinessUsers, OrderDetails, Discounts, ProductImages, Reviews
 
 
 def format_get_businesses(businesses, include_users=False, include_addresses=False, user=None):
@@ -164,6 +164,7 @@ def format_products(products, json=True):
         product_data['product_guid'] = utils.convert_uuid_string(product.product_guid)
         product_data['name'] = product.name
         product_data['discount_info'] = format_discounts(product.discounts_set.filter())
+        product_data['reviews_info'] = format_reviews(Reviews.objects.filter(product_id=product.product_id))
         product_data['description'] = product.description
         product_data['price'] = product.price
         product_data['product_data'] = product.product_data
@@ -245,3 +246,19 @@ def format_discounts(discount_data):
             item.updated_on) if item.updated_on is not None else None
         discounts_data.append(discount_data)
     return discounts_data
+
+
+def format_reviews(review_data):
+    reviews_data = []
+    for item in review_data:
+        review_data = OrderedDict()
+        review_data["review_guid"] = utils.convert_uuid_string(item.review_guid)
+        review_data["rating"] = item.rating
+        review_data["review_detail"] = item.review_detail
+        review_data["user_id"] = item.user_id
+        review_data["business_id"] = item.business_id
+        review_data["created_on"] = utils.format_timestamp(item.created_on)
+        review_data["updated_on"] = utils.format_timestamp(
+            item.updated_on) if item.updated_on is not None else None
+        reviews_data.append(review_data)
+    return reviews_data
