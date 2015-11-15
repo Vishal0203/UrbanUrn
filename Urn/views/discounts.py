@@ -44,6 +44,8 @@ def process_discount_post(request):
                                             end_time=datetime.strptime(request_data["end_time"], "%Y-%m-%d %H:%M:%S"),
                                             discount_value=request_data["discount_value"],
                                             is_percentage=request_data["is_percentage"],
+                                            active=request_data["active"],
+                                            created_by=request.user.user_profile,
                                             product_quantity=request_data["product_quantity"])
         response = OrderedDict()
         response["discount_guid"] = convert_uuid_string(discount.discount_guid)
@@ -63,4 +65,12 @@ def process_discount_get(request):
 
 
 def process_discount_put(request):
-    pass
+    request_data = json.loads(request.body.decode())
+    discount = Discounts.objects.filter(discount_guid=request_data["discount_guid"])
+    if discount.exists():
+        request_data["updated_by"] = request.user.user_profile
+        discount.update(**request_data)
+
+        response = OrderedDict()
+        response["discount_guid"] = convert_uuid_string(discount.get().discount_guid)
+        return HttpResponse(status=202, content=build_json(response))
