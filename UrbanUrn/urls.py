@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from Urn.views import authentication, users, businesses, products, fulltextsearch, addresses, carts, reviews, wishlist
-from Urn.views import coupons, discounts
+from Urn.views import coupons, discounts, orders
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^api/v1_0/wishlists', wishlist.process_wishlist_request),
     url(r'^api/v1_0/coupons', coupons.process_coupons_request),
     url(r'^api/v1_0/discounts', discounts.process_discount_request),
+    url(r'^api/v1_0/orders', orders.process_orders_request),
     url(r'^api/v1_0/whoami', users.who_am_i),
     url(r'^api/v1_0/product/search', fulltextsearch.fts_products),
     url(r'^api/v1_0/addresses', addresses.api_user_addresses)
