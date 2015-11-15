@@ -7,6 +7,8 @@ from Urn.models import Products, Discounts
 
 
 @csrf_exempt
+@jwt_validate
+@check_business_or_super
 def process_discount_request(request):
     if request.method == 'POST':
         return process_discount_post(request)
@@ -18,8 +20,6 @@ def process_discount_request(request):
         return HttpResponseBadRequest("API not found")
 
 
-@jwt_validate
-@check_business_or_super
 def process_discount_post(request):
     request_data = json.loads(request.body.decode())
     product = Products.objects.filter(product_guid=request['product_guid'])
@@ -38,7 +38,5 @@ def process_discount_get(request):
     pass
 
 
-@jwt_validate
-@check_business_or_super
 def process_discount_put(request):
     pass
