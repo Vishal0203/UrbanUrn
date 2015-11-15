@@ -54,7 +54,6 @@ def process_discount_post(request):
         return HttpResponseBadRequest("No such product exists")
 
 
-@validate_schema(put_schema)
 def process_discount_get(request):
     params = request.GET
     if len(params) == 0:
@@ -65,5 +64,6 @@ def process_discount_get(request):
         return HttpResponse(build_json(format_discounts(discount)))
 
 
+@validate_schema(put_schema)
 def process_discount_put(request):
     pass
