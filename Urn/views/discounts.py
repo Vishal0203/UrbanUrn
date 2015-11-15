@@ -5,7 +5,8 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from Urn.common.formatters import format_discounts
 from Urn.common.utils import build_json, convert_uuid_string
-from Urn.decorators.validators import jwt_validate, check_business_or_super
+from Urn.schema_validators.discounts_validator import schema, put_schema
+from Urn.decorators.validators import jwt_validate, check_business_or_super, validate_schema
 from Urn.models import Products, Discounts
 
 
@@ -23,6 +24,7 @@ def process_discount_request(request):
         return HttpResponseBadRequest("API not found")
 
 
+@validate_schema(schema)
 def process_discount_post(request):
     request_data = json.loads(request.body.decode())
     product = Products.objects.filter(product_guid=request_data['product_guid'])
@@ -52,6 +54,7 @@ def process_discount_post(request):
         return HttpResponseBadRequest("No such product exists")
 
 
+@validate_schema(put_schema)
 def process_discount_get(request):
     params = request.GET
     if len(params) == 0:
