@@ -236,6 +236,9 @@ def format_discounts(discount_data):
         discount_data["discount_guid"] = utils.convert_uuid_string(item.discount_guid)
         discount_data["description"] = item.description
         discount_data["discount_value"] = item.discount_value
+        discount_data["start_time"] = utils.format_timestamp(item.start_time if item.start_time is not None else None)
+        discount_data["end_time"] = utils.format_timestamp(item.start_time if item.start_time is not None else None)
+        discount_data["product_quantity"] = item.product_quantity
         discount_data["is_percentage"] = item.is_percentage
         discount_data["created_on"] = utils.format_timestamp(item.created_on)
         discount_data["updated_on"] = utils.format_timestamp(
