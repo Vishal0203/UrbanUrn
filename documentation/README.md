@@ -1,17 +1,79 @@
 <h1><a href="#api-documentation" name="api-documentation" id="api-documentation" class="anchor"></a>API Documentation</h1>
-<p>This page describes the API's along with their payloads and expected results<br/><em>The content below this line is to be removed while pushing the changes on this page. Remove this line too.</em></p>
-<h4><a href="#api-name" name="api-name" id="api-name" class="anchor"></a>API Name</h4>
-<p>Description of this API</p>
+<p>This page describes the API's along with their payloads and expected results<br/>
+<h4><a href="#login" name="login" id="logiin" class="anchor"></a>Login</h4>
 <table>
   <thead>
     <tr>
       <th>Method </th>
+      <th align="center">Access Right </th>
       <th align="center">Endpoint and payload </th>
-      <th align="right">Expected response </th>
+      <th align="center">Expected response </th>
     </tr>
   </thead>
+  <tbody>
+    <tr>
+      <td>
+        POST
+      </td>
+      <td>
+        Super user and Staff
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/login
+      <br><br>
+<pre lang="javascript">
+{
+    "username":string,
+	"password": string
+}
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": {"token": token, "user_guid":uuid}
+    "error": Eror reason
+}
+</pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
-<p><em>Same goes for each API. Remove this line too.</em></p>
+<h4><a href="#logout" name="logout" id="logout" class="anchor"></a>Log Out</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Method </th>
+      <th align="center">Access Right </th>
+      <th align="center">Endpoint and payload </th>
+      <th align="center">Expected response </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Get
+      </td>
+      <td>
+        General User
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/logout
+      <br><br>
+<pre lang="javascript">
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": "Logged Out"
+    "error": Eror reason
+}
+</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h4><a href="#coupons" name="coupons" id="coupons" class="anchor"></a>Coupons</h4>
 <table>
   <thead>
@@ -503,7 +565,7 @@
   {
     "product_guid": uuid,
     "description": string,
-    "name": string",
+    "name": string,
     "sku_guid": uuid
   }
   ]
