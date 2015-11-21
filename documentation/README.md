@@ -74,6 +74,161 @@
     </tr>
   </tbody>
 </table>
+<h4><a href="#skus" name="skus" id="skus" class="anchor"></a>SKU's</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Method </th>
+      <th align="center">Access Right </th>
+      <th align="center">Endpoint and payload </th>
+      <th align="center">Expected response </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        POST
+      </td>
+      <td>
+        Staff or Superuser
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/skus
+      <br><br>
+<pre lang="javascript">
+{
+    "name": string,
+    "description": string,
+    "business_id" : number
+}
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": {sku_guid: uuid}
+    "error": Error Reason
+}
+</pre>
+      </td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>General User</td>
+        <td>
+        <b>Endpoint : </b> api/v1_0/skus
+        <br><br>
+<pre lang="javascript">
+</pre>
+        </td>
+        <td>
+<pre lang="javascript">
+{
+    "success": type: Array , Object : [
+  {
+    "sku_guid": uuid,
+    "name": string,
+    "description": string,
+    "products": [
+      {
+        "product_guid": uuid,
+        "name": string,
+        "discount_info": [],
+        "reviews_info": [],
+        "description": string,
+        "price": number,
+        "product_data": [
+          {
+            "size": string,
+            "quantity": string
+          }
+        ],
+        "product_images": [],
+        "business_guid": uuid,
+        "sku_guid": uuid,
+        "created_on": datetime,
+        "updated_on": datetime
+      }
+    ],
+    "created_by": user,
+    "updated_by": user,
+    "created_on": datetime,
+    "updated_on": datetime
+  }
+  ],
+    "error": Error Message,
+}
+</pre>
+        </td>
+    </tr>
+	<tr>
+        <td>PUT</td>
+        <td>Staff or superuser</td>
+        <td>
+        <b>Endpoint : </b> api/v1_0/skus
+        <br><br>
+<pre lang="javascript">
+{
+    "name": string,
+    "description": string,
+    "sku_guid" : uuid
+}
+</pre>
+        </td>
+        <td>
+<pre lang="javascript">
+{
+    "success": "Sku Updated",
+    "error": Error Message,
+}
+</pre>
+        </td>
+    </tr>
+  </tbody>
+</table>
+<h4><a href="#addresses" name="addresses" id="addresses" class="anchor"></a>Addresses</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Method </th>
+      <th align="center">Access Right </th>
+      <th align="center">Endpoint and payload </th>
+      <th align="center">Expected response </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        POST
+      </td>
+      <td>
+        Authenticated User
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/addresses
+      <br><br>
+<pre lang="javascript">
+{
+    "city": string,
+    "country": string,
+    "state": string,
+    "pincode": string,
+    "street1": string,
+    "street2": string
+}
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": "Address Created"
+    "error": list of coupon codes
+}
+</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h4><a href="#coupons" name="coupons" id="coupons" class="anchor"></a>Coupons</h4>
 <table>
   <thead>
