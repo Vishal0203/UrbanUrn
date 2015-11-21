@@ -351,3 +351,166 @@
     </tr>
   </tbody>
 </table>
+<h4><a href="#carts" name="carts" id="carts" class="anchor"></a>Carts</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Method </th>
+      <th align="center">Access Right </th>
+      <th align="center">Endpoint and payload </th>
+      <th align="center">Expected response </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        POST
+      </td>
+      <td>
+        General User
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/carts
+      <br><br>
+<pre lang="javascript">
+{
+    "product_guid":uuid,
+    "product_data": string
+}
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": {cart_item_guid: uuid}
+    "error": Error Reason
+}
+</pre>
+      </td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>Business or Superuser</td>
+        <td>
+        <b>Endpoint : </b> api/v1_0/discounts?product_guid=guid
+        <br><br>
+<pre lang="javascript">
+</pre>
+        </td>
+        <td>
+<pre lang="javascript">
+{
+    "success": type: Array , Object : [
+  {
+    "cart_item_guid": uuid,
+    "product_info": [
+      {
+        "product_guid": uuid,
+        "name": string,
+        "discount_info": [
+          {
+            "discount_guid": uuid,
+            "description": string,
+            "discount_value": number,
+            "start_time": datetime,
+            "end_time": datetime,
+            "product_quantity": number,
+            "is_percentage": boolean,
+            "created_on": datetime,
+            "updated_on": datetime
+          }
+        ],
+        "reviews_info": [
+          {
+            "review_guid": uuid,
+            "rating": string,
+            "review_detail": string,
+            "user_id": number,
+            "business_id": number,
+            "created_on": datetime,
+            "updated_on": datetime
+          }
+        ],
+        "description": string,
+        "price": number,
+        "product_data": {
+          "quantity": "number"
+        },
+        "product_images": [],
+        "business_guid": uuid,
+        "sku_guid": uuid,
+        "created_on": datetime,
+        "updated_on": datetime
+      }
+  ],
+    "error": Error Message,
+}
+</pre>
+        </td>
+    </tr>
+	<tr>
+        <td>PUT</td>
+        <td>Any General user</td>
+        <td>
+        <b>Endpoint : </b> api/v1_0/carts
+        <br><br>
+<pre lang="javascript">
+{
+    "cart_item_guid": uuid,
+	"product_data": string
+}
+</pre>
+        </td>
+        <td>
+<pre lang="javascript">
+{
+    "success": "Cart product Updated",
+    "error": Error Message,
+}
+</pre>
+        </td>
+    </tr>
+  </tbody>
+</table>
+<h4><a href="#productsearh" name="productsearh" id="productsearh" class="anchor"></a>Search</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Method </th>
+      <th align="center">Access Right </th>
+      <th align="center">Endpoint and payload </th>
+      <th align="center">Expected response </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        POST
+      </td>
+      <td>
+        General User
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/product/search?filter=filterstring
+      <br><br>
+<pre lang="javascript">
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": type: Array, Object: [
+  {
+    "product_guid": uuid,
+    "description": string,
+    "name": string",
+    "sku_guid": uuid
+  }
+  ]
+    "error": Error Reason
+}
+</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
