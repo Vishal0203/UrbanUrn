@@ -23,7 +23,7 @@ review_schema_put = {
         "rating": {
             "type": "number"
         },
-        "review_detail": {
+        "review_comment": {
             "type": "string"
         }
     },
