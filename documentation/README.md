@@ -52,7 +52,7 @@
   <tbody>
     <tr>
       <td>
-        Get
+        GET
       </td>
       <td>
         General User
@@ -223,6 +223,120 @@
 {
     "success": "Address Created"
     "error": list of coupon codes
+}
+</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h4><a href="#business" name="business" id="business" class="anchor"></a>Business</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Method </th>
+      <th align="center">Access Right </th>
+      <th align="center">Endpoint and payload </th>
+      <th align="center">Expected response </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        POST
+      </td>
+      <td>
+        Businees or Superuser
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/businesses
+      <br><br>
+<pre lang="javascript">
+{
+	"name":string,
+	"category":string,
+	"description":string,
+	"addresses": [
+			{
+			"city": string,
+			"country": string,
+			"state": string,
+			"pincode": string,
+			"street1": string,
+			"street2": string
+		}
+    ]
+}
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": "Business created"
+    "error": Error Message
+}
+</pre>
+      </td>
+    </tr>
+	<tr>
+      <td>
+        GET
+      </td>
+      <td>
+        Businees or Superuser
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/businesses
+      <br><br>
+<pre lang="javascript">
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": Type: Array, Object : [
+  {
+    "business_guid": uuid,
+    "name": string,
+    "category": string,
+    "description": string,
+    "business_image": string,
+    "users": [
+      {
+        "user_guid": uuid,
+        "username": string,
+        "role": string,
+        "first_name": string,
+        "last_name": string,
+        "email": string,
+        "phone": string,
+        "status": string,
+        "created_on": datetime,
+        "updated_on": datetime
+      }
+    ],
+    "addresses": [
+      {
+        "address_guid": uuid,
+        "is_default": boolean,
+        "street_1": string,
+        "street_2": string,
+        "city": string,
+        "state": string,
+        "country": string,
+        "pincode": string,
+        "latitude": decimal,
+        "longitude": decimal,
+        "created_on": datetime,
+        "updated_on": datetime
+      }
+    ],
+    "created_by": user,
+    "updated_by": user,
+    "created_on": datetime,
+    "updated_on": datetime
+  }
+  ]
+    "error": Error Message
 }
 </pre>
       </td>
