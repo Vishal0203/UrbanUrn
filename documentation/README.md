@@ -455,7 +455,6 @@
     "final_cost": number,
     "address_info": [
       {
-
         "address_guid": uuid,
         "is_default": boolean,
         "street_1": string,
@@ -479,6 +478,105 @@
     </tr>
   </tbody>
 </table>
+
+
+<h4><a href="#products" name="products" id="products" class="anchor"></a>Products</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Method </th>
+      <th align="center">Access Right </th>
+      <th align="center">Endpoint and payload </th>
+      <th align="center">Expected response </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        POST  
+      </td>
+      <td>
+        Superuser, Staff and Business user 
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/products
+      <br><br>
+      <b>NOTE:: </b> Use form data here
+      <br><br>
+<pre lang="javascript">
+{
+    "product_json": { 
+        "name": "String",
+        "description": "String",     
+        "sku_guid": "uuid",     
+        "price": number,     
+        "business_guid": "uuid",     
+        "product_data": "json" 
+    }
+    
+    "product_images": SELECTED_FILES
+}
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+Product added
+</pre>        
+      </td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>Superuser, Staff and business user</td>
+        <td>
+        <b>Endpoint : </b> api/v1_0/products
+        <br><br>
+        <b>NOTE:: </b> Use form data here
+        <br><br>
+<pre lang="javascript">
+"_method": PUT
+
+"product_json": { 
+        "name": "String",
+        "description": "String",     
+        "sku_guid": "uuid",     
+        "price": number,     
+        "business_guid": "uuid",     
+        "product_data": "json" 
+    }
+    
+"new_images": SELECTED_IMAGES
+
+"deleted_images": ['image guid strings']
+</pre>
+        </td>
+        <td>
+<pre lang="javascript">
+HTTP: 202
+Product updated
+</pre>
+        </td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>General User</td>
+        <td>
+        <b>Endpoint : </b> api/v1_0/products
+        <br><br>
+<pre lang="javascript">
+with or without URL param
+with: "product_guid"
+</pre>
+        </td>
+        <td>
+<pre lang="javascript">
+
+</pre>
+        </td>
+    </tr>
+  </tbody>
+</table>
+
+
 <h4><a href="#coupons" name="coupons" id="coupons" class="anchor"></a>Coupons</h4>
 <table>
   <thead>
