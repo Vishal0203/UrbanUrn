@@ -569,7 +569,26 @@ with: "product_guid"
         </td>
         <td>
 <pre lang="javascript">
-
+{
+    "product_guid": "uuid",
+    "name": "string",
+    "discount_info": [],
+    "reviews_info": [],
+    "description": "string",
+    "price": number,
+    "product_data": [
+      {
+        "quantity": "string",
+        "size": "string"
+      }
+    ],
+    "product_images": [],
+    "business_guid": "uuid",
+    "sku_guid": "uuid",
+    "is_fragile": boolean,
+    "created_on": "timestamp",
+    "updated_on": "timestamp"
+},
 </pre>
         </td>
     </tr>
