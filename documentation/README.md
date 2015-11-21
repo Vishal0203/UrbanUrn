@@ -343,6 +343,142 @@
     </tr>
   </tbody>
 </table>
+<h4><a href="#orders" name="orders" id="orders" class="anchor"></a>Orders</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Method </th>
+      <th align="center">Access Right </th>
+      <th align="center">Endpoint and payload </th>
+      <th align="center">Expected response </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        POST
+      </td>
+      <td>
+        Any Authenticated User
+      </td>
+      <td>
+      <b>Endpoint : </b> api/v1_0/orders
+      <br><br>
+<pre lang="javascript">
+{
+    "products": [
+            {
+                "cart_item_guid": string,
+                "total_cost": number
+            }
+        ],
+    "final_cost": number,
+    "address_guid": uuid
+}
+</pre>
+      </td>
+      <td>
+<pre lang="javascript">
+{
+    "success": {"status": "confirmed"}
+    "error": Error Message
+}
+</pre>
+      </td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>General User</td>
+        <td>
+        <b>Endpoint : </b> api/v1_0/orders
+        <br><br>
+<pre lang="javascript">
+</pre>
+        </td>
+        <td>
+<pre lang="javascript">
+[
+  {
+    "order_guid": string,
+    "order_info": [
+      {
+        "delivery_party_name": string,
+        "delivery_tracking_number": string,
+        "total_cost": number,
+        "product_info": [
+          {
+            "product_guid": uuid,
+            "name": string,
+            "discount_info": [
+              {
+                "discount_guid": uuid,
+				"description": string,
+				"discount_value": number,
+				"start_time": datetime,
+				"end_time": datetime,
+				"product_quantity": number,
+				"is_percentage": boolean,
+				"created_on": datetime,
+				"updated_on": datetime
+              }
+            ],
+            "reviews_info": [
+              {
+                "review_guid": uuid,
+				"rating": string,
+				"review_detail": string,
+				"user_id": number,
+				"business_id": number,
+				"created_on": datetime,
+				"updated_on": datetime
+              }
+            ],
+            "description": string,
+            "price": number,
+            "product_data": {
+              "quantity": number
+            },
+            "product_images": [],
+            "business_guid": string,
+            "sku_guid": string,
+            "is_fragile": boolean,
+            "created_on": datetime,
+            "updated_on": datetime
+          }
+        ],
+        "status": confirmed ,
+        "product_data": string,
+        "created_on": datetime,
+        "updated_on": datetime
+      }
+    ],
+    "final_cost": number,
+    "address_info": [
+      {
+
+        "address_guid": uuid,
+        "is_default": boolean,
+        "street_1": string,
+        "street_2": string,
+        "city": string,
+        "state": string,
+        "country": string,
+        "pincode": string,
+        "latitude": decimal,
+        "longitude": decimal,
+        "created_on": datetime,
+        "updated_on": datetime
+      }
+    ],
+    "created_on": datetime,
+    "updated_on": datetime
+  }
+]
+</pre>
+        </td>
+    </tr>
+  </tbody>
+</table>
 <h4><a href="#coupons" name="coupons" id="coupons" class="anchor"></a>Coupons</h4>
 <table>
   <thead>
