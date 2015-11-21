@@ -107,11 +107,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = "/var/www/UrbanUrn/static/"
+STATIC_ROOT = "/var/www/UrbanUrn/Urn/static/"
 
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = "/var/www/UrbanUrn/media/"
+MEDIA_ROOT = "/var/www/UrbanUrn/Urn/media/"
 
 AUTH_PROFILE_MODULE = 'Urn.Users'
 

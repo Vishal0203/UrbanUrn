@@ -18,6 +18,9 @@ schema = {
         },
         "business_guid": {
             "type": "string"
+        },
+        "is_fragile": {
+            "type": "boolean"
         }
     },
     "required": ["name", "description", "sku_guid", "price", "product_data", "business_guid"]

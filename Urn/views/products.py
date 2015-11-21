@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFou
 
 from Urn.common.formatters import format_skus, format_products
 from Urn.models import Sku, Products, Businesses, ProductImages, BusinessUsers
-from Urn.schema_validators.products_validation import put_schema
+from Urn.schema_validators.products_validation import put_schema, schema as post_schema
 from Urn.schema_validators.sku_validation import schema
 from Urn.common.utils import build_json, convert_uuid_string
 from Urn.decorators.validators import jwt_validate, check_authenticity, validate_schema, check_business_or_super, \
@@ -88,16 +88,17 @@ def process_products_request(request):
 
 @jwt_validate
 @check_business_or_super
-@validate_post_request_schema(schema)
+@validate_post_request_schema(post_schema)
 def process_products_post(request):
     request_data = json.loads(request.POST['product_json'])
     files = request.FILES.getlist("product_images")
     business_info = Businesses.objects.get(business_guid=request_data["business_guid"])
     sku_info = Sku.objects.get(sku_guid=request_data["sku_guid"])
+    is_fragile = True if request_data.get("is_fragile", None) is not None else False
     product = Products.objects.create(name=request_data["name"], description=request_data["description"],
                                       price=request_data["price"], product_data=request_data["product_data"],
                                       business_id=business_info.business_id, sku_id=sku_info.sku_id,
-                                      created_by=request.user.user_profile)
+                                      created_by=request.user.user_profile, is_fragile=is_fragile)
     for file in files:
         ProductImages.objects.create(product_id=product.product_id, image=file)
 

@@ -273,6 +273,7 @@ class Products(models.Model):
                                    related_name='products_updated_by')
     created_on = models.DateTimeField(blank=True, null=True)
     updated_on = models.DateTimeField(blank=True, null=True)
+    is_fragile = models.BooleanField(default=False)
 
     class Meta:
         managed = False

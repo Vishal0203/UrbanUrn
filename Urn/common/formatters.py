@@ -80,7 +80,7 @@ def format_user(user):
     user_data['wishlist'] = format_wishlist_get(users_wishlist)
     users_cart = user.user_profile.cartitems_set.all()
     user_data['cart'] = format_carts(users_cart)
-    #TODO Orders
+    # TODO Orders
 
     user_data['push_notification'] = user.user_profile.push_notification
     user_data['email_notification'] = user.user_profile.email_notification
@@ -172,6 +172,7 @@ def format_products(products, json=True):
                                                                False) if len(product_images) > 0 else []
         product_data['business_guid'] = utils.convert_uuid_string(product.business.business_guid)
         product_data['sku_guid'] = utils.convert_uuid_string(product.sku.sku_guid)
+        product_data['is_fragile'] = product.is_fragile
         product_data['created_on'] = utils.format_timestamp(product.created_on)
         product_data['updated_on'] = utils.format_timestamp(
             product.updated_on) if product.updated_on is not None else None
