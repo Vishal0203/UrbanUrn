@@ -55,8 +55,9 @@ def process_orders_post(request):
         item_in_cart = CartItems.objects.filter(cart_item_guid=each_product["cart_item_guid"],
                                                 user_id=user_info.user_profile)
         if item_in_cart.exists():
-            discount_id = item_in_cart.get().product.discounts_set.filter(
+            discount = item_in_cart.get().product.discounts_set.filter(
                 product_id=item_in_cart.get().product_id)
+            discount_id = discount.get().discount_id
             order_detail = OrderDetails.objects.create(order_id=order.order_id,
                                                        product_id=item_in_cart.get().product_id,
                                                        discount_id=discount_id if discount_id else None,
