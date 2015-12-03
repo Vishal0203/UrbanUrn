@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from Urn.views import authentication, users, businesses, products, fulltextsearch, addresses, carts, reviews, wishlist
-from Urn.views import coupons, discounts, orders
+from Urn.views import coupons, discounts, orders, pages
 
 urlpatterns = [
+    url(r'^$', pages.index),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/v1_0/login', authentication.validate_input_and_authenticate),
     url(r'^api/v1_0/logout', authentication.logout_and_clear_session),

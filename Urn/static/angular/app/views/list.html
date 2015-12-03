@@ -5,24 +5,25 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+{% load staticfiles %}
 <!-- Favicons Icon -->
-<link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
-<title>Classic premium HTML5 &amp; CSS3 template</title>
+<link rel="icon" src="{% static 'angular/assets/images/favicon.ico' %}" type="image/x-icon" />
+<link rel="shortcut icon" src="{% static 'angular/assets/images/favicon.ico' %}" type="image/x-icon" />
+<title>Urban Urn</title>
 
 <!-- Mobile Specific -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- CSS Style -->
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/animate.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/revslider.css" >
-<link rel="stylesheet" type="text/css" href="../../css/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="../../css/owl.theme.css">
-<link rel="stylesheet" type="text/css" href="../../css/jquery.mobile-menu.css">
-<link rel="stylesheet" type="text/css" href="../../css/jquery.bxslider.css">
-<link rel="stylesheet" type="text/css" href="../../css/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/font-awesome.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/animate.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/revslider.css' %}" >
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/owl.theme.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/jquery.mobile-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/jquery.bxslider.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/style.css' %}" media="all">
 <!-- Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,700,900' rel='stylesheet' type='text/css'>
@@ -86,7 +87,7 @@
           <div class="row">
             <div class="col-lg-2 col-sm-3 col-xs-12 col-md-2"> 
               <!-- Header Logo -->
-              <div class="logo"><a title="Magento Commerce" href="index.html"><img alt="Magento Commerce" src="../../assets/images/logo.png"></a></div>
+              <div class="logo"><a title="Magento Commerce" href="index.html"><img alt="Magento Commerce" src="{% static 'angular/assets/images/logo.png' %}"></a></div>
               <!-- End Header Logo --> 
             </div>
             <!-- Navbar -->
@@ -188,8 +189,8 @@
                         </div>
                         <!--nav-block nav-block-center-->
                         <div class="col-2">
-                          <div class="menu_image"><a href="#" title=""><img src="../../assets/images/menu_image.jpg" alt="menu_image"></a></div>
-                          <div class="menu_image1"><a href="#" title=""><img src="../../assets/images/menu_image.jpg" alt="menu_image"></a></div>
+                          <div class="menu_image"><a href="#" title=""><img src="{% static 'angular/assets/images/menu_image.jpg' %}" alt="menu_image"></a></div>
+                          <div class="menu_image1"><a href="#" title=""><img src="{% static 'angular/assets/images/menu_image.jpg' %}" alt="menu_image"></a></div>
                         </div>
                       </div>
                       <!--level0-wrapper2--> </div>
@@ -254,16 +255,16 @@
                         <!--level0-wrapper2-->
                         <div class="nav-add">
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="sunglass" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="sunglass" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="watch" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="watch" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="jeans" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="jeans" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item push_item_last">
-                            <div class="push_img"><a href="#"><img alt="shoes" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="shoes" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                         </div>
                       </div>
@@ -330,16 +331,16 @@
                       <!--level0-wrapper2-->
                       <div class="nav-add">
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="phone" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="phone" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="camera" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="camera" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="ipod" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="ipod" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item push_item_last">
-                          <div class="push_img"><a href="#"><img alt="laptop" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="laptop" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                       </div>
                     </div>
@@ -386,7 +387,7 @@
                           </ul>
                         </div>
                         <!--nav-block nav-block-center-->
-                        <div class="nav-block nav-block-right std grid12-4"><a href="#"><img src="../../assets/images/menu_furniture_2.png" alt="furniture"></a> </div>
+                        <div class="nav-block nav-block-right std grid12-4"><a href="#"><img src="{% static 'angular/assets/images/menu_furniture_2.png' %}" alt="furniture"></a> </div>
                         <!--nav-block nav-block-right std grid12-4--> </div>
                     </div>
                     <!--level0-wrapper2--> 
@@ -397,22 +398,22 @@
                     <div class="container">
                       <div class="header-nav-dropdown-wrapper clearer">
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img1.jpg" alt="custom img1"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img1.jpg' %}" alt="custom img1"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img2.jpg" alt="custom img2"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img2.jpg' %}" alt="custom img2"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img3.jpg" alt="custom img3"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img3.jpg' %}" alt="custom img3"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img4.jpg" alt="custom img4"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img4.jpg' %}" alt="custom img4"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
@@ -439,7 +440,7 @@
                         <!--block-subtitle-->
                         <ul class="mini-products-list" id="cart-sidebar">
                           <li class="item first">
-                            <div class="item-inner"><a href="product_detail.html" class="product-image" title="Sample Product"><img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                            <div class="item-inner"><a href="product_detail.html" class="product-image" title="Sample Product"><img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                               <div class="product-details">
                                 <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                 <!--access--> <strong>1</strong> x <span class="price">$179.99</span>
@@ -448,7 +449,7 @@
                             </div>
                           </li>
                           <li class="item last">
-                            <div class="item-inner"><a class="product-image" title="Sample Product" href="product_detail.html"><img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                            <div class="item-inner"><a class="product-image" title="Sample Product" href="product_detail.html"><img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                               <div class="product-details">
                                 <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                 <!--access--> <strong>1</strong> x <span class="price">$80.00</span>
@@ -476,9 +477,9 @@
                 <div class="lang-curr">
                   <div class="form-language">
                     <ul class="lang">
-                      <li class=""><a href="" title="English"><img src="../../assets/images/english.png" alt="English" /> <span>English</span></a></li>
-                      <li class=""><a href="" title="Francais"><img src="../../assets/images/francais.png" alt="Francais" /> <span>francais</span></a></li>
-                      <li class=""><a href="" title="German"><img src="../../assets/images/german.png" alt="German" /> <span>german</span></a></li>
+                      <li class=""><a href="" title="English"><img src="{% static 'angular/assets/images/english.png' %}" alt="English" /> <span>English</span></a></li>
+                      <li class=""><a href="" title="Francais"><img src="{% static 'angular/assets/images/francais.png' %}" alt="Francais" /> <span>francais</span></a></li>
+                      <li class=""><a href="" title="German"><img src="{% static 'angular/assets/images/german.png' %}" alt="German" /> <span>german</span></a></li>
                     </ul>
                   </div>
                   <div class="form-currency">
@@ -530,7 +531,7 @@
             <div class="page-header">
               <h2>Tops & Tees</h2>
             </div>
-            <div class="category-image"><img title="Sofas " alt="Sofas " src="../../assets/images/women_banner.png"> </div>
+            <div class="category-image"><img title="Sofas " alt="Sofas " src="{% static 'angular/assets/images/women_banner.png' %}"> </div>
             <div class="toolbar">
               <div class="sorter">
                 <div class="view-mode"> <a href="grid.html" title="Grid" class="button button-grid">&nbsp;</a>&nbsp; <span title="List" class="button button-active button-list">&nbsp;</span>&nbsp; </div>
@@ -577,7 +578,7 @@
             <div class="category-products">
               <ol class="products-list" id="products-list">
                 <li class="item first">
-                  <div class="product-image"> <a href="product_detail.html" title="Sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="Sample Product"> </a> </div>
+                  <div class="product-image"> <a href="product_detail.html" title="Sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="product_detail.html" title="Sample Product">Sample Product</a></h2>
                     <div class="ratings">
@@ -603,7 +604,7 @@
                   </div>
                 </li>
                 <li class="item even">
-                  <div class="product-image"> <a href="product_detail.html" title="Sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="Sample Product"> </a> </div>
+                  <div class="product-image"> <a href="product_detail.html" title="Sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="product_detail.html" title="Sample Product">Sample Product</a></h2>
                     <div class="desc std">
@@ -620,7 +621,7 @@
                   </div>
                 </li>
                 <li class="item odd">
-                  <div class="product-image"> <a href="#/30-flat-panel-tft-lcd-cinema-hd-monitor.html" title="sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="sample Product"> </a> </div>
+                  <div class="product-image"> <a href="#/30-flat-panel-tft-lcd-cinema-hd-monitor.html" title="sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="#/30-flat-panel-tft-lcd-cinema-hd-monitor.html" title="sample Product">Sample Product</a></h2>
                     <div class="desc std">Computer games, digital photo 
@@ -637,7 +638,7 @@
                   </div>
                 </li>
                 <li class="item even">
-                  <div class="product-image"> <a href="#/19-widescreen-flat-panel-lcd-monitor.html" title="sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="sample Product"> </a> </div>
+                  <div class="product-image"> <a href="#/19-widescreen-flat-panel-lcd-monitor.html" title="sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="#/19-widescreen-flat-panel-lcd-monitor.html" title="sample Product">Sample Product</a></h2>
                     <div class="desc std">2 ms response time; 10,000:1 contrast ratio; 300 cd/m² brightness; 1440 x 900 maximum resolution; DVI-D and 15-pin D-sub inputs
@@ -651,7 +652,7 @@
                   </div>
                 </li>
                 <li class="item odd">
-                  <div class="product-image"> <a href="#/250gb-5400rpm.html" title="Sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="Sample Product"> </a> </div>
+                  <div class="product-image"> <a href="#/250gb-5400rpm.html" title="Sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="#/250gb-5400rpm.html" title="Sample Product">Sample Product</a></h2>
                     <div class="desc std">1 TB - 7200RPM, SATA 3.0Gb/s, 32MB Cache
@@ -667,7 +668,7 @@
                   </div>
                 </li>
                 <li class="item even">
-                  <div class="product-image"> <a href="#/500gb-5400rpm.html" title="Sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="Sample Product"> </a> </div>
+                  <div class="product-image"> <a href="#/500gb-5400rpm.html" title="Sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="#/500gb-5400rpm.html" title="Sample Product">Sample Product</a></h2>
                     <div class="desc std">1 TB - 7200RPM, SATA 3.0Gb/s, 32MB Cache
@@ -684,7 +685,7 @@
                   </div>
                 </li>
                 <li class="item odd">
-                  <div class="product-image"> <a href="product_detail.html" title="Sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="Sample Product"> </a> </div>
+                  <div class="product-image"> <a href="product_detail.html" title="Sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="product_detail.html" title="Sample Product">Sample Product</a></h2>
                     <div class="desc std">Sample Product 
@@ -701,7 +702,7 @@
                   </div>
                 </li>
                 <li class="item even">
-                  <div class="product-image"> <a href="#/24-widescreen-flat-panel-lcd-monitor.html" title="24&quot; Widescreen LCD Monitor"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="24&quot; Widescreen LCD Monitor"> </a> </div>
+                  <div class="product-image"> <a href="#/24-widescreen-flat-panel-lcd-monitor.html" title="24&quot; Widescreen LCD Monitor"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="24&quot; Widescreen LCD Monitor"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="#/24-widescreen-flat-panel-lcd-monitor.html" title="24&quot; Widescreen LCD Monitor">Sample Product</a></h2>
                     <div class="desc std">5 ms response time; 10,000:1 contrast ratio; 400 cd/m² brightness; 1920 x 1200 maximum resolution; DVI-D and 15-pin D-sub inputs
@@ -716,7 +717,7 @@
                   </div>
                 </li>
                 <li class="item odd">
-                  <div class="product-image"> <a href="#/microsoft-wireless-optical-mouse-5004.html" title="Sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="Sample Product"> </a> </div>
+                  <div class="product-image"> <a href="#/microsoft-wireless-optical-mouse-5004.html" title="Sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="#/microsoft-wireless-optical-mouse-5004.html" title="Sample Product">Sample Product</a></h2>
                     <div class="desc std">Our most advanced trackball yet. 
@@ -734,7 +735,7 @@
                   </div>
                 </li>
                 <li class="item last even">
-                  <div class="product-image"> <a href="#/logitech-dinovo-edge-keyboard.html" title="Sample Product"> <img class="small-image" src="../../assets/images/sample_product.jpg" alt="Sample Product"> </a> </div>
+                  <div class="product-image"> <a href="#/logitech-dinovo-edge-keyboard.html" title="Sample Product"> <img class="small-image" src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"> </a> </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="#/logitech-dinovo-edge-keyboard.html" title="Sample Product">Sample Product</a></h2>
                     <div class="ratings">
@@ -1028,7 +1029,7 @@
                 </dl>
               </div>
             </div>
-            <div class="block block-banner"><a href="#"><img alt="block-banner" src="../../assets/images/RHS-banner-img.jpg"></a></div>
+            <div class="block block-banner"><a href="#"><img alt="block-banner" src="{% static 'angular/assets/images/RHS-banner-img.jpg' %}"></a></div>
             <div class="block block-cart">
               <div class="block-title ">My Cart</div>
               <div class="block-content">
@@ -1041,13 +1042,13 @@
                 </div>
                 <p class="block-subtitle">Recently added item(s) </p>
                 <ul>
-                  <li class="item"> <a href="product_detail.html" title="Sample Product" class="product-image"><img src="../../assets/images/sample_product.jpg" alt="Sample Product"></a>
+                  <li class="item"> <a href="product_detail.html" title="Sample Product" class="product-image"><img src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"></a>
                     <div class="product-details">
                       <div class="access"> <a href="#" title="Remove This Item" class="btn-remove1"> <span class="icon"></span> Remove </a> </div>
                       <p class="product-name"> <a href="product_detail.html">Sample Product</a> </p>
                       <strong>1</strong> x <span class="price">$19.99</span> </div>
                   </li>
-                  <li class="item last"> <a href="product_detail.html" title="Sample Product" class="product-image"><img src="../../assets/images/sample_product.jpg" alt="Sample Product"></a>
+                  <li class="item last"> <a href="product_detail.html" title="Sample Product" class="product-image"><img src="{% static 'angular/assets/images/sample_product.jpg' %}" alt="Sample Product"></a>
                     <div class="product-details">
                       <div class="access"> <a href="#" title="Remove This Item" class="btn-remove1"> <span class="icon"></span> Remove </a> </div>
                       <p class="product-name"> <a href="product_detail.html"> Sample Product </a> </p>
@@ -1072,7 +1073,7 @@
             <div class="item">
               <div class="item-inner">
                 <div class="item-img">
-                  <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                  <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                     <div class="item-box-hover">
                       <div class="box-inner">                                        
                                         <div class="actions">
@@ -1114,7 +1115,7 @@
             <div class="item">
               <div class="item-inner">
                 <div class="item-img">
-                  <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                  <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                     <div class="item-box-hover">
                       <div class="box-inner">                                        
                                         <div class="actions">
@@ -1155,7 +1156,7 @@
             <div class="item">
               <div class="item-inner">
                 <div class="item-img">
-                  <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"> </a>
+                  <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"> </a>
                     <div class="new-label new-top-left">new</div>
                     <div class="item-box-hover">
                       <div class="box-inner">                                        
@@ -1328,35 +1329,35 @@
           <div class="slider-items slider-width-col6"> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
           </div>
@@ -1445,7 +1446,7 @@
     <div class="footer-middle">
       <div class="container">
         <div class="row">
-          <div style="text-align:center"><a href="index.html"><img alt="footerlogo" src="../../assets/images/footer-logo.png"></a></div>
+          <div style="text-align:center"><a href="index.html"><img alt="footerlogo" src="{% static 'angular/assets/images/footer-logo.png' %}"></a></div>
           <address>
           <i class="icon-location-arrow"></i> 123 Main Street, Anytown, CA 12345  USA <i class="icon-mobile-phone"></i><span> +(408) 394-7557</span> <i class="icon-envelope"></i><span>  support@magikcommerce.com</span>
           </address>
@@ -1713,14 +1714,14 @@
 
 <!-- End Footer --> 
 <!-- JavaScript --> 
-<script type="text/javascript" src="../../assets/js/jquery.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/parallax.js"></script> 
-<script type="text/javascript" src="../../assets/js/revslider.js"></script> 
-<script type="text/javascript" src="../../assets/js/common.js"></script> 
-<script type="text/javascript" src="../../assets/js/owl.carousel.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/jquery.mobile-menu.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/jquery.bxslider.min.js"></script> 
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/parallax.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/revslider.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/owl.carousel.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.mobile-menu.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.bxslider.min.js' %}"></script>
 <script type='text/javascript'>
 jQuery(document).ready(function(){
 jQuery('#rev_slider_4').show().revolution({

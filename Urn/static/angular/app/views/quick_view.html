@@ -9,26 +9,27 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+{% load staticfiles %}
 <!-- Favicons Icon -->
-<link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
-<title>Classic premium HTML5 &amp; CSS3 template</title>
+<link rel="icon" src="{% static 'angular/assets/images/favicon.ico' %}" type="image/x-icon" />
+<link rel="shortcut icon" src="{% static 'angular/assets/images/favicon.ico' %}" type="image/x-icon" />
+<title>Urban Urn</title>
 
 <!-- Mobile Specific -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- CSS Style -->
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/animate.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/revslider.css" >
-<link rel="stylesheet" type="text/css" href="../../css/fancybox.css" >
-<link rel="stylesheet" type="text/css" href="../../css/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="../../css/owl.theme.css">
-<link rel="stylesheet" href="../../css/flexslider.css" type="text/css">
-<link rel="stylesheet" type="text/css" href="../../css/jquery.mobile-menu.css">
-<link rel="stylesheet" type="text/css" href="../../css/jquery.bxslider.css">
-<link rel="stylesheet" type="text/css" href="../../css/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/font-awesome.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/animate.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/revslider.css' %}" >
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/fancybox.css' %}" >
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/owl.theme.css' %}">
+<link rel="stylesheet" href="{% static 'angular/css/flexslider.css' %}" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/jquery.mobile-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/jquery.bxslider.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/style.css' %}" media="all">
 <!-- Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,700,900' rel='stylesheet' type='text/css'>
@@ -47,14 +48,14 @@
               <div class="product-img-box col-sm-5 col-xs-12 bounceInRight animated">
                 <div class="new-label new-top-left"> New </div>
                 <div class="product-image">
-                  <div class="large-image"> <a href="../../assets/images/sample_product.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="../../assets/images/sample_product.jpg" alt = "Thumbnail"/> </a> </div>
+                  <div class="large-image"> <a href="{% static 'angular/assets/images/sample_product.jpg' %}" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="{% static 'angular/assets/images/sample_product.jpg' %}" alt = "Thumbnail"/> </a> </div>
                   <div class="flexslider flexslider-thumb">
                     <ul class="previews-list slides">
-                      <li><a href='../../assets/images/sample_product.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '../../assets/images/sample_product.jpg' "><img src="../../assets/images/sample_product.jpg" alt = "Thumbnail 1"/></a></li>
-                      <li><a href='../../assets/images/sample_product.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '../../assets/images/sample_product.jpg' "><img src="../../assets/images/sample_product.jpg" alt = "Thumbnail 2"/></a></li>
-                      <li><a href='../../assets/images/sample_product.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '../../assets/images/sample_product.jpg' "><img src="../../assets/images/sample_product.jpg" alt = "Thumbnail 1"/></a></li>
-                      <li><a href='../../assets/images/sample_product.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '../../assets/images/sample_product.jpg' "><img src="../../assets/images/sample_product.jpg" alt = "Thumbnail 2"/></a></li>
-                      <li><a href='../../assets/images/sample_product.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '../../assets/images/sample_product.jpg' "><img src="../../assets/images/sample_product.jpg" alt = "Thumbnail 2"/></a></li>
+                      <li><a href='{% static 'angular/assets/images/sample_product.jpg' %}' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{% static 'angular/assets/images/sample_product.jpg' %}' "><img src="{% static 'angular/assets/images/sample_product.jpg' %}" alt = "Thumbnail 1"/></a></li>
+                      <li><a href='{% static 'angular/assets/images/sample_product.jpg' %}' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{% static 'angular/assets/images/sample_product.jpg' %}' "><img src="{% static 'angular/assets/images/sample_product.jpg' %}" alt = "Thumbnail 2"/></a></li>
+                      <li><a href='{% static 'angular/assets/images/sample_product.jpg' %}' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{% static 'angular/assets/images/sample_product.jpg' %}' "><img src="{% static 'angular/assets/images/sample_product.jpg' %}" alt = "Thumbnail 1"/></a></li>
+                      <li><a href='{% static 'angular/assets/images/sample_product.jpg' %}' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{% static 'angular/assets/images/sample_product.jpg' %}' "><img src="{% static 'angular/assets/images/sample_product.jpg' %}" alt = "Thumbnail 2"/></a></li>
+                      <li><a href='{% static 'angular/assets/images/sample_product.jpg' %}' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{% static 'angular/assets/images/sample_product.jpg' %}' "><img src="{% static 'angular/assets/images/sample_product.jpg' %}" alt = "Thumbnail 2"/></a></li>
                     </ul>
                   </div>
                 </div>
@@ -118,13 +119,13 @@
 </div>
 
 <!-- JavaScript --> 
-<script type="text/javascript" src="../../assets/js/jquery.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/parallax.js"></script> 
-<script type="text/javascript" src="../../assets/js/common.js"></script> 
-<script type="text/javascript" src="../../assets/js/owl.carousel.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/jquery.flexslider.js"></script> 
-<script type="text/javascript" src="../../assets/js/jquery.mobile-menu.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/cloud-zoom.js"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/parallax.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/owl.carousel.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.flexslider.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.mobile-menu.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/cloud-zoom.js' %}"></script>
 </body>
 </html>

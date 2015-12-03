@@ -9,25 +9,26 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+{% load staticfiles %}
 <!-- Favicons Icon -->
-<link rel="icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="http://demo.magikthemes.com/skin/frontend/base/default/favicon.ico" type="image/x-icon" />
-<title>Classic premium HTML5 &amp; CSS3 template</title>
+<link rel="icon" src="{% static 'angular/assets/images/favicon.ico' %}" type="image/x-icon" />
+<link rel="shortcut icon" src="{% static 'angular/assets/images/favicon.ico' %}" type="image/x-icon" />
+<title>Urban Urn</title>
 
 <!-- Mobile Specific -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- CSS Style -->
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/style.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/animate.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/revslider.css" >
-<link rel="stylesheet" type="text/css" href="../../css/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="../../css/owl.theme.css">
-<link rel="stylesheet" href="../../css/flexslider.css" type="text/css">
-<link rel="stylesheet" type="text/css" href="../../css/jquery.mobile-menu.css">
-<link rel="stylesheet" type="text/css" href="../../css/blogmate.css">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/font-awesome.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/style.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/animate.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/revslider.css' %}" >
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/owl.theme.css' %}">
+<link rel="stylesheet" href="{% static 'angular/css/flexslider.css' %}" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/jquery.mobile-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/blogmate.css' %}">
 
 <!-- Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200italic,300,300italic,400,400italic,600,600italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -93,7 +94,7 @@
           <div class="row">
             <div class="col-lg-2 col-sm-3 col-xs-12 col-md-2"> 
               <!-- Header Logo -->
-              <div class="logo"><a title="Magento Commerce" href="index.html"><img alt="Magento Commerce" src="../../assets/images/logo.png"></a></div>
+              <div class="logo"><a title="Magento Commerce" href="index.html"><img alt="Magento Commerce" src="{% static 'angular/assets/images/logo.png' %}"></a></div>
               <!-- End Header Logo --> 
             </div>
             <!-- Navbar -->
@@ -195,8 +196,8 @@
                         </div>
                         <!--nav-block nav-block-center-->
                         <div class="col-2">
-                          <div class="menu_image"><a href="#" title=""><img src="../../assets/images/menu_image.jpg" alt="menu_image"></a></div>
-                          <div class="menu_image1"><a href="#" title=""><img src="../../assets/images/menu_image.jpg" alt="menu_image"></a></div>
+                          <div class="menu_image"><a href="#" title=""><img src="{% static 'angular/assets/images/menu_image.jpg' %}" alt="menu_image"></a></div>
+                          <div class="menu_image1"><a href="#" title=""><img src="{% static 'angular/assets/images/menu_image.jpg' %}" alt="menu_image"></a></div>
                         </div>
                       </div>
                       <!--level0-wrapper2--> </div>
@@ -261,16 +262,16 @@
                         <!--level0-wrapper2-->
                         <div class="nav-add">
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="sunglass" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="sunglass" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="watch" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="watch" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="jeans" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="jeans" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item push_item_last">
-                            <div class="push_img"><a href="#"><img alt="shoes" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="shoes" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                         </div>
                       </div>
@@ -337,16 +338,16 @@
                       <!--level0-wrapper2-->
                       <div class="nav-add">
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="phone" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="phone" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="camera" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="camera" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="ipod" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="ipod" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item push_item_last">
-                          <div class="push_img"><a href="#"><img alt="laptop" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="laptop" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                       </div>
                     </div>
@@ -394,7 +395,7 @@
                           </ul>
                         </div>
                         <!--nav-block nav-block-center-->
-                        <div class="nav-block nav-block-right std grid12-4"><a href="#"><img src="../../assets/images/menu_furniture_2.png" alt="furniture"></a> </div>
+                        <div class="nav-block nav-block-right std grid12-4"><a href="#"><img src="{% static 'angular/assets/images/menu_furniture_2.png' %}" alt="furniture"></a> </div>
                         <!--nav-block nav-block-right std grid12-4--> </div>
                     </div>
                     <!--level0-wrapper2--> 
@@ -405,22 +406,22 @@
                     <div class="container">
                       <div class="header-nav-dropdown-wrapper clearer">
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img1.jpg" alt="custom img1"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img1.jpg' %}" alt="custom img1"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img2.jpg" alt="custom img2"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img2.jpg' %}" alt="custom img2"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img3.jpg" alt="custom img3"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img3.jpg' %}" alt="custom img3"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img4.jpg" alt="custom img4"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img4.jpg' %}" alt="custom img4"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
@@ -447,7 +448,7 @@
                         <!--block-subtitle-->
                         <ul class="mini-products-list" id="cart-sidebar">
                           <li class="item first">
-                            <div class="item-inner"><a href="product_detail.html" class="product-image" title="Sample Product"><img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                            <div class="item-inner"><a href="product_detail.html" class="product-image" title="Sample Product"><img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                               <div class="product-details">
                                 <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                 <!--access--> <strong>1</strong> x <span class="price">$179.99</span>
@@ -456,7 +457,7 @@
                             </div>
                           </li>
                           <li class="item last">
-                            <div class="item-inner"><a class="product-image" title="Sample Product" href="product_detail.html"><img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                            <div class="item-inner"><a class="product-image" title="Sample Product" href="product_detail.html"><img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                               <div class="product-details">
                                 <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                 <!--access--> <strong>1</strong> x <span class="price">$80.00</span>
@@ -484,9 +485,9 @@
                 <div class="lang-curr">
                   <div class="form-language">
                     <ul class="lang">
-                      <li class=""><a href="" title="English"><img src="../../assets/images/english.png" alt="English" /> <span>English</span></a></li>
-                      <li class=""><a href="" title="Francais"><img src="../../assets/images/francais.png" alt="Francais" /> <span>francais</span></a></li>
-                      <li class=""><a href="" title="German"><img src="../../assets/images/german.png" alt="German" /> <span>german</span></a></li>
+                      <li class=""><a href="" title="English"><img src="{% static 'angular/assets/images/english.png' %}" alt="English" /> <span>English</span></a></li>
+                      <li class=""><a href="" title="Francais"><img src="{% static 'angular/assets/images/francais.png' %}" alt="Francais" /> <span>francais</span></a></li>
+                      <li class=""><a href="" title="German"><img src="{% static 'angular/assets/images/german.png' %}" alt="German" /> <span>german</span></a></li>
                     </ul>
                   </div>
                   <div class="form-currency">
@@ -536,7 +537,7 @@
                     <!--blog_entry-header-inner--> 
                   </header>
                   <div class="entry-content">
-                    <div class="featured-thumb"><a href="blog_detail.html"><img src="../../assets/images/blog-img1.jpg" alt="blog image"></a></div>
+                    <div class="featured-thumb"><a href="blog_detail.html"><img src="{% static 'angular/assets/images/blog-img1.jpg' %}" alt="blog image"></a></div>
                     <div class="entry-content">
                       <p>Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. Nullam lobortis nunc semper ipsum luctus ut viverra ante eleifend. Nunc pretium velit sed augue luctus accumsan.</p>
                       <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis. Donec non erat sed elit bibendum sodales. Donec eu cursus velit. Proin nunc lacus, gravida mollis dictum ut, vulputate eu turpis. Sed felis sapien, commodo in iaculis in, feugiat sed enim. Sed nunc ipsum, fermentum varius dignissim vitae, blandit et ante.Maecenas sagittis, lorem sed congue egestas, lectus purus congue nisl, ac molestie enim ligula nec eros. Sed leo tortor, tincidunt sit amet elementum vel, eleifend at orci. Maecenas ut turpis felis. Donec sit amet quam sem, et aliquet est.</p>
@@ -555,7 +556,7 @@
                     <!--blog_entry-header-inner--> 
                   </header>
                   <div class="entry-content">
-                    <div class="featured-thumb"><a href="blog_detail.html"><img alt="blog-img1" src="../../assets/images/blog-img1.jpg"></a></div>
+                    <div class="featured-thumb"><a href="blog_detail.html"><img alt="blog-img1" src="{% static 'angular/assets/images/blog-img1.jpg' %}"></a></div>
                     <div class="entry-content">
                       <p>Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. Nullam lobortis nunc semper ipsum luctus ut viverra ante eleifend. Nunc pretium velit sed augue luctus accumsan.</p>
                       <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis. Donec non erat sed elit bibendum sodales. Donec eu cursus velit. Proin nunc lacus, gravida mollis dictum ut, vulputate eu turpis. Sed felis sapien, commodo in iaculis in, feugiat sed enim. Sed nunc ipsum, fermentum varius dignissim vitae, blandit et ante.Maecenas sagittis, lorem sed congue egestas, lectus purus congue nisl, ac molestie enim ligula nec eros. Sed leo tortor, tincidunt sit amet elementum vel, eleifend at orci. Maecenas ut turpis felis. Donec sit amet quam sem, et aliquet est.</p>
@@ -575,7 +576,7 @@
                     <!--blog_entry-header-inner--> 
                   </header>
                   <div class="entry-content">
-                    <div class="featured-thumb"><a href="blog_detail.html"><img alt="blog-img2" src="../../assets/images/blog-img1.jpg"></a></div>
+                    <div class="featured-thumb"><a href="blog_detail.html"><img alt="blog-img2" src="{% static 'angular/assets/images/blog-img1.jpg' %}"></a></div>
                     <div class="entry-content">
                       <p>Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. Nullam lobortis nunc semper ipsum luctus ut viverra ante eleifend. Nunc pretium velit sed augue luctus accumsan.</p>
                       <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis. Donec non erat sed elit bibendum sodales. Donec eu cursus velit. Proin nunc lacus, gravida mollis dictum ut, vulputate eu turpis. Sed felis sapien, commodo in iaculis in, feugiat sed enim. Sed nunc ipsum, fermentum varius dignissim vitae, blandit et ante.Maecenas sagittis, lorem sed congue egestas, lectus purus congue nisl, ac molestie enim ligula nec eros. Sed leo tortor, tincidunt sit amet elementum vel, eleifend at orci. Maecenas ut turpis felis. Donec sit amet quam sem, et aliquet est.</p>
@@ -594,7 +595,7 @@
                     <!--blog_entry-header-inner--> 
                   </header>
                   <div class="entry-content">
-                    <div class="featured-thumb"><a href="blog_detail.html"><img alt="blog-img3" src="../../assets/images/blog-img1.jpg" ></a></div>
+                    <div class="featured-thumb"><a href="blog_detail.html"><img alt="blog-img3" src="{% static 'angular/assets/images/blog-img1.jpg' %}" ></a></div>
                     <div class="entry-content">
                       <p>Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. Nullam lobortis nunc semper ipsum luctus ut viverra ante eleifend. Nunc pretium velit sed augue luctus accumsan.</p>
                       <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis. Donec non erat sed elit bibendum sodales. Donec eu cursus velit. Proin nunc lacus, gravida mollis dictum ut, vulputate eu turpis. Sed felis sapien, commodo in iaculis in, feugiat sed enim. Sed nunc ipsum, fermentum varius dignissim vitae, blandit et ante.Maecenas sagittis, lorem sed congue egestas, lectus purus congue nisl, ac molestie enim ligula nec eros. Sed leo tortor, tincidunt sit amet elementum vel, eleifend at orci. Maecenas ut turpis felis. Donec sit amet quam sem, et aliquet est.</p>
@@ -629,7 +630,7 @@
               <div class="widget-content">
                 <ul class="posts-list unstyled clearfix">
                   <li>
-                    <figure class="featured-thumb"> <a href="blog_detail.html"> <img width="80" height="53" alt="blog image" src="../../assets/images/blog-img1.jpg"> </a> </figure>
+                    <figure class="featured-thumb"> <a href="blog_detail.html"> <img width="80" height="53" alt="blog image" src="{% static 'angular/assets/images/blog-img1.jpg' %}"> </a> </figure>
                     <!--featured-thumb-->
                     <h4><a title="Pellentesque posuere" href="blog_detail.html">Pellentesque posuere</a></h4>
                     <p class="post-meta"><i class="icon-calendar"></i>
@@ -637,7 +638,7 @@
                       .</p>
                   </li>
                   <li>
-                    <figure class="featured-thumb"> <a href="blog_detail.html"> <img width="80" height="53" alt="blog image" src="../../assets/images/blog-img1.jpg"> </a> </figure>
+                    <figure class="featured-thumb"> <a href="blog_detail.html"> <img width="80" height="53" alt="blog image" src="{% static 'angular/assets/images/blog-img1.jpg' %}"> </a> </figure>
                     <!--featured-thumb-->
                     <h4><a title="Dolor lorem ipsum" href="blog_detail.html">Dolor lorem ipsum</a></h4>
                     <p class="post-meta"><i class="icon-calendar"></i>
@@ -645,7 +646,7 @@
                       .</p>
                   </li>
                   <li>
-                    <figure class="featured-thumb"> <a href="blog_detail.html"> <img width="80" height="53" alt="blog image" src="../../assets/images/blog-img1.jpg"> </a> </figure>
+                    <figure class="featured-thumb"> <a href="blog_detail.html"> <img width="80" height="53" alt="blog image" src="{% static 'angular/assets/images/blog-img1.jpg' %}"> </a> </figure>
                     <!--featured-thumb-->
                     <h4><a title="Aliquam eget sapien placerat" href="blog_detail.html">Aliquam eget sapien placerat</a></h4>
                     <p class="post-meta"><i class="icon-calendar"></i>
@@ -653,7 +654,7 @@
                       .</p>
                   </li>
                   <li>
-                    <figure class="featured-thumb"> <a href="blog_detail.html"> <img width="80" height="53" alt="blog image" src="../../assets/images/blog-img1.jpg"> </a> </figure>
+                    <figure class="featured-thumb"> <a href="blog_detail.html"> <img width="80" height="53" alt="blog image" src="{% static 'angular/assets/images/blog-img1.jpg' %}"> </a> </figure>
                     <!--featured-thumb-->
                     <h4><a title="Pellentesque habitant morbi" href="blog_detail.html">Pellentesque habitant morbi</a></h4>
                     <p class="post-meta"><i class="icon-calendar"></i>
@@ -674,7 +675,7 @@
             <!-- Banner Ad Block -->
             <div class="ad-spots widget widget__sidebar">
               <h3 class="widget-title">Ad Spots</h3>
-              <div class="widget-content"><a target="_self" href="#" title=""><img alt="offer banner" src="../../assets/images/offer_banner1.jpg"></a></div>
+              <div class="widget-content"><a target="_self" href="#" title=""><img alt="offer banner" src="{% static 'angular/assets/images/offer_banner1.jpg' %}"></a></div>
             </div>
             <!-- Banner Text Block -->
             <div class="text-widget widget widget__sidebar">
@@ -721,35 +722,35 @@
           <div class="slider-items slider-width-col6">
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
+            <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
             <!-- End Item --> 
             
           </div>
@@ -838,7 +839,7 @@
     <div class="footer-middle">
       <div class="container">
         <div class="row">
-          <div style="text-align:center"><a href="index.html"><img alt="footerlogo" src="../../assets/images/footer-logo.png"></a></div>
+          <div style="text-align:center"><a href="index.html"><img alt="footerlogo" src="{% static 'angular/assets/images/footer-logo.png' %}"></a></div>
           <address>
           <i class="icon-location-arrow"></i> 123 Main Street, Anytown, CA 12345  USA <i class="icon-mobile-phone"></i><span> +(408) 394-7557</span> <i class="icon-envelope"></i><span>  support@magikcommerce.com</span>
           </address>
@@ -1106,12 +1107,12 @@
 
 <!-- End Footer --> 
 <!-- JavaScript --> 
-<script type="text/javascript" src="../../assets/js/jquery.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/parallax.js"></script> 
-<script type="text/javascript" src="../../assets/js/common.js"></script> 
-<script type="text/javascript" src="../../assets/js/owl.carousel.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/jquery.flexslider.js"></script> 
-<script type="text/javascript" src="../../assets/js/jquery.mobile-menu.min.js"></script> 
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/parallax.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/owl.carousel.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.flexslider.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.mobile-menu.min.js' %}"></script>
 </body>
 </html>

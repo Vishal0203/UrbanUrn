@@ -9,42 +9,43 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+{% load staticfiles %}
 <!-- Favicons Icon -->
-<link rel="icon" src="../../assets/images/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" src="../../assets/images/favicon.ico" type="image/x-icon" />
+<link rel="icon" src="{% static 'angular/assets/images/favicon.ico' %}" type="image/x-icon" />
+<link rel="shortcut icon" src="{% static 'angular/assets/images/favicon.ico' %}" type="image/x-icon" />
 <title>Urban Urn</title>
 
 <!-- Mobile Specific -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- CSS Style -->
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/animate.css" media="all">
-<link rel="stylesheet" type="text/css" href="../../css/revslider.css" >
-<link rel="stylesheet" type="text/css" href="../../css/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="../../css/owl.theme.css">
-<link rel="stylesheet" type="text/css" href="../../css/jquery.mobile-menu.css">
-<link rel="stylesheet" type="text/css" href="../../css/jquery.bxslider.css">
-<link rel="stylesheet" type="text/css" href="../../css/style.css" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/font-awesome.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/animate.css' %}" media="all">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/revslider.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/owl.theme.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/jquery.mobile-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/jquery.bxslider.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'angular/css/style.css' %}" media="all">
 <!-- Google Fonts -->
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,700,900' rel='stylesheet' type='text/css'>
 </head>
 
 <body class="cms-index-index cms-home-page">
-<div id="page"> 
+<div id="page">
   <!-- Header -->
   <header>
     <div class="header-container">
       <div class="header-top">
         <div class="container">
           <div class="row">
-            <div class="col-sm-2 col-xs-6 col-lg-2 hidden-xs"> 
-              
+            <div class="col-sm-2 col-xs-6 col-lg-2 hidden-xs">
+
               <!-- Default Welcome Message -->
               <div class="welcome-msg"> Welcome Buddy! </div>
-              <!-- End Default Welcome Message --> 
+              <!-- End Default Welcome Message -->
             </div>
             <div class="col-sm-7 col-xs-6 col-lg-8">
               <div class="toplinks">
@@ -65,13 +66,13 @@
                     </ul>
                   </div>
                   <!-- End Header Company -->
-                  
+
                   <div class="login"><a href="login.html"><span class="hidden-xs">Log In</span></a></div>
                 </div>
-                <!-- links --> 
+                <!-- links -->
               </div>
             </div>
-            
+
             <!-- Search-col -->
             <div class="col-sm-3 col-xs-6 col-lg-2">
               <div class="search-box pull-right">
@@ -80,7 +81,7 @@
                   <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
                 </form>
               </div>
-              <!-- End Search-col --> 
+              <!-- End Search-col -->
             </div>
           </div>
         </div>
@@ -88,13 +89,13 @@
       <div class="header">
         <div class="container">
           <div class="row">
-            <div class="col-lg-2 col-sm-3 col-xs-12 col-md-2"> 
+            <div class="col-lg-2 col-sm-3 col-xs-12 col-md-2">
               <!-- Header Logo -->
-              <div class="logo"><a title="Magento Commerce" href="index.html"><img alt="Magento Commerce" src="../../assets/images/logo.png"></a></div>
-              <!-- End Header Logo --> 
+              <div class="logo"><a title="Magento Commerce" href="index.html"><img alt="Magento Commerce" src="{% static 'angular/assets/images/logo.png' %}"></a></div>
+              <!-- End Header Logo -->
             </div>
             <!-- Navbar -->
-            
+
             <div class="nav-inner">
               <ul id="nav" class="hidden-xs">
                 <li class="level0 parent drop-menu active"><a href="index.html"><span>Home</span></a>
@@ -112,10 +113,10 @@
                     <li class="level1"><a href="about_us.html"><span>About us</span></a></li>
                     <li class="level1"><a href="compare.html"><span>Compare</span></a></li>
                     <li class="level1"><a href="login.html"><span>Login</span></a></li>
-                    
+
                     <li class="level1"><a href="faq.html"><span>FAQ</span></a></li>
                     <li class="level1"><a href="quick_view.html"><span>Quick View</span></a></li>
-                    
+
                     <li class="level1 first parent"><a href="blog.html"><span>Blog</span></a>
                       <ul class="level2 right-sub">
                         <li class="level2 nav-2-1-1 first"><a href="blog_detail.html"><span>Blog Detail</span></a></li>
@@ -185,8 +186,8 @@
                         </div>
                         <!--nav-block nav-block-center-->
                         <div class="col-2">
-                          <div class="menu_image"><a href="#" title=""><img src="../../assets/images/menu_image.jpg" alt="menu_image"></a></div>
-                          <div class="menu_image1"><a href="#" title=""><img src="../../assets/images/menu_image.jpg" alt="menu_image"></a></div>
+                          <div class="menu_image"><a href="#" title=""><img src="{% static 'angular/assets/images/menu_image.jpg' %}" alt="menu_image"></a></div>
+                          <div class="menu_image1"><a href="#" title=""><img src="{% static 'angular/assets/images/menu_image.jpg' %}" alt="menu_image"></a></div>
                         </div>
                       </div>
                       <!--level0-wrapper2--> </div>
@@ -251,16 +252,16 @@
                         <!--level0-wrapper2-->
                         <div class="nav-add">
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="sunglass" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="sunglass" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="watch" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="watch" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item">
-                            <div class="push_img"><a href="#"><img alt="jeans" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="jeans" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                           <div class="push_item push_item_last">
-                            <div class="push_img"><a href="#"><img alt="shoes" src="../../assets/images/menu_man_sunglass.png"></a></div>
+                            <div class="push_img"><a href="#"><img alt="shoes" src="{% static 'angular/assets/images/menu_man_sunglass.png' %}"></a></div>
                           </div>
                         </div>
                       </div>
@@ -327,16 +328,16 @@
                       <!--level0-wrapper2-->
                       <div class="nav-add">
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="phone" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="phone" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="camera" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="camera" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item">
-                          <div class="push_img"><a href="#"><img alt="ipod" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="ipod" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                         <div class="push_item push_item_last">
-                          <div class="push_img"><a href="#"><img alt="laptop" src="../../assets/images/menu_ele_phone.png"></a></div>
+                          <div class="push_img"><a href="#"><img alt="laptop" src="{% static 'angular/assets/images/menu_ele_phone.png' %}"></a></div>
                         </div>
                       </div>
                     </div>
@@ -383,10 +384,10 @@
                           </ul>
                         </div>
                         <!--nav-block nav-block-center-->
-                        <div class="nav-block nav-block-right std grid12-4"><a href="#"><img src="../../assets/images/menu_furniture_2.png" alt="furniture"></a> </div>
+                        <div class="nav-block nav-block-right std grid12-4"><a href="#"><img src="{% static 'angular/assets/images/menu_furniture_2.png' %}" alt="furniture"></a> </div>
                         <!--nav-block nav-block-right std grid12-4--> </div>
                     </div>
-                    <!--level0-wrapper2--> 
+                    <!--level0-wrapper2-->
                   </div>
                 </li>
                 <li class="nav-custom-link mega-menu"> <a class="level-top" href="#"><span>Custom</span></a>
@@ -394,22 +395,22 @@
                     <div class="container">
                       <div class="header-nav-dropdown-wrapper clearer">
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img1.jpg" alt="custom img1"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img1.jpg' %}" alt="custom img1"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img2.jpg" alt="custom img2"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img2.jpg' %}" alt="custom img2"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img3.jpg" alt="custom img3"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img3.jpg' %}" alt="custom img3"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
                         <div class="grid12-5">
-                          <div class="custom_img"><a href="#"><img src="../../assets/images/custom-img4.jpg" alt="custom img4"></a></div>
+                          <div class="custom_img"><a href="#"><img src="{% static 'angular/assets/images/custom-img4.jpg' %}" alt="custom img4"></a></div>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue.</p>
                           <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span></button>
                         </div>
@@ -419,7 +420,7 @@
                 </li>
               </ul>
               <div class="menu_top">
-                <div class="top-cart-contain pull-right"> 
+                <div class="top-cart-contain pull-right">
                   <!-- Top Cart -->
                   <div class="mini-cart">
                     <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"><a href="#">(2)</a></div>
@@ -431,12 +432,12 @@
                           <div class="pull-right">
                             <button title="View Cart" class="view-cart" type="button"><span>View Cart</span></button>
                           </div>
-                          <!--pull-right--> 
+                          <!--pull-right-->
                         </div>
                         <!--block-subtitle-->
                         <ul class="mini-products-list" id="cart-sidebar">
                           <li class="item first">
-                            <div class="item-inner"><a href="product_detail.html" class="product-image" title="Sample Product"><img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                            <div class="item-inner"><a href="product_detail.html" class="product-image" title="Sample Product"><img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                               <div class="product-details">
                                 <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                 <!--access--> <strong>1</strong> x <span class="price">₹179.99</span>
@@ -445,7 +446,7 @@
                             </div>
                           </li>
                           <li class="item last">
-                            <div class="item-inner"><a class="product-image" title="Sample Product" href="product_detail.html"><img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                            <div class="item-inner"><a class="product-image" title="Sample Product" href="product_detail.html"><img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                               <div class="product-details">
                                 <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                                 <!--access--> <strong>1</strong> x <span class="price">₹80.00</span>
@@ -457,7 +458,7 @@
                         <div class="actions">
                           <button class="btn-checkout" title="Checkout" type="button"><span>Checkout</span></button>
                         </div>
-                        <!--actions--> 
+                        <!--actions-->
                       </div>
                     </div>
                   </div>
@@ -473,7 +474,7 @@
                 <div class="lang-curr">
                   <div class="form-language">
                     <ul class="lang">
-                      <li class=""><a href="" title="English"><img src="../../assets/images/english.png" alt="English" /> <span>English</span></a></li>
+                      <li class=""><a href="" title="English"><img src="{% static 'angular/assets/images/english.png' %}" alt="English" /> <span>English</span></a></li>
                     </ul>
                   </div>
                   <div class="form-currency">
@@ -482,14 +483,14 @@
                     </ul>
                   </div>
                 </div>
-                
-                <!-- End Header Currency --> 
-                
+
+                <!-- End Header Currency -->
+
               </div>
             </div>
-            
-            <!-- end nav --> 
-            
+
+            <!-- end nav -->
+
           </div>
         </div>
       </div>
@@ -499,13 +500,13 @@
   <div class="mm-toggle-wrap">
     <div class="mm-toggle"><i class="icon-align-justify"></i><span class="mm-label">Menu</span> </div>
   </div>
-  
+
   <!-- Slider -->
   <div id="magik-slideshow" class="magik-slideshow">
     <div id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container' >
       <div id='rev_slider_4' class='rev_slider fullwidthabanner'>
         <ul>
-          <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='../../assets/images/slide-img1.jpg'><img src='../../assets/images/slide-img1.jpg' alt="slide1" data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat'  />
+          <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='{% static 'angular/assets/images/slide-img1.jpg' %}'><img src='{% static 'angular/assets/images/slide-img1.jpg' %}' alt="slide1" data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat'  />
             <div class="info">
               <div    class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='860'  data-y='60'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;'>Launching on</div>
               <div class='tp-caption line' data-x='860'  data-y='120'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>&nbsp;</div>
@@ -515,7 +516,7 @@
               <div    class='tp-caption Title sft  tp-resizeme small-size ' data-x='860'  data-y='370'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>Check for more...</div>
             </div>
           </li>
-          <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='../../assets/images/slide-img2.jpg'><img src='../../assets/images/slide-img2.jpg' alt="slide2" data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat'  />
+          <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='{% static 'angular/assets/images/slide-img2.jpg' %}'><img src='{% static 'angular/assets/images/slide-img2.jpg' %}' alt="slide2" data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat'  />
             <div class="info">
               <div class='tp-caption ExtraLargeTitle sft tp-resizeme ' data-x='395'  data-y='60'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;'>Launching on</div>
               <div class='tp-caption line' data-x='395'  data-y='120'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>&nbsp;</div>
@@ -529,25 +530,25 @@
       </div>
     </div>
   </div>
-  <!-- end banner --> 
+  <!-- end banner -->
   <!-- banner section -->
   <div class="top-offer-banner wow bounceInUp animated">
     <div class="container">
       <div class="row">
-        <div class="offer-inner col-lg-12"> 
+        <div class="offer-inner col-lg-12">
           <!--newsletter-wrap-->
           <div class="left">
-            <div class="col-1"><a href="#"><img src="../../assets/images/offer-banner1.jpg" alt="offer banner1"></a></div>
+            <div class="col-1"><a href="#"><img src="{% static 'angular/assets/images/offer-banner1.jpg' %}" alt="offer banner1"></a></div>
             <div class="col mid">
               <div class="inner-text">
                 <h3>Watches</h3>
               </div>
-              <a href="#"><img src="../../assets/images/offer-banner2.jpg" alt="offer banner2"></a></div>
+              <a href="#"><img src="{% static 'angular/assets/images/offer-banner2.jpg' %}" alt="offer banner2"></a></div>
             <div class="col last">
               <div class="inner-text">
                 <h3>Shoes</h3>
               </div>
-              <a href="#"><img src="../../assets/images/offer-banner3.jpg" alt="offer banner2"></a></div>
+              <a href="#"><img src="{% static 'angular/assets/images/offer-banner3.jpg' %}" alt="offer banner2"></a></div>
           </div>
           <div class="right">
             <div class="col">
@@ -555,7 +556,7 @@
                 <h4>Top COLLECTION</h4>
                 <h3>Sunglasses</h3>
                 <a href="#" class="shop-now1">Shop now</a> </div>
-              <a href="#" title=""><img src="../../assets/images/offer-banner4.jpg" alt=""></a> </div>
+              <a href="#" title=""><img src="{% static 'angular/assets/images/offer-banner4.jpg' %}" alt=""></a> </div>
           </div>
         </div>
       </div>
@@ -563,12 +564,12 @@
   </div>
 
 
-<!-- End banner section --> 
+<!-- End banner section -->
 
 <!-- main container -->
 <div class="main-col">
   <div class="container">
-    <div class="row"> 
+    <div class="row">
       <!-- Featured Slider -->
       <div class="best-pro container wow bounceInUp animated">
         <div class="slider-items-products">
@@ -580,7 +581,7 @@
               <div class="item">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"> </a>
+                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"> </a>
                       <div class="sale-label sale-top-left">sale</div>
                       <div class="item-box-hover">
                         <div class="box-inner">
@@ -614,13 +615,13 @@
                   </div>
                 </div>
               </div>
-              
+
               <!-- Item -->
-              
+
               <div class="item">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                       <div class="item-box-hover">
                         <div class="box-inner">
                           <div class="actions">
@@ -656,13 +657,13 @@
                   </div>
                 </div>
               </div>
-              <!-- End Item --> 
-              
+              <!-- End Item -->
+
               <!-- Item -->
               <div class="item">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                       <div class="item-box-hover">
                         <div class="box-inner">
                           <div class="actions">
@@ -699,11 +700,11 @@
                 </div>
               </div>
               <!-- End Item -->
-              
+
               <div class="item">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"> </a>
+                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"> </a>
                       <div class="new-label new-top-left">new</div>
                       <div class="item-box-hover">
                         <div class="box-inner">
@@ -737,12 +738,12 @@
                   </div>
                 </div>
               </div>
-              
+
               <!-- Item -->
               <div class="item">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                       <div class="item-box-hover">
                         <div class="box-inner">
                           <div class="actions">
@@ -778,13 +779,13 @@
                   </div>
                 </div>
               </div>
-              <!-- End Item --> 
-              
+              <!-- End Item -->
+
               <!-- Item -->
               <div class="item">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+                    <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                       <div class="item-box-hover">
                         <div class="box-inner">
                           <div class="actions">
@@ -820,17 +821,17 @@
                   </div>
                 </div>
               </div>
-              <!-- End Item --> 
-              
+              <!-- End Item -->
+
             </div>
           </div>
         </div>
       </div>
-      <!-- End Featured Slider --> 
+      <!-- End Featured Slider -->
     </div>
   </div>
 </div>
-<!-- end main container --> 
+<!-- end main container -->
 <!-- Featured Slider -->
 <div class="featured-pro container wow bounceInUp animated">
   <div class="slider-items-products">
@@ -842,7 +843,7 @@
         <div class="item">
           <div class="item-inner">
             <div class="item-img">
-              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"> </a>
+              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"> </a>
                 <div class="sale-label sale-top-left">sale</div>
                 <div class="item-box-hover">
                   <div class="box-inner">
@@ -876,12 +877,12 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Item -->
         <div class="item">
           <div class="item-inner">
             <div class="item-img">
-              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                 <div class="item-box-hover">
                   <div class="box-inner">
                     <div class="actions">
@@ -917,13 +918,13 @@
             </div>
           </div>
         </div>
-        <!-- End Item --> 
-        
+        <!-- End Item -->
+
         <!-- Item -->
         <div class="item">
           <div class="item-inner">
             <div class="item-img">
-              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                 <div class="item-box-hover">
                   <div class="box-inner">
                     <div class="actions">
@@ -960,11 +961,11 @@
           </div>
         </div>
         <!-- End Item -->
-        
+
         <div class="item">
           <div class="item-inner">
             <div class="item-img">
-              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"> </a>
+              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"> </a>
                 <div class="new-label new-top-left">new</div>
                 <div class="item-box-hover">
                   <div class="box-inner">
@@ -998,12 +999,12 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Item -->
         <div class="item">
           <div class="item-inner">
             <div class="item-img">
-              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                 <div class="item-box-hover">
                   <div class="box-inner">
                     <div class="actions">
@@ -1039,13 +1040,13 @@
             </div>
           </div>
         </div>
-        <!-- End Item --> 
-        
+        <!-- End Item -->
+
         <!-- Item -->
         <div class="item">
           <div class="item-inner">
             <div class="item-img">
-              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="../../assets/images/sample_product.jpg"></a>
+              <div class="item-img-info"> <a class="product-image" title="Sample Product" href="product_detail.html"> <img alt="Sample Product" src="{% static 'angular/assets/images/sample_product.jpg' %}"></a>
                 <div class="item-box-hover">
                   <div class="box-inner">
                     <div class="actions">
@@ -1081,13 +1082,13 @@
             </div>
           </div>
         </div>
-        <!-- End Item --> 
-        
+        <!-- End Item -->
+
       </div>
     </div>
   </div>
 </div>
-<!-- End Featured Slider --> 
+<!-- End Featured Slider -->
 <!--Offer Start-->
 <div class="offer-slider wow animated parallax parallax-2">
   <div class="container">
@@ -1110,7 +1111,7 @@
     </ul>
   </div>
 </div>
-<!--Offer silder End--> 
+<!--Offer silder End-->
 
 
 
@@ -1120,16 +1121,16 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-sm-3 col-xs-6">
-        <div class="col"><img src="../../assets/images/promo-banner-img1.png" alt="offer banner1"></div>
+        <div class="col"><img src="{% static 'angular/assets/images/promo-banner-img1.png' %}" alt="offer banner1"></div>
       </div>
       <div class="col-lg-3 col-sm-3 col-xs-6">
-        <div class="col"><img src="../../assets/images/promo-banner-img1.png" alt="offer banner2"></div>
+        <div class="col"><img src="{% static 'angular/assets/images/promo-banner-img1.png' %}" alt="offer banner2"></div>
       </div>
       <div class="col-lg-3 col-sm-3 col-xs-6">
-        <div class="col"><img src="../../assets/images/promo-banner-img1.png" alt="offer banner3"></div>
+        <div class="col"><img src="{% static 'angular/assets/images/promo-banner-img1.png' %}" alt="offer banner3"></div>
       </div>
       <div class="col-lg-3 col-sm-3 col-xs-6">
-        <div class="col last"><img src="../../assets/images/promo-banner-img1.png" alt="offer banner4"></div>
+        <div class="col last"><img src="{% static 'angular/assets/images/promo-banner-img1.png' %}" alt="offer banner4"></div>
       </div>
     </div>
   </div>
@@ -1139,40 +1140,40 @@
   <div class="container">
     <div class="slider-items-products">
       <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
-        <div class="slider-items slider-width-col6"> 
-          
+        <div class="slider-items slider-width-col6">
+
           <!-- Item -->
-          <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
-          <!-- End Item --> 
-          
+          <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
+          <!-- End Item -->
+
           <!-- Item -->
-          <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
-          <!-- End Item --> 
-          
+          <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
+          <!-- End Item -->
+
           <!-- Item -->
-          <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
-          <!-- End Item --> 
-          
+          <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
+          <!-- End Item -->
+
           <!-- Item -->
-          <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
-          <!-- End Item --> 
-          
+          <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
+          <!-- End Item -->
+
           <!-- Item -->
-          <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
-          <!-- End Item --> 
-          
+          <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
+          <!-- End Item -->
+
           <!-- Item -->
-          <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
-          <!-- End Item --> 
-          
+          <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
+          <!-- End Item -->
+
           <!-- Item -->
-          <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
-          <!-- End Item --> 
-          
+          <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
+          <!-- End Item -->
+
           <!-- Item -->
-          <div class="item"><a href="#"><img src="../../assets/images/b-logo1.png" alt="Image"></a> </div>
-          <!-- End Item --> 
-          
+          <div class="item"><a href="#"><img src="{% static 'angular/assets/images/b-logo1.png' %}" alt="Image"></a> </div>
+          <!-- End Item -->
+
         </div>
       </div>
     </div>
@@ -1260,7 +1261,7 @@
     <div class="footer-middle">
       <div class="container">
         <div class="row">
-          <div style="text-align:center"><a href="index.html"><img alt="footerlogo" src="../../assets/images/footer-logo.png"></a></div>
+          <div style="text-align:center"><a href="index.html"><img alt="footerlogo" src="{% static 'angular/assets/images/footer-logo.png' %}"></a></div>
           <address>
           <i class="icon-location-arrow"></i> 123 Main Street, Anytown, CA 12345  USA <i class="icon-mobile-phone"></i><span> +(408) 394-7557</span> <i class="icon-envelope"></i><span> support@urbanurn.com</span>
           </address>
@@ -1313,7 +1314,7 @@
         <li> <a href="multiple_addresses.html">Multiple Addresses</a></li>
         <li> <a href="about_us.html">About us</a></li>
         <li><a href="compare.html">Compare</a></li>
-        <li><a href="login.html">Login</a></li>  
+        <li><a href="login.html">Login</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="quick_view.html">Quick View</a></li>
         <li><a href="newsletter.html">Newsletter</a></li>
@@ -1523,16 +1524,16 @@
   </ul>
 </div>
 
-<!-- End Footer --> 
-<!-- JavaScript --> 
-<script type="text/javascript" src="../../assets/js/jquery.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/parallax.js"></script> 
-<script type="text/javascript" src="../../assets/js/revslider.js"></script> 
-<script type="text/javascript" src="../../assets/js/common.js"></script> 
-<script type="text/javascript" src="../../assets/js/owl.carousel.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/jquery.mobile-menu.min.js"></script> 
-<script type="text/javascript" src="../../assets/js/jquery.bxslider.min.js"></script> 
+<!-- End Footer -->
+<!-- JavaScript -->
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/parallax.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/revslider.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/owl.carousel.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.mobile-menu.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'angular/assets/js/jquery.bxslider.min.js' %}"></script>
 <script type='text/javascript'>
 jQuery(document).ready(function(){
 jQuery('#rev_slider_4').show().revolution({
