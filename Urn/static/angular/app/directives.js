@@ -124,8 +124,61 @@ angular.module('urn')
     .directive('productView', function() {
         return {
             restrict: 'A',
-            link: function(scope, element) {
+            link: function (scope, element) {
                 $(element).CloudZoom();
+            }
+        }
+    })
+    .directive('navMenu', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element) {
+                $("#nav > li").hover(function() {
+                    var el = $(this).find(".level0-wrapper");
+                    el.hide();
+                    el.css("left", "0");
+                    el.stop(true, true).delay(150).fadeIn(300, "easeOutCubic");
+                }, function() {
+                    $(this).find(".level0-wrapper").stop(true, true).delay(300).fadeOut(300, "easeInCubic");
+                });
+                var scrolled = false;
+
+                jQuery("#nav li.level0.drop-menu").mouseover(function() {
+                    if (jQuery(window).width() >= 740) {
+                        jQuery(this).children('ul.level1').fadeIn(100);
+                    }
+                    return false;
+                }).mouseleave(function() {
+                    if (jQuery(window).width() >= 740) {
+                        jQuery(this).children('ul.level1').fadeOut(100);
+                    }
+                    return false;
+                });
+                jQuery("#nav li.level0.drop-menu li").mouseover(function() {
+                    if (jQuery(window).width() >= 740) {
+                        jQuery(this).children('ul').css({
+                            top: 0,
+                            left: "165px"
+                        });
+                        var offset = jQuery(this).offset();
+                        if (offset && (jQuery(window).width() < offset.left + 325)) {
+                            jQuery(this).children('ul').removeClass("right-sub");
+                            jQuery(this).children('ul').addClass("left-sub");
+                            jQuery(this).children('ul').css({
+                                top: 0,
+                                left: "-167px"
+                            });
+                        } else {
+                            jQuery(this).children('ul').removeClass("left-sub");
+                            jQuery(this).children('ul').addClass("right-sub");
+                        }
+                        jQuery(this).children('ul').fadeIn(100);
+                    }
+                }).mouseleave(function() {
+                    if (jQuery(window).width() >= 740) {
+                        jQuery(this).children('ul').fadeOut(100);
+                    }
+                });
             }
         }
     });
