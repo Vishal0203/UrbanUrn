@@ -120,4 +120,12 @@ angular.module('urn')
                 });
             }
         }
+    })
+    .directive('productView', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element) {
+                $(element).CloudZoom();
+            }
+        }
     });
