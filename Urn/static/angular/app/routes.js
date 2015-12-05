@@ -54,7 +54,7 @@ angular.module('urn')
                 templateUrl : '/static/angular/app/views/login.html'
             })
             .when('/multiple_addresses', {
-                controller : 'AddressesController',
+                controller : 'AddressController',
                 templateUrl : '/static/angular/app/views/multiple_addresses.html'
             })
             .when('/product_detail', {
