@@ -2,75 +2,75 @@ angular.module('urn')
     .config(function ($routeProvider) {
         $routeProvider
             .when('/home', {
-                controller : 'rootController',
+                controller : 'HomeController',
                 templateUrl : '/static/angular/app/views/home.html'
             })
             .when('/not_found', {
-                controller : 'rootController',
+                controller : 'RootController',
                 templateUrl : '/static/angular/app/views/404error.html'
             })
             .when('/about_us', {
-                controller : 'rootController',
+                controller : 'MiscController',
                 templateUrl : '/static/angular/app/views/about_us.html'
             })
             .when('/blog', {
-                controller : 'rootController',
+                controller : 'BlogController',
                 templateUrl : '/static/angular/app/views/blog.html'
             })
             .when('/blog_detail', {
-                controller : 'rootController',
+                controller : 'BlogDetailController',
                 templateUrl : '/static/angular/app/views/blog_detail.html'
             })
             .when('/checkout', {
-                controller : 'rootController',
+                controller : 'CheckoutController',
                 templateUrl : '/static/angular/app/views/checkout.html'
             })
             .when('/compare', {
-                controller : 'rootController',
+                controller : 'CompareProductController',
                 templateUrl : '/static/angular/app/views/compare.html'
             })
             .when('/contact_us', {
-                controller : 'rootController',
+                controller : 'MiscController',
                 templateUrl : '/static/angular/app/views/contact_us.html'
             })
             .when('/dashboard', {
-                controller : 'rootController',
+                controller : 'DashboardController',
                 templateUrl : '/static/angular/app/views/dashboard.html'
             })
             .when('/faq', {
-                controller : 'rootController',
+                controller : 'MiscController',
                 templateUrl : '/static/angular/app/views/faq.html'
             })
             .when('/grid', {
-                controller : 'rootController',
+                controller : 'GridController',
                 templateUrl : '/static/angular/app/views/grid.html'
             })
             .when('/list', {
-                controller : 'rootController',
+                controller : 'ListController',
                 templateUrl : '/static/angular/app/views/list.html'
             })
             .when('/login', {
-                controller : 'rootController',
+                controller : 'LoginController',
                 templateUrl : '/static/angular/app/views/login.html'
             })
             .when('/multiple_addresses', {
-                controller : 'rootController',
+                controller : 'AddressesController',
                 templateUrl : '/static/angular/app/views/multiple_addresses.html'
             })
             .when('/product_detail', {
-                controller : 'rootController',
+                controller : 'ProductDetailController',
                 templateUrl : '/static/angular/app/views/product_detail.html'
             })
             .when('/quick_view', {
-                controller : 'rootController',
+                controller : 'QuickViewController',
                 templateUrl : '/static/angular/app/views/quick_view.html'
             })
             .when('/shopping_cart', {
-                controller : 'rootController',
+                controller : 'CartController',
                 templateUrl : '/static/angular/app/views/shopping_cart.html'
             })
             .when('/wishlist', {
-                controller : 'rootController',
+                controller : 'WishlistController',
                 templateUrl : '/static/angular/app/views/wishlist.html'
             })
            .otherwise('/home');
