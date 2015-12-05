@@ -1,0 +1,650 @@
+<div class="header-container">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2 col-xs-6 col-lg-2 hidden-xs">
+                    <!-- Default Welcome Message -->
+                    <div class="welcome-msg"> Welcome Buddy!</div>
+                    <!-- End Default Welcome Message -->
+                </div>
+                <div class="col-sm-7 col-xs-6 col-lg-8">
+                    <div class="toplinks">
+                        <div class="links">
+                            <div class="myaccount"><a title="My Account" href="#/login"><span class="hidden-xs">My Account</span></a>
+                            </div>
+                            <div class="wishlist"><a title="My Wishlist" href="#/wishlist"><span class="hidden-xs">Wishlist</span></a>
+                            </div>
+                            <div class="check"><a title="Checkout" href="#/checkout"><span
+                                    class="hidden-xs">Checkout</span></a></div>
+                            <div class="demo"><a title="Blog" href="#/blog"><span class="hidden-xs">Blog</span></a>
+                            </div>
+                            <!-- Header Company -->
+                            <div class="dropdown block-company-wrapper hidden-xs"><a role="button"
+                                                                                     data-toggle="dropdown"
+                                                                                     data-target="#"
+                                                                                     class="block-company dropdown-toggle"
+                                                                                     href="#">Company <span
+                                    class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#/about_us">About
+                                        Us</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Customer
+                                        Service</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Privacy Policy</a>
+                                    </li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="sitemap.html">Site
+                                        Map</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Search Terms</a>
+                                    </li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Advanced
+                                        Search</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Header Company -->
+
+                            <div class="login"><a href="#/login"><span class="hidden-xs">Log In</span></a></div>
+                        </div>
+                        <!-- links -->
+                    </div>
+                </div>
+                <!-- Search-col -->
+                <div class="col-sm-3 col-xs-6 col-lg-2">
+                    <div class="search-box pull-right">
+                        <form action="cat" method="POST" id="search_mini_form" name="Categories">
+                            <input type="text" placeholder="Search entire store here..." value="Search" maxlength="70"
+                                   name="search" id="search">
+                            <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;
+                            </button>
+                        </form>
+                    </div>
+                    <!-- End Search-col -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-sm-3 col-xs-12 col-md-2">
+                    <!-- Header Logo -->
+                    <div class="logo"><a title="Magento Commerce" href="#/home"><img alt="Magento Commerce"
+                                                                                         src="/static/angular/assets/images/logo.png"></a>
+                    </div>
+                    <!-- End Header Logo -->
+                </div>
+                <!-- Navbar -->
+                <div class="nav-inner">
+                    <ul id="nav" class="hidden-xs">
+                        <li class="level0 parent drop-menu active"><a href="#/home"><span>Home</span></a>
+                        </li>
+                        <li class="level0 parent drop-menu"><a href="#"><span>Pages</span></a>
+                            <ul class="level1">
+                                <li class="level1 first"><a href="#/grid"><span>Grid</span></a></li>
+                                <li class="level1 nav-10-2"><a href="#/list"><span>List</span></a></li>
+                                <li class="level1 nav-10-3"><a
+                                        href="#/product_detail"><span>Product Detail</span></a></li>
+                                <li class="level1 nav-10-4"><a href="#/shopping_cart"><span>Shopping Cart</span></a>
+                                </li>
+                                <li class="level1 first parent"><a href="#/checkout"><span>Checkout</span></a></li>
+                                <li class="level1 nav-10-4"><a href="#/wishlist"><span>Wishlist</span></a></li>
+                                <li class="level1"><a href="#/dashboard"><span>Dashboard</span></a></li>
+                                <li class="level1"><a href="#/multiple_addresses"><span>Multiple Addresses</span></a>
+                                </li>
+                                <li class="level1"><a href="#/about_us"><span>About us</span></a></li>
+                                <li class="level1"><a href="#/compare"><span>Compare</span></a></li>
+                                <li class="level1"><a href="#/login"><span>Login</span></a></li>
+
+                                <li class="level1"><a href="#/faq"><span>FAQ</span></a></li>
+                                <li class="level1"><a href="#/quick_view"><span>Quick View</span></a></li>
+
+                                <li class="level1 first parent"><a href="#/blog"><span>Blog</span></a>
+                                    <ul class="level2 right-sub">
+                                        <li class="level2 nav-2-1-1 first"><a
+                                                href="#/blog_detail"><span>Blog Detail</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="level1"><a href="#/contact_us"><span>Contact us</span></a></li>
+                                <li class="level1"><a href="#/not_found"><span>404 Error Page</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="mega-menu"><a href="#/grid" class="level-top"><span>Women</span></a>
+
+                            <div style="left: 0px; display: none;" class="level0-wrapper dropdown-6col">
+                                <div class="container">
+                                    <div class="level0-wrapper2">
+                                        <div class="col-1">
+                                            <div class="nav-block nav-block-center">
+                                                <ul class="level0">
+                                                    <li class="level1 nav-6-1 parent item"><a href="#/grid" class=""><span>Stylish Bag</span></a>
+                                                        <ul class="level1">
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"
+                                                                                            class=""><span>Clutch Handbags</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"
+                                                                                            class=""><span>Diaper Bags</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"
+                                                                                            class=""><span>Bags</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"
+                                                                                            class=""><span>Hobo handbags</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Material Bag</span></a>
+                                                        <ul class="level1">
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Beaded Handbags</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Fabric Handbags</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Handbags</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Leather Handbags</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Shoes</span></a>
+                                                        <ul class="level1">
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Flat Shoes</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Flat Sandals</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a
+                                                                    href="#/grid"><span>Boots</span></a></li>
+                                                            <li class="level2 nav-6-1-1"><a
+                                                                    href="#/grid"><span>Heels</span></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Jwellery</span></a>
+                                                        <ul class="level1">
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Bracelets</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Necklaces &amp; Pendent</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Pendants</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Pins &amp; Brooches</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="level1 nav-6-1 parent item"><a href="#"><span>Dresses</span></a>
+                                                        <ul class="level1">
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Casual Dresses</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Evening</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Designer</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a
+                                                                    href="#/grid"><span>Party</span></a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Swimwear</span></a>
+                                                        <ul class="level1">
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Swimsuits</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Beach Clothing</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Clothing</span></a>
+                                                            </li>
+                                                            <li class="level2 nav-6-1-1"><a href="#/grid"><span>Bikinis</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!--nav-block nav-block-center-->
+                                        <div class="col-2">
+                                            <div class="menu_image"><a href="#" title=""><img
+                                                    src="/static/angular/assets/images/menu_image.jpg"
+                                                    alt="menu_image"></a></div>
+                                            <div class="menu_image1"><a href="#" title=""><img
+                                                    src="/static/angular/assets/images/menu_image.jpg"
+                                                    alt="menu_image"></a></div>
+                                        </div>
+                                    </div>
+                                    <!--level0-wrapper2--> </div>
+                            </div>
+                        </li>
+                        <li class="mega-menu"><a href="#/grid" class="level-top"><span>Men</span></a>
+
+                            <div style="left: 0px; display: none;" class="level0-wrapper dropdown-6col">
+                                <div class="container">
+                                    <div class="level0-wrapper2">
+                                        <div class="nav-block nav-block-center">
+                                            <ul class="level0">
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"
+                                                                                          class=""><span>Shoes</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Sport Shoes</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Casual Shoes</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Leather Shoes</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>canvas shoes</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a
+                                                        href="#/grid"><span>Dresses</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Casual Dresses</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Evening</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Designer</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Party</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a
+                                                        href="#/grid"><span>Jackets</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Coats</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Formal Jackets</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Leather Jackets</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Blazers</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a
+                                                        href="#/grid"><span>Watches</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Fasttrack</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Casio</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Titan</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Tommy-Hilfiger</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Sunglasses</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Ray Ban</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Fasttrack</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Police</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Oakley</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Accesories</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Backpacks</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Wallets</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Laptops Bags</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Belts</span></a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!--level0-wrapper2-->
+                                        <div class="nav-add">
+                                            <div class="push_item">
+                                                <div class="push_img"><a href="#"><img alt="sunglass"
+                                                                                       src="/static/angular/assets/images/menu_man_sunglass.png"></a>
+                                                </div>
+                                            </div>
+                                            <div class="push_item">
+                                                <div class="push_img"><a href="#"><img alt="watch"
+                                                                                       src="/static/angular/assets/images/menu_man_sunglass.png"></a>
+                                                </div>
+                                            </div>
+                                            <div class="push_item">
+                                                <div class="push_img"><a href="#"><img alt="jeans"
+                                                                                       src="/static/angular/assets/images/menu_man_sunglass.png"></a>
+                                                </div>
+                                            </div>
+                                            <div class="push_item push_item_last">
+                                                <div class="push_img"><a href="#"><img alt="shoes"
+                                                                                       src="/static/angular/assets/images/menu_man_sunglass.png"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mega-menu"><a href="#/grid" class="level-top"><span>Electronics</span></a>
+
+                            <div style="left: 0px; display: none;" class="level0-wrapper dropdown-6col">
+                                <div class="container">
+                                    <div class="level0-wrapper2">
+                                        <div class="nav-block nav-block-center">
+                                            <ul class="level0">
+                                                <li class="level1 nav-6-1 parent item"><a
+                                                        href="#/grid"><span>Mobiles</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Samsung</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Nokia</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>IPhone</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Sony</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"
+                                                                                          class=""><span>Accesories</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Mobile Memory Cards</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Cases &amp; Covers</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Mobile Headphones</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Bluetooth Headsets</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a
+                                                        href="#/grid"><span>Cameras</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Camcorders</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Point &amp; Shoot</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Digital SLR</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Camera Accesories</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Audio &amp; Video</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>MP3 Players</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>IPods</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Speakers</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Video Players</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Computer</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>External Hard Disk</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Pendrives</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Headphones</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>PC Components</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Appliances</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Vaccum Cleaners</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Indoor Lighting</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Kitchen Tools</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Water Purifier</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!--level0-wrapper2-->
+                                    <div class="nav-add">
+                                        <div class="push_item">
+                                            <div class="push_img"><a href="#"><img alt="phone"
+                                                                                   src="/static/angular/assets/images/menu_ele_phone.png"></a>
+                                            </div>
+                                        </div>
+                                        <div class="push_item">
+                                            <div class="push_img"><a href="#"><img alt="camera"
+                                                                                   src="/static/angular/assets/images/menu_ele_phone.png"></a>
+                                            </div>
+                                        </div>
+                                        <div class="push_item">
+                                            <div class="push_img"><a href="#"><img alt="ipod"
+                                                                                   src="/static/angular/assets/images/menu_ele_phone.png"></a>
+                                            </div>
+                                        </div>
+                                        <div class="push_item push_item_last">
+                                            <div class="push_img"><a href="#"><img alt="laptop"
+                                                                                   src="/static/angular/assets/images/menu_ele_phone.png"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mega-menu"><a class="level-top" href="#/grid"><span>Furniture</span></a>
+
+                            <div style="left: 0px; display: none;" class="level0-wrapper dropdown-6col">
+                                <div class="container">
+                                    <div class="level0-wrapper2">
+                                        <div class="nav-block nav-block-center grid12-8 itemgrid itemgrid-4col">
+                                            <ul class="level0">
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"><span>Living Room</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Racks &amp; Cabinets</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Sofas</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Chairs</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Tables</span></a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a href="#/grid"
+                                                                                          class=""><span>Dining &amp; Bar</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Dining Table Sets</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Serving Trolleys</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Bar Counters</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Dining Cabinets</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a
+                                                        href="#/grid"><span>Bedroom</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a
+                                                                href="#/grid"><span>Beds</span></a></li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Chest of Drawers</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Wardrobes &amp; Almirahs</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Nightstands</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="level1 nav-6-1 parent item"><a
+                                                        href="#/grid"><span>Kitchen</span></a>
+                                                    <ul class="level1">
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Kitchen Racks</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Kitchen Fillings</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Wall Units</span></a>
+                                                        </li>
+                                                        <li class="level2 nav-6-1-1"><a href="#/grid"><span>Benches &amp; Stools</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!--nav-block nav-block-center-->
+                                        <div class="nav-block nav-block-right std grid12-4"><a href="#"><img
+                                                src="/static/angular/assets/images/menu_furniture_2.png"
+                                                alt="furniture"></a></div>
+                                        <!--nav-block nav-block-right std grid12-4--> </div>
+                                </div>
+                                <!--level0-wrapper2-->
+                            </div>
+                        </li>
+                        <li class="nav-custom-link mega-menu"><a class="level-top" href="#"><span>Custom</span></a>
+
+                            <div class="level0-wrapper custom-menu" style="left: 0px; display: none;">
+                                <div class="container">
+                                    <div class="header-nav-dropdown-wrapper clearer">
+                                        <div class="grid12-5">
+                                            <div class="custom_img"><a href="#"><img
+                                                    src="/static/angular/assets/images/custom-img1.jpg"
+                                                    alt="custom img1"></a></div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
+                                                augue.</p>
+                                            <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span>
+                                            </button>
+                                        </div>
+                                        <div class="grid12-5">
+                                            <div class="custom_img"><a href="#"><img
+                                                    src="/static/angular/assets/images/custom-img2.jpg"
+                                                    alt="custom img2"></a></div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
+                                                augue.</p>
+                                            <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span>
+                                            </button>
+                                        </div>
+                                        <div class="grid12-5">
+                                            <div class="custom_img"><a href="#"><img
+                                                    src="/static/angular/assets/images/custom-img3.jpg"
+                                                    alt="custom img3"></a></div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
+                                                augue.</p>
+                                            <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span>
+                                            </button>
+                                        </div>
+                                        <div class="grid12-5">
+                                            <div class="custom_img"><a href="#"><img
+                                                    src="/static/angular/assets/images/custom-img4.jpg"
+                                                    alt="custom img4"></a></div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla
+                                                augue.</p>
+                                            <button class="learn_more_btn" title="Add to Cart" type="button"><span>Learn More</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="menu_top">
+                        <div class="top-cart-contain pull-right">
+                            <!-- Top Cart -->
+                            <div class="mini-cart">
+                                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"><a
+                                        href="#">(2)</a></div>
+                                <div>
+                                    <div class="top-cart-content" style="display: none;">
+                                        <div class="block-subtitle">
+                                            <div class="top-subtotal">2 items, <span class="price">₹259.99</span></div>
+                                            <!--top-subtotal-->
+                                            <div class="pull-right">
+                                                <button title="View Cart" class="view-cart" type="button"><span>View Cart</span>
+                                                </button>
+                                            </div>
+                                            <!--pull-right-->
+                                        </div>
+                                        <!--block-subtitle-->
+                                        <ul class="mini-products-list" id="cart-sidebar">
+                                            <li class="item first">
+                                                <div class="item-inner"><a href="#/product_detail"
+                                                                           class="product-image" title="Sample Product"><img
+                                                        alt="Sample Product"
+                                                        src="/static/angular/assets/images/sample_product.jpg"></a>
+
+                                                    <div class="product-details">
+                                                        <div class="access"><a class="btn-remove1"
+                                                                               title="Remove This Item"
+                                                                               href="#">Remove</a> <a class="btn-edit"
+                                                                                                      title="Edit item"
+                                                                                                      href="#"><i
+                                                                class="icon-pencil"></i><span
+                                                                class="hidden">Edit item</span></a></div>
+                                                        <!--access--> <strong>1</strong> x <span
+                                                            class="price">₹179.99</span>
+
+                                                        <p class="product-name"><a href="#/product_detail">Sample
+                                                            Product</a></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item last">
+                                                <div class="item-inner"><a class="product-image" title="Sample Product"
+                                                                           href="#/product_detail"><img
+                                                        alt="Sample Product"
+                                                        src="/static/angular/assets/images/sample_product.jpg"></a>
+
+                                                    <div class="product-details">
+                                                        <div class="access"><a class="btn-remove1"
+                                                                               title="Remove This Item"
+                                                                               href="#">Remove</a> <a class="btn-edit"
+                                                                                                      title="Edit item"
+                                                                                                      href="#"><i
+                                                                class="icon-pencil"></i><span
+                                                                class="hidden">Edit item</span></a></div>
+                                                        <!--access--> <strong>1</strong> x <span
+                                                            class="price">₹80.00</span>
+
+                                                        <p class="product-name"><a href="#/product_detail">Sample
+                                                            Product</a></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="actions">
+                                            <button class="btn-checkout" title="Checkout" type="button">
+                                                <span>Checkout</span></button>
+                                        </div>
+                                        <!--actions-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Top Cart -->
+                            <div id="ajaxconfig_info" style="display:none"><a href="#/"></a>
+                                <input value="" type="hidden">
+                                <input id="enable_module" value="1" type="hidden">
+                                <input class="effect_to_cart" value="1" type="hidden">
+                                <input class="title_shopping_cart" value="Go to shopping cart" type="hidden">
+                            </div>
+                        </div>
+                        <!-- Header Language -->
+                        <div class="lang-curr">
+                            <div class="form-language">
+                                <ul class="lang">
+                                    <li class=""><a href="" title="English"><img
+                                            src="/static/angular/assets/images/english.png" alt="English"/>
+                                        <span>English</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="form-currency">
+                                <ul class="currencies_list">
+                                    <li class=""><a class="" title="Dollar" href="#">₹</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Header Currency -->
+                    </div>
+                </div>
+                <!-- end nav -->
+            </div>
+        </div>
+    </div>
+</div>
