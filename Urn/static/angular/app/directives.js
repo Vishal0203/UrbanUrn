@@ -99,12 +99,24 @@ angular.module('urn')
         return {
             restrict: 'A',
             link: function(scope, element) {
-                jQuery(document).ready(function () {
-                   $(element).bxSlider({
-                        mode: 'horizontal',
-                        slideMargin: 3,
-                        auto:true
-                    });
+                $(element).bxSlider({
+                    mode: 'horizontal',
+                    slideMargin: 3,
+                    auto:true
+                });
+            }
+        }
+    })
+    .directive('cartDropdown', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element) {
+                $(element).mouseenter(function() {
+                    $(this).find(".top-cart-content").stop(true, true).slideDown();
+                });
+
+                $(element).mouseleave(function() {
+                    $(this).find(".top-cart-content").stop(true, true).slideUp();
                 });
             }
         }
