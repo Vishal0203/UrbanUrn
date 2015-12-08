@@ -1,121 +1,116 @@
-﻿ <div class="mm-toggle-wrap">
-    <div class="mm-toggle"><i class="icon-align-justify"></i><span class="mm-label">Menu</span> </div>
-  </div>
-  <!-- end nav --> 
+﻿<div class="mm-toggle-wrap">
+    <div class="mm-toggle"><i class="icon-align-justify"></i><span class="mm-label">Menu</span></div>
+</div>
+<!-- end nav -->
 <!-- Main Container -->
 <section class="main-container col1-layout wow bounceInUp animated">
-  <div class="main container">
-    <div class="account-login">
-      <div class="page-title">
-        <h2>Login or Create an Account</h2>
-      </div>
-      <fieldset class="col2-set">
-        <legend>Login or Create an Account</legend>
-        <div class="col-1 new-users"><strong>New Customers</strong>
-          <div class="content">
-            <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-            <div class="buttons-set">
-              <button class="button create-account"><span>Create an Account</span></button>
+    <div class="main container">
+        <div class="account-login">
+            <div class="page-title">
+                <h2>Login or Create an Account</h2>
             </div>
-          </div>
+            <fieldset class="col2-set">
+                <legend>Login or Create an Account</legend>
+                <div class="col-1 new-users"><strong>New Customers</strong>
+
+                    <div class="content">
+                        <p>By creating an account with our store, you will be able to move through the checkout process
+                            faster, store multiple shipping addresses, view and track your orders in your account and
+                            more.</p>
+
+                        <div class="buttons-set">
+                            <button class="button create-account"><span>Create an Account</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 registered-users"><strong>Registered Customers</strong>
+
+                    <div class="content">
+                        <p>If you have an account with us, please log in.</p>
+                        <div class="error-msg" ng-show="error">
+                            <p>{{ error }}</p>
+                        </div>
+                        <ul class="form-list">
+                            <li>
+                                <label for="username">Username <span class="required">*</span></label>
+                                <br>
+                                <input type="text" title="Username" class="input-text" id="username"
+                                       placeholder="Username" autocomplete="off" ng-model="username"
+                                       name="username">
+                            </li>
+                            <li>
+                                <label for="password">Password <span class="required">*</span></label>
+                                <br>
+                                <input type="password" title="Password" id="password" class="input-text"
+                                       placeholder="Password" autocomplete="off" ng-model="password"
+                                       name="password">
+                            </li>
+                        </ul>
+                        <p class="required">* Required Fields</p>
+                        <div class="buttons-set">
+                            <button id="login" name="login" class="button login" ng-click="submit()"><span>Login</span>
+                            </button>
+                            <a class="forgot-word" href="#">Forgot Your Password?</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
         </div>
-        <div class="col-2 registered-users"><strong>Registered Customers</strong>
-          <div class="content">
-            <p>If you have an account with us, please log in.</p>
-            <ul class="form-list">
-              <li>
-                <label for="email">Email Address <span class="required">*</span></label>
-                <br>
-                <input type="text" title="Email Address" class="input-text" id="email" value="" name="login[username]">
-              </li>
-              <li>
-                <label for="pass">Password <span class="required">*</span></label>
-                <br>
-                <input type="password" title="Password" id="pass" class="input-text" name="login[password]">
-              </li>
-            </ul>
-            <p class="required">* Required Fields</p>
-            <div class="buttons-set">
-              <button id="send2" name="send" type="submit" class="button login"><span>Login</span></button>
-              <a class="forgot-word" href="#">Forgot Your Password?</a> </div>
-          </div>
-        </div>
-      </fieldset>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-  </div>
 </section>
 <!-- Main Container End -->
 
-  <div class="top-banner-section wow bounceInUp animated">
+<div class="top-banner-section wow bounceInUp animated">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col add-banner1">
-          <div class="top-b-text"><strong>Designer Shoes</strong> For Women</div></div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-6">
+                <div class="col add-banner1">
+                    <div class="top-b-text"><strong>Designer Shoes</strong> For Women</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-3 col-xs-6">
+                <div class="col free-shipping"><strong>Free Shipping</strong> on order over $199</div>
+            </div>
+            <div class="col-lg-3 col-sm-3 col-xs-6">
+                <div class="col add-banner2">
+                    <div class="top-b-text"><strong>Luxury Handbags</strong>2015 New Arrive</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-3 col-xs-6">
+                <div class="col last offer"><strong>New Collection</strong> Lorem ipsum dolor.</div>
+            </div>
         </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col free-shipping"><strong>Free Shipping</strong> on order over $199</div>
-        </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-        <div class="col add-banner2">
-          <div class="top-b-text"><strong>Luxury Handbags</strong>2015 New Arrive</div>
-          </div>
-                  
-          
-          
-        </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col last offer"><strong>New Collection</strong> Lorem ipsum dolor.</div>
-        </div>
-      </div>
     </div>
-  </div>
- <!-- end banner section -->
-  <div class="brand-logo">
+</div>
+<!-- end banner section -->
+<div class="brand-logo">
     <div class="container">
-      <div class="slider-items-products">
-        <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
-          <div class="slider-items slider-width-col6" common-slider item-count="6">
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-          </div>
+        <div class="slider-items-products">
+            <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
+                <div class="slider-items slider-width-col6" common-slider item-count="6">
+                    <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a>
+                    </div>
+                    <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a>
+                    </div>
+                    <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a>
+                    </div>
+                    <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a>
+                    </div>
+                    <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a>
+                    </div>
+                    <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a>
+                    </div>
+                    <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a>
+                    </div>
+                    <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
