@@ -10,6 +10,9 @@ schema = {
         "password": {
             "type": "string"
         },
+        "confirm_password": {
+            "type": "string"
+        },
         "first_name": {
             "type": "string"
         },
@@ -29,7 +32,7 @@ schema = {
             "type": "string"
         }
     },
-    "required": ["email", "username", "password", "first_name", "last_name", "phone"]
+    "required": ["email", "username", "password", "confirm_password", "first_name", "last_name", "phone"]
 }
 update_schema = {
     "type": "object",
@@ -62,4 +65,17 @@ update_schema = {
             "type": "string"
         }
     }
+}
+
+login_schema = {
+    "type": "object",
+    "properties": {
+        "username": {
+            "type": "string"
+        },
+        "password": {
+            "type": "string"
+        }
+    },
+    "required": ["username", "password"]
 }

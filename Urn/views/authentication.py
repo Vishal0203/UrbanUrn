@@ -1,8 +1,9 @@
 import datetime
 import jwt
-from django.shortcuts import render
 from Urn.common.utils import build_json
 from django.contrib.auth import authenticate, login, logout
+from Urn.decorators.validators import validate_schema
+from Urn.schema_validators.registration_validator import login_schema
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseNotAllowed, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -16,6 +17,7 @@ import json
 
 @csrf_exempt
 @manage_cookie
+@validate_schema(login_schema)
 def validate_input_and_authenticate(request):
     if request.method == 'GET':
         return HttpResponseNotFound("Page not found")

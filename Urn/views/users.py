@@ -19,30 +19,33 @@ def registration(request, users_api=False):
         if check_username_exists(request, request_data['username']):
             return HttpResponseBadRequest("Username already exists")
 
-        user = User.objects.create_user(request_data['username'], request_data['email'],
-                                        request_data['password'],
-                                        first_name=request_data['first_name'],
-                                        last_name=request_data['last_name'])
-        is_business_user = False
-        if users_api and 'is_business_user' in request_data:
-            is_business_user = utils.request_boolean_field_value(request_data['is_business_user'])
+        if request_data['password'] == request_data['confirm_password']:
+            user = User.objects.create_user(request_data['username'], request_data['email'],
+                                            request_data['password'],
+                                            first_name=request_data['first_name'],
+                                            last_name=request_data['last_name'])
+            is_business_user = False
+            if users_api and 'is_business_user' in request_data:
+                is_business_user = utils.request_boolean_field_value(request_data['is_business_user'])
 
-        push_notification = utils.request_boolean_field_value(
-            request_data['push_notification']) if 'push_notification' in request_data else False
-        email_notification = utils.request_boolean_field_value(
-            request_data['email_notification']) if 'email_notification' in request_data else False
-        sms_notification = utils.request_boolean_field_value(
-            request_data['sms_notification']) if 'sms_notification' in request_data else False
-        Users.objects.create(
-            user_id=user.id,
-            phone=request_data['phone'],
-            status=Status.active.value,
-            push_notification=push_notification,
-            email_notification=email_notification,
-            sms_notification=sms_notification,
-            is_business_user=is_business_user
-        )
-        return HttpResponse(status=201, content="User is Created")
+            push_notification = utils.request_boolean_field_value(
+                request_data['push_notification']) if 'push_notification' in request_data else False
+            email_notification = utils.request_boolean_field_value(
+                request_data['email_notification']) if 'email_notification' in request_data else False
+            sms_notification = utils.request_boolean_field_value(
+                request_data['sms_notification']) if 'sms_notification' in request_data else False
+            Users.objects.create(
+                user_id=user.id,
+                phone=request_data['phone'],
+                status=Status.active.value,
+                push_notification=push_notification,
+                email_notification=email_notification,
+                sms_notification=sms_notification,
+                is_business_user=is_business_user
+            )
+            return HttpResponse(status=201, content="User is Created")
+        else:
+            return HttpResponseBadRequest("Password and confirm password do not match")
     else:
         return HttpResponseNotFound("Page Not Found")
 
