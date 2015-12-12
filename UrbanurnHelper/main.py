@@ -2,9 +2,8 @@ import os
 import sys
 import json
 import requests
-from Classes.Authentication import Authentication
-from Classes.ExcelReader import ExcelReader
-
+from UrbanurnHelper.Classes.ExcelReader import ExcelReader
+from UrbanurnHelper.Classes.Authentication import Authentication
 
 if __name__ == '__main__':
     auth_object = Authentication()

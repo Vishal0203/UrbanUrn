@@ -3,8 +3,8 @@ import json
 import os
 import sys
 import requests
-from config.env import config
-from config.env_variable_setter import set_urls
+from UrbanurnHelper.config.env import config
+from UrbanurnHelper.config.env_variable_setter import set_urls
 
 
 class Authentication:
