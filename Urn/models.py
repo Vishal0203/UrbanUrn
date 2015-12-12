@@ -39,6 +39,12 @@ class Rating(ChoiceEnum):
     RATING_FIVE = '5'
 
 
+class Category(ChoiceEnum):
+    women = 'women'
+    men = 'men'
+    decor = 'decor'
+
+
 class Status(ChoiceEnum):
     active = 'active'
     online = 'online'
@@ -302,6 +308,8 @@ class Sku(models.Model):
     name = models.CharField(max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     status = models.NullBooleanField(default=True)
+    parent_sku_id = models.IntegerField(null=True)
+    category = models.CharField(max_length=10, choices=Category.choices())
     created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
                                    related_name='sku_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
