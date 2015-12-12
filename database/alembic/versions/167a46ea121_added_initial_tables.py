@@ -38,6 +38,12 @@ CREATE TYPE rating_enum AS ENUM (
     '5'
 );
 
+CREATE TYPE category_enum AS ENUM (
+    'women',
+    'men',
+    'decor'
+);
+
 CREATE TYPE role_enum AS ENUM (
     'owner',
     'admin',
@@ -367,6 +373,8 @@ CREATE TABLE sku (
     name character varying(30),
     description text,
     status boolean DEFAULT true,
+    parent_sku_id integer,
+    category category_enum,
     created_by integer,
     updated_by integer,
     created_on timestamp without time zone,
@@ -833,6 +841,9 @@ ALTER TABLE ONLY sku
 ALTER TABLE ONLY sku
     ADD CONSTRAINT "sku_users_updated_by_FK" FOREIGN KEY (updated_by) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
+ALTER TABLE ONLY sku
+    ADD CONSTRAINT "sku_sku_parent_sku_id_FK" FOREIGN KEY (parent_sku_id) REFERENCES sku(sku_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
 ALTER TABLE ONLY sessions
     ADD CONSTRAINT "sessions_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
@@ -844,6 +855,7 @@ ALTER TABLE ONLY wishlist
 
 ALTER TABLE ONLY wishlist
     ADD CONSTRAINT "wishlist_users_user_id_FK" FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
 REVOKE ALL ON SCHEMA public FROM postgres;
@@ -898,6 +910,8 @@ DROP TYPE rating_enum;
 DROP TYPE role_enum;
 
 DROP TYPE status_enum;
+
+DROP TYPE category_enum;
 
 DROP TYPE IF EXISTS order_status_enum;
 """

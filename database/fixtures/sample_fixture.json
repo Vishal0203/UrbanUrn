@@ -209,6 +209,8 @@
 	  "description": "Sarees & Shawls",
 	  "status": "True",
 	  "created_by": "1",
+      "parent_sku_id": null,
+      "category": "men",
 	  "updated_by": "1"
     }
   },
@@ -220,6 +222,8 @@
 	  "name": "Sherwanis",
 	  "description": "Sherwanis",
 	  "status": "True",
+      "parent_sku_id": "1",
+      "category": null,
 	  "created_by": "1"
     }
   },
@@ -231,6 +235,8 @@
 	  "name": "Shoes",
 	  "description": "Shoes",
 	  "status": "True",
+      "parent_sku_id": null,
+      "category": "decor",
 	  "created_by": "1",
 	  "updated_by": "1"
     }
@@ -243,6 +249,8 @@
 	  "name": "Chapals",
 	  "description": "Chapals",
 	  "status": "True",
+      "parent_sku_id": "3",
+      "category": null,
 	  "created_by": "1"
     }
   },
