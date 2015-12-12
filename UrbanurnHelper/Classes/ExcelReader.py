@@ -1,7 +1,7 @@
 import sys
 import os
 import openpyxl
-from config.env import excel_config, config
+from UrbanurnHelper.config.env import excel_config, config
 
 
 class ExcelReader:
