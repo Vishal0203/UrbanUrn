@@ -6,8 +6,8 @@ angular.module('user', ['urn.services'])
             init();
         }])
 
-    .controller('LoginController', ['$rootScope', '$scope', 'UserLogin',
-        LoginController = function ($rootScope, $scope, UserLogin) {
+    .controller('LoginController', ['$rootScope', '$scope', '$cookies', 'UserLogin',
+        LoginController = function ($rootScope, $scope, $cookies, UserLogin) {
             var init = function () {
             };
             $scope.submit = function () {
@@ -25,7 +25,8 @@ angular.module('user', ['urn.services'])
                 payload.password = $scope.password;
                 UserLogin.login(payload,
                     function (data) {
-                       // TODO: Set the JWT token received in response in $cookies service and user_guid in rootscope and redirect to home page
+                        $cookies.put('auth-token', data.token);
+                        $rootScope.user_guid = data.user_guid;
                     },
                     function (error) {
                         $scope.error = error.data;
