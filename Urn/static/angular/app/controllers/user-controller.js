@@ -6,8 +6,8 @@ angular.module('user', ['urn.services'])
             init();
         }])
 
-    .controller('LoginController', ['$rootScope', '$scope', '$cookies', 'UserLogin',
-        LoginController = function ($rootScope, $scope, $cookies, UserLogin) {
+    .controller('LoginController', ['$rootScope', '$scope', '$cookies', 'UserLogin', 'Whoami',
+        LoginController = function ($rootScope, $scope, $cookies, UserLogin, Whoami) {
             var init = function () {
             };
             $scope.submit = function () {
@@ -27,6 +27,13 @@ angular.module('user', ['urn.services'])
                     function (data) {
                         $cookies.put('auth-token', data.token);
                         $rootScope.user_guid = data.user_guid;
+                        Whoami.getUserDetails({},
+                            function (data) {
+                                // TODO: Add logic to set username on home page and redirect to home page.
+                            },
+                            function (error) {
+                                console.log(error);
+                            });
                     },
                     function (error) {
                         $scope.error = error.data;
