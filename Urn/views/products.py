@@ -5,7 +5,7 @@ from collections import OrderedDict
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 
-from Urn.common.formatters import format_skus, format_products
+from Urn.common.formatters import format_skus, format_products, format_sku_parent
 from Urn.models import Sku, Products, Businesses, ProductImages, BusinessUsers
 from Urn.schema_validators.products_validation import put_schema, schema as post_schema
 from Urn.schema_validators.sku_validation import schema
@@ -63,22 +63,31 @@ def process_sku_post(request):
             return HttpResponseBadRequest('No such sku to update')
 
 
+def sku_products(parent_sku, skus):
+    final_sku_data = []
+    for sku in skus:
+        if sku.status:
+            products = Products.objects.filter(sku_id=sku.sku_id)
+            final_sku_data.append(format_skus(sku, products))
+    return format_sku_parent(parent_sku, final_sku_data)
+
+
 def process_sku_get(request):
     url_params = request.GET
     if len(url_params) == 0:
-        skus = Sku.objects.all()
+        all_skus = Sku.objects.all()
         result = []
-        for sku in skus:
-            products = Products.objects.filter(sku_id=sku.sku_id)
-            result.append(format_skus(sku, products))
+        for parent_sku in all_skus:
+            if parent_sku.parent_sku_id is None:
+                skus = Sku.objects.filter(parent_sku_id=parent_sku.sku_id)
+                result.append(sku_products(parent_sku, skus))
         return HttpResponse(build_json(result))
     elif 'sku_guid' in url_params:
         sku_guid = url_params['sku_guid']
         try:
-            sku = Sku.objects.get(sku_guid=sku_guid)
-            if sku.status:
-                products = Products.objects.filter(sku_id=sku.sku_id)
-                return HttpResponse(build_json(format_skus(sku, products)))
+            parent_sku = Sku.objects.get(sku_guid=sku_guid)
+            skus = Sku.objects.filter(parent_sku_id=parent_sku.sku_id)
+            return HttpResponse(build_json(sku_products(parent_sku, skus)))
         except Sku.DoesNotExist as e:
             return HttpResponseBadRequest("No such SKU exists")
     else:

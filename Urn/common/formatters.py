@@ -143,6 +143,15 @@ def format_carts(cart_items):
     return cart_items_data
 
 
+def format_sku_parent(parent_sku, final_sku_data):
+    response = OrderedDict()
+    response['parent_sku_name'] = parent_sku.name
+    response['parent_sku_category'] = parent_sku.category
+    response['parent_sku_guid'] = utils.convert_uuid_string(parent_sku.sku_guid)
+    response['children'] = final_sku_data
+    return response
+
+
 def format_skus(sku, products):
     sku_data = OrderedDict()
     sku_data['sku_guid'] = utils.convert_uuid_string(sku.sku_guid)
