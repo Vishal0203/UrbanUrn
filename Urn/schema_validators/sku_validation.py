@@ -7,8 +7,11 @@ schema = {
         "description": {
             "type": "string"
         },
-        "business_id": {
-            "type": "number"
+        "parent_sku_guid": {
+            "type": "string"
+        },
+        "category": {
+            "type": "string"
         }
     },
     "required": ["name", "description"]
