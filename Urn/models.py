@@ -309,7 +309,7 @@ class Sku(models.Model):
     description = models.TextField(blank=True, null=True)
     status = models.NullBooleanField(default=True)
     parent_sku_id = models.IntegerField(null=True)
-    category = models.CharField(max_length=10, choices=Category.choices())
+    category = models.CharField(max_length=10, choices=Category.choices(), null=True)
     created_by = models.ForeignKey('Users', db_column='created_by', blank=True, null=True,
                                    related_name='sku_created_by')
     updated_by = models.ForeignKey('Users', db_column='updated_by', blank=True, null=True,
