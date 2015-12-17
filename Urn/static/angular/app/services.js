@@ -17,4 +17,10 @@ angular.module('urn.services', ['urn.models'])
                 getUserDetails: {method: "GET"}
             })
     })
+    .factory('Skus', function ($resource, ApiUrls) {
+        return $resource(ApiUrls.skus, {},
+            {
+                getSkus: {method: "GET", isArray: true}
+            })
+    })
 ;

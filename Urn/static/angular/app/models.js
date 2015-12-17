@@ -4,7 +4,8 @@ angular.module('urn.models', ['ngResource', 'ngCookies'])
         var baseUrls = {
             'products': apiBaseUrl + 'products',
             'login': apiBaseUrl + 'login',
-            'whoami': apiBaseUrl + 'whoami'
+            'whoami': apiBaseUrl + 'whoami',
+            'skus': apiBaseUrl + 'skus',
         };
         return angular.extend(baseUrls, {});
     })
