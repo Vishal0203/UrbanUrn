@@ -905,13 +905,13 @@ DROP FUNCTION before_insert_function();
 
 DROP FUNCTION before_update_function();
 
-DROP TYPE rating_enum;
+DROP TYPE IF EXISTS rating_enum;
 
-DROP TYPE role_enum;
+DROP TYPE IF EXISTS role_enum;
 
-DROP TYPE status_enum;
+DROP TYPE IF EXISTS status_enum;
 
-DROP TYPE category_enum;
+DROP TYPE IF EXISTS category_enum;
 
 DROP TYPE IF EXISTS order_status_enum;
 """
