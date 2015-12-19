@@ -81,33 +81,45 @@
                             <div style="left: 0px; display: none;" class="level0-wrapper dropdown-6col">
                                 <div class="container">
                                     <div class="level0-wrapper2">
-                                        <div class="col-1">
-                                            <div class="nav-block nav-block-center">
-                                                <ul class="level0">
-                                                    <li ng-repeat="sku in womenSkus"
-                                                        class="level1 nav-6-1 parent item"><a href="#/grid"
-                                                                                              class=""><span>{{ sku.parent_sku_name }}</span></a>
-                                                        <ul class="level1">
-                                                            <li ng-repeat="child in sku.children"
-                                                                class="level2 nav-6-1-1"><a href="#/grid"
-                                                                                            class=""><span>{{ child.name }}</span></a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
+                                        <div class="nav-block nav-block-center">
+                                            <ul class="level0">
+                                                <li ng-repeat="sku in womenSkus"
+                                                    class="level1 nav-6-1 parent item"><a href="#/grid"
+                                                                                          class=""><span>{{ sku.parent_sku_name }}</span></a>
+                                                    <ul class="level1">
+                                                        <li ng-repeat="child in sku.children"
+                                                            class="level2 nav-6-1-1"><a href="#/grid"
+                                                                                        class=""><span>{{ child.name }}</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!--level0-wrapper2-->
+                                        <div class="nav-add">
+                                            <div class="push_item">
+                                                <div class="push_img"><a href="#"><img alt="sunglass"
+                                                                                       src="/static/angular/assets/images/menu_man_sunglass.png"></a>
+                                                </div>
+                                            </div>
+                                            <div class="push_item">
+                                                <div class="push_img"><a href="#"><img alt="watch"
+                                                                                       src="/static/angular/assets/images/menu_man_sunglass.png"></a>
+                                                </div>
+                                            </div>
+                                            <div class="push_item">
+                                                <div class="push_img"><a href="#"><img alt="jeans"
+                                                                                       src="/static/angular/assets/images/menu_man_sunglass.png"></a>
+                                                </div>
+                                            </div>
+                                            <div class="push_item push_item_last">
+                                                <div class="push_img"><a href="#"><img alt="shoes"
+                                                                                       src="/static/angular/assets/images/menu_man_sunglass.png"></a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <!--nav-block nav-block-center-->
-                                        <div class="col-2">
-                                            <div class="menu_image"><a href="#" title=""><img
-                                                    src="/static/angular/assets/images/menu_image.jpg"
-                                                    alt="menu_image"></a></div>
-                                            <div class="menu_image1"><a href="#" title=""><img
-                                                    src="/static/angular/assets/images/menu_image.jpg"
-                                                    alt="menu_image"></a></div>
-                                        </div>
                                     </div>
-                                    <!--level0-wrapper2--> </div>
+                                </div>
                             </div>
                         </li>
                         <li class="mega-menu"><a href="#/grid" class="level-top"><span>Men</span></a>
