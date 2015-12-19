@@ -8,8 +8,8 @@
         <div class="col-xs-12">
           <ul>
             <li class="home"> <a title="Go to Home Page" href="#/home">Home</a><span>» </span></li>
-            <li class=""> <a title="Go to Home Page" href="#/grid">Women</a><span>» </span></li>
-            <li class="category13"><strong>Tops & Tees</strong></li>
+            <li class=""> <a title="Go to Home Page" href="#/grid">{{ sku_category }}</a><span>» </span></li>
+            <li class="category13"><strong>{{ sku_name }}</strong></li>
           </ul>
         </div>
       </div>
@@ -23,37 +23,30 @@
         <div class="col-main col-sm-9 col-sm-push-3">
           <article class="col-main">
             <div class="page-header">
-              <h2>Tops & Tees</h2>
+              <h2>{{ sku_name }}</h2>
             </div>
             <div class="category-description std">
-              <div class="slider-items-products">
+              <!-- Temporarily commented the slider feature, we will enable it at a later phase -->
+              <!--div class="slider-items-products">
                 <div id="category-desc-slider" class="product-flexslider hidden-buttons">
                   <div class="slider-items slider-width-col1 owl-carousel owl-theme" common-slider item-count="1">
-                    
-                    <!-- Item -->
                     <div class="item"> <a href="#x"><img alt="" src="/static/angular/assets/images/women_banner.png"></a>
                       <div class="cat-img-title cat-bg cat-box">
                         <h2 class="cat-heading"><strong>New Fashion 2015</strong><br></h2>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus diam arcu.</p>
                       </div>
                     </div>
-                    <!-- End Item --> 
-                    
-                    <!-- Item -->
                     <div class="item"> <a href="#x"><img alt="" src="/static/angular/assets/images/women_banner.png"></a>
-                      
                     </div>
-                    
-                    <!-- End Item --> 
-                    
                   </div>
                 </div>
-              </div>
+              </div-->
             </div>
             <div class="toolbar">
-              <div class="sorter">
+              <!-- Temporarily commented the view mode feature, we will enable it at a later phase -->
+              <!--div class="sorter">
                 <div class="view-mode"> <span title="Grid" class="button button-active button-grid">&nbsp;</span><a href="#/list" title="List" class="button-list">&nbsp;</a> </div>
-              </div>
+              </div-->
               <div id="sort-by">
                 <label class="left">Sort By: </label>
                 <ul>
@@ -94,12 +87,12 @@
               </div>
             </div>
             <div class="category-products">
-              <ul class="products-grid">
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+              <ul class="products-grid" ng-show="sku_products.length > 0">
+                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6" ng-repeat="product in sku_products">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                        <div class="new-label new-top-left">New</div>
+                      <div class="item-img-info"> <a href="#/product_detail" title="{{ product.name }}" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="{{ product.name }}"> </a>
+                        <!--div class="new-label new-top-left">New</div-->
                         <div class="item-box-hover">
                           <div class="box-inner"> <div class="actions">
                             <div class="add_cart">
@@ -113,7 +106,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
+                        <div class="item-title"> <a href="#/product_detail" title="{{ product.name }}">{{ product.name }}</a> </div>
                         <div class="item-content">
                           <div class="rating">
                             <div class="ratings">
@@ -124,353 +117,7 @@
                             </div>
                           </div>
                           <div class="item-price">
-                            <div class="price-box"> <span class="regular-price" id="product-price-1"> <span class="price">$125.00</span> </span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                        <div class="sale-label sale-top-left">Sale</div>
-                        <div class="item-box-hover">
-                          <div class="box-inner"> <div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                           <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:40%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $100.00 </span> </p>
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $90.00 </span> </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                       
-                        <div class="item-box-hover">
-                          <div class="box-inner"><div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                            <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:0%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $100.00 </span> </p>
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $90.00 </span> </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                       
-                        <div class="item-box-hover">
-                          <div class="box-inner"> <div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                           <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:100%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $100.00 </span> </p>
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $90.00 </span> </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                        <div class="item-box-hover">
-                          <div class="box-inner"><div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                            <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:100%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $100.00 </span> </p>
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $90.00 </span> </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                       
-                        <div class="item-box-hover">
-                          <div class="box-inner"> <div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                           <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:80%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                      
-                        <div class="item-box-hover">
-                          <div class="box-inner"><div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                            <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:40%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $100.00 </span> </p>
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $90.00 </span> </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                       
-                        <div class="item-box-hover">
-                          <div class="box-inner"><div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                            <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:0%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $100.00 </span> </p>
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $90.00 </span> </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                       
-                        <div class="item-box-hover">
-                          <div class="box-inner"><div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                            <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:100%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $100.00 </span> </p>
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $90.00 </span> </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="Sample Product" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="Sample Product"> </a>
-                        <div class="item-box-hover">
-                          <div class="box-inner"><div class="actions">
-                            <div class="add_cart">
-                              <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                            </div>
-                            <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
-                            <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="Sample Product"> Sample Product </a> </div>
-                        <div class="item-content">
-                          <div class="rating">
-                            <div class="ratings">
-                              <div class="rating-box">
-                                <div class="rating" style="width:100%"></div>
-                              </div>
-                              <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                            </div>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $90.00 </span> </p>
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $80.00 </span> </p>
-                            </div>
+                            <div class="price-box"> <span class="regular-price" id="product-price-1"> <span class="price">Rs. {{ product.price }}</span> </span> </div>
                           </div>
                         </div>
                       </div>
@@ -478,6 +125,9 @@
                   </div>
                 </li>
               </ul>
+              <div class="products-grid" ng-show="sku_products.length == 0">
+                  <p>Sorry, currently there are no products in this category. Stay tuned !!</p>
+              </div>
             </div>
           </article>
           <!--	///*///======    End article  ========= //*/// --> 
@@ -489,203 +139,38 @@
               <!--block-title--> 
               <!-- BEGIN BOX-CATEGORY -->
               <div class="box-content box-category">
-                <ul>
-                  <li> <a class="active" href="#">Women</a> <span class="subDropdown minus"></span>
-                    <ul class="level0_415" style="display:block">
-                      <li> <a href="#"> Tops </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Evening Tops </a> </li>
-                          <li> <a href="#"> Shirts &amp; Blouses </a> </li>
-                          <li> <a href="#"> Tunics </a> </li>
-                          <li> <a href="#"> Vests </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
+                  <ul>
+                      <li><a class="active" href="#">Women</a> <span class="subDropdown minus"></span>
+                          <ul class="level0_415" style="display:block">
+                              <li ng-repeat="sku in womenSkus"><a href="#">{{ sku.parent_sku_name }}</a> <span
+                                      class="subDropdown plus"></span>
+                                  <ul class="level1" style="display:none">
+                                      <li ng-repeat="child in sku.children"><a href="#">{{ child.name }}</a></li>
+                                  </ul>
+                              </li>
+                          </ul>
                       </li>
-                      <!--level1-->
-                      <li> <a href="#"> Bags </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Bags </a> </li>
-                          <li> <a href="#"> Designer Handbags </a> </li>
-                          <li> <a href="#"> Purses </a> </li>
-                          <li> <a href="#"> Shoulder Bags </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
+                      <li><a href="#">Men</a> <span class="subDropdown plus"></span>
+                          <ul class="level0_415" style="display:block">
+                              <li ng-repeat="sku in menSkus"><a href="#">{{ sku.parent_sku_name }}</a> <span
+                                      class="subDropdown plus"></span>
+                                  <ul class="level1" style="display:none">
+                                      <li ng-repeat="child in sku.children"><a href="#">{{ child.name }}</a></li>
+                                  </ul>
+                              </li>
+                          </ul>
                       </li>
-                      <!--level1-->
-                      <li> <a href="#"> Shoes </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Flat Shoes </a> </li>
-                          <li> <a href="#"> Flat Sandals </a> </li>
-                          <li> <a href="#"> Boots </a> </li>
-                          <li> <a href="#"> Heels </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
+                      <li class="last"><a href="#">Decor</a> <span class="subDropdown plus"></span>
+                          <ul class="level0_415" style="display:block">
+                              <li ng-repeat="sku in decorSkus"><a href="#">{{ sku.parent_sku_name }}</a> <span
+                                      class="subDropdown plus"></span>
+                                  <ul class="level1" style="display:none">
+                                      <li ng-repeat="child in sku.children"><a href="#">{{ child.name }}</a></li>
+                                  </ul>
+                              </li>
+                          </ul>
                       </li>
-                      <!--level1-->
-                      <li> <a href="#"> Jewellery </a>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Bracelets </a> </li>
-                          <li> <a href="#"> Necklaces &amp; Pendants </a> </li>
-                          <li> <a href="#"> Pins &amp; Brooches </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Dresses </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Casual Dresses </a> </li>
-                          <li> <a href="#"> Evening </a> </li>
-                          <li> <a href="#"> Designer </a> </li>
-                          <li> <a href="#"> Party </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Lingerie </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Bras </a> </li>
-                          <li> <a href="#"> Bodies </a> </li>
-                          <li> <a href="#"> Lingerie Sets </a> </li>
-                          <li> <a href="#"> Shapewear </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Jackets </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Coats </a> </li>
-                          <li> <a href="#"> Jackets </a> </li>
-                          <li> <a href="#"> Leather Jackets </a> </li>
-                          <li> <a href="#"> Blazers </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Swimwear </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Swimsuits </a> </li>
-                          <li> <a href="#"> Beach Clothing </a> </li>
-                          <li> <a href="#"> Bikinis </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                    </ul>
-                    <!--level0--> 
-                  </li>
-                  <!--level 0-->
-                  <li> <a href="#">Men</a> <span class="subDropdown plus"></span>
-                    <ul class="level0_455" style="display:none">
-                      <li> <a href="#"> Shoes </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Flat Shoes </a> </li>
-                          <li> <a href="#"> Boots </a> </li>
-                          <li> <a href="#"> Heels </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Jewellery </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Bracelets </a> </li>
-                          <li> <a href="#"> Necklaces &amp; Pendants </a> </li>
-                          <li> <a href="#"> Pins &amp; Brooches </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Dresses </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Casual Dresses </a> </li>
-                          <li> <a href="#"> Evening </a> </li>
-                          <li> <a href="#"> Designer </a> </li>
-                          <li> <a href="#"> Party </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Jackets </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Coats </a> </li>
-                          <li> <a href="#"> Jackets </a> </li>
-                          <li> <a href="#"> Leather Jackets </a> </li>
-                          <li> <a href="#"> Blazers </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Swimwear </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Swimsuits </a> </li>
-                          <li> <a href="#"> Beach Clothing </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                    </ul>
-                    <!--level0--> 
-                  </li>
-                  <!--level 0-->
-                  <li> <a href="#">Electronics</a> <span class="subDropdown plus"></span>
-                    <ul class="level0_482" style="display:none">
-                      <li> <a href="#"> Smartphones </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Samsung </a> </li>
-                          <li> <a href="#"> Apple </a> </li>
-                          <li> <a href="#"> Blackberry </a> </li>
-                          <li> <a href="#"> Nokia </a> </li>
-                          <li> <a href="#"> HTC </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Cameras </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> Digital Cameras </a> </li>
-                          <li> <a href="#"> Camcorders </a> </li>
-                          <li> <a href="#"> Lenses </a> </li>
-                          <li> <a href="#"> Filters </a> </li>
-                          <li> <a href="#"> Tripod </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                      <li> <a href="#"> Accesories </a> <span class="subDropdown plus"></span>
-                        <ul class="level1" style="display:none">
-                          <li> <a href="#"> HeadSets </a> </li>
-                          <li> <a href="#"> Batteries </a> </li>
-                          <li> <a href="#"> Screen Protectors </a> </li>
-                          <li> <a href="#"> Memory Cards </a> </li>
-                          <li> <a href="#"> Cases </a> </li>
-                          <!--end for-each -->
-                        </ul>
-                        <!--level1--> 
-                      </li>
-                      <!--level1-->
-                    </ul>
-                    <!--level0--> 
-                  </li>
-                  <!--level 0-->
-                  <li> <a href="">Digital</a> </li>
-                  <!--level 0-->
-                  <li class="last"> <a href="#">Fashion</a> </li>
-                  <!--level 0-->
-                </ul>
+                  </ul>
               </div>
               <!--box-content box-category--> 
             </div>
@@ -774,8 +259,7 @@
                     <div class="product-details">
                       <div class="access"> <a href="#" title="Remove This Item" class="btn-remove1"> <span class="icon"></span> Remove </a> </div>
                       <p class="product-name"> <a href="#/product_detail"> Sample Product </a> </p>
-                      <strong>1</strong> x <span class="price">$8.00</span> 
-                      <!--access clearfix--> 
+                      <strong>1</strong> x <span class="price">$8.00</span>
                     </div>
                   </li>
                 </ul>
