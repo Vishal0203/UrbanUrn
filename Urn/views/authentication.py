@@ -45,13 +45,39 @@ def validate_input_and_authenticate(request):
                     user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=active_session)
                     user_session.save()
 
-                return HttpResponse(build_json(keys=['user_guid', 'token'],
-                                               values=[utils.convert_uuid_string(auth_user.user_profile.user_guid),
+                return HttpResponse(build_json(keys=['username', 'user_guid', 'token'],
+                                               values=[auth_user.username,
+                                                       utils.convert_uuid_string(auth_user.user_profile.user_guid),
                                                        encoded_token.decode('utf-8')]))
             else:
                 return HttpResponseNotAllowed('This user has a disabled account')
         else:
             return HttpResponseForbidden('Invalid username or password')
+
+
+def post_reg_login(request, request_data):
+    auth_user = authenticate(username=request_data['username'], password=request_data['password'])
+    request.session.set_expiry(1800)
+    login(request, auth_user)
+    active_session = request.session.session_key
+    issued_at = datetime.datetime.utcnow()
+    jwt_payload = {
+        'iss': settings.JWT_ISSUER,
+        'iat': issued_at,
+        'exp': issued_at + datetime.timedelta(hours=2),
+        'username': auth_user.username,
+        'session_key': active_session,
+        'user_guid': basestring(auth_user.user_profile.user_guid)
+    }
+    encoded_token = jwt.encode(jwt_payload, settings.JWT_SECRET_KEY, algorithm='HS256')
+    if not Sessions.objects.filter(session_key=active_session).exists():
+        user_session = Sessions(user_id=auth_user.user_profile.user_id, session_key=active_session)
+        user_session.save()
+
+    return HttpResponse(build_json(keys=['username', 'user_guid', 'token'],
+                                   values=[auth_user.username,
+                                           utils.convert_uuid_string(auth_user.user_profile.user_guid),
+                                           encoded_token.decode('utf-8')]))
 
 
 @jwt_validate

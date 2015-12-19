@@ -6,8 +6,8 @@ angular.module('user', ['urn.services'])
             init();
         }])
 
-    .controller('LoginController', ['$rootScope', '$scope', '$cookies', 'UserLogin', 'Whoami',
-        LoginController = function ($rootScope, $scope, $cookies, UserLogin, Whoami) {
+    .controller('LoginController', ['$rootScope', '$scope', '$cookies', 'UserLogin', 'Whoami', 'UserRegister',
+        LoginController = function ($rootScope, $scope, $cookies, UserLogin, Whoami, UserRegister) {
             var init = function () {
             };
             $scope.submit = function () {
@@ -39,6 +39,33 @@ angular.module('user', ['urn.services'])
                         $scope.error = error.data;
                     });
             };
+
+            //var registration_validator = function($scope) {
+            //
+            //};
+
+            $scope.reg_submit = function () {
+                $scope.reg_error = false;
+                //registration_validator($scope);
+
+                var payload = {};
+                payload.username = $scope.reg_username;
+                payload.email = $scope.reg_email;
+                payload.password = $scope.reg_password;
+                payload.confirm_password = $scope.reg_confirm_password;
+                payload.first_name = $scope.reg_first_name;
+                payload.last_name = $scope.reg_last_name;
+                payload.phone = $scope.reg_phone;
+
+                UserRegister.register(payload,
+                    function (data) {
+                        console.log(data);
+                    },
+                    function (error) {
+                        $scope.reg_error = error.data;
+                    });
+            };
+
             init();
         }])
 

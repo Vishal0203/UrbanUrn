@@ -1,11 +1,12 @@
-angular.module('urn.models', ['ngResource', 'ngCookies'])
+angular.module('urn.models', ['ngResource'])
     .factory('ApiUrls', function () {
         var apiBaseUrl = 'api/v1_0/';
         var baseUrls = {
             'products': apiBaseUrl + 'products',
+            'register': apiBaseUrl + 'registration',
             'login': apiBaseUrl + 'login',
             'whoami': apiBaseUrl + 'whoami',
-            'skus': apiBaseUrl + 'skus',
+            'skus': apiBaseUrl + 'skus'
         };
         return angular.extend(baseUrls, {});
     })

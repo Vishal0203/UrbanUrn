@@ -151,7 +151,7 @@ ul, ol {
 .col-right.sidebar {
 	margin-top: auto;
 }
-/*---------- 3. Header ---------*/ 
+/*---------- 3. Header ---------*/
 .logo {
 	vertical-align: middle;
 	cursor: pointer;
@@ -3432,7 +3432,7 @@ button.button.submit:before {
 	padding: 6px 0;
 	width: 100%;
 }
-	
+
 
 /*--------- 8. View Type: Grid ----------- */
 .products-grid {
@@ -6179,7 +6179,7 @@ a.button.detail-bnt span {
 	font-weight: normal;
 	margin-left: 6px;
 }
-	
+
 /*------- 19. Cart page -------*/
 
 .cart {
@@ -6248,7 +6248,7 @@ button.button.btn-continue:before {
 	outline: none;
 	-webkit-border-fit: lines;
 	text-transform: uppercase;
-	border: 1px solid #ddd; 
+	border: 1px solid #ddd;
 }
 #shopping-cart-table button.button:hover {
 	background: #E8AE30;
@@ -8817,9 +8817,9 @@ select#shipping-address-select {
 }
  @media only screen and (min-width: 320px) and (max-width: 479px) {
 	 .multiple-checkout .buttons-set .button {
-		   float: none; 
+		   float: none;
     margin-left: 4px;}
-	
+
 	 .blog_entry-title {
 		 line-height:25px !important;}
 	 .blog_entry-title a {
@@ -9585,7 +9585,7 @@ float: none;
 	 margin-bottom: 5px;
 }
 	 .multiple-checkout .buttons-set .button {
-		   float: none; 
+		   float: none;
     margin-left: 4px;}
 	 .ad-spots img {
 		 width:auto !important;}
@@ -10338,7 +10338,7 @@ ul.currencies_list li a {
 .footer-inner .social {
 	width: 45%;
 	display: inline-block;
-    float: none; 
+    float: none;
     vertical-align: top;
 }
 #sequence-theme .controls a {
@@ -11149,4 +11149,49 @@ ol#compare-items li a.product-name {
 .add-banner2 {
 	background-size: 100%;
 }
+}
+
+.modal {
+	text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+
+.modal-dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.modal-header {
+    padding:20px;
+    border-bottom:1px solid #eee;
+    background-color: #F7F7F7;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal {
+    overflow-y: auto;
+}
+.modal-open {
+    overflow: auto;
+}
+.modal-open[style] {
+    padding-right: 0px !important;
+}
+.modal-body{
+	max-height: calc(100vh - 200px);
+	overflow-y: auto;
 }

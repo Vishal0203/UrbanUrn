@@ -19,7 +19,7 @@
                             more.</p>
 
                         <div class="buttons-set">
-                            <button class="button create-account"><span>Create an Account</span></button>
+                            <button class="button create-account" data-toggle = "modal" data-target = "#register_modal"><span>Create an Account</span></button>
                         </div>
                     </div>
                 </div>
@@ -115,28 +115,70 @@
     </div>
 </div>
 
-<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog"
-     aria-labelledby = "myModalLabel" aria-hidden = "true">
-    <div class = "modal-dialog">
-        <div class = "modal-content">
-            <div class = "modal-header">
-                <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
-                    &times;
-                </button>
-                <h4 class = "modal-title" id = "myModalLabel">
-                    This Modal title
-                </h4>
+<div class="modal fade" id="register_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#x2715;</button>
+                <h4 class="modal-title">Urban Urn Registration</h4>
             </div>
-            <div class = "modal-body">
-                Add some text here
-            </div>
-            <div class = "modal-footer">
-                <button type = "button" class = "btn btn-default" data-dismiss = "modal">
-                    Close
-                </button>
-                <button type = "button" class = "btn btn-primary">
-                    Submit changes
-                </button>
+            <div class="modal-body">
+                <div style="padding-left: 20px; padding-right: 20px">
+                    <div class="error-msg" ng-show="reg_error">
+                        <p>{{ reg_error }}</p>
+                    </div>
+
+                    <ul class="form-list">
+                        <li>
+                            <label for="reg_email">Email <span class="required">*</span></label>
+                            <br>
+                            <input type="email" title="Email" class="input-text" id="reg_email"
+                                   placeholder="Email Id" autocomplete="off" ng-model="reg_email">
+                        </li>
+                        <li>
+                            <label for="reg_username">Username <span class="required">*</span></label>
+                            <br>
+                            <input type="text" title="Username" id="reg_username" class="input-text"
+                                   placeholder="Username" autocomplete="off" ng-model="reg_username">
+                        </li>
+                        <li>
+                            <label for="reg_first_name">First Name <span class="required">*</span></label>
+                            <br>
+                            <input type="text" title="First Name" id="reg_first_name" class="input-text"
+                                   placeholder="First Name" autocomplete="off" ng-model="reg_first_name">
+                        </li>
+                        <li>
+                            <label for="reg_last_name">Last Name <span class="required">*</span></label>
+                            <br>
+                            <input type="text" title="Last Name" id="reg_last_name" class="input-text"
+                                   placeholder="Last Name" autocomplete="off" ng-model="reg_last_name">
+                        </li>
+                        <li>
+                            <label for="reg_phone">Phone Number <span class="required">*</span></label>
+                            <br>
+                            <input type="text" title="Phone Number" id="reg_phone" class="input-text"
+                                   placeholder="Phone Number" autocomplete="off" ng-model="reg_phone">
+                        </li>
+                        <li>
+                            <label for="reg_password">Password <span class="required">*</span></label>
+                            <br>
+                            <input type="password" title="Password" id="reg_password" class="input-text"
+                                   placeholder="Password" autocomplete="off" ng-model="reg_password">
+                        </li>
+                        <li>
+                            <label for="reg_confirm_password">Confirm Password <span class="required">*</span></label>
+                            <br>
+                            <input type="password" title="Confirm Password" id="reg_confirm_password" class="input-text"
+                                   placeholder="Confirm Password" autocomplete="off" ng-model="reg_confirm_password">
+                        </li>
+                    </ul>
+                    <p class="required">* Required Fields</p>
+                    <div class="buttons-set">
+                        <button id="register" name="Register" class="button create-account" ng-click="reg_submit()">
+                            <span>Register</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

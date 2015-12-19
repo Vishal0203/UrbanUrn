@@ -11,6 +11,12 @@ angular.module('urn.services', ['urn.models'])
                 login: {method: "POST"}
             })
     })
+    .factory('UserRegister', function ( $resource, ApiUrls) {
+        return $resource(ApiUrls.register, {},
+            {
+                register : {method : "POST"}
+            })
+    })
     .factory('Whoami', function ($resource, ApiUrls) {
         return $resource(ApiUrls.whoami, {},
             {
@@ -22,5 +28,4 @@ angular.module('urn.services', ['urn.models'])
             {
                 getSkus: {method: "GET", isArray: true}
             })
-    })
-;
+    });

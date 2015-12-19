@@ -7,6 +7,7 @@ from Urn.decorators.validators import validate_schema, jwt_validate, check_authe
     check_email_exists, check_username_exists
 from Urn.models import Users, Status
 from Urn.schema_validators.registration_validator import schema, update_schema
+from Urn.views.authentication import post_reg_login
 
 
 @csrf_exempt
@@ -43,7 +44,8 @@ def registration(request, users_api=False):
                 sms_notification=sms_notification,
                 is_business_user=is_business_user
             )
-            return HttpResponse(status=201, content="User is Created")
+
+            return post_reg_login(request, request_data)
         else:
             return HttpResponseBadRequest("Password and confirm password do not match")
     else:
