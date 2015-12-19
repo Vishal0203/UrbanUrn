@@ -59,7 +59,8 @@ angular.module('user', ['urn.services'])
 
                 UserRegister.register(payload,
                     function (data) {
-                        console.log(data);
+                        $cookies.put('auth-token', data.token);
+                        $rootScope.user_guid = data.user_guid;
                     },
                     function (error) {
                         $scope.reg_error = error.data;

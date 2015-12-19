@@ -1,11 +1,19 @@
-import os
 import sys
-import json
-import requests
-from UrbanurnHelper.Classes.ExcelReader import ExcelReader
+import argparse
+from UrbanurnHelper.Features.Products import process_product_uploads
 from UrbanurnHelper.Classes.Authentication import Authentication
+from UrbanurnHelper.Features.Skus import process_sku_uploads
+from UrbanurnHelper.config.env import excel_config
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Upload products and skus')
+    parser.add_argument("--product", help="Switch to upload products", action="store_true")
+    parser.add_argument("--sku", nargs=1, help="Switch to upload sku", choices=['parent', 'child'])
+    args = parser.parse_args()
+
+    if not (args.product or args.sku):
+        parser.error('No action requested, add --product or --sku')
+
     auth_object = Authentication()
     payload = auth_object.check_config()
     if not payload:
@@ -20,22 +28,14 @@ if __name__ == '__main__':
             sys.exit(1)
 
     print("[ OK ]")
-    print("Reading Excel..................................", end="")
+    if args.product:
+        process_product_uploads(auth_object)
 
-    excel_reader = ExcelReader()
-    product_jsons = excel_reader.get_product_json()
-    print("[ OK ]")
-
-    products_url = os.environ.get('uu_products')
-    uu_auth_header = {'X-Urbanurn-Auth': auth_object.jwt_token}
-
-    for product in product_jsons:
-        print("Pumping Product................................", end="")
-        product_json = {"product_json": json.dumps(product.get('product_json'))}
-        r = requests.post(products_url, files=list(product.get('product_images')), headers=uu_auth_header,
-                          cookies=auth_object.session_id, data=product_json)
-
-        if r.status_code == 201:
-            print("[ PASSED {0} ]".format(product.get('product_json')['name']))
+    if args.sku:
+        print("Checking SKU config............................", end="")
+        if excel_config.get('SKU_PARENT_EXCEL', None) is None and excel_config.get('SKU_CHILD_EXCEL',
+                                                                                   None) is None:
+            print("[ FAIL ]")
         else:
-            print("[ FAILED {0} ]".format(product.get('product_json')['name']))
+            print("[ OK ]")
+            process_sku_uploads(auth_object, args.sku[0])

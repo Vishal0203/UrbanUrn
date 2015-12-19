@@ -4,7 +4,7 @@ import openpyxl
 from UrbanurnHelper.config.env import excel_config, config
 
 
-class ExcelReader:
+class ProductExcelReader:
     def __init__(self):
         self.product_jsons = []
         self.required_columns = {}
