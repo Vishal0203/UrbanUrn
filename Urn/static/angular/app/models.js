@@ -6,7 +6,8 @@ angular.module('urn.models', ['ngResource'])
             'register': apiBaseUrl + 'registration',
             'login': apiBaseUrl + 'login',
             'whoami': apiBaseUrl + 'whoami',
-            'skus': apiBaseUrl + 'skus'
+            'skus': apiBaseUrl + 'skus',
+            'carts': apiBaseUrl + 'carts'
         };
         return angular.extend(baseUrls, {});
     })
