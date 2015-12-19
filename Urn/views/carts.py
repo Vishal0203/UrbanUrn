@@ -105,7 +105,6 @@ def process_carts_get(request):
     return HttpResponse(build_json(format_carts(cart_items)))
 
 
-@validate_schema(delete_schema)
 def process_carts_delete(request):
     if request.user.is_authenticated() or request.user.is_superuser or request.user.is_staff:
         return process_delete_if_authenticated(request)
@@ -115,8 +114,7 @@ def process_carts_delete(request):
 
 @jwt_validate
 def process_delete_if_authenticated(request):
-    request_data = json.loads(request.body.decode())
-    cart_item = CartItems.objects.filter(cart_item_guid=request_data["cart_item_guid"])
+    cart_item = CartItems.objects.filter(cart_item_guid=request.GET["cart_item_guid"])
     if cart_item.exists() or cart_item.get().user_id == request.user.user_profile.user_id:
         cart_item.delete()
         return HttpResponse(status=202, content='cart product deleted')
@@ -125,8 +123,7 @@ def process_delete_if_authenticated(request):
 
 
 def process_delete_if_not_authenticated(request):
-    request_data = json.loads(request.body.decode())
-    cart_item = CartItems.objects.filter(cart_item_guid=request_data["cart_item_guid"])
+    cart_item = CartItems.objects.filter(cart_item_guid=request.GET["cart_item_guid"])
     if cart_item.exists() or cart_item.get().session.session_key == request.COOKIES.get(
             settings.BROWSER_COOKIE_NAME):
         cart_item.delete()

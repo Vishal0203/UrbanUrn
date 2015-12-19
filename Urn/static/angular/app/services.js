@@ -29,4 +29,11 @@ angular.module('urn.services', ['urn.models'])
                 getSkus: {method: "GET", isArray: true},
                 getSkuProducts: {method: "GET"}
             })
+    })
+    .factory('Carts', function ($resource, ApiUrls) {
+        return $resource(ApiUrls.carts, {},
+            {
+                getCartDetails: {method: "GET", isArray: true},
+                deleteItem: {method: "DELETE"}
+            })
     });
