@@ -65,11 +65,17 @@ def process_sku_post(request):
 
 def sku_products(parent_sku, skus):
     final_sku_data = []
-    for sku in skus:
-        if sku.status:
-            products = Products.objects.filter(sku_id=sku.sku_id)
-            final_sku_data.append(format_skus(sku, products))
-    return format_sku_parent(parent_sku, final_sku_data)
+    length = skus.count()
+    if length > 0:
+        for sku in skus:
+            if sku.status:
+                products = Products.objects.filter(sku_id=sku.sku_id)
+                final_sku_data.append(format_skus(sku, products))
+        return format_sku_parent(parent_sku, final_sku_data)
+    else:
+        products = Products.objects.filter(sku_id=parent_sku.sku_id)
+        final_sku_data = format_skus(parent_sku, products)
+        return format_sku_parent(parent_sku, final_sku_data, True)
 
 
 def process_sku_get(request):

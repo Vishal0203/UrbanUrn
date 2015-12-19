@@ -76,7 +76,7 @@
                     <ul id="nav" class="hidden-xs" nav-menu>
                         <li class="level0 parent drop-menu active"><a href="#/home"><span>Home</span></a>
                         </li>
-                        <li class="mega-menu"><a href="#/grid" class="level-top"><span>Women</span></a>
+                        <li class="mega-menu"><a href class="level-top"><span>Women</span></a>
 
                             <div style="left: 0px; display: none;" class="level0-wrapper dropdown-6col">
                                 <div class="container">
@@ -84,11 +84,11 @@
                                         <div class="nav-block nav-block-center">
                                             <ul class="level0">
                                                 <li ng-repeat="sku in womenSkus"
-                                                    class="level1 nav-6-1 parent item"><a href="#/grid"
+                                                    class="level1 nav-6-1 parent item"><a href
                                                                                           class=""><span>{{ sku.parent_sku_name }}</span></a>
                                                     <ul class="level1">
                                                         <li ng-repeat="child in sku.children"
-                                                            class="level2 nav-6-1-1"><a href="#/grid"
+                                                            class="level2 nav-6-1-1"><a href ng-click="getSkuProducts(child.sku_guid)"
                                                                                         class=""><span>{{ child.name }}</span></a>
                                                         </li>
                                                     </ul>
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="mega-menu"><a href="#/grid" class="level-top"><span>Men</span></a>
+                        <li class="mega-menu"><a href class="level-top"><span>Men</span></a>
 
                             <div style="left: 0px; display: none;" class="level0-wrapper dropdown-6col">
                                 <div class="container">
@@ -130,11 +130,11 @@
                                         <div class="nav-block nav-block-center">
                                             <ul class="level0">
                                                 <li ng-repeat="sku in menSkus"
-                                                    class="level1 nav-6-1 parent item"><a href="#/grid"
+                                                    class="level1 nav-6-1 parent item"><a href
                                                                                           class=""><span>{{ sku.parent_sku_name }}</span></a>
                                                     <ul class="level1">
-                                                        <li ng-repeat="child in sku.children"
-                                                            class="level2 nav-6-1-1"><a href="#/grid"
+                                                        <li ng-repeat="child in sku.children" ng-click="getSkuProducts(child.sku_guid)"
+                                                            class="level2 nav-6-1-1"><a href
                                                                                         class=""><span>{{ child.name }}</span></a>
                                                         </li>
                                                     </ul>
@@ -168,7 +168,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="mega-menu"><a href="#/grid" class="level-top"><span>Decor</span></a>
+                        <li class="mega-menu"><a href class="level-top"><span>Decor</span></a>
 
                             <div style="left: 0px; display: none;" class="level0-wrapper dropdown-6col">
                                 <div class="container">
@@ -176,11 +176,11 @@
                                         <div class="nav-block nav-block-center">
                                             <ul class="level0">
                                                 <li ng-repeat="sku in decorSkus"
-                                                    class="level1 nav-6-1 parent item"><a href="#/grid"
+                                                    class="level1 nav-6-1 parent item"><a href
                                                                                           class=""><span>{{ sku.parent_sku_name }}</span></a>
                                                     <ul class="level1">
-                                                        <li ng-repeat="child in sku.children"
-                                                            class="level2 nav-6-1-1"><a href="#/grid"
+                                                        <li ng-repeat="child in sku.children" ng-click="getSkuProducts(child.sku_guid)"
+                                                            class="level2 nav-6-1-1"><a href
                                                                                         class=""><span>{{ child.name }}</span></a>
                                                         </li>
                                                     </ul>

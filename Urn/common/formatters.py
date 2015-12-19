@@ -1,9 +1,8 @@
 from collections import OrderedDict
 from UrbanUrn import settings
 from Urn.common.utils import convert_uuid_string
-from Urn.views import addresses
 from Urn.common import utils
-from Urn.models import Addresses, BusinessUsers, OrderDetails, Discounts, ProductImages, Reviews
+from Urn.models import Addresses, BusinessUsers, OrderDetails, ProductImages, Reviews, Sku
 
 
 def format_get_businesses(businesses, include_users=False, include_addresses=False, user=None):
@@ -143,12 +142,19 @@ def format_carts(cart_items):
     return cart_items_data
 
 
-def format_sku_parent(parent_sku, final_sku_data):
-    response = OrderedDict()
-    response['parent_sku_name'] = parent_sku.name
-    response['parent_sku_category'] = parent_sku.category
-    response['parent_sku_guid'] = utils.convert_uuid_string(parent_sku.sku_guid)
-    response['children'] = final_sku_data
+def format_sku_parent(parent_sku, final_sku_data, is_child=False):
+    if is_child:
+        response = final_sku_data
+    else:
+        response = OrderedDict()
+        response['children'] = final_sku_data
+        response['parent_sku_name'] = parent_sku.name
+        response['parent_sku_guid'] = utils.convert_uuid_string(parent_sku.sku_guid)
+    if parent_sku.category:
+        response['parent_sku_category'] = parent_sku.category
+    else:
+        grandparent = Sku.objects.get(sku_id=parent_sku.parent_sku_id)
+        response['parent_sku_category'] = grandparent.category
     return response
 
 

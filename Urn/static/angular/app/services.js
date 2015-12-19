@@ -26,6 +26,7 @@ angular.module('urn.services', ['urn.models'])
     .factory('Skus', function ($resource, ApiUrls) {
         return $resource(ApiUrls.skus, {},
             {
-                getSkus: {method: "GET", isArray: true}
+                getSkus: {method: "GET", isArray: true},
+                getSkuProducts: {method: "GET"}
             })
     });
