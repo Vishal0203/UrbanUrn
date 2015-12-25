@@ -1,6 +1,6 @@
 angular.module('urn')
-    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval','$cookies','Skus','Carts',
-        RootController = function ($rootScope, $scope, $location, $route, $interval, $cookies, Skus, Carts) {
+    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval','$cookies','Skus','Carts', 'UserLogout',
+        RootController = function ($rootScope, $scope, $location, $route, $interval, $cookies, Skus, Carts, UserLogout) {
             $rootScope.womenSkus = [];
             $rootScope.menSkus = [];
             $rootScope.decorSkus = [];
@@ -66,6 +66,23 @@ angular.module('urn')
 
             $rootScope.loadRoute = function (path) {
                 path == $location.path() ? $route.reload() : $location.path(path);
+            };
+
+            $scope.logoutUser = function() {
+                UserLogout.logout({},
+                    function (data) {
+                        console.log(data);
+                        var cookies = $cookies.getAll();
+                        $rootScope.is_loggedin = false;
+                        angular.forEach(cookies, function (v, k) {
+                            $cookies.remove(k);
+                        });
+                        $rootScope.loadRoute('/index');
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                )
             };
 
             init();
