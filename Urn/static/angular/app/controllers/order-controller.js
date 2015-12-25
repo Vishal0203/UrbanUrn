@@ -2,7 +2,6 @@ angular.module('order', ['urn.services'])
     .controller('CheckoutController', ['$rootScope', '$scope','$cookies',
         CheckoutController = function ($rootScope, $scope, $cookies) {
             $scope.createAddress = 'same';
-            $scope.selected = true;
             var init = function () {
                 if ($rootScope.user == undefined) {
                     if ($cookies.getObject('user-data')) {

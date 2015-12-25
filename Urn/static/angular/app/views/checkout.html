@@ -28,12 +28,10 @@
                       </select>
                     </li>
                     <li>
-                        <input type="radio" name="address.value"
-                              ng-click="createAddress='same'"/>
-                            <label>Ship to this address</label>
-                            <input type="radio" name="address.value"
-                               ng-click="createAddress='diff'"/>
-                            <label>Ship to different address</label>
+                        <input type="radio" ng-model="createAddress" value ='same'/>
+                        <label>Ship to this address</label>
+                        <input type="radio" ng-model="createAddress" value ='diff'/>
+                        <label>Ship to different address</label>
                     </li>
                     <li id="billing-new-address-form" ng-show="createAddress=='diff'">
                       <fieldset>
