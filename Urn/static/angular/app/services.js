@@ -17,6 +17,12 @@ angular.module('urn.services', ['urn.models'])
                 register : {method : "POST"}
             })
     })
+    .factory('UserLogout', function ( $resource, ApiUrls) {
+        return $resource(ApiUrls.logout, {},
+            {
+                logout : {method : "GET"}
+            })
+    })
     .factory('Whoami', function ($resource, ApiUrls) {
         return $resource(ApiUrls.whoami, {},
             {

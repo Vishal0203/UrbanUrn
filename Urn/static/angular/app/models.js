@@ -9,7 +9,8 @@ angular.module('urn.models', ['ngResource'])
             'skus': apiBaseUrl + 'skus',
             'carts': apiBaseUrl + 'carts',
             'wishlist': apiBaseUrl + 'wishlists',
-            'addresses': apiBaseUrl + 'addresses'
+            'addresses': apiBaseUrl + 'addresses',
+            'logout': apiBaseUrl + 'logout'
         };
         return angular.extend(baseUrls, {});
     })
@@ -30,7 +31,24 @@ angular.module('urn.models', ['ngResource'])
             }
         }
     }])
+
+    .factory('responseErrorInterceptor', ['$cookies', '$location', function ($cookies, $location) {
+        return {
+            responseError: function(response) {
+                if (response.status == 403){
+                    $rootScope.is_loggedin = false;
+                    var cookies = $cookies.getAll();
+                    angular.forEach(cookies, function (v, k) {
+                        $cookies.remove(k);
+                    });
+                    $location.path('/home');
+                }
+                return response;
+            }
+        }
+    }])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('requestInterceptor');
+        $httpProvider.interceptors.push('responseErrorInterceptor');
     }])
 ;

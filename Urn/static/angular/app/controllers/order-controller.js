@@ -5,8 +5,8 @@ angular.module('order', ['urn.services'])
             $scope.selected = true;
             var init = function () {
                 if ($rootScope.user == undefined) {
-                    if ($cookies.getObject('user')) {
-                        $rootScope.user = $cookies.getObject('user');
+                    if ($cookies.getObject('user-data')) {
+                        $rootScope.user = $cookies.getObject('user-data');
                     } else {
                         $rootScope.loadRoute('/home');
                     }

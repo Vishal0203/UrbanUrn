@@ -45,8 +45,8 @@ angular.module('product', ['urn.services'])
         ProductDetailController = function ($rootScope, $scope, $cookies) {
             var init = function () {
                 if ($rootScope.selectedProduct == undefined) {
-                    if ($cookies.getObject('selected_product')) {
-                        $rootScope.selectedProduct = $cookies.getObject('selected_product');
+                    if ($cookies.getObject('selected-product')) {
+                        $rootScope.selectedProduct = $cookies.getObject('selected-product');
                     } else {
                         $rootScope.loadRoute('/home');
                     }
