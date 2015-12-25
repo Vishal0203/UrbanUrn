@@ -7,7 +7,8 @@ angular.module('urn.models', ['ngResource'])
             'login': apiBaseUrl + 'login',
             'whoami': apiBaseUrl + 'whoami',
             'skus': apiBaseUrl + 'skus',
-            'carts': apiBaseUrl + 'carts'
+            'carts': apiBaseUrl + 'carts',
+            'wishlist': apiBaseUrl + 'wishlists'
         };
         return angular.extend(baseUrls, {});
     })

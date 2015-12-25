@@ -104,9 +104,17 @@ angular.module('user', ['urn.services'])
             init();
         }])
 
-    .controller('WishlistController', ['$rootScope', '$scope',
-        WishlistController = function ($rootScope, $scope) {
+    .controller('WishlistController', ['$rootScope', '$scope', 'WishList',
+        WishlistController = function ($rootScope, $scope, WishList) {
+            $scope.wishlistData = [];
             var init = function () {
+                WishList.getWishlist(
+                    function (data) {
+                            $scope.wishlistData = data;
+                        },
+                        function (error) {
+                            console.log(error);
+                        });
             };
             init();
         }])
