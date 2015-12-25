@@ -44,23 +44,23 @@
                 <div class="product-shop col-sm-5 col-xs-12 bounceInUp animated">
                   <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div>
                   <div class="product-name">
-                    <h1>Sample Product</h1>
+                    <h1>{{ selectedProduct.name}}</h1>
                   </div>
                   <div class="short-description"> 
                     <!--<h2>Quick Overview</h2>-->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum.</p>
+                    <p>{{ selectedProduct.description }}</p>
                   </div>
                   <div class="ratings">
                     <div class="rating-box">
                       <div style="width:60%" class="rating"></div>
                     </div>
-                    <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
+                    <p class="rating-links"> <a href="#">{{ selectedProduct.reviews_info.length }} Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
                   </div>
                   <p class="availability in-stock pull-right"><span>In Stock</span></p>
                   <div class="price-block">
                     <div class="price-box">
-                      <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> ₹315.99 </span> </p>
-                      <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> ₹309.99 </span> </p>
+                      <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> ₹{{ selectedProduct.price }} </span> </p>
+                      <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> ₹{{ selectedProduct.price }} </span> </p>
                     </div>
                   </div>
                   <div class="add-to-box">

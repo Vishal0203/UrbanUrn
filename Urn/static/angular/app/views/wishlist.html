@@ -12,7 +12,7 @@
             <h2>My Wishlist</h2>
           </div>
           <div class="my-wishlist">
-            <div class="table-responsive">
+            <div class="table-responsive" ng-show="wishlistData.length > 0">
               <form method="post" action="#" id="wishlist-view-form">
                 <fieldset>
                   <input type="hidden" value="ROBdJO5tIbODPZHZ" name="form_key">
@@ -28,20 +28,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr id="item_31" class="first odd">
+                      <tr id="item_31" class="first odd" ng-repeat="wishlist in wishlistData">
                         <td class="wishlist-cell0 customer-wishlist-item-image"><a title="Sample Product" href="#" class="product-image"> <img width="150" height="150" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"> </a></td>
-                        <td class="wishlist-cell1 customer-wishlist-item-info"><h3 class="product-name"><a title="Sample Product" href="#/product_detail">Sample Product</a></h3>
+                        <td class="wishlist-cell1 customer-wishlist-item-info"><h3 class="product-name"><a title="Sample Product" href="#/product_detail">{{ wishlist.product_name }}</a></h3>
                           <div class="description std">
-                            <div class="inner">A Black Multi-Coloured Printed Leggings for Women from Softwear.</div>
+                            <div class="inner">{{ wishlist.product_description }}</div>
                           </div>
-                          <textarea title="Comment" onblur="focusComment(this)" onfocus="focusComment(this)" cols="5" rows="3" name="description[31]" style="height: 120px; width: 96%;"></textarea></td>
+                    <!--   <textarea title="Comment" onblur="focusComment(this)" onfocus="focusComment(this)" cols="5" rows="3" name="description[31]" style="height: 120px; width: 96%;"></textarea></td> -->
                         <td data-rwd-label="Quantity" class="wishlist-cell2 customer-wishlist-item-quantity"><div class="cart-cell">
                             <div class="add-to-cart-alt">
-                              <input type="text" value="1" name="qty[31]" class="input-text qty validate-not-negative-number" pattern="\d*">
+                              <input type="text" value="{{ wishlist.product_data.quantity }}" name="qty[31]" class="input-text qty validate-not-negative-number" pattern="\d*">
                             </div>
                           </div></td>
                         <td data-rwd-label="Price" class="wishlist-cell3 customer-wishlist-item-price"><div class="cart-cell">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                            <div class="price-box"> <span class="regular-price"> <span class="price">{{ wishlist.product_price }}</span> </span> </div>
                           </div></td>
                         <td class="wishlist-cell4 customer-wishlist-item-cart"><div class="cart-cell">
                             <button class="button btn-cart" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
@@ -49,48 +49,7 @@
                           <p><a href="#" class="">Edit</a></p></td>
                         <td class="wishlist-cell5 customer-wishlist-item-remove last"><a class="remove-item" title="Clear Cart" href="#"><span><span></span></span></a></td>
                       </tr>
-                      <tr id="item_33" class="odd">
-                        <td class="wishlist-cell0 customer-wishlist-item-image"><a title="Sample Product" href="#" class="product-image"> <img width="150" height="150" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"> </a></td>
-                        <td class="wishlist-cell1 customer-wishlist-item-info"><h3 class="product-name"><a title="Sample Product" href="#/">Sample Product</a></h3>
-                          <div class="description std">
-                            <div class="inner">A Black Multi-Coloured Printed Leggings for Women from Softwear.</div>
-                          </div>
-                          <textarea title="Comment" onblur="focusComment(this)" onfocus="focusComment(this)" cols="5" rows="3" name="description[31]" style="height: 120px; width: 96%;"></textarea></td>
-                        <td data-rwd-label="Quantity" class="wishlist-cell2 customer-wishlist-item-quantity"><div class="cart-cell">
-                            <div class="add-to-cart-alt">
-                              <input type="text" value="1" name="qty[31]" class="input-text qty validate-not-negative-number" pattern="\d*">
-                            </div>
-                          </div></td>
-                        <td data-rwd-label="Price" class="wishlist-cell3 customer-wishlist-item-price"><div class="cart-cell">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                          </div></td>
-                        <td class="wishlist-cell4 customer-wishlist-item-cart"><div class="cart-cell">
-                            <button class="button btn-cart" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
-                          </div>
-                          <p><a href="#" class="">Edit</a></p></td>
-                        <td class="wishlist-cell5 customer-wishlist-item-remove last"><a class="remove-item" title="Clear Cart" href="#"><span><span></span></span></a></td>
-                      </tr>
-                      <tr id="item_32" class="last even">
-                        <td class="wishlist-cell0 customer-wishlist-item-image"><a title="Sample Product" href="#" class="product-image"> <img width="150" height="150" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"> </a></td>
-                        <td class="wishlist-cell1 customer-wishlist-item-info"><h3 class="product-name"><a title="Sample Product" href="#/product_detail">Sample Product</a></h3>
-                          <div class="description std">
-                            <div class="inner">Blue colour self design casual shirt.</div>
-                          </div>
-                          <textarea title="Comment" onblur="focusComment(this)" onfocus="focusComment(this)" cols="5" rows="3" name="description[32]" style="height: 120px; width: 96%;"></textarea></td>
-                        <td data-rwd-label="Quantity" class="wishlist-cell2 customer-wishlist-item-quantity"><div class="cart-cell">
-                            <div class="add-to-cart-alt">
-                              <input type="text" value="1" name="qty[32]" class="input-text qty validate-not-negative-number" pattern="\d*">
-                            </div>
-                          </div></td>
-                        <td data-rwd-label="Price" class="wishlist-cell3 customer-wishlist-item-price"><div class="cart-cell">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$55.00</span> </span> </div>
-                          </div></td>
-                        <td class="wishlist-cell4 customer-wishlist-item-cart"><div class="cart-cell">
-                            <button class="button btn-cart" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
-                          </div>
-                          <p><a href="#" class="">Edit</a></p></td>
-                        <td class="wishlist-cell5 customer-wishlist-item-remove last"><a class="remove-item" title="Clear Cart" href="#"><span><span></span></span></a></td>
-                      </tr>
+
                     </tbody>
                   </table>
                   <div class="buttons-set buttons-set2">
@@ -101,10 +60,13 @@
                 </fieldset>
               </form>
             </div>
+              <div ng-show="wishlistData.length == 0">
+                  <p>Sorry, currently there are no products in your wishlist. Browse the products to add !!</p>
+              </div>
           </div>
-          <div class="buttons-set">
+         <!-- <div class="buttons-set">
             <p class="back-link"><a href="#"><small>« </small>Back</a></p>
-          </div>
+          </div> -->
         </div>
       </div>
       <aside class="col-right sidebar col-sm-3">

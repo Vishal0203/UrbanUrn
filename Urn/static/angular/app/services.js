@@ -34,6 +34,13 @@ angular.module('urn.services', ['urn.models'])
         return $resource(ApiUrls.carts, {},
             {
                 getCartDetails: {method: "GET", isArray: true},
-                deleteItem: {method: "DELETE"}
+                deleteItem: {method: "DELETE"},
+                updateCart: {method: "PUT"}
+            })
+    })
+    .factory('WishList', function ($resource, ApiUrls) {
+        return $resource(ApiUrls.wishlist, {},
+            {
+                getWishlist : {method: "GET", isArray: true}
             })
     });

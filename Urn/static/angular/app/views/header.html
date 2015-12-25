@@ -288,7 +288,7 @@
                                             <div class="top-subtotal">{{cartData.length}} <span class="price">{{total}}</span></div>
                                             <!--top-subtotal-->
                                             <div class="pull-right">
-                                                <button title="View Cart" class="view-cart" type="button"><span>View Cart</span>
+                                                <button title="View Cart" class="view-cart" type="button" ng-click="editItemInCart()"><span>View Cart</span>
                                                 </button>
                                             </div>
                                             <!--pull-right-->
@@ -319,7 +319,7 @@
                                             </li>
                                         </ul>
                                         <div class="actions">
-                                            <button class="btn-checkout" title="Checkout" type="button">
+                                            <button class="btn-checkout" title="Checkout" type="button" ng-click="loadRoute('/checkout')">
                                                 <span>Checkout</span></button>
                                         </div>
                                         <!--actions-->

@@ -41,9 +41,16 @@ angular.module('product', ['urn.services'])
             init();
         }])
 
-    .controller('ProductDetailController', ['$rootScope', '$scope',
-        ProductDetailController = function ($rootScope, $scope) {
+    .controller('ProductDetailController', ['$rootScope', '$scope', '$cookies',
+        ProductDetailController = function ($rootScope, $scope, $cookies) {
             var init = function () {
+                if ($rootScope.selectedProduct == undefined) {
+                    if ($cookies.getObject('selected_product')) {
+                        $rootScope.selectedProduct = $cookies.getObject('selected_product');
+                    } else {
+                        $rootScope.loadRoute('/home');
+                    }
+                }
             };
             init();
         }])

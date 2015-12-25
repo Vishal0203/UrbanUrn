@@ -62,7 +62,7 @@ angular.module('urn')
                 controller : 'AddressController',
                 templateUrl : '/static/angular/app/views/multiple_addresses.html'
             })
-            .when('/product_detail', {
+            .when('/product_detail/:product_name', {
                 controller : 'ProductDetailController',
                 templateUrl : '/static/angular/app/views/product_detail.html'
             })

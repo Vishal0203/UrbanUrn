@@ -102,6 +102,8 @@ def format_wishlist_get(users_wishlist):
         item_dict["product_guid"] = convert_uuid_string(item.product.product_guid)
         item_dict["product_name"] = item.product.name
         item_dict["product_data"] = item.product_data
+        item_dict["product_price"] = item.product.price
+        item_dict["product_description"] = item.product.description
         response.append(item_dict)
 
     return response
