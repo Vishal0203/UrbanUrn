@@ -87,6 +87,7 @@ angular.module('user', ['urn.services'])
 
     .controller('WishlistController', ['$rootScope', '$scope', 'WishList',
         WishlistController = function ($rootScope, $scope, WishList) {
+            $scope.wishlistData = [];
             var init = function () {
                 WishList.getWishlist(
                     function (data) {

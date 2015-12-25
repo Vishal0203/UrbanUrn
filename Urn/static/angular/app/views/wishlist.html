@@ -12,7 +12,7 @@
             <h2>My Wishlist</h2>
           </div>
           <div class="my-wishlist">
-            <div class="table-responsive">
+            <div class="table-responsive" ng-show="wishlistData.length > 0">
               <form method="post" action="#" id="wishlist-view-form">
                 <fieldset>
                   <input type="hidden" value="ROBdJO5tIbODPZHZ" name="form_key">
@@ -60,10 +60,13 @@
                 </fieldset>
               </form>
             </div>
+              <div ng-show="wishlistData.length == 0">
+                  <p>Sorry, currently there are no products in your wishlist. Browse the products to add !!</p>
+              </div>
           </div>
-          <div class="buttons-set">
+         <!-- <div class="buttons-set">
             <p class="back-link"><a href="#"><small>« </small>Back</a></p>
-          </div>
+          </div> -->
         </div>
       </div>
       <aside class="col-right sidebar col-sm-3">
