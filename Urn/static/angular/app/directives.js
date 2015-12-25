@@ -181,4 +181,14 @@ angular.module('urn')
                 });
             }
         }
+    })
+    .directive('modalDismiss', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element) {
+                scope.dismiss = function () {
+                    $(element).modal('hide');
+                }
+            }
+        }
     });

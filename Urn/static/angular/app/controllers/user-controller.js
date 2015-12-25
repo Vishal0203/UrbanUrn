@@ -6,8 +6,8 @@ angular.module('user', ['urn.services'])
             init();
         }])
 
-    .controller('LoginController', ['$rootScope', '$scope', '$cookies', 'UserLogin', 'Whoami', 'UserRegister',
-        LoginController = function ($rootScope, $scope, $cookies, UserLogin, Whoami, UserRegister) {
+    .controller('LoginController', ['$rootScope', '$scope', '$cookies', '$location', 'UserLogin', 'Whoami', 'UserRegister',
+        LoginController = function ($rootScope, $scope, $cookies, $location, UserLogin, Whoami, UserRegister) {
             var init = function () {
             };
             $scope.submit = function () {
@@ -30,7 +30,8 @@ angular.module('user', ['urn.services'])
                         Whoami.getUserDetails({},
                             function (data) {
                                 $rootScope.user = data;
-                                // TODO: Add logic to set username on home page and redirect to home page.
+                                $rootScope.is_loggedin = true;
+                                $location.path('/index');
                             },
                             function (error) {
                                 console.log(error);
@@ -41,13 +42,8 @@ angular.module('user', ['urn.services'])
                     });
             };
 
-            //var registration_validator = function($scope) {
-            //
-            //};
-
             $scope.reg_submit = function () {
                 $scope.reg_error = false;
-                //registration_validator($scope);
 
                 var payload = {};
                 payload.username = $scope.reg_username;
@@ -62,6 +58,16 @@ angular.module('user', ['urn.services'])
                     function (data) {
                         $cookies.put('auth-token', data.token);
                         $rootScope.user_guid = data.user_guid;
+                        Whoami.getUserDetails({},
+                            function (data) {
+                                $rootScope.user = data;
+                                $rootScope.is_loggedin = true;
+                                $scope.dismiss();
+                                $location.path('/index');
+                            },
+                            function (error) {
+                                console.log(error);
+                            });
                     },
                     function (error) {
                         $scope.reg_error = error.data;

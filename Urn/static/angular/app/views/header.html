@@ -41,7 +41,23 @@
                                 </ul>
                             </div>
                             <!-- End Header Company -->
-                            <div class="login"><a href="#/login"><span class="hidden-xs">Log In | Sign Up</span></a></div>
+                            <div class="login" ng-show="!is_loggedin">
+                                <a href="#/login"><span class="hidden-xs">Log In | Sign Up</span></a>
+                            </div>
+
+                            <div ng-show="is_loggedin">
+                                <div class="dropdown block-company-wrapper hidden-xs"><a role="button"
+                                                                                         data-toggle="dropdown"
+                                                                                         data-target="#"
+                                                                                         class="block-company dropdown-toggle"
+                                                                                         href="">{{ user.username }}<span
+                                        class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="">Logout
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <!-- links -->
                     </div>

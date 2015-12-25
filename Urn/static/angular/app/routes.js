@@ -1,6 +1,11 @@
 angular.module('urn')
     .config(function ($routeProvider) {
         $routeProvider
+            .when('/index', {
+                controller : 'RootController',
+                templateUrl : '/static/angular/app/views/index.html',
+                redirectTo: '/home'
+            })
             .when('/home', {
                 controller : 'HomeController',
                 templateUrl : '/static/angular/app/views/home.html'
