@@ -23,12 +23,19 @@
                     <li>
                       <label for="billing-address-select">Select a billing address from your address book or enter a new address.</label>
                       <br>
-                      <select name="billing_address_id" id="billing-address-select" class="address-select" title="" onChange="billing.newAddress(!this.value)">
-                        <option value="1" selected="selected">pranali d, aundh, tyyrt, Alabama 46532, United States</option>
-                        <option >New Address</option>
+                      <select ng-options="address.street_1 for address in user.addresses" ng-model="selectedAddress" name="billing_address_id" id="billing-address-select"
+                              class="address-select" title="">
                       </select>
                     </li>
-                    <li id="billing-new-address-form" style="display: none;">
+                    <li>
+                        <input type="radio" name="address.value"
+                              ng-click="createAddress='same'"/>
+                            <label>Ship to this address</label>
+                            <input type="radio" name="address.value"
+                               ng-click="createAddress='diff'"/>
+                            <label>Ship to different address</label>
+                    </li>
+                    <li id="billing-new-address-form" ng-show="createAddress=='diff'">
                       <fieldset>
                         <legend>New Address</legend>
                         <input type="hidden" name="billing[address_id]" value="4269" id="billing:address_id">
@@ -421,12 +428,7 @@
                         </ul>
                       </fieldset>
                     </li>
-                    <li>
-                      <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1" class="radio">
-                      <label for="billing:use_for_shipping_yes">Ship to this address</label>
-                      <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_no" value="0" checked="checked" class="radio">
-                      <label for="billing:use_for_shipping_no">Ship to different address</label>
-                    </li>
+
                   </ul>
                   <p class="require"><em class="required">* </em>Required Fields</p>
                   <button type="button" class="button continue" ><span>Continue</span></button>
@@ -1028,14 +1030,13 @@
               <dt class="complete"> Billing Address <span class="separator">|</span> <a href="#">Change</a> </dt>
               <dd class="complete">
                 <address>
-                swapna taru<br>
-                Better Technology Labs.<br>
-                23 North Main Stree<br>
-                Windsor<br>
-                Holtsville,  New York, 00501<br>
-                United States<br>
-                T: 5465465 <br>
-                F: 466523
+                {{ user.first_name }}<br>
+                {{ selectedAddress.street_1 }}<br>
+                {{ selectedAddress.street_2 }}<br>
+                {{ selectedAddress.city }} {{ selectedAddress.pincode }}<br>
+                {{ selectedaddress.state }}<br>
+                {{ selectedaddress.country }}<br>
+                {{ user.phone }}
                 </address>
               </dd>
               <dt class="complete"> Shipping Address <span class="separator">|</span> <a href="#">Change</a> </dt>

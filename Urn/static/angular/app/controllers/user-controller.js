@@ -30,12 +30,14 @@ angular.module('user', ['urn.services'])
                         Whoami.getUserDetails({},
                             function (data) {
                                 $rootScope.user = data;
+                                $cookies.putObject('user', $rootScope.user);
                                 $rootScope.is_loggedin = true;
                                 $location.path('/index');
                             },
                             function (error) {
                                 console.log(error);
                             });
+                        $rootScope.getCartDetails();
                     },
                     function (error) {
                         $scope.error = error.data;

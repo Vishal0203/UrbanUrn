@@ -45,4 +45,10 @@ angular.module('urn.services', ['urn.models'])
                 getWishlist : {method: "GET", isArray: true},
                 deleteWishlist : {method : "DELETE"}
             })
+    })
+    .factory('Address', function ($resource, ApiUrls) {
+        return $resource(ApiUrls.addresses, {},
+            {
+                get : {method: "POST", isArray: true}
+            })
     });

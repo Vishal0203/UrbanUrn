@@ -8,7 +8,8 @@ angular.module('urn.models', ['ngResource'])
             'whoami': apiBaseUrl + 'whoami',
             'skus': apiBaseUrl + 'skus',
             'carts': apiBaseUrl + 'carts',
-            'wishlist': apiBaseUrl + 'wishlists'
+            'wishlist': apiBaseUrl + 'wishlists',
+            'addresses': apiBaseUrl + 'addresses'
         };
         return angular.extend(baseUrls, {});
     })
