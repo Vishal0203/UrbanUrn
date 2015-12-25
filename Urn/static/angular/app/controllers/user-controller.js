@@ -29,6 +29,7 @@ angular.module('user', ['urn.services'])
                         $rootScope.user_guid = data.user_guid;
                         Whoami.getUserDetails({},
                             function (data) {
+                                $rootScope.user = data;
                                 // TODO: Add logic to set username on home page and redirect to home page.
                             },
                             function (error) {
