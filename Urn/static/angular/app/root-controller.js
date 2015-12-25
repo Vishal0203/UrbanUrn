@@ -1,18 +1,19 @@
 angular.module('urn')
-    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', 'Skus','Carts',
-        RootController = function ($rootScope, $scope, $location, $route, $interval, Skus, Carts) {
+    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval','$cookies','Skus','Carts',
+        RootController = function ($rootScope, $scope, $location, $route, $interval, $cookies, Skus, Carts) {
             $rootScope.womenSkus = [];
             $rootScope.menSkus = [];
             $rootScope.decorSkus = [];
             $rootScope.user = [];
-            $scope.cartData = [];
-            $scope.total = 0;
-            var getCartDetails = function(){
+            $rootScope.cartData = [];
+            $rootScope.total = 0;
+            $rootScope.selectedProduct;
+            $rootScope.getCartDetails = function(){
                 Carts.getCartDetails({},
                     function(data){
-                        $scope.cartData = data;
+                        $rootScope.cartData = data;
                         angular.forEach($scope.cartData, function(cart){
-                            $scope.total += parseInt(cart.product_data.quantity * cart.product_info[0].price);
+                            $rootScope.total += parseInt(cart.product_data.quantity * cart.product_info[0].price);
                         });
                     },
                     function (error) {
@@ -35,27 +36,33 @@ angular.module('urn')
                     function (error) {
                         console.log(error);
                     });
-                getCartDetails();
+                $rootScope.getCartDetails();
 
             };
-            $scope.deleteItemFromCart =  function(cart) {
+
+            $rootScope.editItemInCart = function(cart){
+                $rootScope.selectedProduct = cart.product_info[0];
+                $cookies.putObject('selected_product', $rootScope.selectedProduct);
+                $rootScope.loadRoute('/product_detail/'+ cart.product_info[0].name);
+            };
+
+            $rootScope.deleteItemFromCart =  function(cart) {
                 var payload = {};
                 payload.cart_item_guid = cart.cart_item_guid;
+                console.log(cart);
                 Carts.deleteItem(payload, function(data){
-                    getCartDetails();
+                    $rootScope.getCartDetails();
+                }, function(error){
+                    console.log(error);
                 })
-            };
-
-            $scope.editItemInCart =  function(cart) {
-                $scope.loadRoute('/shopping_cart');
             };
 
             $scope.getSkuProducts = function (sku_guid) {
                 $rootScope.sku_guid = sku_guid;
-                $scope.loadRoute('/grid');
+                $rootScope.loadRoute('/grid');
             };
 
-            $scope.loadRoute = function (path) {
+            $rootScope.loadRoute = function (path) {
                 path == $location.path() ? $route.reload() : $location.path(path);
             };
 

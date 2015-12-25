@@ -78,8 +78,27 @@ angular.module('user', ['urn.services'])
             init();
         }])
 
-    .controller('CartController', ['$rootScope', '$scope',
-        CartController = function ($rootScope, $scope) {
+    .controller('CartController', ['$rootScope', '$scope', '$cookies', 'Carts',
+        CartController = function ($rootScope, $scope, $cookies, Carts) {
+            $scope.deleteAllItemsFromCart = function(cartData) {
+                angular.forEach(cartData, function(cart){
+                    $rootScope.deleteItemFromCart(cart);
+                });
+            };
+
+            $scope.updateCartItems = function(cartData) {
+                angular.forEach(cartData, function(cart){
+                    var payload = {};
+                    payload.cart_item_guid = cart.cart_item_guid;
+                    payload.product_data = JSON.stringify(cart.product_data);
+                    Carts.updateCart(JSON.stringify(payload), function(data){
+                        $rootScope.getCartDetails();
+                        console.log(data);
+                }, function(error) {
+                    console.log(error);
+                })
+                })
+            };
             var init = function () {
             };
             init();
