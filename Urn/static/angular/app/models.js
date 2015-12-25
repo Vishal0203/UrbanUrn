@@ -40,9 +40,8 @@ angular.module('urn.models', ['ngResource'])
                     angular.forEach(cookies, function (v, k) {
                         $cookies.remove(k);
                     });
-                    $location.path('/index');
+                    $location.path('/home');
                 }
-
                 return response;
             }
         }

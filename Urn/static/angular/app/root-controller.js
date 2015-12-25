@@ -1,13 +1,13 @@
 angular.module('urn')
-    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval','$cookies','Skus','Carts', 'UserLogout',
+    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', '$cookies', 'Skus', 'Carts', 'UserLogout',
         RootController = function ($rootScope, $scope, $location, $route, $interval, $cookies, Skus, Carts, UserLogout) {
             $rootScope.womenSkus = [];
             $rootScope.menSkus = [];
             $rootScope.decorSkus = [];
-            $rootScope.user = [];
             $rootScope.cartData = [];
             $rootScope.total = 0;
             $rootScope.selectedProduct = {};
+
             $rootScope.getCartDetails = function () {
                 if ($rootScope.is_loggedin) {
                     Carts.getCartDetails({},
@@ -23,6 +23,12 @@ angular.module('urn')
                 }
             };
             var init = function () {
+                if ($cookies.getObject('user-data')) {
+                    $rootScope.user = $cookies.getObject('user-data');
+                    $rootScope.is_loggedin = true;
+                } else {
+                    $rootScope.user = {};
+                }
                 Skus.getSkus({},
                     function (data) {
                         angular.forEach(data, function (item, key) {
@@ -39,12 +45,11 @@ angular.module('urn')
                         console.log(error);
                     });
                 $rootScope.getCartDetails();
-
             };
 
             $rootScope.editItemInCart = function(cart){
                 $rootScope.selectedProduct = cart.product_info[0];
-                $cookies.putObject('selected_product', $rootScope.selectedProduct);
+                $cookies.putObject('selected-product', $rootScope.selectedProduct);
                 $rootScope.loadRoute('/product_detail/'+ cart.product_info[0].name);
             };
 
@@ -77,7 +82,7 @@ angular.module('urn')
                         angular.forEach(cookies, function (v, k) {
                             $cookies.remove(k);
                         });
-                        $rootScope.loadRoute('/index');
+                        $rootScope.loadRoute('/home');
                     },
                     function (error) {
                         console.log(error);

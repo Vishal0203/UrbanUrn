@@ -30,8 +30,9 @@ angular.module('user', ['urn.services'])
                         Whoami.getUserDetails({},
                             function (data) {
                                 $rootScope.user = data;
+                                $cookies.putObject('user-data', data);
                                 $rootScope.is_loggedin = true;
-                                $location.path('/index');
+                                $location.path('/home');
                             },
                             function (error) {
                                 console.log(error);
@@ -61,9 +62,10 @@ angular.module('user', ['urn.services'])
                         Whoami.getUserDetails({},
                             function (data) {
                                 $rootScope.user = data;
+                                $cookies.putObject('user-data', data);
                                 $rootScope.is_loggedin = true;
                                 $scope.dismiss();
-                                $location.path('/index');
+                                $location.path('/home');
                             },
                             function (error) {
                                 console.log(error);
