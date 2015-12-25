@@ -7,18 +7,20 @@ angular.module('urn')
             $rootScope.user = [];
             $rootScope.cartData = [];
             $rootScope.total = 0;
-            $rootScope.selectedProduct;
-            $rootScope.getCartDetails = function(){
-                Carts.getCartDetails({},
-                    function(data){
-                        $rootScope.cartData = data;
-                        angular.forEach($scope.cartData, function(cart){
-                            $rootScope.total += parseInt(cart.product_data.quantity * cart.product_info[0].price);
+            $rootScope.selectedProduct = {};
+            $rootScope.getCartDetails = function () {
+                if ($rootScope.is_loggedin) {
+                    Carts.getCartDetails({},
+                        function (data) {
+                            $rootScope.cartData = data;
+                            angular.forEach($scope.cartData, function (cart) {
+                                $rootScope.total += parseInt(cart.product_data.quantity * cart.product_info[0].price);
+                            });
+                        },
+                        function (error) {
+                            console.log(error);
                         });
-                    },
-                    function (error) {
-                        console.log(error);
-                    });
+                }
             };
             var init = function () {
                 Skus.getSkus({},
