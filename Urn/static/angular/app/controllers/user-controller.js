@@ -137,6 +137,15 @@ angular.module('user', ['urn.services'])
                     console.log(error);
                 })
             };
+
+            $scope.deleteWishlist = function(wishlist_guid){
+                WishList.deleteWishlist({'wishlist_guid' : wishlist_guid}, function (data) {
+                    init();
+                }, function (error) {
+                    console.log(error);
+                });
+            };
+
             init();
         }])
 ;
