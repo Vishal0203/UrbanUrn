@@ -6,9 +6,11 @@ post_schema = {
         },
         "product_data": {
             "type": "string"
+        },
+        "wishlist_guids": {
+            "type": "array"
         }
-    },
-    "required": ["product_guid", "product_data"]
+    }
 }
 
 put_schema = {

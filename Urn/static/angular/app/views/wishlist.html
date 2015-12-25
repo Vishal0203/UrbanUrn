@@ -13,7 +13,7 @@
           </div>
           <div class="my-wishlist">
             <div class="table-responsive" ng-show="wishlistData.length > 0">
-              <form method="post" action="#" id="wishlist-view-form">
+              <form method="post" id="wishlist-view-form">
                 <fieldset>
                   <input type="hidden" value="ROBdJO5tIbODPZHZ" name="form_key">
                   <table id="wishlist-table" class="clean-table linearize-table data-table">
@@ -53,9 +53,9 @@
                     </tbody>
                   </table>
                   <div class="buttons-set buttons-set2">
-                    <button class="button btn-share" title="Share Wishlist" name="save_and_share" type="submit"><span>Share Wishlist</span></button>
-                    <button class="button btn-add" title="Add All to Cart" type="button"><span>Add All to Cart</span></button>
-                    <button class="button btn-update" title="Update Wishlist" name="do" type="submit"><span>Update Wishlist</span></button>
+                  <!--  <button class="button btn-share" title="Share Wishlist" name="save_and_share" type="submit"><span>Share Wishlist</span></button> -->
+                    <button class="button btn-add" title="Add All to Cart" type="button" ng-click="addItemsToCart()"><span>Add All to Cart</span></button>
+                  <!--  <button class="button btn-update" title="Update Wishlist" name="do" type="submit"><span>Update Wishlist</span></button> -->
                   </div>
                 </fieldset>
               </form>

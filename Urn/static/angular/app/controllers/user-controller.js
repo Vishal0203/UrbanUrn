@@ -106,12 +106,13 @@ angular.module('user', ['urn.services'])
                 })
             };
             var init = function () {
+                $rootScope.getCartDetails();
             };
             init();
         }])
 
-    .controller('WishlistController', ['$rootScope', '$scope', 'WishList',
-        WishlistController = function ($rootScope, $scope, WishList) {
+    .controller('WishlistController', ['$rootScope', '$scope', 'WishList', 'Carts',
+        WishlistController = function ($rootScope, $scope, WishList, Carts) {
             $scope.wishlistData = [];
             var init = function () {
                 WishList.getWishlist(
@@ -121,6 +122,20 @@ angular.module('user', ['urn.services'])
                         function (error) {
                             console.log(error);
                         });
+            };
+
+            $scope.addItemsToCart = function () {
+                var wishlist_guids = [];
+                angular.forEach($scope.wishlistData, function (wishlist) {
+                    wishlist_guids.push(wishlist.wishlist_guid);
+                });
+                var payload = {};
+                payload.wishlist_guids = wishlist_guids;
+                Carts.addItemsToCart(JSON.stringify(payload), function (data) {
+                    $rootScope.loadRoute('/shopping_cart');
+                }, function (error) {
+                    console.log(error);
+                })
             };
             init();
         }])

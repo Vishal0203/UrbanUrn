@@ -9,7 +9,7 @@ from Urn.common.formatters import format_carts
 from Urn.common.utils import build_json, convert_uuid_string
 from Urn.decorators.cookie_manager import manage_cookie
 from Urn.decorators.validators import jwt_validate, validate_schema
-from Urn.models import Sessions, Products, CartItems
+from Urn.models import Sessions, Products, CartItems, Wishlist
 from Urn.schema_validators.cart_validation import *
 
 
@@ -36,9 +36,19 @@ def process_carts_post(request):
 @jwt_validate
 def process_post_if_authenticated(request):
     request_data = json.loads(request.body.decode())
-    product = Products.objects.get(product_guid=request_data["product_guid"])
-    cart_item = CartItems.objects.create(product_id=product.product_id, user_id=request.user.user_profile.user_id,
-                                         product_data=request_data["product_data"])
+    if "wishlist_guids" in request_data:
+        wishlist_guids = request_data["wishlist_guids"]
+        for guid in wishlist_guids:
+            wishlist = Wishlist.objects.get(wishlist_guid=guid)
+            cart_item = CartItems.objects.create(product_id=wishlist.product_id,
+                                                 user_id=request.user.user_profile.user_id,
+                                                 product_data=wishlist.product_data)
+            wishlist.delete()
+    else:
+        product = Products.objects.get(product_guid=request_data["product_guid"])
+        cart_item = CartItems.objects.create(product_id=product.product_id,
+                                             user_id=request.user.user_profile.user_id,
+                                             product_data=request_data["product_data"])
     response = OrderedDict()
     response["cart_item_guid"] = convert_uuid_string(cart_item.cart_item_guid)
 
