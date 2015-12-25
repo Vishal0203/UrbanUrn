@@ -1,4 +1,3 @@
-from collections import OrderedDict
 import json
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
@@ -6,7 +5,7 @@ from Urn.common.formatters import format_wishlist_get
 from Urn.common.utils import build_json
 from Urn.decorators.validators import jwt_validate, validate_schema
 from Urn.models import Products, Wishlist, Users
-from Urn.schema_validators.wishlist_validator import wishlist_delete, wishlist_post
+from Urn.schema_validators.wishlist_validator import wishlist_post
 
 
 @csrf_exempt
@@ -49,18 +48,20 @@ def process_wishlist_post(request):
         Wishlist.objects.create(user_id=request.user.user_profile.user_id,
                                 product_id=product_info.product_id,
                                 product_data=request_data["product_data"])
-        return HttpResponse("Product added to wishlist")
+        return HttpResponse(status=201, content="Product added to wishlist")
     else:
         return HttpResponseBadRequest("No such product")
 
 
-@validate_schema(wishlist_delete)
 def process_wishlist_delete(request):
-    request_data = json.loads(request.body.decode())
-    wish = Wishlist.objects.filter(wishlist_guid=request_data["wishlist_guid"],
-                                   user_id=request.user.user_profile.user_id)
-    if wish.exists():
-        wish.delete()
-        return HttpResponse("Product removed from wish list")
+    wishlist_guid = request.GET.get("wishlist_guid", None)
+    if wishlist_guid:
+        wish = Wishlist.objects.filter(wishlist_guid=wishlist_guid,
+                                       user_id=request.user.user_profile.user_id)
+        if wish.exists():
+            wish.delete()
+            return HttpResponse(status=202, content="Product removed from wishlist")
+        else:
+            return HttpResponseBadRequest("Product not present in wishlist")
     else:
-        return HttpResponseBadRequest("Product not present in wish list")
+        return HttpResponseBadRequest("wishlist_guid value not provided")
