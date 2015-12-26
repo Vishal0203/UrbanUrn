@@ -49,7 +49,8 @@ angular.module('urn.services', ['urn.models'])
         return $resource(ApiUrls.wishlist, {},
             {
                 getWishlist : {method: "GET", isArray: true},
-                deleteWishlist : {method : "DELETE"}
+                deleteWishlist : {method : "DELETE"},
+                addToWishlist : {method : "POST"}
             })
     })
     .factory('Address', function ($resource, ApiUrls) {

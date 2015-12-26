@@ -1,6 +1,6 @@
 angular.module('urn')
-    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', '$cookies', 'Skus', 'Carts', 'UserLogout',
-        RootController = function ($rootScope, $scope, $location, $route, $interval, $cookies, Skus, Carts, UserLogout) {
+    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', '$cookies', 'Skus', 'Carts', 'WishList', 'UserLogout',
+        RootController = function ($rootScope, $scope, $location, $route, $interval, $cookies, Skus, Carts, WishList, UserLogout) {
             $rootScope.womenSkus = [];
             $rootScope.menSkus = [];
             $rootScope.decorSkus = [];
@@ -60,6 +60,17 @@ angular.module('urn')
                 Carts.deleteItem(payload, function(data){
                     $rootScope.getCartDetails();
                 }, function(error){
+                    console.log(error);
+                })
+            };
+
+            $rootScope.addToWishlist = function(product) {
+                var payload = {};
+                payload.product_guid = product.product_guid;
+                payload.product_data = product.product_data;
+                WishList.addToWishlist(JSON.stringify(payload), function (data) {
+
+                }, function (error) {
                     console.log(error);
                 })
             };

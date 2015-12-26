@@ -5,14 +5,8 @@ wishlist_post = {
             "type": "string"
         },
         "product_data": {
-            "type": "string"
-        },
-        "product_price": {
-            "type": "string"
-        },
-        "product_description": {
-            "type": "string"
+            "type": "object",
         }
     },
-    "required": ["product_guid"]
+    "required": ["product_guid", "product_data"]
 }
