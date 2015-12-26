@@ -121,7 +121,10 @@ def process_products_post(request):
                                       business_id=business_info.business_id, sku_id=sku_info.sku_id,
                                       created_by=request.user.user_profile, is_fragile=is_fragile)
     for file in files:
-        ProductImages.objects.create(product_id=product.product_id, image=file)
+        if 'Image_1' in file.name:
+            ProductImages.objects.create(product_id=product.product_id, image=file, is_default=True)
+        else:
+            ProductImages.objects.create(product_id=product.product_id, image=file)
 
     return HttpResponse(status=201, content='Product added')
 

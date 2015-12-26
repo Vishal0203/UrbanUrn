@@ -29,7 +29,7 @@ class ProductExcelReader:
                             name_column_number = key + 1
                         self.required_columns[key] = cell.value
             else:
-                if sheet.cell(row=index, column=name_column_number).value is not None:
+                if sheet.cell(row=index + 1, column=name_column_number).value is not None:
                     self.product_jsons.append(self.get_required_keys(row, index))
 
     def get_required_keys(self, row, product_number):
@@ -40,7 +40,7 @@ class ProductExcelReader:
 
         product_image_dir = config.get('PRODUCT_IMAGES') + "\product_" + str(product_number)
         for file in os.listdir(product_image_dir):
-            if file.endswith('.jpg'):
+            if file.lower().endswith('.jpg') or file.lower().endswith('.png'):
                 product_images.append(('product_images', (file, open(product_image_dir + "\\" + file, 'rb'), 'image/jpeg')))
 
         product_json['product_images'] = product_images
