@@ -38,7 +38,7 @@ class Authentication:
         if r.status_code == requests.codes.ok:
             print('Checking authenticity..........................', end="")
             response = r.json()
-            if response.get('is_superuser', False) or response.get('is_stall', False):
+            if response.get('is_superuser', False) or response.get('is_staff', False):
                 return True
             else:
                 logout_url = os.environ.get('uu_logout')

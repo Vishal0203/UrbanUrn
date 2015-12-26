@@ -244,7 +244,7 @@ class Orders(models.Model):
 
 
 def custom_file_path(instance, filename):
-    return '/'.join(['product_images', convert_uuid_string(instance.product.sku.sku_guid),
+    return '/'.join(['Urn/static/product_images', convert_uuid_string(instance.product.sku.sku_guid),
                      convert_uuid_string(instance.product.product_guid), filename])
 
 

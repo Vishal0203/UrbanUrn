@@ -53,3 +53,4 @@ docs/_build/
 alembic.ini
 database/alembic/env.py
 media
+Urn/static/product_images/

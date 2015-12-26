@@ -20,13 +20,17 @@ class ProductExcelReader:
         sheet = wb.get_sheet_by_name('Sheet1')
         print("[ OK ]")
         print("Building payload...............................")
+        name_column_number = 0
         for index, row in enumerate(sheet.rows):
             if index is 0:
                 for key, cell in enumerate(row):
                     if cell.value in config.get('PRODUCT_KEYS'):
+                        if cell.value == 'name':
+                            name_column_number = key + 1
                         self.required_columns[key] = cell.value
             else:
-                self.product_jsons.append(self.get_required_keys(row, index))
+                if sheet.cell(row=index, column=name_column_number).value is not None:
+                    self.product_jsons.append(self.get_required_keys(row, index))
 
     def get_required_keys(self, row, product_number):
         product_json = {'product_json': {}}

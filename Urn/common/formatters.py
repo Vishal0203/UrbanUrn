@@ -205,7 +205,7 @@ def format_product_images(product_images, json=True):
     for product_image in product_images:
         product_image_data = OrderedDict()
         product_image_data['product_image_guid'] = utils.convert_uuid_string(product_image.product_image_guid)
-        product_image_data['image'] = settings.BASE_URL + product_image.image.url
+        product_image_data['image'] = settings.BASE_URL + product_image.image.url[4:]
         product_image_data['size'] = product_image.size
         product_image_data['is_default'] = product_image.is_default
         product_image_data['created_on'] = utils.format_timestamp(product_image.created_on)
