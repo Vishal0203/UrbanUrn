@@ -75,11 +75,12 @@ def format_user(user):
         user_businesses = user.user_profile.businesses_set.all()
         user_data['businesses'] = format_get_businesses(user_businesses, False, False, user.user_profile)
 
-    users_wishlist = user.user_profile.wishlist_set.all()
-    user_data['wishlist'] = format_wishlist_get(users_wishlist)
-    users_cart = user.user_profile.cartitems_set.all()
-    user_data['cart'] = format_carts(users_cart)
-    # TODO Orders
+    # TODO Orders,wishlist and Carts
+    # users_wishlist = user.user_profile.wishlist_set.all()
+    # user_data['wishlist'] = format_wishlist_get(users_wishlist)
+    # users_cart = user.user_profile.cartitems_set.all()
+    # user_data['cart'] = format_carts(users_cart)
+
 
     user_data['push_notification'] = user.user_profile.push_notification
     user_data['email_notification'] = user.user_profile.email_notification
