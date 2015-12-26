@@ -55,19 +55,20 @@ def process_orders_post(request):
         item_in_cart = CartItems.objects.filter(cart_item_guid=each_product["cart_item_guid"],
                                                 user_id=user_info.user_profile)
         if item_in_cart.exists():
+            discount_id = None
             discount = item_in_cart.get().product.discounts_set.filter(
                 product_id=item_in_cart.get().product_id)
-            discount_id = discount.get().discount_id
+            if discount.exists():
+                discount_id = discount.get().discount_id
             order_detail = OrderDetails.objects.create(order_id=order.order_id,
                                                        product_id=item_in_cart.get().product_id,
-                                                       discount_id=discount_id if discount_id else None,
+                                                       discount_id=discount_id,
                                                        total_cost=each_product["total_cost"],
                                                        product_data=item_in_cart.get().product_data)
         else:
             return HttpResponse(status=401, content="You are not authorized to view this cart")
 
-    response = OrderedDict()
-    response["status"] = order_detail.status
+    response = format_orders(Orders.objects.filter(user_id=user_info.id).filter(order_id=order.order_id))
     return HttpResponse(build_json(response))
 
 

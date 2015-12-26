@@ -73,6 +73,10 @@ angular.module('urn')
                 controller : 'WishlistController',
                 templateUrl : '/static/angular/app/views/wishlist.html'
             })
+            .when('/orders/:order_id', {
+                controller : 'OrdersController',
+                templateUrl : '/static/angular/app/views/orders.html'
+            })
            .otherwise('/home');
     })
 ;

@@ -222,6 +222,7 @@ def format_orders(order_items):
     for item in order_items:
         order_data = OrderedDict()
         order_data["order_guid"] = utils.convert_uuid_string(item.order_guid)
+        order_data["id"] = item.order_id
         order_data["order_info"] = format_order_details(OrderDetails.objects.filter(order_id=item.order_id))
         order_data["final_cost"] = item.final_cost
         order_data["address_info"] = format_addresses(Addresses.objects.filter(address_id=item.address_id))

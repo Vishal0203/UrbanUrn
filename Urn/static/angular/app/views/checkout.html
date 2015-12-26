@@ -11,72 +11,51 @@
           <h2>Checkout</h2>
         </div>
         <ol class="one-page-checkout" id="checkoutSteps">
-          <li id="opc-billing" class="section allow active">
-            <div class="step-title"> <span class="number">1</span>
+          <li id="opc-billing" class="section" ng-class="{'active allow': displayItems[0].show}">
+            <div class="step-title"> <span class="number" ng-click="updateDisplay(0)">1</span>
               <h3>Checkout Method</h3>
               <!--<a href="#">Edit</a> --> 
             </div>
-            <div id="checkout-step-billing" class="step a-item" >
+            <div id="checkout-step-billing" class="step a-item" ng-show="displayItems[0].show">
               <form id="co-billing-form" >
                 <fieldset class="group-select">
                   <ul>
                     <li>
                       <label for="billing-address-select">Select a billing address from your address book or enter a new address.</label>
                       <br>
-                      <select ng-options="address.street_1 for address in user.addresses" ng-model="selectedAddress" name="billing_address_id" id="billing-address-select"
+                      <select ng-options="address.street_1 for address in user.addresses" ng-model="selectedBillingAddress" name="billing_address_id" id="billing-address-select"
                               class="address-select" title="">
                       </select>
                     </li>
                     <li>
-                        <input type="radio" ng-model="createAddress" value ='same'/>
+                        <input type="radio" ng-model="createBillingAddress" value ='same'/>
                         <label>Ship to this address</label>
-                        <input type="radio" ng-model="createAddress" value ='diff'/>
+                        <input type="radio" ng-model="createBillingAddress" value ='diff'/>
                         <label>Ship to different address</label>
                     </li>
-                    <li id="billing-new-address-form" ng-show="createAddress=='diff'">
+                    <li id="billing-new-address-form" ng-show="createBillingAddress=='diff'">
                       <fieldset>
                         <legend>New Address</legend>
                         <input type="hidden" name="billing[address_id]" value="4269" id="billing:address_id">
                         <ul>
                           <li>
-                            <div class="customer-name">
-                              <div class="input-box name-firstname">
-                                <label for="billing:firstname"> First Name <span class="required">*</span> </label>
-                                <br>
-                                <input type="text" id="billing:firstname" name="billing[firstname]" value="pranali" title="First Name" class="input-text">
-                              </div>
-                              <div class="input-box name-lastname">
-                                <label for="billing:lastname"> Last Name <span class="required">*</span> </label>
-                                <br>
-                                <input type="text" id="billing:lastname" name="billing[lastname]" value="d" title="Last Name" class="input-text">
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="input-box">
-                              <label for="billing:company">Company</label>
-                              <br>
-                              <input type="text" id="billing:company" name="billing[company]"  title="Company" class="input-text">
-                            </div>
-                          </li>
-                          <li>
                             <label>Address <span class="required">*</span></label>
                             <br>
-                            <input type="text" title="Street Address" name="billing[street][]" value="aundh" class="input-text">
+                            <input type="text" ng-model="newBillingAddress.street_1" title="Street Address" class="input-text">
                           </li>
                           <li>
-                            <input type="text" title="Street Address 2" name="billing[street][]" class="input-text">
+                            <input type="text" ng-model="newBillingAddress.street_2" title="Street Address 2" class="input-text">
                           </li>
                           <li>
                             <div class="input-box">
                               <label for="billing:city">City <span class="required">*</span></label>
                               <br>
-                              <input type="text" title="City" name="billing[city]" value="tyyrt" class="input-text" id="billing:city">
+                              <input type="text" ng-model="newBillingAddress.city" title="City" name="billing[city]" value="tyyrt" class="input-text" id="billing:city">
                             </div>
                             <div class="input-box">
                               <label for="billing:region">State/Province <span class="required">*</span></label>
                               <br>
-                              <select id="billing:region_id" name="billing[region_id]" title="State/Province" class="validate-select" >
+                              <select id="billing:region_id" ng-model="newBillingAddress.state" name="billing[region_id]" title="State/Province" class="validate-select" >
                                 <option >Please select region, state or province</option>
                                 <option value="1">Alabama</option>
                                 <option value="2">Alaska</option>
@@ -151,12 +130,12 @@
                             <div class="input-box">
                               <label for="billing:postcode">Zip/Postal Code <span class="required">*</span></label>
                               <br>
-                              <input type="text" title="Zip/Postal Code" name="billing[postcode]" id="billing:postcode" value="46532" class="input-text validate-zip-international">
+                              <input ng-model="newBillingAddress.pincode" type="text" title="Zip/Postal Code" name="billing[postcode]" id="billing:postcode" value="46532" class="input-text validate-zip-international">
                             </div>
                             <div class="input-box">
                               <label for="billing:country_id">Country <span class="required">*</span></label>
                               <br>
-                              <select name="billing[country_id]" id="billing:country_id" class="validate-select" title="Country">
+                              <select ng-model="newBillingAddress.country" name="billing[country_id]" id="billing:country_id" class="validate-select" title="Country">
                                 
                                 <option value="AF">Afghanistan</option>
                                 <option value="AL">Albania</option>
@@ -408,19 +387,7 @@
                             </div>
                           </li>
                           <li>
-                            <div class="input-box">
-                              <label for="billing:telephone">Telephone <span class="required">*</span></label>
-                              <br>
-                              <input type="text" name="billing[telephone]" value="454541" title="Telephone" class="input-text" id="billing:telephone">
-                            </div>
-                            <div class="input-box">
-                              <label for="billing:fax">Fax</label>
-                              <br>
-                              <input type="text" name="billing[fax]"  title="Fax" class="input-text" id="billing:fax">
-                            </div>
-                          </li>
-                          <li>
-                            <input type="checkbox" name="billing[save_in_address_book]" value="1" title="Save in address book" id="billing:save_in_address_book" onChange="shipping.setSameAsBilling(false);" class="checkbox">
+                            <input type="checkbox" ng-model="saveBillingAddress" class="checkbox">
                             <label for="billing:save_in_address_book">Save in address book</label>
                           </li>
                         </ul>
@@ -429,71 +396,55 @@
 
                   </ul>
                   <p class="require"><em class="required">* </em>Required Fields</p>
-                  <button type="button" class="button continue" ><span>Continue</span></button>
+                  <button type="button" class="button continue" ng-click="updateOnContinue(0);updateDetailsBilling()"><span>Continue</span></button>
                 </fieldset>
               </form>
             </div>
           </li>
-          <li id="opc-shipping" class="section">
-            <div class="step-title"> <span class="number">2</span>
+          <li id="opc-shipping" class="section" ng-class="{'active allow': displayItems[1].show}">
+            <div class="step-title"> <span class="number" ng-click="updateDisplay(1)">2</span>
               <h3 class="one_page_heading"> Shipping Information</h3>
               <!--<a href="#">Edit</a>--> 
             </div>
-            <div id="checkout-step-shipping" class="step a-item" style="display: none;">
+            <div id="checkout-step-shipping" class="step a-item" ng-show="displayItems[1].show" >
               <form  id="co-shipping-form">
                 <fieldset class="group-select">
                   <ul>
                     <li>
                       <label for="shipping-address-select">Select a shipping address from your address book or enter a new address.</label>
                       <br>
-                      <select name="shipping_address_id" id="shipping-address-select" class="address-select" title="" onChange="shipping.newAddress(!this.value)">
-                        <option value="1" selected="selected">pranali d, aundh, tyyrt, Alabama 46532, United States</option>
-                        <option >New Address</option>
+                       <select ng-options="address.street_1 for address in user.addresses" ng-model="selectedShippingAddress"
+                              class="address-select" title="">
                       </select>
                     </li>
-                    <li id="shipping-new-address-form" style="display: none;">
+                    <li>
+                        <input type="radio" ng-model="createShippingAddress" value ='same'/>
+                        <label>Ship to this address</label>
+                        <input type="radio" ng-model="createShippingAddress" value ='diff'/>
+                        <label>Ship to different address</label>
+                    </li>
+                    <li id="shipping-new-address-form" ng-show="createShippingAddress=='diff'">
                       <fieldset>
                         <input type="hidden" name="shipping[address_id]"  id="shipping:address_id">
                         <ul>
                           <li>
-                            <div class="customer-name">
-                              <div class="input-box name-firstname">
-                                <label for="shipping:firstname"> First Name <span class="required">*</span> </label>
-                                <br>
-                                <input type="text" id="shipping:firstname" name="shipping[firstname]"  title="First Name" class="input-text" onChange="shipping.setSameAsBilling(false)">
-                              </div>
-                              <div class="input-box name-lastname">
-                                <label for="shipping:lastname"> Last Name <span class="required">*</span> </label>
-                                <br>
-                                <input type="text" id="shipping:lastname" name="shipping[lastname]"  title="Last Name" class="input-text" onChange="shipping.setSameAsBilling(false)">
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="input-box">
-                              <label for="shipping:company">Company</label>
-                              <br>
-                              <input type="text" id="shipping:company" name="shipping[company]"  title="Company" class="input-text" onChange="shipping.setSameAsBilling(false);">
-                            </div>
-                          </li>
-                          <li>
                             <label for="shipping:street1">Address <span class="required">*</span></label>
                             <br>
-                            <input type="text" title="Street Address" name="shipping[street][]" id="shipping:street1"  class="input-text" onChange="shipping.setSameAsBilling(false);">
+                            <input type="text" ng-model="newShippingAddress.street_1" title="Street Address" name="shipping[street][]" id="shipping:street1"  class="input-text" onChange="shipping.setSameAsBilling(false);">
                           </li>
                           <li>
-                            <input type="text" title="Street Address 2" name="shipping[street][]" id="shipping:street2"  class="input-text" onChange="shipping.setSameAsBilling(false);">
+                            <input type="text" ng-model="newShippingAddress.street_2" title="Street Address 2" name="shipping[street][]" id="shipping:street2"  class="input-text" onChange="shipping.setSameAsBilling(false);">
                           </li>
                           <li>
                             <div class="input-box">
                               <label for="shipping:city">City <span class="required">*</span></label>
                               <br>
-                              <input type="text" title="City" name="shipping[city]"  class="input-text" id="shipping:city" onChange="shipping.setSameAsBilling(false);">
+                              <input type="text" ng-model="newShippingAddress.city" title="City" name="shipping[city]"  class="input-text" id="shipping:city" onChange="shipping.setSameAsBilling(false);">
                             </div>
                             <div class="input-box">
                               <label for="shipping:region">State/Province <span class="required">*</span></label>
                               <br>
-                              <select id="shipping:region_id" name="shipping[region_id]" title="State/Province" class="validate-select" >
+                              <select id="shipping:region_id" ng-model="newShippingAddress.state" name="shipping[region_id]" title="State/Province" class="validate-select" >
                                 <option >Please select region, state or province</option>
                                 <option value="1">Alabama</option>
                                 <option value="2">Alaska</option>
@@ -568,12 +519,12 @@
                             <div class="input-box">
                               <label for="shipping:postcode">Zip/Postal Code <span class="required">*</span></label>
                               <br>
-                              <input type="text" title="Zip/Postal Code" name="shipping[postcode]" id="shipping:postcode"  class="input-text validate-zip-international" onChange="shipping.setSameAsBilling(false);">
+                              <input type="text" ng-model="newShippingAddress.pincode" title="Zip/Postal Code" name="shipping[postcode]" id="shipping:postcode"  class="input-text validate-zip-international" onChange="shipping.setSameAsBilling(false);">
                             </div>
                             <div class="input-box">
                               <label for="shipping:country_id">Country <span class="required">*</span></label>
                               <br>
-                              <select name="shipping[country_id]" id="shipping:country_id" class="validate-select" title="Country" onChange="shipping.setSameAsBilling(false);">
+                              <select name="shipping[country_id]" ng-model="newShippingAddress.country" id="shipping:country_id" class="validate-select" title="Country" onChange="shipping.setSameAsBilling(false);">
                                 
                                 <option value="AF">Afghanistan</option>
                                 <option value="AL">Albania</option>
@@ -825,23 +776,11 @@
                             </div>
                           </li>
                           <li>
-                            <div class="input-box">
-                              <label for="shipping:telephone">Telephone <span class="required">*</span></label>
-                              <br>
-                              <input type="text" name="shipping[telephone]"  title="Telephone" class="input-text" id="shipping:telephone" onChange="shipping.setSameAsBilling(false);">
-                            </div>
-                            <div class="input-box">
-                              <label for="shipping:fax">Fax</label>
-                              <br>
-                              <input type="text" name="shipping[fax]"  title="Fax" class="input-text" id="shipping:fax" onChange="shipping.setSameAsBilling(false);">
-                            </div>
-                          </li>
-                          <li>
-                            <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="Save in address book" id="shipping:save_in_address_book" onChange="shipping.setSameAsBilling(false);" class="checkbox">
+                            <input type="checkbox" ng-model="saveBillingAddress" id="shipping:save_in_address_book" class="checkbox">
                             <label for="shipping:save_in_address_book">Save in address book</label>
                           </li>
                           <li>
-                            <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1" class="checkbox">
+                            <input type="checkbox" ng-model="useBillingAddress" ng-change="updateShippingAddress()" class="checkbox">
                             <label for="shipping:same_as_billing">Use Billing Address</label>
                           </li>
                         </ul>
@@ -850,87 +789,83 @@
                   </ul>
                   <p class="require"><em class="required">* </em>Required Fields</p>
                   <div class="buttons-set1" id="shipping-buttons-container">
-                    <button type="button" class="button" ><span>Continue</span></button>
-                    <a href="#" class="back-link">« Back</a> </div>
+                    <button type="button" class="button" ng-click="updateOnContinue(1);updateDetailsShipping()" ><span>Continue</span></button>
+                    </div>
                 </fieldset>
               </form>
             </div>
           </li>
-          <li id="opc-shipping_method" class="section">
-            <div class="step-title"> <span class="number">3</span>
-              <h3 class="one_page_heading">Shipping Method</h3>
-              <!--<a href="#">Edit</a>--> 
+          <li id="opc-review" class="section" ng-class="{'active allow': displayItems[2].show}">
+            <div class="step-title"> <span class="number" ng-click="updateDisplay(2)">3</span>
+              <h3 class="one_page_heading">Order Review</h3>
             </div>
-            <div id="checkout-step-shipping_method" class="step a-item" style="display: none;">
-              <form id="co-shipping-method-form" >
-                <fieldset>
-                  <div id="checkout-shipping-method-load">
-                    <dl class="shipping-methods">
-                      <dt>Flat Rate</dt>
-                      <dd>
-                        <ul>
-                          <li>
-                            <input type="radio" name="shipping_method" value="flatrate_flatrate" id="s_method_flatrate_flatrate" checked="checked" class="radio">
-                            <label for="s_method_flatrate_flatrate">Fixed <span class="price">$35.00</span> </label>
-                          </li>
-                        </ul>
-                      </dd>
-                    </dl>
-                  </div>
-                  <div id="onepage-checkout-shipping-method-additional-load">
-                    <div class="add-gift-message">
-                      <h4>Do you have any gift items in your order?</h4>
-                      <p>
-                        <input type="checkbox" name="allow_gift_messages" id="allow_gift_messages" value="1" class="checkbox">
-                        <label for="allow_gift_messages">Check this checkbox if you want to add gift messages.</label>
-                      </p>
-                    </div>
-                    <div style="display: none;" class="gift-message-form" id="allow-gift-message-container">
-                      <div class="inner-box"> </div>
-                    </div>
-                  </div>
-                  <div class="buttons-set1" id="shipping-method-buttons-container">
-                    <button type="button" class="button" ><span>Continue</span></button>
-                    <a href="#" class="back-link">« Back</a> </div>
-                </fieldset>
-              </form>
+            <div id="checkout-step-review" class="step a-item" ng-show="displayItems[2].show">
+              <div class="order-review" id="checkout-review-load">
+                  <fieldset>
+                <table class="data-table cart-table" id="shopping-cart-table">
+                  <thead>
+                    <tr class="first last">
+                      <th rowspan="1">&nbsp;</th>
+                      <th rowspan="1"><span class="nobr">Product Name</span></th>
+                      <th colspan="1" class="a-center"><span class="nobr">Unit Price</span></th>
+                      <th class="a-center " rowspan="1">Qty</th>
+                      <th colspan="1" class="a-center">Subtotal</th>
+                      <th class="a-center" rowspan="1">&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="first odd" ng-repeat="cart in cartData">
+                      <td class="image"><a class="product-image" title="cart.product_info[0].name" href="#/product_detail"><img width="75" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"></a></td>
+                      <td><h2 class="product-name"> <a href>{{cart.product_info[0].name}}</a> </h2></td>
+                      <td class="a-center hidden-table"><span class="cart-price"> <span class="price">₹{{cart.product_info[0].price}}</span> </span></td>
+                      <td class="a-center movewishlist"><input maxlength="12" class="input-text qty" ng-readonly="true" title="Qty" size="4" ng-model="cart.product_data.quantity" name="cart[10522][qty]"></td>
+                      <td class="a-center movewishlist"><span class="cart-price"> <span class="price">₹{{cart.product_data.quantity * cart.product_info[0].price}}</span> </span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+              </div>
+              <div class="buttons-set13" id="review-buttons-container">
+                <p class="f-left" ng-hide="hideDetails">Forgot an Item? <a href="#/shopping_cart">Edit Your Cart</a></p>
+                <button type="submit" class="button" ><span ng-click="updateOnContinue(2);">Continue</span></button>
+              </div>
             </div>
           </li>
-          <li id="opc-payment" class="section">
-            <div class="step-title"> <span class="number">4</span>
+          <li id="opc-payment" class="section" ng-class="{'active allow': displayItems[3].show}">
+            <div class="step-title"> <span class="number" ng-click="updateDisplay(3)">4</span>
               <h3 class="one_page_heading">Payment Information</h3>
               <!--<a href="#">Edit</a>--> 
             </div>
-            <div id="checkout-step-payment" class="step a-item" style="display: none;">
+            <div id="checkout-step-payment" class="step a-item" ng-show="displayItems[3].show">
               <form id="co-payment-form">
                 <dl id="checkout-payment-method-load">
-                  <dt>
+                  <!-- <dt>
                     <input type="radio" id="p_method_checkmo" value="checkmo" name="payment[method]" title="Check / Money order" class="radio">
                     <label for="p_method_checkmo">Check / Money order</label>
-                  </dt>
+                  </dt> -->
                   <dd>
                     <fieldset class="form-list">
                     </fieldset>
                   </dd>
-                  <dt>
+                  <!-- <dt>
                     <input type="radio" id="p_method_ccsave" value="ccsave" name="payment[method]" title="Credit Card (saved)" class="radio">
                     <label for="p_method_ccsave">Credit Card (saved)</label>
-                  </dt>
+                  </dt> -->
                   <dd>
                     <fieldset class="form-list">
-                      <ul id="payment_form_ccsave" style="display: none;">
+                      <ul id="payment_form_ccsave">
                         <li>
                           <div class="input-box">
                             <label for="ccsave_cc_owner">Name on Card <span class="required">*</span></label>
                             <br>
-                            <input type="text" disabled="" title="Name on Card" class="input-text" id="ccsave_cc_owner" name="payment[cc_owner]" >
+                            <input type="text" ng-model="paymentInfo.name" title="Name on Card" class="input-text" id="ccsave_cc_owner" name="payment[cc_owner]" >
                           </div>
                         </li>
                         <li>
                           <div class="input-box">
                             <label for="ccsave_cc_type">Credit Card Type <span class="required">*</span></label>
                             <br>
-                            <select disabled="" id="ccsave_cc_type" name="payment[cc_type]" class="required-entry validate-cc-type-select">
+                            <select ng-model="paymentInfo.type" id="ccsave_cc_type" name="payment[cc_type]" class="required-entry validate-cc-type-select">
                               <option >--Please Select--</option>
                               <option value="AE">American Express</option>
                               <option value="VI">Visa</option>
@@ -943,7 +878,7 @@
                           <div class="input-box">
                             <label for="ccsave_cc_number">Credit Card Number <span class="required">*</span></label>
                             <br>
-                            <input type="text" disabled="" id="ccsave_cc_number" name="payment[cc_number]" title="Credit Card Number" class="input-text validate-cc-number validate-cc-type" >
+                            <input type="text" ng-model="paymentInfo.cardnumber" id="ccsave_cc_number" name="payment[cc_number]" title="Credit Card Number" class="input-text validate-cc-number validate-cc-type" >
                           </div>
                         </li>
                         <li>
@@ -951,7 +886,7 @@
                             <label for="ccsave_expiration">Expiration Date <span class="required">*</span></label>
                             <br>
                             <div class="v-fix">
-                              <select disabled="" id="ccsave_expiration" style="width: 140px;" name="payment[cc_exp_month]" class="required-entry">
+                              <select ng-model="paymentInfo.expMonth" id="ccsave_expiration" style="width: 140px;" name="payment[cc_exp_month]" class="required-entry">
                                 <option  selected="selected">Month</option>
                                 <option value="1">01 - January</option>
                                 <option value="2">02 - February</option>
@@ -968,7 +903,7 @@
                               </select>
                             </div>
                             <div class="v-fix">
-                              <select disabled="" id="ccsave_expiration_yr" style="width: 103px;" name="payment[cc_exp_year]" class="required-entry">
+                              <select ng-model="paymentInfo.expYear" id="ccsave_expiration_yr" style="width: 103px;" name="payment[cc_exp_year]" class="required-entry">
                                 <option  selected="selected">Year</option>
                                 <option value="2011">2011</option>
                                 <option value="2012">2012</option>
@@ -990,7 +925,7 @@
                             <label for="ccsave_cc_cid">Card Verification Number <span class="required">*</span></label>
                             <br>
                             <div class="v-fix">
-                              <input type="text" title="Card Verification Number" class="input-text" id="ccsave_cc_cid" name="payment[cc_cid]" style="width: 3em;" >
+                              <input type="text" ng-model="paymentInfo.cvv" title="Card Verification Number" class="input-text" id="ccsave_cc_cid" name="payment[cc_cid]" style="width: 3em;" >
                             </div>
                             <a href="#" class="cvv-what-is-this">What is this?</a> </div>
                         </li>
@@ -1001,21 +936,9 @@
               </form>
               <p class="require"><em class="required">* </em>Required Fields</p>
               <div class="buttons-set1" id="payment-buttons-container">
-                <button type="button" class="button" ><span>Continue</span></button>
-                <a href="#" class="back-link">« Back</a> </div>
+                <button type="button" class="button" ><span ng-click="updateOnContinue(3);sendPaymentDetails();">Save and Pay Now</span></button>
               <div style="clear: both;"></div>
-            </div>
-          </li>
-          <li id="opc-review" class="section">
-            <div class="step-title"> <span class="number">5</span>
-              <h3 class="one_page_heading">Order Review</h3>
-            </div>
-            <div id="checkout-step-review" class="step a-item" style="display: none;">
-              <div class="order-review" id="checkout-review-load"> </div>
-              <div class="buttons-set13" id="review-buttons-container">
-                <p class="f-left">Forgot an Item? <a href="#/shopping_cart">Edit Your Cart</a></p>
-                <button type="submit" class="button" ><span>Place Order</span></button>
-              </div>
+                  </div>
             </div>
           </li>
         </ol>
@@ -1029,30 +952,29 @@
               <dd class="complete">
                 <address>
                 {{ user.first_name }}<br>
-                {{ selectedAddress.street_1 }}<br>
-                {{ selectedAddress.street_2 }}<br>
-                {{ selectedAddress.city }} {{ selectedAddress.pincode }}<br>
-                {{ selectedaddress.state }}<br>
-                {{ selectedaddress.country }}<br>
+                {{ selectedBillingAddress.street_1 }}<br>
+                {{ selectedBillingAddress.street_2 }}<br>
+                {{ selectedBillingAddress.city }} {{ selectedBillingAddress.pincode }}<br>
+                {{ selectedBillingAddress.state }}<br>
+                {{ selectedBillingAddress.country }}<br>
                 {{ user.phone }}
                 </address>
               </dd>
               <dt class="complete"> Shipping Address <span class="separator">|</span> <a href="#">Change</a> </dt>
               <dd class="complete">
                 <address>
-                swapna taru<br>
-                Better Technology Labs.<br>
-                23 North Main Stree<br>
-                Windsor<br>
-                Holtsville,  New York, 00501<br>
-                United States<br>
-                T: 5465465 <br>
-                F: 466523
+                {{ user.first_name }}<br>
+                {{ selectedShippingAddress.street_1 }}<br>
+                {{ selectedShippingAddress.street_2 }}<br>
+                {{ selectedShippingAddress.city }} {{ selectedShippingAddress.pincode }}<br>
+                {{ selectedShippingAddress.state }}<br>
+                {{ selectedShippingAddress.country }}<br>
+                {{ user.phone }}
                 </address>
               </dd>
               <dt class="complete"> Shipping Method <span class="separator">|</span> <a href="#">Change</a> </dt>
               <dd class="complete"> Flat Rate - Fixed <br>
-                <span class="price">$15.00</span> </dd>
+                <span class="price">₹15.00</span> </dd>
               <dt> Payment Method </dt>
               <dd class="complete"></dd>
             </dl>

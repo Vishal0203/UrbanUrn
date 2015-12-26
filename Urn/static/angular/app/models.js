@@ -10,6 +10,7 @@ angular.module('urn.models', ['ngResource'])
             'carts': apiBaseUrl + 'carts',
             'wishlist': apiBaseUrl + 'wishlists',
             'addresses': apiBaseUrl + 'addresses',
+            'orders': apiBaseUrl + 'orders',
             'logout': apiBaseUrl + 'logout'
         };
         return angular.extend(baseUrls, {});
