@@ -1,9 +1,6 @@
 angular.module('urn')
     .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', '$cookies', 'Skus', 'Carts', 'WishList', 'UserLogout',
         RootController = function ($rootScope, $scope, $location, $route, $interval, $cookies, Skus, Carts, WishList, UserLogout) {
-            $rootScope.womenSkus = [];
-            $rootScope.menSkus = [];
-            $rootScope.decorSkus = [];
             $rootScope.cartData = [];
             $rootScope.total = 0;
             $rootScope.selectedProduct = {};
@@ -31,6 +28,9 @@ angular.module('urn')
                 }
                 Skus.getSkus({},
                     function (data) {
+                        $rootScope.womenSkus = [];
+                        $rootScope.menSkus = [];
+                        $rootScope.decorSkus = [];
                         angular.forEach(data, function (item, key) {
                             if (item.parent_sku_category == 'women') {
                                 $rootScope.womenSkus.push(item);

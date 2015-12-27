@@ -91,7 +91,7 @@
                 <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6" ng-repeat="product in sku_products">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="{{ product.name }}" class="product-image"> <img src="http://127.0.0.1:9090/static/product_images/27d71b1c-69ce-11e5-9d70-feff819cdc9f/90c67327-2b5d-4173-bc6a-f10d048e971f/Image_1.jpg" alt="{{ product.name }}"> </a>
+                      <div class="item-img-info"> <a href="#/product_detail" title="{{ product.name }}" class="product-image"> <img src="{{ product.product_images[0].image }}" alt="{{ product.name }}"> </a>
                         <!--div class="new-label new-top-left">New</div-->
                         <!-- Commented out the feature of allowing actions from product image-->
                         <!--div class="item-box-hover">
