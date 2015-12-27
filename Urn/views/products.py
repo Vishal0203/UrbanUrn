@@ -31,10 +31,11 @@ def process_sku_post(request):
     request_data = json.loads(request.body.decode())
     if request.method == 'POST':
         if request_data.get("parent_sku_guid", None) is None and request_data.get("category", None) is not None:
-            Sku.objects.create(name=request_data["name"], description=request_data["description"],
-                               category=request_data["category"], created_by=request.user.user_profile)
+            parent_sku = Sku.objects.create(name=request_data["name"], description=request_data["description"],
+                                            category=request_data["category"], created_by=request.user.user_profile)
 
-            return HttpResponse(status=201, content='parent sku created')
+            return HttpResponse(status=201, content=build_json(keys=['sku_guid'],
+                                                               values=[convert_uuid_string(parent_sku.sku_guid)]))
 
         elif request_data.get("parent_sku_guid", None) is not None and request_data.get("category", None) is None:
             parent_sku_id = Sku.objects.filter(sku_guid=request_data["parent_sku_guid"]).get().sku_id

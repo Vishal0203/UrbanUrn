@@ -87,7 +87,6 @@ angular.module('urn')
             $scope.logoutUser = function() {
                 UserLogout.logout({},
                     function (data) {
-                        console.log(data);
                         var cookies = $cookies.getAll();
                         $rootScope.is_loggedin = false;
                         angular.forEach(cookies, function (v, k) {

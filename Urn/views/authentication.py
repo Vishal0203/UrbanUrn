@@ -85,7 +85,7 @@ def logout_and_clear_session(request):
     if request.method == 'GET':
         Sessions.objects.filter(session_key=request.session.session_key).delete()
         logout(request)
-        return HttpResponse("Logged Out")
+        return HttpResponse(build_json(keys=["success"], values=["Logged Out"]))
 
 
 @jwt_validate

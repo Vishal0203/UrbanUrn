@@ -1,4 +1,6 @@
 import sys
+sys.path.append('..')  # needed to run from command prompt
+
 import argparse
 from UrbanurnHelper.Features.Products import process_product_uploads
 from UrbanurnHelper.Classes.Authentication import Authentication
@@ -8,7 +10,7 @@ from UrbanurnHelper.config.env import excel_config
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Upload products and skus')
     parser.add_argument("--product", help="Switch to upload products", action="store_true")
-    parser.add_argument("--sku", nargs=1, help="Switch to upload sku", choices=['parent', 'child'])
+    parser.add_argument("--sku", help="Switch to upload sku", action="store_true")
     args = parser.parse_args()
 
     if not (args.product or args.sku):
@@ -38,4 +40,8 @@ if __name__ == '__main__':
             print("[ FAIL ]")
         else:
             print("[ OK ]")
-            process_sku_uploads(auth_object, args.sku[0])
+            print("Uploading parent SKUs........................")
+            process_sku_uploads(auth_object, 'parent')
+
+            print("Uploading child SKUs.........................")
+            process_sku_uploads(auth_object, 'child')
