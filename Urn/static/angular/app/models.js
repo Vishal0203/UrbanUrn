@@ -35,8 +35,8 @@ angular.module('urn.models', ['ngResource'])
 
     .factory('responseErrorInterceptor', ['$cookies', '$location', function ($cookies, $location) {
         return {
-            responseError: function(response) {
-                if (response.status == 403){
+            responseError: function (response) {
+                if (response.status == 403) {
                     $rootScope.is_loggedin = false;
                     var cookies = $cookies.getAll();
                     angular.forEach(cookies, function (v, k) {

@@ -91,9 +91,10 @@
                 <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6" ng-repeat="product in sku_products">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="{{ product.name }}" class="product-image"> <img src="/static/angular/assets/images/sample_product.jpg" alt="{{ product.name }}"> </a>
+                      <div class="item-img-info"> <a href="#/product_detail" title="{{ product.name }}" class="product-image"> <img src="http://127.0.0.1:9090/static/product_images/27d71b1c-69ce-11e5-9d70-feff819cdc9f/90c67327-2b5d-4173-bc6a-f10d048e971f/Image_1.jpg" alt="{{ product.name }}"> </a>
                         <!--div class="new-label new-top-left">New</div-->
-                        <div class="item-box-hover">
+                        <!-- Commented out the feature of allowing actions from product image-->
+                        <!--div class="item-box-hover">
                           <div class="box-inner"> <div class="actions">
                             <div class="add_cart">
                               <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -101,7 +102,7 @@
                             <div class="product-detail-bnt"><a href="#/quick_view" class="button detail-bnt"><span>Quick View</span></a></div>
                            <span class="add-to-links"> <a href="#/wishlist" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#/compare" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
                           </div>
-                        </div>
+                        </div-->
                       </div>
                     </div>
                     <div class="item-info">

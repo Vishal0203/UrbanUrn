@@ -1,8 +1,8 @@
 angular.module('urn')
-    .directive('revolutionSlider', function() {
+    .directive('revolutionSlider', function () {
         return {
             restrict: 'A',
-            link: function(scope, element) {
+            link: function (scope, element) {
                 $(element).show().revolution({
                     dottedOverlay: 'none',
                     delay: 5000,
@@ -74,13 +74,13 @@ angular.module('urn')
             }
         }
     })
-    .directive('commonSlider', function() {
+    .directive('commonSlider', function () {
         return {
             restrict: 'A',
             scope: {
-                itemCount : '='
+                itemCount: '='
             },
-            link: function(scope, element) {
+            link: function (scope, element) {
                 $(element).owlCarousel({
                     items: parseInt(scope.itemCount), //10 items above 1000px browser width
                     itemsDesktop: [1024, 4], //5 items between 1024px and 901px
@@ -95,33 +95,33 @@ angular.module('urn')
             }
         }
     })
-    .directive('offerSlider', function() {
+    .directive('offerSlider', function () {
         return {
             restrict: 'A',
-            link: function(scope, element) {
+            link: function (scope, element) {
                 $(element).bxSlider({
                     mode: 'horizontal',
                     slideMargin: 3,
-                    auto:true
+                    auto: true
                 });
             }
         }
     })
-    .directive('cartDropdown', function() {
+    .directive('cartDropdown', function () {
         return {
             restrict: 'A',
-            link: function(scope, element) {
-                $(element).mouseenter(function() {
+            link: function (scope, element) {
+                $(element).mouseenter(function () {
                     $(this).find(".top-cart-content").stop(true, true).slideDown();
                 });
 
-                $(element).mouseleave(function() {
+                $(element).mouseleave(function () {
                     $(this).find(".top-cart-content").stop(true, true).slideUp();
                 });
             }
         }
     })
-    .directive('productView', function() {
+    .directive('productView', function () {
         return {
             restrict: 'A',
             link: function (scope, element) {
@@ -129,32 +129,32 @@ angular.module('urn')
             }
         }
     })
-    .directive('navMenu', function() {
+    .directive('navMenu', function () {
         return {
             restrict: 'A',
-            link: function(scope, element) {
-                $("#nav > li").hover(function() {
+            link: function (scope, element) {
+                $("#nav > li").hover(function () {
                     var el = $(this).find(".level0-wrapper");
                     el.hide();
                     el.css("left", "0");
                     el.stop(true, true).delay(150).fadeIn(300, "easeOutCubic");
-                }, function() {
+                }, function () {
                     $(this).find(".level0-wrapper").stop(true, true).delay(300).fadeOut(300, "easeInCubic");
                 });
                 var scrolled = false;
 
-                jQuery("#nav li.level0.drop-menu").mouseover(function() {
+                jQuery("#nav li.level0.drop-menu").mouseover(function () {
                     if (jQuery(window).width() >= 740) {
                         jQuery(this).children('ul.level1').fadeIn(100);
                     }
                     return false;
-                }).mouseleave(function() {
+                }).mouseleave(function () {
                     if (jQuery(window).width() >= 740) {
                         jQuery(this).children('ul.level1').fadeOut(100);
                     }
                     return false;
                 });
-                jQuery("#nav li.level0.drop-menu li").mouseover(function() {
+                jQuery("#nav li.level0.drop-menu li").mouseover(function () {
                     if (jQuery(window).width() >= 740) {
                         jQuery(this).children('ul').css({
                             top: 0,
@@ -174,7 +174,7 @@ angular.module('urn')
                         }
                         jQuery(this).children('ul').fadeIn(100);
                     }
-                }).mouseleave(function() {
+                }).mouseleave(function () {
                     if (jQuery(window).width() >= 740) {
                         jQuery(this).children('ul').fadeOut(100);
                     }
@@ -182,10 +182,10 @@ angular.module('urn')
             }
         }
     })
-    .directive('modalDismiss', function() {
+    .directive('modalDismiss', function () {
         return {
             restrict: 'A',
-            link: function(scope, element) {
+            link: function (scope, element) {
                 scope.dismiss = function () {
                     $(element).modal('hide');
                 }

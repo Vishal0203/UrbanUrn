@@ -47,24 +47,23 @@ angular.module('urn')
                 $rootScope.getCartDetails();
             };
 
-            $rootScope.editItemInCart = function(cart){
+            $rootScope.editItemInCart = function (cart) {
                 $rootScope.selectedProduct = cart.product_info[0];
                 $cookies.putObject('selected-product', $rootScope.selectedProduct);
-                $rootScope.loadRoute('/product_detail/'+ cart.product_info[0].name);
+                $rootScope.loadRoute('/product_detail/' + cart.product_info[0].name);
             };
 
-            $rootScope.deleteItemFromCart =  function(cart) {
+            $rootScope.deleteItemFromCart = function (cart) {
                 var payload = {};
                 payload.cart_item_guid = cart.cart_item_guid;
-                console.log(cart);
-                Carts.deleteItem(payload, function(data){
+                Carts.deleteItem(payload, function (data) {
                     $rootScope.getCartDetails();
-                }, function(error){
+                }, function (error) {
                     console.log(error);
                 })
             };
 
-            $rootScope.addToWishlist = function(product) {
+            $rootScope.addToWishlist = function (product) {
                 var payload = {};
                 payload.product_guid = product.product_guid;
                 payload.product_data = product.product_data;
@@ -84,7 +83,7 @@ angular.module('urn')
                 path == $location.path() ? $route.reload() : $location.path(path);
             };
 
-            $scope.logoutUser = function() {
+            $scope.logoutUser = function () {
                 UserLogout.logout({},
                     function (data) {
                         var cookies = $cookies.getAll();

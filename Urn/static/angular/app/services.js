@@ -11,16 +11,16 @@ angular.module('urn.services', ['urn.models'])
                 login: {method: "POST"}
             })
     })
-    .factory('UserRegister', function ( $resource, ApiUrls) {
+    .factory('UserRegister', function ($resource, ApiUrls) {
         return $resource(ApiUrls.register, {},
             {
-                register : {method : "POST"}
+                register: {method: "POST"}
             })
     })
-    .factory('UserLogout', function ( $resource, ApiUrls) {
+    .factory('UserLogout', function ($resource, ApiUrls) {
         return $resource(ApiUrls.logout, {},
             {
-                logout : {method : "GET"}
+                logout: {method: "GET"}
             })
     })
     .factory('Whoami', function ($resource, ApiUrls) {
@@ -48,20 +48,20 @@ angular.module('urn.services', ['urn.models'])
     .factory('WishList', function ($resource, ApiUrls) {
         return $resource(ApiUrls.wishlist, {},
             {
-                getWishlist : {method: "GET", isArray: true},
-                deleteWishlist : {method : "DELETE"},
-                addToWishlist : {method : "POST"}
+                getWishlist: {method: "GET", isArray: true},
+                deleteWishlist: {method: "DELETE"},
+                addToWishlist: {method: "POST"}
             })
     })
     .factory('Address', function ($resource, ApiUrls) {
         return $resource(ApiUrls.addresses, {},
             {
-                add : {method: "POST", isArray: true}
+                add: {method: "POST", isArray: true}
             })
     })
     .factory('Orders', function ($resource, ApiUrls) {
         return $resource(ApiUrls.orders, {},
             {
-                place : {method: "POST", isArray: true}
+                place: {method: "POST", isArray: true}
             })
     });
