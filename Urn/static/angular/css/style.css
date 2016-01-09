@@ -8546,13 +8546,18 @@ select#shipping-address-select {
   text-align: left;
   position: relative;
 }
+.accordion-faq h3{
+  margin-bottom: 25px;
+}
+.accordion-faq p{
+  text-align: justify;
+}
 .accordion-faq .panel {
   border-radius: 0;}
   .accordion-faq .panel .panel-heading {
   padding: 0;
-  color: #fff;
   border-radius: 0!important;
-  background: #333;
+  background: none;
 }
 .accordion-faq .panel-heading a {
   display: block;
@@ -8561,28 +8566,10 @@ select#shipping-address-select {
   color: #333;
   padding: 10px 5px 12px 15px;
   border-radius: 0;
-  border-right: 48px solid #E8AE30;
   min-height: 50px;
   text-decoration: none;
   font-family: "Lato", sans-serif;
   font-weight: bold;
-}
-.accordion-faq .collapsed .arrow-down {
-  display: block;
-}
-.accordion-faq .arrow-down, .accordion-faq .arrow-up {
-  position: absolute;
-  display: block;
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
-  top: 50%;
-  margin-top: -15px;
-  right: -36px;
-  color: #fff;
-}
-.accordion-faq .arrow-down, .accordion-faq .collapsed .arrow-up {
-  display: none;
 }
 /* compare */
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
