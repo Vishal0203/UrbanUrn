@@ -1,6 +1,8 @@
+import json
 from django.http import HttpResponse
 from django.db import connection
 from Urn.common.formatters import format_products
+from Urn.common.utils import build_json
 from Urn.models import Products
 
 
@@ -8,8 +10,11 @@ def fts_products(request):
     if request.method == 'GET' and request.GET.get('filter', None) is not None:
         search_query = request.GET["filter"]
         product_guids = fts_raw_query(search_query)
+        returnable = {
+            'products': format_products(Products.objects.filter(product_guid__in=product_guids), json=False)
+        }
 
-        return HttpResponse(format_products(Products.objects.filter(product_guid__in=product_guids)))
+        return HttpResponse(build_json(returnable))
 
 
 def convert_cursor_result_dict(cursor):

@@ -6,8 +6,8 @@ angular.module('product', ['urn.services'])
             init();
         }])
 
-    .controller('GridController', ['$rootScope', '$scope', 'Skus',
-        GridController = function ($rootScope, $scope, Skus) {
+    .controller('GridController', ['$rootScope', '$scope', 'Skus', 'ProductsSearch',
+        GridController = function ($rootScope, $scope, Skus, ProductsSearch) {
             $scope.sku_category = '';
             $scope.sku_name = '';
             $scope.sku_products = [];
@@ -28,6 +28,19 @@ angular.module('product', ['urn.services'])
                         function (error) {
                             console.log(error);
                         });
+                }
+
+                if ($rootScope.search_query) {
+                    ProductsSearch.search({'filter': $rootScope.search_query},
+                        function (data) {
+                            $scope.sku_category = "Search";
+                            $scope.sku_name = $rootScope.search_query;
+                            $scope.sku_products = data.products;
+                        },
+                        function (error) {
+                            console.log(error);
+                        }
+                    )
                 }
             };
 

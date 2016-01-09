@@ -11,7 +11,8 @@ angular.module('urn.models', ['ngResource'])
             'wishlist': apiBaseUrl + 'wishlists',
             'addresses': apiBaseUrl + 'addresses',
             'orders': apiBaseUrl + 'orders',
-            'logout': apiBaseUrl + 'logout'
+            'logout': apiBaseUrl + 'logout',
+            'search': apiBaseUrl + 'product/search'
         };
         return angular.extend(baseUrls, {});
     })

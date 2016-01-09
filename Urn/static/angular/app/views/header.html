@@ -65,12 +65,10 @@
                 <!-- Search-col -->
                 <div class="col-sm-3 col-xs-6 col-lg-2">
                     <div class="search-box pull-right">
-                        <form action="cat" method="POST" id="search_mini_form" name="Categories">
-                            <input type="text" placeholder="Search entire store" maxlength="70"
-                                   name="search" id="search">
-                            <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;
-                            </button>
-                        </form>
+                        <input ng-model="searchQuery" type="text" placeholder="Search entire store" maxlength="70"
+                               name="search" id="search">
+                        <button type="button" ng-click="searchProduct()" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;
+                        </button>
                     </div>
                     <!-- End Search-col -->
                 </div>

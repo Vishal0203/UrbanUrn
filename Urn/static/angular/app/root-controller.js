@@ -75,6 +75,7 @@ angular.module('urn')
             };
 
             $scope.getSkuProducts = function (sku_guid) {
+                $rootScope.search_query = undefined;
                 $rootScope.sku_guid = sku_guid;
                 $rootScope.loadRoute('/grid');
             };
@@ -97,6 +98,12 @@ angular.module('urn')
                         console.log(error);
                     }
                 )
+            };
+
+            $scope.searchProduct = function () {
+                $rootScope.sku_guid = undefined;
+                $rootScope.search_query = this.searchQuery;
+                $rootScope.loadRoute('/grid');
             };
 
             init();

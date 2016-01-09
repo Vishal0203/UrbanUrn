@@ -5,6 +5,12 @@ angular.module('urn.services', ['urn.models'])
                 getProducts: {method: "GET", isArray: true}
             })
     })
+    .factory('ProductsSearch', function ($resource, ApiUrls) {
+        return $resource(ApiUrls.search, {},
+            {
+                search: {method: "GET"}
+            })
+    })
     .factory('UserLogin', function ($resource, ApiUrls) {
         return $resource(ApiUrls.login, {},
             {
