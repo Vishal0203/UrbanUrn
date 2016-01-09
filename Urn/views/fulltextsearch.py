@@ -1,12 +1,19 @@
 from django.http import HttpResponse
 from django.db import connection
+from Urn.common.formatters import format_products
 from Urn.common.utils import build_json
+from Urn.models import Products
 
 
 def fts_products(request):
     if request.method == 'GET' and request.GET.get('filter', None) is not None:
         search_query = request.GET["filter"]
-        return HttpResponse(build_json(fts_raw_query(search_query)))
+        product_guids = fts_raw_query(search_query)
+        required_products = list()
+        for product_guid in product_guids:
+            required_products.append(Products.objects.get(product_guid=product_guid['product_guid']))
+
+        return HttpResponse(format_products(required_products))
 
 
 def convert_cursor_result_dict(cursor):
@@ -25,9 +32,6 @@ def fts_raw_query(query):
     ranked AS
     (
       SELECT product_guid,
-             s.sku_guid as sku_guid,
-             p.name,
-             p.description,
              ts_rank_cd(tsv,query) AS RANK
       FROM products p, sku s,
            q
@@ -35,10 +39,7 @@ def fts_raw_query(query):
       ORDER BY RANK DESC
       LIMIT 10
     )
-    SELECT CAST(product_guid AS varchar),
-           CAST(sku_guid AS varchar),
-           ts_headline(name, q.query) as name,
-           ts_headline(description, q.query) as description
+    SELECT CAST(product_guid AS varchar)
     FROM ranked,
          q
     ORDER BY ranked DESC;
