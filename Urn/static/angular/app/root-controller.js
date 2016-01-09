@@ -9,8 +9,9 @@ angular.module('urn')
                 if ($rootScope.is_loggedin) {
                     Carts.getCartDetails({},
                         function (data) {
+                            $rootScope.total = 0;
                             $rootScope.cartData = data;
-                            angular.forEach($scope.cartData, function (cart) {
+                            angular.forEach($rootScope.cartData, function (cart) {
                                 $rootScope.total += parseInt(cart.product_data.quantity * cart.product_info[0].price);
                             });
                         },
@@ -31,6 +32,9 @@ angular.module('urn')
                         $rootScope.womenSkus = [];
                         $rootScope.menSkus = [];
                         $rootScope.decorSkus = [];
+                        $rootScope.womenSkusGuid = '';
+                        $rootScope.menSkusGuid = '';
+                        $rootScope.decorSkusGuid = '';
                         angular.forEach(data, function (item, key) {
                             if (item.parent_sku_category == 'women') {
                                 $rootScope.womenSkus.push(item);
@@ -51,6 +55,12 @@ angular.module('urn')
                 $rootScope.selectedProduct = cart.product_info[0];
                 $cookies.putObject('selected-product', $rootScope.selectedProduct);
                 $rootScope.loadRoute('/product_detail/' + cart.product_info[0].name);
+            };
+
+             $rootScope.goToProduct = function (product) {
+                $rootScope.selectedProduct = product;
+                $cookies.putObject('selected-product', $rootScope.selectedProduct);
+                $rootScope.loadRoute('/product_detail/' + product.name);
             };
 
             $rootScope.deleteItemFromCart = function (cart) {
@@ -74,13 +84,17 @@ angular.module('urn')
                 })
             };
 
-            $scope.getSkuProducts = function (sku_guid) {
+            $rootScope.getSkuProducts = function (sku_guid) {
                 $rootScope.sku_guid = sku_guid;
                 $rootScope.loadRoute('/grid');
             };
 
             $rootScope.loadRoute = function (path) {
                 path == $location.path() ? $route.reload() : $location.path(path);
+            };
+
+            $rootScope.getUrl = function(name) {
+                return "#/product_detail/"+ name;
             };
 
             $scope.logoutUser = function () {

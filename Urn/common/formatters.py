@@ -190,6 +190,9 @@ def format_products(products, json=True):
                                                                False) if len(product_images) > 0 else []
         product_data['business_guid'] = utils.convert_uuid_string(product.business.business_guid)
         product_data['sku_guid'] = utils.convert_uuid_string(product.sku.sku_guid)
+        if product.sku.parent_sku_id:
+            product_data['parent_sku_guid'] = utils.convert_uuid_string(Sku.objects.filter(
+                sku_id=product.sku.parent_sku_id).get().sku_guid)
         product_data['is_fragile'] = product.is_fragile
         product_data['created_on'] = utils.format_timestamp(product.created_on)
         product_data['updated_on'] = utils.format_timestamp(

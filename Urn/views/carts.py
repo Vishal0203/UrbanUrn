@@ -63,10 +63,18 @@ def process_post_if_not_authenticated(request):
         active_session = Sessions.objects.get(session_key=request.COOKIES.get(settings.BROWSER_COOKIE_NAME))
     except Sessions.DoesNotExist:
         active_session = Sessions.objects.create(session_key=request.COOKIES.get(settings.BROWSER_COOKIE_NAME))
-
-    product = Products.objects.get(product_guid=request_data["product_guid"])
-    cart_item = CartItems.objects.create(product_id=product.product_id, session_id=active_session.session_id,
-                                         product_data=request_data["product_data"])
+    if "wishlist_guids" in request_data:
+        wishlist_guids = request_data["wishlist_guids"]
+        for guid in wishlist_guids:
+            wishlist = Wishlist.objects.get(wishlist_guid=guid)
+            cart_item = CartItems.objects.create(product_id=wishlist.product_id,
+                                                 user_id=request.user.user_profile.user_id,
+                                                 product_data=wishlist.product_data)
+            wishlist.delete()
+    else:
+        product = Products.objects.get(product_guid=request_data["product_guid"])
+        cart_item = CartItems.objects.create(product_id=product.product_id, session_id=active_session.session_id,
+                                             product_data=request_data["product_data"])
     response = OrderedDict()
     response["cart_item_guid"] = convert_uuid_string(cart_item.cart_item_guid)
 
