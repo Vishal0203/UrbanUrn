@@ -91,7 +91,7 @@
                 <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6" ng-repeat="product in sku_products">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a href="#/product_detail" title="{{ product.name }}" class="product-image"> <img src="{{ product.product_images[0].image }}" alt="{{ product.name }}"> </a>
+                      <div class="item-img-info"> <a href ng-click="goToProduct(product)" title="{{ product.name }}" class="product-image"> <img src="{{ product.product_images[0].image }}" alt="{{ product.name }}"> </a>
                         <!--div class="new-label new-top-left">New</div-->
                         <!-- Commented out the feature of allowing actions from product image-->
                         <!--div class="item-box-hover">
@@ -107,7 +107,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a href="#/product_detail" title="{{ product.name }}">{{ product.name }}</a> </div>
+                        <div class="item-title"> <a href ng-click="goToProduct(product)" title="{{ product.name }}">{{ product.name }}</a> </div>
                         <div class="item-content">
                           <div class="rating">
                             <div class="ratings">
@@ -498,47 +498,4 @@
       </div>
     </div>
   </div>
-  <!-- Main Container End --> 
-  <!--div class="top-banner-section wow bounceInUp animated">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col add-banner1">
-          <div class="top-b-text"><strong>Designer Shoes</strong> For Women</div></div>
-        </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col free-shipping"><strong>Free Shipping</strong> on order over $199</div>
-        </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-        <div class="col add-banner2">
-          <div class="top-b-text"><strong>Luxury Handbags</strong>2015 New Arrive</div>
-          </div>
-                  
-          
-          
-        </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col last offer"><strong>New Collection</strong> Lorem ipsum dolor.</div>
-        </div>
-      </div>
-    </div>
-  </div-->
- <!-- end banner section -->
-  <!--div-- class="brand-logo">
-    <div class="container">
-      <div class="slider-items-products">
-        <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
-          <div class="slider-items slider-width-col6" common-slider item-count="6">
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div-->
+  <!-- Main Container End -->

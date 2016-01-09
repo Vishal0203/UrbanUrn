@@ -271,7 +271,7 @@ CREATE TABLE order_details (
 );
 
 CREATE SEQUENCE order_details_order_detail_id_seq
-    START WITH 1
+    START WITH 1000001
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -293,7 +293,7 @@ CREATE TABLE orders (
 );
 
 CREATE SEQUENCE orders_order_id_seq
-    START WITH 1000001
+    START WITH 10001
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -500,13 +500,13 @@ SELECT pg_catalog.setval('entity_keywords_entity_keyword_id_seq', 1, false);
 
 SELECT pg_catalog.setval('keywords_keyword_id_seq', 1, false);
 
-SELECT pg_catalog.setval('order_details_order_detail_id_seq', 1, false);
+SELECT pg_catalog.setval('order_details_order_detail_id_seq', 1000001, false);
 
-SELECT pg_catalog.setval('orders_order_id_seq', 1000001, false);
+SELECT pg_catalog.setval('orders_order_id_seq', 10001, false);
 
 SELECT pg_catalog.setval('product_images_product_image_id_seq', 1, false);
 
-SELECT pg_catalog.setval('products_product_id_seq', 1000001, false);
+SELECT pg_catalog.setval('products_product_id_seq', 10001, false);
 
 SELECT pg_catalog.setval('reviews_review_id_seq', 1, false);
 

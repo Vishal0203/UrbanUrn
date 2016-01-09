@@ -13,22 +13,22 @@ angular.module('urn')
                 controller: 'MiscController',
                 templateUrl: '/static/angular/app/views/about_us.html'
             })
-            .when('/blog', {
+            /*.when('/blog', {
                 controller: 'BlogController',
                 templateUrl: '/static/angular/app/views/blog.html'
-            })
-            .when('/blog_detail', {
+            })*/
+            /*.when('/blog_detail', {
                 controller: 'BlogDetailController',
                 templateUrl: '/static/angular/app/views/blog_detail.html'
-            })
+            })*/
             .when('/checkout', {
                 controller: 'CheckoutController',
                 templateUrl: '/static/angular/app/views/checkout.html'
             })
-            .when('/compare', {
+            /*.when('/compare', {
                 controller: 'CompareProductController',
                 templateUrl: '/static/angular/app/views/compare.html'
-            })
+            })*/
             .when('/contact_us', {
                 controller: 'MiscController',
                 templateUrl: '/static/angular/app/views/contact_us.html'
@@ -61,10 +61,10 @@ angular.module('urn')
                 controller: 'ProductDetailController',
                 templateUrl: '/static/angular/app/views/product_detail.html'
             })
-            .when('/quick_view', {
+            /*.when('/quick_view', {
                 controller: 'QuickViewController',
                 templateUrl: '/static/angular/app/views/quick_view.html'
-            })
+            })*/
             .when('/shopping_cart', {
                 controller: 'CartController',
                 templateUrl: '/static/angular/app/views/shopping_cart.html'

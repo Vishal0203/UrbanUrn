@@ -37,8 +37,8 @@
                   </tfoot>
                   <tbody>
                     <tr class="first odd" ng-repeat="cart in cartData">
-                      <td class="image"><a class="product-image" title="cart.product_info[0].name" href="#/product_detail"><img width="75" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"></a></td>
-                      <td><h2 class="product-name"> <a href="#/product_detail">{{cart.product_info[0].name}}</a> </h2></td>
+                      <td class="image"><a class="product-image" title="cart.product_info[0].name" href ng-click="editItemInCart(cart)"><img width="75" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"></a></td>
+                      <td><h2 class="product-name"> <a href ng-click="editItemInCart(cart)">{{cart.product_info[0].name}}</a> </h2></td>
                       <td class="a-center hidden-table"><a title="Edit item parameters" class="edit-bnt" ng-click="editItemInCart(cart)"></a></td>
                       <td class="a-center hidden-table"><a class="link-wishlist1 use-ajax" href="#">Move</a></td>
                       <td class="a-center hidden-table"><span class="cart-price"> <span class="price">₹{{cart.product_info[0].price}}</span> </span></td>
@@ -53,7 +53,7 @@
           </div>
           <!-- BEGIN CART COLLATERALS -->
           <div class="cart-collaterals row">
-            <div class="col-sm-4">
+            <!--div class="col-sm-4">
               <div class="shipping">
                 <h3>Estimate Shipping and Tax</h3>
                 <div class="shipping-form">
@@ -398,11 +398,10 @@
                     <div class="buttons-set11">
                       <button class="button get-quote" title="Get a Quote" type="button"><span>Get a Quote</span></button>
                     </div>
-                    <!--buttons-set11-->
                   </form>
                 </div>
               </div>
-            </div>
+            </div-->
             <div class="col-sm-4">
               <div class="discount">
                 <h3>Discount Codes</h3>
@@ -449,7 +448,7 @@
           <!--cart-collaterals--> 
           
         </div>
-  <div class="crosssel wow bounceInUp animated">
+  <!--div class="crosssel wow bounceInUp animated">
       <div class="">
         <h2>Based on your selection, you may be interested in the following items:</h2>
       </div>
@@ -610,77 +609,8 @@
                 </li>
                 </ul>
       </div>
-    </div>     
+    </div-->
         
       </div>
     </div>
   </section>
-  
-   <div class="top-banner-section wow bounceInUp animated">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col add-banner1">
-          <div class="top-b-text"><strong>Designer Shoes</strong> For Women</div></div>
-        </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col free-shipping"><strong>Free Shipping</strong> on order over $199</div>
-        </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-        <div class="col add-banner2">
-          <div class="top-b-text"><strong>Luxury Handbags</strong>2015 New Arrive</div>
-          </div>
-                  
-          
-          
-        </div>
-        <div class="col-lg-3 col-sm-3 col-xs-6">
-          <div class="col last offer"><strong>New Collection</strong> Lorem ipsum dolor.</div>
-        </div>
-      </div>
-    </div>
-  </div>
- <!-- end banner section -->
-  <div class="brand-logo">
-    <div class="container">
-      <div class="slider-items-products">
-        <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
-          <div class="slider-items slider-width-col6" common-slider item-count="6">
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-            <!-- Item -->
-            <div class="item"><a href="#"><img src="/static/angular/assets/images/b-logo1.png" alt="Image"></a> </div>
-            <!-- End Item --> 
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>

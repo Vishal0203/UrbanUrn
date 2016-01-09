@@ -1,4 +1,3 @@
-import json
 from django.http import HttpResponse
 from django.db import connection
 from Urn.common.formatters import format_products

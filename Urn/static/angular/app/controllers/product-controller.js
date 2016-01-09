@@ -54,17 +54,60 @@ angular.module('product', ['urn.services'])
             init();
         }])
 
-    .controller('ProductDetailController', ['$rootScope', '$scope', '$cookies',
-        ProductDetailController = function ($rootScope, $scope, $cookies) {
+    .controller('ProductDetailController', ['$rootScope', '$scope', '$cookies','Carts',
+        ProductDetailController = function ($rootScope, $scope, $cookies, Carts) {
+            $scope.quantitySelected="1";
             var init = function () {
-                if ($rootScope.selectedProduct == undefined) {
-                    if ($cookies.getObject('selected-product')) {
+                if ($cookies.getObject('selected-product')) {
                         $rootScope.selectedProduct = $cookies.getObject('selected-product');
                     } else {
                         $rootScope.loadRoute('/home');
                     }
-                }
+                var skusList = [$rootScope.womenSkus, $rootScope.menSkus, $rootScope.decorSkus];
+                angular.forEach(skusList, function(parentSku) {
+                    angular.forEach(parentSku, function (childSku) {
+                        if($rootScope.selectedProduct.parent_sku_guid == childSku.parent_sku_guid){
+                        $scope.getSkuDetails(childSku.children);
+                        }
+                    })
+                })
+                };
+
+            $scope.getSkuDetails = function(skus){
+                angular.forEach(skus, function(sku) {
+                   if(sku.sku_guid == $rootScope.selectedProduct.sku_guid){
+                       $scope.selectedSku = sku.name;
+                   }
+                });
             };
+
+            $scope.add = function() {
+              var number = parseInt($scope.quantitySelected);
+              if(number <= $rootScope.selectedProduct.product_data.quantity-1){
+                  number++;
+              }
+              $scope.quantitySelected = number.toString();
+
+            };
+            $scope.negate = function() {
+              if($scope.quantitySelected > 0 ){
+                  $scope.quantitySelected--;
+              }
+            };
+            $scope.addItemToCart = function () {
+                var payload = {};
+                payload.product_guid = $rootScope.selectedProduct.product_guid;
+                var product_info = {};
+                product_info.quantity = $scope.quantitySelected;
+                payload.product_data = JSON.stringify(product_info);
+                Carts.addItemsToCart(JSON.stringify(payload), function (data) {
+                     console.log(data);
+                     $rootScope.getCartDetails();
+                }, function (error) {
+                    console.log(error);
+                })
+            };
+
             init();
         }])
 

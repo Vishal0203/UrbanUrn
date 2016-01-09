@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-sm-2 col-xs-6 col-lg-2 hidden-xs">
                     <!-- Default Welcome Message -->
-                    <div class="welcome-msg"> Welcome Buddy!</div>
+                    <div class="welcome-msg" ng-show="is_loggedin"> Welcome '{{ user.first_name }} {{ user.last_name }}'</div>
                     <!-- End Default Welcome Message -->
                 </div>
                 <div class="col-sm-7 col-xs-6 col-lg-8">
@@ -16,8 +16,8 @@
                             </div>
                             <div class="check"><a title="Checkout" href="#/checkout"><span
                                     class="hidden-xs">Checkout</span></a></div>
-                            <div class="demo"><a title="Blog" href="#/blog"><span class="hidden-xs">Blog</span></a>
-                            </div>
+                            <!--div-- class="demo"><a title="Blog" href="#/blog"><span class="hidden-xs">Blog</span></a>
+                            </div-->
                             <!-- Header Company -->
                             <div class="dropdown block-company-wrapper hidden-xs"><a role="button"
                                                                                      data-toggle="dropdown"
@@ -297,7 +297,7 @@
                                         <!--block-subtitle-->
                                         <ul class="mini-products-list" id="cart-sidebar">
                                             <li class="item first" ng-repeat="cart in cartData">
-                                                <div class="item-inner"><a href="#/product_detail"
+                                                <div class="item-inner"><a href ng-click="editItemInCart(cart)"
                                                                            class="product-image" title="cart.product_info[0].name"><img
                                                         alt="Sample Product"
                                                         src="/static/angular/assets/images/sample_product.jpg"></a>
@@ -314,7 +314,7 @@
                                                         <!--access--> <strong>{{cart.product_data.quantity}}</strong> x <span
                                                             class="price">₹{{cart.product_info[0].price}}</span>
 
-                                                        <p class="product-name"><a href="#/product_detail">{{cart.product_info[0].name}}</a></p>
+                                                        <p class="product-name"><a href ng-click="editItemInCart(cart)">{{cart.product_info[0].name}}</a></p>
                                                     </div>
                                                 </div>
                                             </li>
