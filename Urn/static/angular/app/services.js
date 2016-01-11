@@ -62,7 +62,7 @@ angular.module('urn.services', ['urn.models'])
     .factory('Address', function ($resource, ApiUrls) {
         return $resource(ApiUrls.addresses, {},
             {
-                add: {method: "POST", isArray: true}
+                add: {method: "POST"}
             })
     })
     .factory('Orders', function ($resource, ApiUrls) {

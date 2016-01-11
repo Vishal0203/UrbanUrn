@@ -32,8 +32,9 @@ def api_user_addresses(request):
                                      user=user.user_profile)
         response = OrderedDict()
         addresses = Addresses.objects.filter(user=user.user_profile)
-        response.addresses = format_addresses(addresses)
-        response.address = address.address_guid
-        return HttpResponse(status=201, content=build_json(response))
+        response["addresses"] = format_addresses(addresses)
+        response["address"] = utils.convert_uuid_string(address.address_guid)
+        final_response = build_json(response)
+        return HttpResponse(status=201, content=final_response)
     else:
         HttpResponseNotFound('API not found')

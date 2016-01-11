@@ -12,6 +12,7 @@ angular.module('order', ['urn.services'])
             $scope.useBillingAddress = false;
             $scope.paymentInfo = {};
             $scope.selectedAddressGuid = '';
+            $scope.selectedBillingAddressGuid = '';
             $rootScope.orderDetail = '';
             $scope.updateDetailsBilling = function () {
                 if ($scope.createBillingAddress == 'diff') {
@@ -20,6 +21,7 @@ angular.module('order', ['urn.services'])
                 if ($scope.saveBillingAddress) {
                     Address.add(JSON.stringify($scope.newBillingAddress), function (data) {
                         $rootScope.user.addresses = data.addresses;
+                        $scope.selectedBillingAddressGuid = data.address;
                     }, function (error) {
                         console.log(error);
                     })
@@ -34,6 +36,7 @@ angular.module('order', ['urn.services'])
             $scope.updateDetailsShipping = function () {
                 if ($scope.createShippingAddress == 'diff') {
                     $scope.selectedShippingAddress = $scope.newShippingAddress;
+                    $scope.selectedAddressGuid = $scope.selectedBillingAddressGuid ;
                 }
                 else {
                     $scope.selectedAddressGuid = $scope.selectedShippingAddress.address_guid;

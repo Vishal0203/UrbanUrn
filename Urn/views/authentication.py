@@ -16,7 +16,6 @@ import json
 
 
 @csrf_exempt
-@manage_cookie
 @validate_schema(login_schema)
 def validate_input_and_authenticate(request):
     if request.method == 'GET':

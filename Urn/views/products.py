@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 
 from Urn.common.formatters import format_skus, format_products, format_sku_parent
+from Urn.decorators.cookie_manager import manage_cookie
 from Urn.models import Sku, Products, Businesses, ProductImages, BusinessUsers
 from Urn.schema_validators.products_validation import put_schema, schema as post_schema
 from Urn.schema_validators.sku_validation import schema
@@ -15,6 +16,7 @@ from Urn.decorators.validators import jwt_validate, check_authenticity, validate
 
 
 @csrf_exempt
+@manage_cookie
 def process_sku_request(request):
     if request.method in ['POST', 'PUT']:
         return process_sku_post(request)

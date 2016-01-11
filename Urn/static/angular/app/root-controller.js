@@ -6,7 +6,6 @@ angular.module('urn')
             $rootScope.selectedProduct = {};
 
             $rootScope.getCartDetails = function () {
-                if ($rootScope.is_loggedin) {
                     Carts.getCartDetails({},
                         function (data) {
                             $rootScope.total = 0;
@@ -18,7 +17,6 @@ angular.module('urn')
                         function (error) {
                             console.log(error);
                         });
-                }
             };
             var init = function () {
                 if ($cookies.getObject('user-data')) {
