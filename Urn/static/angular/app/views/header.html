@@ -10,12 +10,12 @@
                 <div class="col-sm-7 col-xs-6 col-lg-8">
                     <div class="toplinks">
                         <div class="links">
-                            <div class="myaccount"><a title="My Account" href="#/login"><span class="hidden-xs">My Account</span></a>
+                            <div class="myaccount" ng-show="user"><a title="My Account" href="#/dashboard"><span class="hidden-xs">My Account</span></a>
                             </div>
                             <div class="wishlist"><a title="My Wishlist" href="#/wishlist"><span class="hidden-xs">Wishlist</span></a>
                             </div>
-                            <div class="check"><a title="Checkout" href="#/checkout"><span
-                                    class="hidden-xs">Checkout</span></a></div>
+                            <!-- div class="check"><a title="Checkout" href="#/checkout"><span
+                                    class="hidden-xs">Checkout</span></a></div -->
                             <!--div-- class="demo"><a title="Blog" href="#/blog"><span class="hidden-xs">Blog</span></a>
                             </div-->
                             <!-- Header Company -->
@@ -299,8 +299,8 @@
                                             <li class="item first" ng-repeat="cart in cartData">
                                                 <div class="item-inner"><a href ng-click="editItemInCart(cart)"
                                                                            class="product-image" title="cart.product_info[0].name"><img
-                                                        alt="Sample Product"
-                                                        src="/static/angular/assets/images/sample_product.jpg"></a>
+                                                     alt="Sample Product"
+                                                     src="/static/angular/assets/images/sample_product.jpg"></a>
 
                                                     <div class="product-details">
                                                         <div class="access"><a class="btn-remove1"
@@ -320,7 +320,7 @@
                                             </li>
                                         </ul>
                                         <div class="actions">
-                                            <button class="btn-checkout" title="Checkout" type="button" ng-click="loadRoute('/checkout')">
+                                            <button class="btn-checkout" title="Checkout" type="button" ng-click="routeToCheckout()">
                                                 <span>Checkout</span></button>
                                         </div>
                                         <!--actions-->

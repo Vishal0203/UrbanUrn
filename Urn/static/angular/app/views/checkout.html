@@ -815,7 +815,7 @@
                   </thead>
                   <tbody>
                     <tr class="first odd" ng-repeat="cart in cartData">
-                      <td class="image"><a class="product-image" title="cart.product_info[0].name" href="#/product_detail"><img width="75" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"></a></td>
+                      <td class="image"><a class="product-image" title="cart.product_info[0].name" href="#/product_detail"><img width="75" src="{{cart.product_info[0].product_images[0].image }}" alt="{{cart.product_info[0].name }}></a></td>
                       <td><h2 class="product-name"> <a href>{{cart.product_info[0].name}}</a> </h2></td>
                       <td class="a-center hidden-table"><span class="cart-price"> <span class="price">₹{{cart.product_info[0].price}}</span> </span></td>
                       <td class="a-center movewishlist"><input maxlength="12" class="input-text qty" ng-readonly="true" title="Qty" size="4" ng-model="cart.product_data.quantity" name="cart[10522][qty]"></td>
@@ -947,9 +947,9 @@
         <div class="block block-progress">
           <div class="block-title ">Your Checkout</div>
           <div class="block-content">
-            <dl>
-              <dt class="complete"> Billing Address <span class="separator">|</span> <a href="#">Change</a> </dt>
-              <dd class="complete">
+            <dl ng-show="user.addresses">
+              <dt class="complete"> Billing Address <span class="separator">|</span> <a href ng-hide="true">Change</a> </dt>
+              <dd class="complete" ng-show="user && selectedBillingAddress">
                 <address>
                 {{ user.first_name }}<br>
                 {{ selectedBillingAddress.street_1 }}<br>
@@ -960,8 +960,8 @@
                 {{ user.phone }}
                 </address>
               </dd>
-              <dt class="complete"> Shipping Address <span class="separator">|</span> <a href="#">Change</a> </dt>
-              <dd class="complete">
+              <dt class="complete"> Shipping Address <span class="separator">|</span> <a href ng-hide="true">Change</a> </dt>
+              <dd class="complete" ng-show="user && selectedShippingAddress">
                 <address>
                 {{ user.first_name }}<br>
                 {{ selectedShippingAddress.street_1 }}<br>
@@ -972,7 +972,7 @@
                 {{ user.phone }}
                 </address>
               </dd>
-              <dt class="complete"> Shipping Method <span class="separator">|</span> <a href="#">Change</a> </dt>
+              <dt class="complete"> Shipping Method <span class="separator">|</span> <a href ng-hide="true">Change</a> </dt>
               <dd class="complete"> Flat Rate - Fixed <br>
                 <span class="price">₹15.00</span> </dd>
               <dt> Payment Method </dt>

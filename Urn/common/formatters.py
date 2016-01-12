@@ -241,6 +241,7 @@ def format_order_details(order_details):
     for item in order_details:
         order_item_data = OrderedDict()
         order_item_data["delivery_party_name"] = item.delivery_party_name
+        order_item_data["suborder_id"] = item.order_detail_id
         order_item_data["delivery_tracking_number"] = item.delivery_tracking_number
         order_item_data["total_cost"] = item.total_cost
         order_item_data["product_info"] = format_products([item.product], False)

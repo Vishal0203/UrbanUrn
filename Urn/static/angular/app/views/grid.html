@@ -143,9 +143,9 @@
                   <ul>
                       <li><a class="active" href="#">Women</a> <span class="subDropdown minus"></span>
                           <ul class="level0_415" style="display:block">
-                              <li ng-repeat="sku in womenSkus"><a href="#">{{ sku.parent_sku_name }}</a> <span
+                              <li ng-repeat="sku in womenSkus"><a href ng-click="sku.selected = true">{{ sku.parent_sku_name }}</a> <span
                                       class="subDropdown plus"></span>
-                                  <ul class="level1" style="display:none">
+                                  <ul class="level1" ng-show="sku.selected == true">
                                       <li ng-repeat="child in sku.children"><a href="#">{{ child.name }}</a></li>
                                   </ul>
                               </li>
@@ -153,7 +153,7 @@
                       </li>
                       <li><a href="#">Men</a> <span class="subDropdown plus"></span>
                           <ul class="level0_415" style="display:block">
-                              <li ng-repeat="sku in menSkus"><a href="#">{{ sku.parent_sku_name }}</a> <span
+                              <li ng-repeat="sku in menSkus"><a href>{{ sku.parent_sku_name }}</a> <span
                                       class="subDropdown plus"></span>
                                   <ul class="level1" style="display:none">
                                       <li ng-repeat="child in sku.children"><a href="#">{{ child.name }}</a></li>
@@ -163,7 +163,7 @@
                       </li>
                       <li class="last"><a href="#">Decor</a> <span class="subDropdown plus"></span>
                           <ul class="level0_415" style="display:block">
-                              <li ng-repeat="sku in decorSkus"><a href="#">{{ sku.parent_sku_name }}</a> <span
+                              <li ng-repeat="sku in decorSkus"><a href>{{ sku.parent_sku_name }}</a> <span
                                       class="subDropdown plus"></span>
                                   <ul class="level1" style="display:none">
                                       <li ng-repeat="child in sku.children"><a href="#">{{ child.name }}</a></li>
@@ -238,15 +238,15 @@
               </div>
             </div>
             <div class="block block-banner"><a href="#"><img alt="block-banner" src="/static/angular/assets/images/RHS-banner-img.jpg"></a></div-->
-            <div class="block block-cart">
+            <div class="block block-cart" ng-show="cartData.length>0">
               <div class="block-title ">My Cart</div>
               <div class="block-content">
                 <div class="summary">
-                  <p class="amount">There are <a href="#">2 items</a> in your cart.</p>
-                  <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">$27.99</span> </p>
+                  <p class="amount">There are <a href="#">{{cartData.length}} item(s)</a> in your cart.</p>
+                  <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">₹{{ total }}</span> </p>
                 </div>
                 <div class="ajax-checkout">
-                  <button class="button button-checkout" title="Submit" type="submit"><span>Checkout</span></button>
+                  <button class="button button-checkout" ng-click="routeToCheckout()" title="Submit" type="submit"><span>Checkout</span></button>
                 </div>
                 <!--p class="block-subtitle">Recently added item(s) </p>
                 <ul>

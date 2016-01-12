@@ -67,6 +67,7 @@ def process_orders_post(request):
                                                        product_data=item_in_cart.get().product_data)
         else:
             return HttpResponse(status=401, content="You are not authorized to view this cart")
+        item_in_cart.delete()
 
     response = format_orders(Orders.objects.filter(user_id=user_info.id).filter(order_id=order.order_id))
     return HttpResponse(build_json(response))

@@ -30,9 +30,9 @@
                   </thead>
                   <tbody>
                     <tr class="first odd" ng-repeat="product in orderDetail.order_info">
-                      <td class="image"><a class="product-image" title="cart.product_info[0].name"><img width="75" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"></a></td>
+                      <td class="image"><a class="product-image" title="cart.product_info[0].name"><img width="75" src="{{ product.product_info[0].product_images[0].image }}" alt="{{ product.product_info[0].name }}"></a></td>
                       <td><h2 class="product-name"> <a href>{{product.product_info[0].name}}</a> </h2></td>
-                      <td><h2 class="product-name"> <a href>{{orderDetail.created_on}}</a> </h2></td>
+                      <td><h2 class="product-name"> <a href>{{orderDetail.created_on | date:'yyyy-MM-dd'}}</a> </h2></td>
                       <td><h2 class="product-name"> <a href>{{product.status}}</a> </h2></td>
                         <td><h2 class="product-name"> <a href>{{product.delivery_tracking_number}}</a> </h2></td>
                       <td class="a-center hidden-table"><span class="cart-price"> <span class="product-name">₹{{product.total_cost}}</span> </span></td>

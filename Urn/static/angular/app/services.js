@@ -68,6 +68,7 @@ angular.module('urn.services', ['urn.models'])
     .factory('Orders', function ($resource, ApiUrls) {
         return $resource(ApiUrls.orders, {},
             {
-                place: {method: "POST", isArray: true}
+                place: {method: "POST", isArray: true},
+                get: {method: "GET", isArray: true}
             })
     });

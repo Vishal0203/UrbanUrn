@@ -23,7 +23,7 @@ angular.module('urn')
                     $rootScope.user = $cookies.getObject('user-data');
                     $rootScope.is_loggedin = true;
                 } else {
-                    $rootScope.user = {};
+                    $rootScope.user = null;
                 }
                 Skus.getSkus({},
                     function (data) {
@@ -82,10 +82,19 @@ angular.module('urn')
                 })
             };
 
-            $scope.getSkuProducts = function (sku_guid) {
+            $rootScope.getSkuProducts = function (sku_guid) {
                 $rootScope.search_query = undefined;
                 $rootScope.sku_guid = sku_guid;
                 $rootScope.loadRoute('/grid');
+            };
+
+            $rootScope.routeToCheckout = function() {
+                if($rootScope.user){
+                    $rootScope.loadRoute('/checkout');
+                }
+                else {
+                    $rootScope.loadRoute('/login');
+                }
             };
 
             $rootScope.loadRoute = function (path) {

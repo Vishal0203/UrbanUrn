@@ -1,7 +1,11 @@
 angular.module('user', ['urn.services'])
-    .controller('DashboardController', ['$rootScope', '$scope',
-        DashboardController = function ($rootScope, $scope) {
+    .controller('DashboardController', ['$rootScope', '$scope','Orders',
+        DashboardController = function ($rootScope, $scope, Orders) {
+            $scope.orderData = '';
             var init = function () {
+                Orders.get({}, function(data) {
+                    $scope.orderData = data;
+                })
             };
             init();
         }])

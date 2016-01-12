@@ -37,7 +37,7 @@
                   </tfoot>
                   <tbody>
                     <tr class="first odd" ng-repeat="cart in cartData">
-                      <td class="image"><a class="product-image" title="cart.product_info[0].name" href ng-click="editItemInCart(cart)"><img width="75" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"></a></td>
+                      <td class="image"><a class="product-image" title="cart.product_info[0].name" href ng-click="editItemInCart(cart)"><img width="75" src="{{cart.product_info[0].product_images[0].image }}" alt="{{cart.product_info[0].name }}></a></td>
                       <td><h2 class="product-name"> <a href ng-click="editItemInCart(cart)">{{cart.product_info[0].name}}</a> </h2></td>
                       <td class="a-center hidden-table"><a title="Edit item parameters" class="edit-bnt" ng-click="editItemInCart(cart)"></a></td>
                       <td class="a-center hidden-table"><a class="link-wishlist1 use-ajax" href="#">Move</a></td>

@@ -80,6 +80,8 @@ angular.module('order', ['urn.services'])
                 payload.address_guid = $scope.selectedAddressGuid;
                 Orders.place(JSON.stringify(payload), function (data) {
                     $rootScope.orderDetail = data[0];
+                    $cookies.putObject('selected-order', $rootScope.orderDetail);
+                    $rootScope.getCartDetails();
                     $rootScope.loadRoute("/orders/" + $rootScope.orderDetail.id);
                 }, function (error) {
                     console.log(error);
@@ -98,9 +100,14 @@ angular.module('order', ['urn.services'])
             };
             init();
         }])
-    .controller('OrdersController', ['$rootScope', '$scope', '$cookies', 'Orders',
-        OrdersController = function ($rootScope, $scope, $cookies, Orders) {
+    .controller('OrdersController', ['$rootScope', '$scope', '$cookies',
+        OrdersController = function ($rootScope, $scope, $cookies) {
             var init = function () {
+                if ($cookies.getObject('selected-order')) {
+                        $rootScope.orderDetail = $cookies.getObject('selected-order');
+                    } else {
+                        $rootScope.loadRoute('/home');
+                    }
             };
             init();
         }])
