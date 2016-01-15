@@ -11182,3 +11182,6 @@ ol#compare-items li a.product-name {
 	max-height: calc(100vh - 200px);
 	overflow-y: auto;
 }
+.no-products {
+	margin-top: 20px;
+}

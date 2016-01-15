@@ -191,4 +191,16 @@ angular.module('urn')
                 }
             }
         }
+    })
+    .directive('expandCollapse', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                $(element).click(function () {
+                    $(element).toggleClass('plus');
+                    $(element).toggleClass('minus');
+                    $(element).parent().find('ul').slideToggle();
+                });
+            }
+        }
     });

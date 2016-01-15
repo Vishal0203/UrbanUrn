@@ -11,23 +11,28 @@ angular.module('product', ['urn.services'])
             $scope.sku_category = '';
             $scope.sku_name = '';
             $scope.sku_products = [];
+
+            $scope.getSkuProducts = function (sku_guid) {
+                Skus.getSkuProducts({'sku_guid': sku_guid},
+                    function (data) {
+                        if (data.parent_sku_category == 'women') {
+                            $scope.sku_category = 'Women';
+                        } else if (data.parent_sku_category == 'men') {
+                            $scope.sku_category = 'Men';
+                        } else if (data.parent_sku_category == 'decor') {
+                            $scope.sku_category = 'Decor';
+                        }
+                        $scope.sku_name = data.name;
+                        $scope.sku_products = data.products;
+                    },
+                    function (error) {
+                        console.log(error);
+                    });
+            };
+
             var init = function () {
                 if ($rootScope.sku_guid) {
-                    Skus.getSkuProducts({'sku_guid': $rootScope.sku_guid},
-                        function (data) {
-                            if (data.parent_sku_category == 'women') {
-                                $scope.sku_category = 'Women';
-                            } else if (data.parent_sku_category == 'men') {
-                                $scope.sku_category = 'Men';
-                            } else if (data.parent_sku_category == 'decor') {
-                                $scope.sku_category = 'Decor';
-                            }
-                            $scope.sku_name = data.name;
-                            $scope.sku_products = data.products;
-                        },
-                        function (error) {
-                            console.log(error);
-                        });
+                    $scope.getSkuProducts($rootScope.sku_guid);
                 }
 
                 if ($rootScope.search_query) {
