@@ -1,9 +1,10 @@
 angular.module('user', ['urn.services'])
-    .controller('DashboardController', ['$rootScope', '$scope', '$window', '$location', '$anchorScroll', 'Orders',
-        DashboardController = function ($rootScope, $scope, $window, $location, $anchorScroll, Orders) {
+    .controller('DashboardController', ['$rootScope', '$scope', '$window', '$location', '$anchorScroll', 'Orders', 'Address',
+        DashboardController = function ($rootScope, $scope, $window, $location, $anchorScroll, Orders, Address) {
             $scope.orderData = '';
             var init = function () {
                 $rootScope.user = JSON.parse($window.localStorage.getItem('user-data'));
+                $rootScope.add_address_click = false;
                 Orders.get({}, function(data) {
                     $scope.orderData = data;
                     angular.forEach($scope.orderData, function(order) {
@@ -15,6 +16,16 @@ angular.module('user', ['urn.services'])
                     console.log(error);
                 })
             };
+
+            $scope.add_address = function () {
+                Address.add(JSON.stringify($scope.userAddress), function (data) {
+                    $rootScope.user.addresses = data.addresses;
+                    $window.localStorage.setItem('user-data', JSON.stringify($rootScope.user));
+                }, function (error) {
+                    console.log(error);
+                })
+            };
+
             $scope.toggleOrders = function() {
                 if($scope.noOfOrders!= 2) {
                     $scope.noOfOrders = 2;

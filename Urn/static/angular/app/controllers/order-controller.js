@@ -21,6 +21,7 @@ angular.module('order', ['urn.services'])
                 if ($scope.saveBillingAddress) {
                     Address.add(JSON.stringify($scope.newBillingAddress), function (data) {
                         $rootScope.user.addresses = data.addresses;
+                        $window.localStorage.setItem('user-data', JSON.stringify($rootScope.user));
                         $scope.selectedBillingAddressGuid = data.address;
                     }, function (error) {
                         console.log(error);

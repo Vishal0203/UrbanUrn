@@ -6836,6 +6836,20 @@ button.button.password:before {
 	font-size: 14px;
 	padding-right: 8px;
 }
+button.button.add_button:before {
+    content: '\f00c';
+    font-family: FontAwesome;
+    font-size: 14px;
+    padding-right: 8px;
+}
+
+button.button.cancel_button:before {
+    content: '\f00d';
+    font-family: FontAwesome;
+    font-size: 14px;
+    padding-right: 8px;
+}
+
 .account-login .form-list input.input-text {
 	background: #fff;
 	border: 1px solid #cbcbcb;
