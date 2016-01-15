@@ -75,14 +75,14 @@
           <div class="block-content">
             <ul>
               <li><a ng-click="loadRoute('/dashboard')">Account Dashboard</a></li>
-              <li><a href>Account Information</a></li>
-              <li><a href>Address Book</a></li>
-              <li><a href>My Orders</a></li>
+              <li><a href ng-click="goToDashboard(1)">Account Information</a></li>
+              <li><a href ng-click="goToDashboard(2)">Address Book</a></li>
+              <li><a href ng-click="goToDashboard(3)">My Orders</a></li>
               <!-- li><a href>Billing Agreements</a></li>
               <li><a href>Recurring Profiles</a></li>
               <li><a href>My Product Reviews</a></li>
               <li><a href>My Tags</a></li -->
-              <li><a href="#/wishlist">My Wishlist</a></li>
+              <li class="current"><a href="#/wishlist" >My Wishlist</a></li>
               <!-- li><a href="#">My Downloadable</a></li>
               <li class="last"><a href="#">Newsletter Subscriptions</a></li -->
             </ul>

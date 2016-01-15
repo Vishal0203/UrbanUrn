@@ -2,6 +2,11 @@ angular.module('user', ['urn.services'])
     .controller('DashboardController', ['$rootScope', '$scope', '$window', '$location', '$anchorScroll', 'Orders', 'Address',
         DashboardController = function ($rootScope, $scope, $window, $location, $anchorScroll, Orders, Address) {
             $scope.orderData = '';
+            $scope.accountDashboard = true;
+            $scope.accountInfo = false;
+            $scope.addressBook = false;
+            $scope.displayItems = [{show: true}, {show: false}, {show: false}, {show: false}];
+            $scope.myOrders = false;
             var init = function () {
                 $rootScope.user = JSON.parse($window.localStorage.getItem('user-data'));
                 $rootScope.add_address_click = false;
@@ -11,6 +16,10 @@ angular.module('user', ['urn.services'])
                           $scope.confirmedStatus = 0;
                           $scope.getStatusOfOrder(order, order.order_info);
                     });
+                    if($rootScope.indexToBeShown) {
+                        $rootScope.updateDisplay($rootScope.indexToBeShown, $scope.displayItems);
+                        $rootScope.indexToBeShown = null;
+                    }
                 }, function(error) {
                     $scope.orderData = false;
                     console.log(error);
@@ -207,6 +216,11 @@ angular.module('user', ['urn.services'])
                 }, function (error) {
                     console.log(error);
                 });
+            };
+
+            $scope.goToDashboard = function(index) {
+                $rootScope.indexToBeShown=index;
+                $rootScope.loadRoute('/dashboard')
             };
 
             init();

@@ -12,7 +12,7 @@
         </div>
         <ol class="one-page-checkout" id="checkoutSteps">
           <li id="opc-billing" class="section" ng-class="{'active allow': displayItems[0].show}">
-            <div class="step-title"> <span class="number" ng-click="updateDisplay(0)">1</span>
+            <div class="step-title"> <span class="number" ng-click="updateDisplay(0, displayItems)">1</span>
               <h3>Checkout Method</h3>
               <!--<a href="#">Edit</a> --> 
             </div>
@@ -402,7 +402,7 @@
             </div>
           </li>
           <li id="opc-shipping" class="section" ng-class="{'active allow': displayItems[1].show}">
-            <div class="step-title"> <span class="number" ng-click="updateDisplay(1)">2</span>
+            <div class="step-title"> <span class="number" ng-click="updateDisplay(1, displayItems)">2</span>
               <h3 class="one_page_heading"> Shipping Information</h3>
               <!--<a href="#">Edit</a>--> 
             </div>
@@ -796,7 +796,7 @@
             </div>
           </li>
           <li id="opc-review" class="section" ng-class="{'active allow': displayItems[2].show}">
-            <div class="step-title"> <span class="number" ng-click="updateDisplay(2)">3</span>
+            <div class="step-title"> <span class="number" ng-click="updateDisplay(2, displayItems)">3</span>
               <h3 class="one_page_heading">Order Review</h3>
             </div>
             <div id="checkout-step-review" class="step a-item" ng-show="displayItems[2].show">
@@ -832,7 +832,7 @@
             </div>
           </li>
           <li id="opc-payment" class="section" ng-class="{'active allow': displayItems[3].show}">
-            <div class="step-title"> <span class="number" ng-click="updateDisplay(3)">4</span>
+            <div class="step-title"> <span class="number" ng-click="updateDisplay(3, displayItems)">4</span>
               <h3 class="one_page_heading">Payment Information</h3>
               <!--<a href="#">Edit</a>--> 
             </div>

@@ -11,11 +11,11 @@
           <div class="page-title">
             <h2>My Dashboard</h2>
           </div>
-          <div class="dashboard">
-            <div class="welcome-msg"> <strong>Hello, {{user.first_name }} {{ user.last_name }}!</strong>
+          <div class="dashboard" >
+            <div class="welcome-msg" ng-show="displayItems[0].show"> <strong>Hello, {{user.first_name }} {{ user.last_name }}!</strong>
               <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
             </div>
-            <div class="box-account">
+            <div class="box-account" ng-show="displayItems[1].show">
               <div class="page-title">
                 <h2>Account Information</h2>
               </div>
@@ -45,7 +45,8 @@
                   <p> You are currently not subscribed to any newsletter. </p>
                 </div-->
               </div>
-              <div class="col2-set">
+            </div>
+              <div class="box-account" ng-show="displayItems[2].show">
                   <div class="page-title">
                       <h2>Address Book</h2>
                   </div>
@@ -438,8 +439,7 @@
                   <!--</address>-->
                 <!--</div>-->
               </div>
-            </div>
-            <div class="box-account" id="myOrders">
+            <div class="box-account" id="myOrders" ng-show="displayItems[3].show">
               <div class="page-title">
                 <h2>My Orders</h2>
               </div>
@@ -481,10 +481,10 @@
           <div class="block-title">My Account</div>
           <div class="block-content">
             <ul>
-              <li class="current"><a>Account Dashboard</a></li>
-              <li><a href>Account Information</a></li>
-              <li><a href>Address Book</a></li>
-              <li><a href ng-click="scrollTo('myOrders')">My Orders</a></li>
+              <li ng-class="{'current': displayItems[0].show} " ng-click="updateDisplay(0, displayItems)"><a>Account Dashboard</a></li>
+              <li ng-class="{'current': displayItems[1].show} " ng-click="updateDisplay(1, displayItems)"><a href>Account Information</a></li>
+              <li ng-class="{'current': displayItems[2].show} " ng-click="updateDisplay(2, displayItems)"><a href>Address Book</a></li>
+              <li ng-class="{'current': displayItems[3].show} " ng-click="updateDisplay(3, displayItems)"><a href>My Orders</a></li>
               <!-- li><a href>Billing Agreements</a></li>
               <li><a href>Recurring Profiles</a></li>
               <li><a href>My Product Reviews</a></li>
