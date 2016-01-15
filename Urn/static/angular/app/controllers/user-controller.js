@@ -1,13 +1,48 @@
 angular.module('user', ['urn.services'])
-    .controller('DashboardController', ['$rootScope', '$scope', '$window','Orders',
-        DashboardController = function ($rootScope, $scope, $window, Orders) {
+    .controller('DashboardController', ['$rootScope', '$scope', '$window', '$location', '$anchorScroll', 'Orders',
+        DashboardController = function ($rootScope, $scope, $window, $location, $anchorScroll, Orders) {
             $scope.orderData = '';
             var init = function () {
                 $rootScope.user = JSON.parse($window.localStorage.getItem('user-data'));
                 Orders.get({}, function(data) {
                     $scope.orderData = data;
+                    angular.forEach($scope.orderData, function(order) {
+                          $scope.confirmedStatus = 0;
+                          $scope.getStatusOfOrder(order, order.order_info);
+                    });
+                }, function(error) {
+                    $scope.orderData = false;
+                    console.log(error);
                 })
             };
+            $scope.toggleOrders = function() {
+                if($scope.noOfOrders!= 2) {
+                    $scope.noOfOrders = 2;
+                }
+                else {
+                    $scope.noOfOrders= $scope.orderData.length
+                }
+            };
+
+            $scope.getStatusOfOrder = function(order, orderDetails) {
+                angular.forEach(orderDetails, function(product){
+                    if(product.status == "confirmed") {
+                        $scope.confirmedStatus++;
+                    }
+                });
+                if($scope.confirmedStatus == orderDetails.length) {
+                        order.statusText = "Confirmed";
+                    }
+                    else {
+                        order.statusText = "Pending";
+                    }
+            };
+
+            $scope.scrollTo = function(id) {
+                $location.hash(id);
+                    $anchorScroll();
+            };
+            $scope.noOfOrders = 2;
             init();
         }])
 

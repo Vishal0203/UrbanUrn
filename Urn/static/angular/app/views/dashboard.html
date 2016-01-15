@@ -77,13 +77,14 @@
                 <!--</div>-->
               </div>
             </div>
-              <div class="box-account">
+            <div class="box-account" id="myOrders">
               <div class="page-title">
                 <h2>My Orders</h2>
               </div>
               <div class="recent-orders">
-              <div class="title-buttons"><strong>Recent Orders</strong> <a href="#">View All </a> </div>
-              <div class="table-responsive">
+              <div class="title-buttons"><strong>Recent Orders</strong> <a href ng-show="orderData" ng-click="toggleOrders()">View All </a> </div>
+              <div ng-show="!orderData"> <span> You have not placed any orders yet !! </span></div>
+              <div class="table-responsive" ng-show="orderData">
                 <table class="data-table" id="my-orders-table">
 
                   <thead>
@@ -96,22 +97,14 @@
                       <th>&nbsp;</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="first odd">
-                      <td>500000002</td>
-                      <td>9/9/10 </td>
-                      <td>pranali d</td>
-                      <td><span class="price">$5.00</span></td>
-                      <td><em>Pending</em></td>
-                      <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#">Reorder</a> </span></td>
-                    </tr>
-                    <tr class="last even">
-                      <td>500000001</td>
-                      <td>9/9/10 </td>
-                      <td>pranali d</td>
-                      <td><span class="price">$1,397.99</span></td>
-                      <td><em>Pending</em></td>
-                      <td class="a-center last"><span class="nobr"> <a href="#">View Order</a> <span class="separator">|</span> <a href="#">Reorder</a> </span></td>
+                  <tbody ng-repeat="order in orderData">
+                    <tr class="first odd" ng-show="$index < noOfOrders ">
+                      <td>{{ order.id }}</td>
+                      <td>{{order.created_on }} </td>
+                      <td>{{ user.first_name }} {{ user.last_name }}</td>
+                      <td><span class="price"> ₹{{ order.final_cost }}</span></td>
+                      <td><em>{{ order.statusText }}</em></td>
+                      <td class="a-center last"><span class="nobr" ng-click="navigateToOrders(order)"> <a href>View Order</a> <span class="separator" ng-hide = "true">|</span> <a href="#" ng-hide = "true">Reorder</a> </span></td>
                     </tr>
                   </tbody>
                 </table>
@@ -129,7 +122,7 @@
               <li class="current"><a>Account Dashboard</a></li>
               <li><a href>Account Information</a></li>
               <li><a href>Address Book</a></li>
-              <li><a href>My Orders</a></li>
+              <li><a href ng-click="scrollTo('myOrders')">My Orders</a></li>
               <!-- li><a href>Billing Agreements</a></li>
               <li><a href>Recurring Profiles</a></li>
               <li><a href>My Product Reviews</a></li>

@@ -127,6 +127,14 @@ angular.module('urn')
                 $rootScope.loadRoute('/grid');
             };
 
+            $rootScope.navigateToOrders = function(order) {
+                $rootScope.orderDetail = order;
+                    $window.localStorage.setItem('selected-order', JSON.stringify($rootScope.orderDetail));
+                    $rootScope.getCartDetails();
+                    $rootScope.loadRoute("/orders/" + $rootScope.orderDetail.id);
+            };
+
             init();
         }])
-;
+
+
