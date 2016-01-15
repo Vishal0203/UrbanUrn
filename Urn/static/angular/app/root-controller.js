@@ -46,7 +46,9 @@ angular.module('urn')
                     function (error) {
                         console.log(error);
                     });
-                $rootScope.getCartDetails();
+                if ($rootScope.is_loggedin) {
+                    $rootScope.getCartDetails();
+                }
             };
 
             $rootScope.editItemInCart = function (cart) {
