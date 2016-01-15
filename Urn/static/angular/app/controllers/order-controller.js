@@ -79,14 +79,12 @@ angular.module('order', ['urn.services'])
                 payload.final_cost = $rootScope.total;
                 payload.address_guid = $scope.selectedAddressGuid;
                 Orders.place(JSON.stringify(payload), function (data) {
-                    $rootScope.orderDetail = data[0];
-                    $window.localStorage.setItem('selected-order', JSON.stringify($rootScope.orderDetail));
-                    $rootScope.getCartDetails();
-                    $rootScope.loadRoute("/orders/" + $rootScope.orderDetail.id);
+                        $rootScope.navigateToOrders(data[0])
                 }, function (error) {
                     console.log(error);
                 });
             };
+
             var init = function () {
                 if ($rootScope.user == undefined) {
                     if ($window.localStorage.getItem('user-data')) {
