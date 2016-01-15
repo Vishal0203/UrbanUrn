@@ -10,9 +10,9 @@
                 <div class="col-sm-7 col-xs-6 col-lg-8">
                     <div class="toplinks">
                         <div class="links">
-                            <div class="myaccount" ng-show="user"><a title="My Account" href="#/dashboard"><span class="hidden-xs">My Account</span></a>
+                            <div class="myaccount" ng-show="is_loggedin"><a title="My Account" href="#/dashboard"><span class="hidden-xs">My Account</span></a>
                             </div>
-                            <div class="wishlist"><a title="My Wishlist" href="#/wishlist"><span class="hidden-xs">Wishlist</span></a>
+                            <div class="wishlist" ng-show="is_loggedin"><a title="My Wishlist" href="#/wishlist"><span class="hidden-xs">Wishlist</span></a>
                             </div>
                             <!-- div class="check"><a title="Checkout" href="#/checkout"><span
                                     class="hidden-xs">Checkout</span></a></div -->

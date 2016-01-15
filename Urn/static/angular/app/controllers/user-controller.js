@@ -144,6 +144,16 @@ angular.module('user', ['urn.services'])
                 })
             };
 
+            $scope.addItemToCart = function (wishlist_guid) {
+                var payload = {};
+                payload.wishlist_guids = [wishlist_guid];
+                Carts.addItemsToCart(JSON.stringify(payload), function (data) {
+                    init();
+                }, function (error) {
+                    console.log(error);
+                })
+            };
+
             $scope.deleteWishlist = function (wishlist_guid) {
                 WishList.deleteWishlist({'wishlist_guid': wishlist_guid}, function (data) {
                     init();

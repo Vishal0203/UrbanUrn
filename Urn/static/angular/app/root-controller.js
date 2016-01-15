@@ -73,12 +73,13 @@ angular.module('urn')
                 })
             };
 
-            $rootScope.addToWishlist = function (product) {
+            $rootScope.addToWishlist = function (product, quantitySelected) {
                 var payload = {};
                 payload.product_guid = product.product_guid;
                 payload.product_data = product.product_data;
+                payload.product_data.quantity = quantitySelected;
                 WishList.addToWishlist(JSON.stringify(payload), function (data) {
-
+                    $rootScope.loadRoute('/wishlist');
                 }, function (error) {
                     console.log(error);
                 })

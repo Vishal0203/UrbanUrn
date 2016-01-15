@@ -20,17 +20,17 @@
                     <thead>
                       <tr class="first last">
                         <th class="customer-wishlist-item-image"></th>
-                        <th class="customer-wishlist-item-info"></th>
+                        <th class="customer-wishlist-item-info">Product</th>
                         <th class="customer-wishlist-item-quantity">Quantity</th>
                         <th class="customer-wishlist-item-price">Price</th>
-                        <th class="customer-wishlist-item-cart">Action</th>
+                        <th class="customer-wishlist-item-cart"></th>
                         <th class="customer-wishlist-item-remove"></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr id="item_31" class="first odd" ng-repeat="wishlist in wishlistData">
-                        <td class="wishlist-cell0 customer-wishlist-item-image"><a title="Sample Product" href="#" class="product-image"> <img width="150" height="150" alt="Sample Product" src="/static/angular/assets/images/sample_product.jpg"> </a></td>
-                        <td class="wishlist-cell1 customer-wishlist-item-info"><h3 class="product-name"><a title="Sample Product" href="#/product_detail">{{ wishlist.product_name }}</a></h3>
+                        <td class="wishlist-cell0 customer-wishlist-item-image"><a title="{{ wishlist.product_name }}" href class="product-image"> <img width="150" height="150" alt="{{ wishlist.product_name }}" src="{{ wishlist.product_images[0].image }}"> </a></td>
+                        <td class="wishlist-cell1 customer-wishlist-item-info"><h3 class="product-name"><a title="{{ wishlist.product_name }}" href>{{ wishlist.product_name }}</a></h3>
                           <div class="description std">
                             <div class="inner">{{ wishlist.product_description }}</div>
                           </div>
@@ -44,10 +44,10 @@
                             <div class="price-box"> <span class="regular-price"> <span class="price">{{ wishlist.product_price }}</span> </span> </div>
                           </div></td>
                         <td class="wishlist-cell4 customer-wishlist-item-cart"><div class="cart-cell">
-                            <button class="button btn-cart" title="Add to Cart" type="button"><span><span>Add to Cart</span></span></button>
+                            <button class="button btn-cart" title="Add to Cart" type="button" ng-click="addItemToCart(wishlist.wishlist_guid)"><span><span>Add to Cart</span></span></button>
                           </div>
-                          <p><a href="#" class="">Edit</a></p></td>
-                        <td class="wishlist-cell5 customer-wishlist-item-remove last"><a class="remove-item" title="Clear Cart" href="" ng-click="deleteWishlist(wishlist.wishlist_guid)"><span><span></span></span></a></td>
+                          <!--p><a href="#" class="">Edit</a></p--></td>
+                        <td class="wishlist-cell5 customer-wishlist-item-remove last"><a class="remove-item" title="Delete Item" href="" ng-click="deleteWishlist(wishlist.wishlist_guid)"><span><span></span></span></a></td>
                       </tr>
 
                     </tbody>

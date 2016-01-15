@@ -1,4 +1,5 @@
 from collections import OrderedDict
+
 from UrbanUrn import settings
 from Urn.common.utils import convert_uuid_string
 from Urn.common import utils
@@ -105,6 +106,9 @@ def format_wishlist_get(users_wishlist):
         item_dict["product_data"] = item.product_data
         item_dict["product_price"] = item.product.price
         item_dict["product_description"] = item.product.description
+        product_images = ProductImages.objects.filter(product_id=item.product.product_id)
+        item_dict['product_images'] = format_product_images(product_images,
+                                                            False) if len(product_images) > 0 else []
         response.append(item_dict)
 
     return response
