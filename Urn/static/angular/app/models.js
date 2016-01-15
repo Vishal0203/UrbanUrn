@@ -17,13 +17,13 @@ angular.module('urn.models', ['ngResource'])
         return angular.extend(baseUrls, {});
     })
 
-    .factory('requestInterceptor', ['$cookies', function ($cookies) {
+    .factory('requestInterceptor', ['$window', function ($window) {
         return {
             request: function (config) {
                 if (!config.url.match(/api/)) {
                     return config;
                 }
-                var authToken = $cookies.get('auth-token');
+                var authToken = $window.localStorage.getItem('auth-token');
                 if (authToken != undefined) {
                     angular.extend((config.headers = config.headers || {}), {
                         'X-Urbanurn-Auth': authToken
@@ -34,15 +34,12 @@ angular.module('urn.models', ['ngResource'])
         }
     }])
 
-    .factory('responseErrorInterceptor', ['$cookies', '$location', function ($cookies, $location) {
+    .factory('responseErrorInterceptor', ['$window', '$location', function ($window, $location) {
         return {
             responseError: function (response) {
                 if (response.status == 403) {
                     $rootScope.is_loggedin = false;
-                    var cookies = $cookies.getAll();
-                    angular.forEach(cookies, function (v, k) {
-                        $cookies.remove(k);
-                    });
+                    $window.localStorage.clear();
                     $location.path('/home');
                 }
                 return response;

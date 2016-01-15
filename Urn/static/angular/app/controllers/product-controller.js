@@ -54,12 +54,12 @@ angular.module('product', ['urn.services'])
             init();
         }])
 
-    .controller('ProductDetailController', ['$rootScope', '$scope', '$cookies','Carts',
-        ProductDetailController = function ($rootScope, $scope, $cookies, Carts) {
+    .controller('ProductDetailController', ['$rootScope', '$scope', '$window','Carts',
+        ProductDetailController = function ($rootScope, $scope, $window, Carts) {
             $scope.quantitySelected="1";
             var init = function () {
-                if ($cookies.getObject('selected-product')) {
-                        $rootScope.selectedProduct = $cookies.getObject('selected-product');
+                if ($window.localStorage.getItem('selected-product')) {
+                        $rootScope.selectedProduct = JSON.parse($window.localStorage.getItem('selected-product'));
                     } else {
                         $rootScope.loadRoute('/home');
                     }

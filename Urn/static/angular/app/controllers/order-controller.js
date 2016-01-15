@@ -1,6 +1,6 @@
 angular.module('order', ['urn.services'])
-    .controller('CheckoutController', ['$rootScope', '$scope', '$cookies', 'Address', 'Orders',
-        CheckoutController = function ($rootScope, $scope, $cookies, Address, Orders) {
+    .controller('CheckoutController', ['$rootScope', '$scope', '$window', 'Address', 'Orders',
+        CheckoutController = function ($rootScope, $scope, $window, Address, Orders) {
             $scope.createBillingAddress = 'same';
             $scope.createShippingAddress = 'same';
             $scope.displayItems = [{show: true}, {show: false}, {show: false}, {show: false}];
@@ -80,7 +80,7 @@ angular.module('order', ['urn.services'])
                 payload.address_guid = $scope.selectedAddressGuid;
                 Orders.place(JSON.stringify(payload), function (data) {
                     $rootScope.orderDetail = data[0];
-                    $cookies.putObject('selected-order', $rootScope.orderDetail);
+                    $window.localStorage.setItem('selected-order', JSON.stringify($rootScope.orderDetail));
                     $rootScope.getCartDetails();
                     $rootScope.loadRoute("/orders/" + $rootScope.orderDetail.id);
                 }, function (error) {
@@ -89,8 +89,8 @@ angular.module('order', ['urn.services'])
             };
             var init = function () {
                 if ($rootScope.user == undefined) {
-                    if ($cookies.getObject('user-data')) {
-                        $rootScope.user = $cookies.getObject('user-data');
+                    if ($window.localStorage.getItem('user-data')) {
+                        $rootScope.user = JSON.parse($window.localStorage.getItem('user-data'));
                     } else {
                         $rootScope.loadRoute('/home');
                     }
@@ -100,11 +100,11 @@ angular.module('order', ['urn.services'])
             };
             init();
         }])
-    .controller('OrdersController', ['$rootScope', '$scope', '$cookies',
-        OrdersController = function ($rootScope, $scope, $cookies) {
+    .controller('OrdersController', ['$rootScope', '$scope', '$window',
+        OrdersController = function ($rootScope, $scope, $window) {
             var init = function () {
-                if ($cookies.getObject('selected-order')) {
-                        $rootScope.orderDetail = $cookies.getObject('selected-order');
+                if ($window.localStorage.getItem('selected-order')) {
+                        $rootScope.orderDetail = JSON.parse($window.localStorage.getItem('selected-order'));
                     } else {
                         $rootScope.loadRoute('/home');
                     }

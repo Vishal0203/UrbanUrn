@@ -10,8 +10,8 @@ angular.module('user', ['urn.services'])
             init();
         }])
 
-    .controller('LoginController', ['$rootScope', '$scope', '$cookies', '$location', 'UserLogin', 'Whoami', 'UserRegister',
-        LoginController = function ($rootScope, $scope, $cookies, $location, UserLogin, Whoami, UserRegister) {
+    .controller('LoginController', ['$rootScope', '$scope', '$window', '$location', 'UserLogin', 'Whoami', 'UserRegister',
+        LoginController = function ($rootScope, $scope, $window, $location, UserLogin, Whoami, UserRegister) {
             var init = function () {
             };
             $scope.submit = function () {
@@ -29,12 +29,12 @@ angular.module('user', ['urn.services'])
                 payload.password = $scope.password;
                 UserLogin.login(payload,
                     function (data) {
-                        $cookies.put('auth-token', data.token);
+                        $window.localStorage.setItem('auth-token', data.token);
                         $rootScope.user_guid = data.user_guid;
                         Whoami.getUserDetails({},
                             function (data) {
                                 $rootScope.user = data;
-                                $cookies.putObject('user-data', data);
+                                $window.localStorage.setItem('user-data', JSON.stringify(data));
                                 $rootScope.is_loggedin = true;
                                 $location.path('/home');
                             },
@@ -62,12 +62,12 @@ angular.module('user', ['urn.services'])
 
                 UserRegister.register(payload,
                     function (data) {
-                        $cookies.put('auth-token', data.token);
+                        $window.localStorage.setItem('auth-token', data.token);
                         $rootScope.user_guid = data.user_guid;
                         Whoami.getUserDetails({},
                             function (data) {
                                 $rootScope.user = data;
-                                $cookies.putObject('user-data', data);
+                                $window.localStorage.setItem('user-data', JSON.stringify(data));
                                 $rootScope.is_loggedin = true;
                                 $scope.dismiss();
                                 $location.path('/home');
@@ -91,8 +91,8 @@ angular.module('user', ['urn.services'])
             init();
         }])
 
-    .controller('CartController', ['$rootScope', '$scope', '$cookies', 'Carts',
-        CartController = function ($rootScope, $scope, $cookies, Carts) {
+    .controller('CartController', ['$rootScope', '$scope', '$window', 'Carts',
+        CartController = function ($rootScope, $scope, $window, Carts) {
             $scope.deleteAllItemsFromCart = function (cartData) {
                 angular.forEach(cartData, function (cart) {
                     $rootScope.deleteItemFromCart(cart);

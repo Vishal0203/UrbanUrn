@@ -1,6 +1,6 @@
 angular.module('urn')
-    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', '$cookies', 'Skus', 'Carts', 'WishList', 'UserLogout',
-        RootController = function ($rootScope, $scope, $location, $route, $interval, $cookies, Skus, Carts, WishList, UserLogout) {
+    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', '$window', 'Skus', 'Carts', 'WishList', 'UserLogout',
+        RootController = function ($rootScope, $scope, $location, $route, $interval, $window, Skus, Carts, WishList, UserLogout) {
             $rootScope.cartData = [];
             $rootScope.total = 0;
             $rootScope.selectedProduct = {};
@@ -19,8 +19,8 @@ angular.module('urn')
                         });
             };
             var init = function () {
-                if ($cookies.getObject('user-data')) {
-                    $rootScope.user = $cookies.getObject('user-data');
+                if ($window.localStorage.getItem('user-data')) {
+                    $rootScope.user = JSON.parse($window.localStorage.getItem('user-data'));
                     $rootScope.is_loggedin = true;
                 } else {
                     $rootScope.user = null;
@@ -51,13 +51,13 @@ angular.module('urn')
 
             $rootScope.editItemInCart = function (cart) {
                 $rootScope.selectedProduct = cart.product_info[0];
-                $cookies.putObject('selected-product', $rootScope.selectedProduct);
+                $window.localStorage.setItem('selected-product', JSON.stringify($rootScope.selectedProduct));
                 $rootScope.loadRoute('/product_detail/' + cart.product_info[0].name);
             };
 
              $rootScope.goToProduct = function (product) {
                 $rootScope.selectedProduct = product;
-                $cookies.putObject('selected-product', $rootScope.selectedProduct);
+                 $window.localStorage.setItem('selected-product', JSON.stringify($rootScope.selectedProduct));
                 $rootScope.loadRoute('/product_detail/' + product.name);
             };
 
@@ -108,11 +108,8 @@ angular.module('urn')
             $scope.logoutUser = function () {
                 UserLogout.logout({},
                     function (data) {
-                        var cookies = $cookies.getAll();
                         $rootScope.is_loggedin = false;
-                        angular.forEach(cookies, function (v, k) {
-                            $cookies.remove(k);
-                        });
+                        $window.localStorage.clear();
                         $rootScope.loadRoute('/home');
                     },
                     function (error) {
