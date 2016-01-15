@@ -298,10 +298,8 @@
                                         <ul class="mini-products-list" id="cart-sidebar">
                                             <li class="item first" ng-repeat="cart in cartData">
                                                 <div class="item-inner"><a href ng-click="editItemInCart(cart)"
-                                                                           class="product-image" title="cart.product_info[0].name"><img
-                                                     alt="Sample Product"
-                                                     src="/static/angular/assets/images/sample_product.jpg"></a>
-
+                                                                           class="product-image" title="{{ cart.product_info[0].name }}">
+                                                    <img alt="{{ cart.product_info[0].name }}" src="{{ cart.product_info[0].product_images[0].image }}"></a>
                                                     <div class="product-details">
                                                         <div class="access"><a class="btn-remove1"
                                                                                title="Remove This Item"
