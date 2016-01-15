@@ -30,8 +30,6 @@ if __name__ == '__main__':
             sys.exit(1)
 
     print("[ OK ]")
-    if args.product:
-        process_product_uploads(auth_object)
 
     if args.sku:
         print("Checking SKU config............................", end="")
@@ -45,3 +43,6 @@ if __name__ == '__main__':
 
             print("Uploading child SKUs.........................")
             process_sku_uploads(auth_object, 'child')
+
+    if args.product:
+        process_product_uploads(auth_object)

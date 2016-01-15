@@ -19,6 +19,7 @@ def process_sku_uploads(auth_object, sku_type):
     uu_auth_header = {'X-Urbanurn-Auth': auth_object.jwt_token}
 
     parent_sku_mapping = {}
+    child_sku_mapping = []
     for sku in sku_jsons:
         print("Pumping SKU...................................", end="")
         r = requests.post(skus_url, headers=uu_auth_header, cookies=auth_object.session_id, data=json.dumps(sku))
@@ -27,6 +28,8 @@ def process_sku_uploads(auth_object, sku_type):
                 parent_sku_mapping[json.loads(r.text).get('sku_guid')] = {'category': "", 'name': ""}
                 parent_sku_mapping[json.loads(r.text).get('sku_guid')]['category'] = sku.get('category')
                 parent_sku_mapping[json.loads(r.text).get('sku_guid')]['name'] = sku.get('name')
+            else:
+                child_sku_mapping.append({sku.get('name'): json.loads(r.text).get('sku_guid')})
 
             print("[ PASSED {0} ]".format(sku.get('name')))
         else:
@@ -36,6 +39,39 @@ def process_sku_uploads(auth_object, sku_type):
         print("Writing to Child Excel...........................", end="")
         update_child_excel(parent_sku_mapping)
         print("[ OK ]")
+
+    if len(child_sku_mapping) is not 0:
+        print("Writing to Product Excel.........................", end="")
+        update_product_excel(child_sku_mapping)
+        print("[ OK ]")
+
+
+def update_product_excel(child_sku_mapping):
+    wb = openpyxl.load_workbook(excel_config.get('PRODUCT_EXCEL'))
+    sheet = wb.get_sheet_by_name('Sheet1')
+
+    keys_to_look = {
+        "sku_guid": 0,
+        "sku_name": 0
+    }
+
+    for index, row in enumerate(sheet.rows):
+        if index is 0:
+            for key, cell in enumerate(row):
+                if cell.value in keys_to_look.keys():
+                    keys_to_look[cell.value] = key
+        else:
+            product_excel_writer(row, keys_to_look, child_sku_mapping)
+
+    wb.save(excel_config.get('PRODUCT_EXCEL'))
+
+
+def product_excel_writer(row, keys, mapping):
+    row_list = list(row)
+    for element in mapping:
+        name = list(element)[0]
+        if row_list[keys.get('sku_name')].value == name:
+            row_list[keys.get('sku_guid')].value = element[name]
 
 
 def update_child_excel(parent_sku_mapping):

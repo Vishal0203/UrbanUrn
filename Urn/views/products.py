@@ -41,10 +41,11 @@ def process_sku_post(request):
 
         elif request_data.get("parent_sku_guid", None) is not None and request_data.get("category", None) is None:
             parent_sku_id = Sku.objects.filter(sku_guid=request_data["parent_sku_guid"]).get().sku_id
-            Sku.objects.create(name=request_data["name"], description=request_data["description"],
-                               parent_sku_id=parent_sku_id, created_by=request.user.user_profile)
+            child_sku = Sku.objects.create(name=request_data["name"], description=request_data["description"],
+                                           parent_sku_id=parent_sku_id, created_by=request.user.user_profile)
 
-            return HttpResponse(status=201, content='child sku created')
+            return HttpResponse(status=201, content=build_json(keys=['sku_guid'],
+                                                               values=[convert_uuid_string(child_sku.sku_guid)]))
 
         else:
             return HttpResponseBadRequest('Invalid sku creation request')
