@@ -106,7 +106,6 @@ angular.module('product', ['urn.services'])
                 product_info.quantity = $scope.quantitySelected;
                 payload.product_data = JSON.stringify(product_info);
                 Carts.addItemsToCart(JSON.stringify(payload), function (data) {
-                     console.log(data);
                      $rootScope.getCartDetails();
                 }, function (error) {
                     console.log(error);
