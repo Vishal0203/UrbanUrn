@@ -57,16 +57,7 @@ angular.module('order', ['urn.services'])
                     $scope.displayItems[index + 1].show = true;
                 }
             };
-            $scope.updateDisplay = function (index) {
-                angular.forEach($scope.displayItems, function (data, key) {
-                    if (key == index) {
-                        data.show = !data.show;
-                    }
-                    else {
-                        data.show = false;
-                    }
-                });
-            };
+
             $scope.sendPaymentDetails = function () {
                 var payload = {};
                 payload.products = [];

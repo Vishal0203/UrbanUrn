@@ -4,7 +4,7 @@ angular.module('urn')
             $rootScope.cartData = [];
             $rootScope.total = 0;
             $rootScope.selectedProduct = {};
-
+            $rootScope.indexToBeShown = null;
             $rootScope.getCartDetails = function () {
                     Carts.getCartDetails({},
                         function (data) {
@@ -132,6 +132,17 @@ angular.module('urn')
                     $window.localStorage.setItem('selected-order', JSON.stringify($rootScope.orderDetail));
                     $rootScope.getCartDetails();
                     $rootScope.loadRoute("/orders/" + $rootScope.orderDetail.id);
+            };
+
+            $rootScope.updateDisplay = function (index, items) {
+                angular.forEach(items, function (data, key) {
+                    if (key == index) {
+                        data.show = !data.show;
+                    }
+                    else {
+                        data.show = false;
+                    }
+                });
             };
 
             init();
