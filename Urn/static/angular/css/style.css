@@ -6225,6 +6225,12 @@ button.button.btn-continue:before {
 	padding: 10px;
 	vertical-align: top;
 }
+#shopping-cart-table thead tr {
+	width: 100%;
+}
+#shopping-cart-table tbody tr {
+	width: 100%;
+}
 #shopping-cart-table tfoot tr td.last {
 	border-top: none;
 }
