@@ -20,12 +20,24 @@
                 <h2>Account Information</h2>
               </div>
               <div class="col2-set">
-                <div class="col-1">
+                <div>
                   <h5>Contact Information</h5>
-                  <a href="#">Edit</a>
-                  <p> pranali deshmukh<br>
-                    pranalid15@gmail.com<br>
-                    <a href="#">Change Password</a> </p>
+                  <!--<a href="#">Edit</a>-->
+                  <p>{{ user.first_name }} {{ user.last_name }}<br>
+                    {{ user.email }}<br>
+                  </p>
+                    <div>
+                        <input type="password" class="input-text" placeholder="Old Password" autocomplete="off"
+                               ng-model="change_password"/>
+                        <input type="password" class="input-text" placeholder="New Password" autocomplete="off"
+                               ng-model="change_password"/>
+                        <input type="password" class="input-text" placeholder="Confirm Password" autocomplete="off"
+                               ng-model="change_password_cnf"/>
+                        <button class="button password">
+                            <span>Apply</span>
+                        </button>
+                    </div>
+                    <br>
                 </div>
                 <!-- div class="col-2">
                   <h5>Newsletters</h5>
@@ -34,30 +46,35 @@
                 </div-->
               </div>
               <div class="col2-set">
-                <h4>Address Book</h4>
-                <div class="manage_add"><a href="#">Manage Addresses</a> </div>
-                <div class="col-1">
+                  <div class="page-title">
+                      <h2>Address Book</h2>
+                  </div>
+                <div class="manage_add"><a href="" ng-click="add_address_click=true">Add Addresses</a> </div>
+                <div ng-show="user.addresses.length > 0">
                   <h5>Primary Billing Address</h5>
                   <address>
-                  pranali d<br>
-                  aundh<br>
-                  tyyrt,  Alabama, 46532<br>
-                  United States<br>
-                  T: 454541 <br>
-                  <a href="#">Edit Address</a>
+                      {{ user.first_name }}<br>
+                      {{ user.addresses[0].street_1 }}<br>
+                      {{ user.addresses[0].street_2 }}<br>
+                      {{ user.addresses[0].city }} {{ orderDetail.address_info[0].pincode }}<br>
+                      {{ user.addresses[0].state }}<br>
+                      {{ user.addresses[0].country }}<br>
+                      {{ user.phone }}
                   </address>
                 </div>
-                <div class="col-2">
-                  <h5>Primary Shipping Address</h5>
-                  <address>
-                  pranali d<br>
-                  aundh<br>
-                  tyyrt,  Alabama, 46532<br>
-                  United States<br>
-                  T: 454541 <br>
-                  <a href="#">Edit Address</a>
-                  </address>
-                </div>
+              <div ng-show="user.addresses.length == 0">
+                  <h5>No addresses added, Click on Add Address button to add one</h5>
+              </div>
+                <!--<div class="col-2">-->
+                  <!--<h5>Primary Shipping Address</h5>-->
+                  <!--<address>-->
+                      <!--pranali d<br>-->
+                      <!--aundh<br>-->
+                      <!--tyyrt,  Alabama, 46532<br>-->
+                      <!--United States<br>-->
+                      <!--T: 454541 <br>-->
+                  <!--</address>-->
+                <!--</div>-->
               </div>
             </div>
               <div class="box-account">

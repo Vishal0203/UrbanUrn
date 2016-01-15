@@ -1,8 +1,9 @@
 angular.module('user', ['urn.services'])
-    .controller('DashboardController', ['$rootScope', '$scope','Orders',
-        DashboardController = function ($rootScope, $scope, Orders) {
+    .controller('DashboardController', ['$rootScope', '$scope', '$window','Orders',
+        DashboardController = function ($rootScope, $scope, $window, Orders) {
             $scope.orderData = '';
             var init = function () {
+                $rootScope.user = JSON.parse($window.localStorage.getItem('user-data'));
                 Orders.get({}, function(data) {
                     $scope.orderData = data;
                 })

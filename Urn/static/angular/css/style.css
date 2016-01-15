@@ -6830,6 +6830,12 @@ button.button.login:before {
 	font-size: 14px;
 	padding-right: 8px;
 }
+button.button.password:before {
+	content: '\f084';
+	font-family: FontAwesome;
+	font-size: 14px;
+	padding-right: 8px;
+}
 .account-login .form-list input.input-text {
 	background: #fff;
 	border: 1px solid #cbcbcb;
