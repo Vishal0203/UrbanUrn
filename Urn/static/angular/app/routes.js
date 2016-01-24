@@ -77,6 +77,22 @@ angular.module('urn')
                 controller: 'OrdersController',
                 templateUrl: '/static/angular/app/views/orders.html'
             })
+            .when('/return_policy', {
+                controller: 'MiscController',
+                templateUrl: '/static/angular/app/views/return_policy.html'
+            })
+            .when('/privacy_policy', {
+                controller: 'MiscController',
+                templateUrl: '/static/angular/app/views/privacy_policy.html'
+            })
+            .when('/about_us', {
+                controller: 'MiscController',
+                templateUrl: '/static/angular/app/views/about_us.html'
+            })
+             .when('/where_is_my_order', {
+                controller: 'MiscController',
+                templateUrl: '/static/angular/app/views/where_is_my_order.html'
+            })
             .otherwise('/home');
     })
 ;
