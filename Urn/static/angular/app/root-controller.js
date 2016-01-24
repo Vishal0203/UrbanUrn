@@ -1,10 +1,11 @@
 angular.module('urn')
-    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', '$window', 'Skus', 'Carts', 'WishList', 'UserLogout',
-        RootController = function ($rootScope, $scope, $location, $route, $interval, $window, Skus, Carts, WishList, UserLogout) {
+    .controller('RootController', ['$rootScope', '$scope', '$location', '$route', '$interval', '$window', 'Skus', 'Carts', 'WishList', 'UserLogout', 'Products',
+        RootController = function ($rootScope, $scope, $location, $route, $interval, $window, Skus, Carts, WishList, UserLogout, Products) {
             $rootScope.cartData = [];
             $rootScope.total = 0;
             $rootScope.selectedProduct = {};
             $rootScope.indexToBeShown = null;
+            $scope.latest_products = [];
             $rootScope.getCartDetails = function () {
                     Carts.getCartDetails({},
                         function (data) {
@@ -19,6 +20,7 @@ angular.module('urn')
                         });
             };
             var init = function () {
+                $scope.getLatestProducts();
                 if ($window.localStorage.getItem('user-data')) {
                     $rootScope.user = JSON.parse($window.localStorage.getItem('user-data'));
                     $rootScope.is_loggedin = true;
@@ -145,7 +147,17 @@ angular.module('urn')
                 });
             };
 
+            $scope.getLatestProducts = function () {
+                Products.getProducts({'latest': true},
+                    function (data) {
+                        $scope.latest_products = data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    });
+            };
+
             init();
-        }])
+        }]);
 
 
