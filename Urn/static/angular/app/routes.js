@@ -14,21 +14,21 @@ angular.module('urn')
                 templateUrl: '/static/angular/app/views/about_us.html'
             })
             /*.when('/blog', {
-                controller: 'BlogController',
-                templateUrl: '/static/angular/app/views/blog.html'
-            })*/
+             controller: 'BlogController',
+             templateUrl: '/static/angular/app/views/blog.html'
+             })*/
             /*.when('/blog_detail', {
-                controller: 'BlogDetailController',
-                templateUrl: '/static/angular/app/views/blog_detail.html'
-            })*/
+             controller: 'BlogDetailController',
+             templateUrl: '/static/angular/app/views/blog_detail.html'
+             })*/
             .when('/checkout', {
                 controller: 'CheckoutController',
                 templateUrl: '/static/angular/app/views/checkout.html'
             })
             /*.when('/compare', {
-                controller: 'CompareProductController',
-                templateUrl: '/static/angular/app/views/compare.html'
-            })*/
+             controller: 'CompareProductController',
+             templateUrl: '/static/angular/app/views/compare.html'
+             })*/
             .when('/contact_us', {
                 controller: 'MiscController',
                 templateUrl: '/static/angular/app/views/contact_us.html'
@@ -62,9 +62,9 @@ angular.module('urn')
                 templateUrl: '/static/angular/app/views/product_detail.html'
             })
             /*.when('/quick_view', {
-                controller: 'QuickViewController',
-                templateUrl: '/static/angular/app/views/quick_view.html'
-            })*/
+             controller: 'QuickViewController',
+             templateUrl: '/static/angular/app/views/quick_view.html'
+             })*/
             .when('/shopping_cart', {
                 controller: 'CartController',
                 templateUrl: '/static/angular/app/views/shopping_cart.html'
@@ -89,7 +89,7 @@ angular.module('urn')
                 controller: 'MiscController',
                 templateUrl: '/static/angular/app/views/about_us.html'
             })
-             .when('/where_is_my_order', {
+            .when('/where_is_my_order', {
                 controller: 'MiscController',
                 templateUrl: '/static/angular/app/views/where_is_my_order.html'
             })

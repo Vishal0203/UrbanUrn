@@ -29,10 +29,10 @@
                 <div class="product-img-box col-sm-4 col-xs-12 bounceInRight animated">
                   <div class="new-label new-top-left"> New </div>
                   <div class="product-image">
-                    <div class="large-image"> <a ng-href="{{ selectedProduct.product_images[0].image }}" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="{{ selectedProduct.product_images[0].image }}" alt="{{ selectedProduct.name }}"> </a> </div>
+                    <div class="large-image"> <a href class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="{{ mainImage }}" alt="{{ selectedProduct.name }}"> </a> </div>
                     <div class="flexslider flexslider-thumb">
                       <ul class="previews-list slides" ng-repeat="image in selectedProduct.product_images">
-                        <li><a href='{{ image.image }}' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '/static/angular/assets/images/sample/IMG_1374.jpg' "><img src="{{ image.image }}" alt="{{ selectedProduct.name }}"/></a></li>
+                        <li><a href ng-click="setMainImage(image.image)" class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{{ image.image }}' "><img src="{{ image.image }}" alt="{{ selectedProduct.name }}"/></a></li>
                       </ul>
                     </div>
                   </div>
@@ -86,7 +86,7 @@
                 </div>
                 <aside class="col-lg-3 col-sm-3 col-xs-12 bounceInLeft animated"> 
                   <div class="product-sibebar-banner">
-                    <div class="text-banner"> <a title="Text Banner" href="#"><img src="/static/angular/assets/images/RHS-banner-img.jpg" alt="banner"></a> </div>
+                    <div class="text-banner"> <a title="Text Banner" href><img src="/static/angular/assets/images/logo.png" alt="banner"></a> </div>
                   </div>
                 </aside>
               </form>

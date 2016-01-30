@@ -209,7 +209,7 @@ def process_products_get(request):
     elif 'latest' in url_params:
         latest = url_params['latest']
         if latest == 'true':
-            products = Products.objects.all().order_by('created_on')[:10]
+            products = Products.objects.all().order_by('created_on')[:12]
         else:
             products = Products.objects.all()
         return HttpResponse(format_products(products))

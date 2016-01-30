@@ -37,7 +37,7 @@ angular.module('order', ['urn.services'])
             $scope.updateDetailsShipping = function () {
                 if ($scope.createShippingAddress == 'diff') {
                     $scope.selectedShippingAddress = $scope.newShippingAddress;
-                    $scope.selectedAddressGuid = $scope.selectedBillingAddressGuid ;
+                    $scope.selectedAddressGuid = $scope.selectedBillingAddressGuid;
                 }
                 else {
                     $scope.selectedAddressGuid = $scope.selectedShippingAddress.address_guid;
@@ -71,7 +71,7 @@ angular.module('order', ['urn.services'])
                 payload.final_cost = $rootScope.total;
                 payload.address_guid = $scope.selectedAddressGuid;
                 Orders.place(JSON.stringify(payload), function (data) {
-                        $rootScope.navigateToOrders(data[0])
+                    $rootScope.navigateToOrders(data[0])
                 }, function (error) {
                     console.log(error);
                 });
@@ -94,10 +94,10 @@ angular.module('order', ['urn.services'])
         OrdersController = function ($rootScope, $scope, $window) {
             var init = function () {
                 if ($window.localStorage.getItem('selected-order')) {
-                        $rootScope.orderDetail = JSON.parse($window.localStorage.getItem('selected-order'));
-                    } else {
-                        $rootScope.loadRoute('/home');
-                    }
+                    $rootScope.orderDetail = JSON.parse($window.localStorage.getItem('selected-order'));
+                } else {
+                    $rootScope.loadRoute('/home');
+                }
             };
             init();
         }])

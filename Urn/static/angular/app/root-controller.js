@@ -7,17 +7,17 @@ angular.module('urn')
             $rootScope.indexToBeShown = null;
             $scope.latest_products = [];
             $rootScope.getCartDetails = function () {
-                    Carts.getCartDetails({},
-                        function (data) {
-                            $rootScope.total = 0;
-                            $rootScope.cartData = data;
-                            angular.forEach($rootScope.cartData, function (cart) {
-                                $rootScope.total += parseInt(cart.product_data.quantity * cart.product_info[0].price);
-                            });
-                        },
-                        function (error) {
-                            console.log(error);
+                Carts.getCartDetails({},
+                    function (data) {
+                        $rootScope.total = 0;
+                        $rootScope.cartData = data;
+                        angular.forEach($rootScope.cartData, function (cart) {
+                            $rootScope.total += parseInt(cart.product_data.quantity * cart.product_info[0].price);
                         });
+                    },
+                    function (error) {
+                        console.log(error);
+                    });
             };
             var init = function () {
                 $scope.getLatestProducts();
@@ -59,9 +59,9 @@ angular.module('urn')
                 $rootScope.loadRoute('/product_detail/' + cart.product_info[0].name);
             };
 
-             $rootScope.goToProduct = function (product) {
+            $rootScope.goToProduct = function (product) {
                 $rootScope.selectedProduct = product;
-                 $window.localStorage.setItem('selected-product', JSON.stringify($rootScope.selectedProduct));
+                $window.localStorage.setItem('selected-product', JSON.stringify($rootScope.selectedProduct));
                 $rootScope.loadRoute('/product_detail/' + product.name);
             };
 
@@ -90,11 +90,12 @@ angular.module('urn')
             $rootScope.getSkuProducts = function (sku_guid) {
                 $rootScope.search_query = undefined;
                 $rootScope.sku_guid = sku_guid;
+                $window.localStorage.setItem('sku_guid', $rootScope.sku_guid);
                 $rootScope.loadRoute('/grid');
             };
 
-            $rootScope.routeToCheckout = function() {
-                if($rootScope.user){
+            $rootScope.routeToCheckout = function () {
+                if ($rootScope.user) {
                     $rootScope.loadRoute('/checkout');
                 }
                 else {
@@ -106,8 +107,8 @@ angular.module('urn')
                 path == $location.path() ? $route.reload() : $location.path(path);
             };
 
-            $rootScope.getUrl = function(name) {
-                return "#/product_detail/"+ name;
+            $rootScope.getUrl = function (name) {
+                return "#/product_detail/" + name;
             };
 
             $scope.logoutUser = function () {
@@ -129,11 +130,11 @@ angular.module('urn')
                 $rootScope.loadRoute('/grid');
             };
 
-            $rootScope.navigateToOrders = function(order) {
+            $rootScope.navigateToOrders = function (order) {
                 $rootScope.orderDetail = order;
-                    $window.localStorage.setItem('selected-order', JSON.stringify($rootScope.orderDetail));
-                    $rootScope.getCartDetails();
-                    $rootScope.loadRoute("/orders/" + $rootScope.orderDetail.id);
+                $window.localStorage.setItem('selected-order', JSON.stringify($rootScope.orderDetail));
+                $rootScope.getCartDetails();
+                $rootScope.loadRoute("/orders/" + $rootScope.orderDetail.id);
             };
 
             $rootScope.updateDisplay = function (index, items) {

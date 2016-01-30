@@ -6,8 +6,8 @@ angular.module('product', ['urn.services'])
             init();
         }])
 
-    .controller('GridController', ['$rootScope', '$scope', 'Skus', 'ProductsSearch',
-        GridController = function ($rootScope, $scope, Skus, ProductsSearch) {
+    .controller('GridController', ['$rootScope', '$scope', '$window', 'Skus', 'ProductsSearch',
+        GridController = function ($rootScope, $scope, $window, Skus, ProductsSearch) {
             $scope.sku_category = '';
             $scope.sku_name = '';
             $scope.sku_products = [];
@@ -32,6 +32,9 @@ angular.module('product', ['urn.services'])
 
             var init = function () {
                 if ($rootScope.sku_guid) {
+                    $scope.getSkuProducts($rootScope.sku_guid);
+                } else {
+                    $rootScope.sku_guid = $window.localStorage.getItem('sku_guid');
                     $scope.getSkuProducts($rootScope.sku_guid);
                 }
 
@@ -59,45 +62,51 @@ angular.module('product', ['urn.services'])
             init();
         }])
 
-    .controller('ProductDetailController', ['$rootScope', '$scope', '$window','Carts',
+    .controller('ProductDetailController', ['$rootScope', '$scope', '$window', 'Carts',
         ProductDetailController = function ($rootScope, $scope, $window, Carts) {
-            $scope.quantitySelected="1";
+            $scope.quantitySelected = "1";
+            $scope.mainImage = '';
             var init = function () {
                 if ($window.localStorage.getItem('selected-product')) {
-                        $rootScope.selectedProduct = JSON.parse($window.localStorage.getItem('selected-product'));
-                    } else {
-                        $rootScope.loadRoute('/home');
-                    }
+                    $rootScope.selectedProduct = JSON.parse($window.localStorage.getItem('selected-product'));
+                } else {
+                    $rootScope.loadRoute('/home');
+                }
                 var skusList = [$rootScope.womenSkus, $rootScope.menSkus, $rootScope.decorSkus];
-                angular.forEach(skusList, function(parentSku) {
+                angular.forEach(skusList, function (parentSku) {
                     angular.forEach(parentSku, function (childSku) {
-                        if($rootScope.selectedProduct.parent_sku_guid == childSku.parent_sku_guid){
-                        $scope.getSkuDetails(childSku.children);
+                        if ($rootScope.selectedProduct.parent_sku_guid == childSku.parent_sku_guid) {
+                            $scope.getSkuDetails(childSku.children);
                         }
                     })
-                })
-                };
+                });
+                $scope.mainImage = $rootScope.selectedProduct.product_images[0].image;
+            };
 
-            $scope.getSkuDetails = function(skus){
-                angular.forEach(skus, function(sku) {
-                   if(sku.sku_guid == $rootScope.selectedProduct.sku_guid){
-                       $scope.selectedSku = sku.name;
-                   }
+            $scope.getSkuDetails = function (skus) {
+                angular.forEach(skus, function (sku) {
+                    if (sku.sku_guid == $rootScope.selectedProduct.sku_guid) {
+                        $scope.selectedSku = sku.name;
+                    }
                 });
             };
 
-            $scope.add = function() {
-              var number = parseInt($scope.quantitySelected);
-              if(number <= $rootScope.selectedProduct.product_data.quantity-1){
-                  number++;
-              }
-              $scope.quantitySelected = number.toString();
+            $scope.setMainImage = function (image) {
+                $scope.mainImage = image;
+            };
+
+            $scope.add = function () {
+                var number = parseInt($scope.quantitySelected);
+                if (number <= $rootScope.selectedProduct.product_data.quantity - 1) {
+                    number++;
+                }
+                $scope.quantitySelected = number.toString();
 
             };
-            $scope.negate = function() {
-              if($scope.quantitySelected > 0 ){
-                  $scope.quantitySelected--;
-              }
+            $scope.negate = function () {
+                if ($scope.quantitySelected > 0) {
+                    $scope.quantitySelected--;
+                }
             };
             $scope.addItemToCart = function () {
                 var payload = {};
@@ -106,7 +115,7 @@ angular.module('product', ['urn.services'])
                 product_info.quantity = $scope.quantitySelected;
                 payload.product_data = JSON.stringify(product_info);
                 Carts.addItemsToCart(JSON.stringify(payload), function (data) {
-                     $rootScope.getCartDetails();
+                    $rootScope.getCartDetails();
                 }, function (error) {
                     console.log(error);
                 })

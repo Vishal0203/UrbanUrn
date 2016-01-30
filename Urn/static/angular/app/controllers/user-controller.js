@@ -10,17 +10,17 @@ angular.module('user', ['urn.services'])
             var init = function () {
                 $rootScope.user = JSON.parse($window.localStorage.getItem('user-data'));
                 $rootScope.add_address_click = false;
-                Orders.get({}, function(data) {
+                Orders.get({}, function (data) {
                     $scope.orderData = data;
-                    angular.forEach($scope.orderData, function(order) {
-                          $scope.confirmedStatus = 0;
-                          $scope.getStatusOfOrder(order, order.order_info);
+                    angular.forEach($scope.orderData, function (order) {
+                        $scope.confirmedStatus = 0;
+                        $scope.getStatusOfOrder(order, order.order_info);
                     });
-                    if($rootScope.indexToBeShown) {
+                    if ($rootScope.indexToBeShown) {
                         $rootScope.updateDisplay($rootScope.indexToBeShown, $scope.displayItems);
                         $rootScope.indexToBeShown = null;
                     }
-                }, function(error) {
+                }, function (error) {
                     $scope.orderData = false;
                     console.log(error);
                 })
@@ -35,32 +35,32 @@ angular.module('user', ['urn.services'])
                 })
             };
 
-            $scope.toggleOrders = function() {
-                if($scope.noOfOrders!= 2) {
+            $scope.toggleOrders = function () {
+                if ($scope.noOfOrders != 2) {
                     $scope.noOfOrders = 2;
                 }
                 else {
-                    $scope.noOfOrders= $scope.orderData.length
+                    $scope.noOfOrders = $scope.orderData.length
                 }
             };
 
-            $scope.getStatusOfOrder = function(order, orderDetails) {
-                angular.forEach(orderDetails, function(product){
-                    if(product.status == "confirmed") {
+            $scope.getStatusOfOrder = function (order, orderDetails) {
+                angular.forEach(orderDetails, function (product) {
+                    if (product.status == "confirmed") {
                         $scope.confirmedStatus++;
                     }
                 });
-                if($scope.confirmedStatus == orderDetails.length) {
-                        order.statusText = "Confirmed";
-                    }
-                    else {
-                        order.statusText = "Pending";
-                    }
+                if ($scope.confirmedStatus == orderDetails.length) {
+                    order.statusText = "Confirmed";
+                }
+                else {
+                    order.statusText = "Pending";
+                }
             };
 
-            $scope.scrollTo = function(id) {
+            $scope.scrollTo = function (id) {
                 $location.hash(id);
-                    $anchorScroll();
+                $anchorScroll();
             };
             $scope.noOfOrders = 2;
             init();
@@ -218,8 +218,8 @@ angular.module('user', ['urn.services'])
                 });
             };
 
-            $scope.goToDashboard = function(index) {
-                $rootScope.indexToBeShown=index;
+            $scope.goToDashboard = function (index) {
+                $rootScope.indexToBeShown = index;
                 $rootScope.loadRoute('/dashboard')
             };
 
