@@ -78,6 +78,9 @@
                         <li><span class="separator">|</span> <a class="link-compare" href="#/compare" ng-hide="true"><span>Add to Compare</span></a></li>
                       </ul>
                       <p class="email-friend"><a href="#" class="" ng-hide="true"><span>Email to a Friend</span></a></p>
+                        <div class="std">
+                            <p>{{ selectedProduct.description }}</p>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -88,10 +91,10 @@
                 </aside>
               </form>
             </div>
-            <div class="product-collateral col-sm-12 col-xs-12 bounceInUp animated">
+            <div class="product-collateral col-sm-12 col-xs-12 bounceInUp animated" ng-hide="true">
               <div class="add_info">
                 <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
-                  <li class="active"> <a href="#product_tabs_description" data-toggle="tab"> Product Description </a> </li>
+                  <li class="active"> <a href="#product_tabs_description" data-toggle="tab" ng-hide="true"> Product Description </a> </li>
                   <li><a href="#product_tabs_tags" data-toggle="tab" ng-hide="true">Tags</a></li>
                   <li> <a href="#reviews_tabs" data-toggle="tab" ng-hide="true">Reviews</a> </li>
                   <li> <a href="#product_tabs_custom" data-toggle="tab" ng-hide="true">Custom Tab</a> </li>

@@ -106,7 +106,7 @@ def format_wishlist_get(users_wishlist):
         item_dict["product_data"] = item.product_data
         item_dict["product_price"] = item.product.price
         item_dict["product_description"] = item.product.description
-        product_images = ProductImages.objects.filter(product_id=item.product.product_id)
+        product_images = ProductImages.objects.filter(product_id=item.product.product_id).order_by('image')
         item_dict['product_images'] = format_product_images(product_images,
                                                             False) if len(product_images) > 0 else []
         response.append(item_dict)
@@ -181,7 +181,7 @@ def format_skus(sku, products):
 def format_products(products, json=True):
     products_data = []
     for product in products:
-        product_images = ProductImages.objects.filter(product_id=product.product_id)
+        product_images = ProductImages.objects.filter(product_id=product.product_id).order_by('image')
         product_data = OrderedDict()
         product_data['product_guid'] = utils.convert_uuid_string(product.product_guid)
         product_data['name'] = product.name
