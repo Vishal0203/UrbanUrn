@@ -3,5 +3,5 @@ angular.module('urn', [
     'blog', 'misc', 'order', 'product', 'user'
 ])
   .config(function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeSpinner = false;
+   cfpLoadingBarProvider.includeSpinner = false;
   });
